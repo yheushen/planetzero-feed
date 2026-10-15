@@ -15,8 +15,11 @@ import argparse
 import concurrent.futures as cf
 import datetime as dt
 import json
+import math
 import os
+import statistics
 import sys
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -412,6 +415,51 @@ def checks_only(out, logger, at=None):
     return obj
 
 
+# ---------------------------------------------------------------- delays, for the page's countdown (session 6, part 51)
+LEAD_SOURCES = ("NEA", "DOE", "OpenAQ")   # the sources that lead a place's page: NEA's hour, a community sensor's hour, DOE's index
+DELAY_DAYS = 7
+DELAY_MIN_HOURS = 3     # fewer recorded hours than this in the last 7 days: no expected time, so the page shows no countdown
+PAGES_MINUTES = 1       # GitHub Pages publishes a commit in under a minute (its runs: 24 to 48 s)
+CACHE_MINUTES = 10      # GitHub Pages lets browsers and its CDN keep a file 10 minutes (cache-control: max-age=600)
+
+
+def record_delays(out, status, now, build_s=None):
+    """history/delays: for each lead source, its newest reading's hour and how many minutes after it this run saw it, kept the
+    first time only (a later run that sees the same hour changes nothing); and this run's build time in seconds."""
+    rows = []
+    for src in LEAD_SOURCES:
+        st = status.get(src) or {}
+        if st.get("ok") and st.get("latest"):
+            t = dt.datetime.fromisoformat(st["latest"])
+            rows.append((src, st["latest"][:16], max(0, round((now - t).total_seconds() / 60))))
+    if build_s is not None:
+        rows.append(("build", now.strftime("%Y-%m-%dT%H:%M"), round(build_s)))
+    if rows:
+        history.merge(out, "delays", {"unit": "minutes", "window": "1h",
+                                      "note": "series = source: its reading's hour, and the minutes after that hour when it first reached this feed; "
+                                              "series 'build': each run's start and how many seconds the build took",
+                                      "credits": credits.block([], now, ours=("delays",))}, rows, overwrite=False)
+
+
+def next_readings(out, now, build_s=None):
+    """{source: when the page should expect the next reading, in minutes after its hour}: the median first-seen delay of the last
+    7 days, plus our build's median time (this run's, before any is recorded), GitHub Pages and the 10-minute cache. Sources with
+    fewer than 3 recorded hours are left out."""
+    lo = (now - dt.timedelta(days=DELAY_DAYS)).strftime("%Y-%m-%dT%H:%M")
+    months = sorted({(now - dt.timedelta(days=d)).strftime("%Y-%m") for d in range(DELAY_DAYS + 1)})
+    builds = [v for t, v in history.series(out, "delays", "build", months).items() if t >= lo]
+    build_m = math.ceil((statistics.median(builds) if builds else (build_s or 60)) / 60)
+    res = {}
+    for src in LEAD_SOURCES:
+        vals = [v for t, v in history.series(out, "delays", src, months).items() if t >= lo]
+        if len(vals) < DELAY_MIN_HOURS:
+            continue
+        seen = round(statistics.median(vals))
+        res[src] = {"after_minutes": seen + build_m + PAGES_MINUTES + CACHE_MINUTES, "seen_minutes": seen, "build_minutes": build_m,
+                    "pages_minutes": PAGES_MINUTES, "cache_minutes": CACHE_MINUTES, "hours": len(vals), "days": DELAY_DAYS}
+    return res
+
+
 # ---------------------------------------------------------------- the run
 def validate(feed):
     from jsonschema import Draft202012Validator
@@ -466,6 +514,7 @@ def measured_only(out, at=None, transport_=None):
 
 
 def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
+    t0 = time.monotonic()
     if transport_ is not None:
         transport.TRANSPORT = transport_
     now = dt.datetime.fromisoformat(at).astimezone(TZ8) if at else dt.datetime.now(TZ8).replace(second=0, microsecond=0)
@@ -478,7 +527,10 @@ def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
             "Open-Meteo daily": lambda: weather_day(now, cache, places)}
     got, status = fetch_all(jobs, now)
     merge_history(out, got, status, now)
-    return finish_build(out, at, now, places, got, status, quiet, logger)
+    record_delays(out, status, now)
+    feed = finish_build(out, at, now, places, got, status, quiet, logger, t0=t0)
+    record_delays(out, {}, now, build_s=time.monotonic() - t0)   # this run's build time, for the next runs' expected times
+    return feed
 
 
 def merge_history(out, got, status, now):
@@ -511,6 +563,9 @@ def merge_history(out, got, status, now):
                                                         [(s["id"], t, v) for s in kept for t, v in s["readings"].items()])
         if errs:
             status["OpenAQ"]["error"] = f"{len(errs)} sensors did not answer"
+        hours = [t for s in sensors for t in s["readings"]]
+        if hours:
+            status["OpenAQ"]["latest"] = max(hours)[:16] + "+08:00"
     if "CAMS" in got and not isinstance(got["CAMS"], Exception):
         cut = now.strftime("%Y-%m-%dT%H:%M")
         status["CAMS"]["hours_added"] = history.merge(out, "cams", {"source": "CAMS", "unit": "µg/m³", "window": "1h", "note": "series = place id; model estimate",
@@ -518,7 +573,7 @@ def merge_history(out, got, status, now):
                                                       [(pid, t, round(v, 1)) for pid, s in got["CAMS"].items() for t, v in s.items() if t <= cut])
 
 
-def finish_build(out, at, now, places, got, status, quiet, logger):
+def finish_build(out, at, now, places, got, status, quiet, logger, t0=None):
     """now.json, outlook.json, grid.json, checks.json and the rest, from this run's answers (history/ already merged)."""
     # now.json: from this run's answers only (invariant 10)
     out_places = []
@@ -537,6 +592,9 @@ def finish_build(out, at, now, places, got, status, quiet, logger):
     if at:
         now_json["replay_of"] = stamp(now)
     now_json["sources"] = dict(sorted(status.items()))
+    nxt = next_readings(out, now, build_s=None if t0 is None else time.monotonic() - t0)
+    if nxt:
+        now_json["next"] = nxt
     now_json["places"] = out_places
     now_json["credits"] = credits.block(sources.sources_in(now_json["places"]), now, ours=("advice",))
     feed = {"now": now_json, "outlook": outlook(places, got["CAMS"], now, out, got["Open-Meteo daily"]), "grid": grid(now, got["Open-Meteo"], got["FIRMS"]),

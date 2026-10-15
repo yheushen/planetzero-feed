@@ -24,6 +24,24 @@
         "additionalProperties": false
       }
     },
+    "next": {
+      "type": "object",
+      "description": "When the page should expect each lead source's next reading, in minutes after that reading's hour: the median of the last 7 days' first-seen delays, plus our build, GitHub Pages and the 10-minute cache (session 6, part 51). A source with too few recorded hours is left out, and the page then shows no countdown.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["after_minutes", "seen_minutes", "build_minutes", "pages_minutes", "cache_minutes", "hours", "days"],
+        "properties": {
+          "after_minutes": {"type": "integer", "minimum": 0},
+          "seen_minutes": {"type": "integer", "minimum": 0},
+          "build_minutes": {"type": "integer", "minimum": 0},
+          "pages_minutes": {"type": "integer", "minimum": 0},
+          "cache_minutes": {"type": "integer", "minimum": 0},
+          "hours": {"type": "integer", "minimum": 1},
+          "days": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
     "places": {"type": "array", "minItems": 1, "items": {"$ref": "common.schema.json#/$defs/place"}},
     "credits": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "minLength": 1}, "description": "Each source this file holds, with its required credit line (engine/schema/credits.json) and the day it was fetched."}
   },
