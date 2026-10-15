@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planetzero.ai/schema/checks.schema.json",
+  "title": "checks.json: our check results on numbers we may not republish (Google, IQAir) and on relabelling (aqicn)",
+  "description": "Google's and IQAir's live numbers never enter the feed (invariant 6). Only our results about them do, each with what it measured and over how long.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "checks",
+    "credits"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "subject",
+          "place_id",
+          "metric",
+          "value",
+          "unit",
+          "window_days",
+          "hours_compared",
+          "text",
+          "computed_at",
+          "against"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject": {
+            "enum": [
+              "Google",
+              "IQAir",
+              "aqicn"
+            ],
+            "description": "Whose numbers were checked. Never a source of a value in the feed."
+          },
+          "place_id": {
+            "type": "string",
+            "pattern": "^(sg|my)-[a-z0-9]+$"
+          },
+          "metric": {
+            "enum": [
+              "share_within_30pct",
+              "share_relabelled_24h"
+            ]
+          },
+          "value": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "unit": {
+            "const": "% of hours"
+          },
+          "window_days": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hours_compared": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "against": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What it was checked against, e.g. 'NEA monitor, same region'."
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verdict": {
+            "enum": [
+              "Close to NEA",
+              "Close to the sensors",
+              "Reads low",
+              "Reads high",
+              "Often off"
+            ],
+            "description": "Our check in words, for the number cell of the row: within 30% in at least 66% of hours is close; otherwise the median of the checked number over the measured one says low (under 0.85) or high (over 1.15), else often off."
+          },
+          "median_ratio": {
+            "type": "number",
+            "minimum": 0,
+            "description": "The median, over the hours compared, of the checked number divided by the measured one."
+          },
+          "computed_at": {
+            "$ref": "common.schema.json#/$defs/time"
+          },
+          "data_from": {
+            "$ref": "common.schema.json#/$defs/time",
+            "description": "The first hour compared."
+          },
+          "data_to": {
+            "$ref": "common.schema.json#/$defs/time",
+            "description": "The last hour compared."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "credits": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Each source this file holds, with its required credit line (engine/schema/credits.json), and the day it was fetched."
+    }
+  },
+  "additionalProperties": false
+}

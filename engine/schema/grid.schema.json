@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planetzero.ai/schema/grid.schema.json",
+  "title": "grid.json: smoke, wind and fires for the globe, for 1 hour",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "valid_at", "smoke", "wind", "fires", "credits"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "generated_at": {"$ref": "common.schema.json#/$defs/time"},
+    "valid_at": {"$ref": "common.schema.json#/$defs/time", "description": "The hour the smoke and wind fields are for."},
+    "smoke": {
+      "allOf": [{"$ref": "#/$defs/layer"}],
+      "required": ["grid", "values"],
+      "properties": {
+        "unit": {"const": "µg/m³"},
+        "source": {"const": "CAMS"},
+        "source_type": {"const": "computer model"},
+        "grid": {"$ref": "#/$defs/grid"},
+        "values": {"type": "array", "items": {"type": ["number", "null"], "minimum": 0}, "description": "Row order: south to north, then west to east; null where the model gives nothing."}
+      }
+    },
+    "wind": {
+      "allOf": [{"$ref": "#/$defs/layer"}],
+      "required": ["fields"],
+      "properties": {
+        "unit": {"const": "km/h"},
+        "source": {"const": "Open-Meteo"},
+        "source_type": {"const": "computer model"},
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "grid", "speed", "direction"],
+            "properties": {
+              "name": {"enum": ["box", "hemi"]},
+              "grid": {"$ref": "#/$defs/grid"},
+              "speed": {"type": "array", "items": {"type": ["number", "null"]}},
+              "direction": {"type": "array", "items": {"type": ["number", "null"]}, "description": "Degrees the wind comes FROM, as weather services give it."}
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "credits": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "minLength": 1}, "description": "Each source this file holds, with its required credit line (engine/schema/credits.json) and the day it was fetched."},
+    "fires": {
+      "allOf": [{"$ref": "#/$defs/layer"}],
+      "required": ["from", "to", "cells"],
+      "properties": {
+        "unit": {"const": "detections"},
+        "source": {"const": "FIRMS"},
+        "source_type": {"const": "satellite"},
+        "from": {"$ref": "common.schema.json#/$defs/time"},
+        "to": {"$ref": "common.schema.json#/$defs/time"},
+        "cells": {
+          "type": "array",
+          "description": "Fires seen from space, gathered into 0.1 degree cells: [lat, lon, detections, strongest fire radiative power in MW].",
+          "items": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "integer", "minimum": 1}, {"type": "number", "minimum": 0}], "minItems": 4, "maxItems": 4}
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "grid": {
+      "type": "object",
+      "required": ["lat0", "lon0", "step", "nlat", "nlon"],
+      "properties": {
+        "lat0": {"type": "number"}, "lon0": {"type": "number"}, "step": {"type": "number", "exclusiveMinimum": 0},
+        "nlat": {"type": "integer", "minimum": 1}, "nlon": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "layer": {
+      "type": "object",
+      "required": ["status", "unit", "window", "source", "source_type", "measured_at", "credit"],
+      "properties": {
+        "status": {"enum": ["ok", "missing"]},
+        "reason": {"type": "string"},
+        "unit": {"type": "string"},
+        "window": {"enum": ["1h", "24h"]},
+        "source": {"type": "string"},
+        "source_type": {"type": "string"},
+        "measured_at": {"$ref": "common.schema.json#/$defs/time"},
+        "credit": {"type": "string", "minLength": 1},
+        "grid": {}, "values": {}, "fields": {}, "from": {}, "to": {}, "cells": {}
+      },
+      "additionalProperties": false
+    }
+  }
+}

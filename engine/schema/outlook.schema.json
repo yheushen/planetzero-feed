@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planetzero.ai/schema/outlook.schema.json",
+  "title": "outlook.json: the next 5 days per place, on the PSI scale, from a computer model",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "issued_at",
+    "method",
+    "places",
+    "scorecard",
+    "credits"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "issued_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "places": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(sg|my)-[a-z0-9]+$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "days"
+        ],
+        "properties": {
+          "days": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/$defs/day"
+            }
+          },
+          "why": {
+            "type": "string",
+            "minLength": 1,
+            "description": "1 line on why the outlook changes, only when the model's wind or rain explains it."
+          },
+          "adjust": {
+            "type": "object",
+            "description": "The last 3 days' ratio of the measured 24-hour index (NEA's PSI or DOE's API) to the model's own estimate on the same scale; the days' values are scaled by it. 'not adjusted' with the reason when there were too few readings.",
+            "required": [
+              "status",
+              "hours"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "adjusted",
+                  "not adjusted"
+                ]
+              },
+              "ratio": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 3
+              },
+              "raw_ratio": {
+                "type": "number",
+                "minimum": 0
+              },
+              "hours": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "from": {
+                "$ref": "common.schema.json#/$defs/time"
+              },
+              "to": {
+                "$ref": "common.schema.json#/$defs/time"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "adjusted"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "ratio",
+                "raw_ratio",
+                "from",
+                "to"
+              ]
+            },
+            "else": {
+              "required": [
+                "reason"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "scorecard": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "collecting",
+            "ready"
+          ]
+        },
+        "from": {
+          "$ref": "common.schema.json#/$defs/date",
+          "description": "When collecting: the first date a full week of logged forecasts exists."
+        },
+        "right": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "of": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "places": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "credits": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Each source this file holds, with its required credit line (engine/schema/credits.json), and the day it was fetched."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "day": {
+      "type": "object",
+      "required": [
+        "valid_for",
+        "value",
+        "unit",
+        "scale",
+        "band",
+        "window",
+        "source",
+        "source_type",
+        "issued_at",
+        "pm25_mean"
+      ],
+      "properties": {
+        "valid_for": {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0,
+          "description": "The PSI shown: the model's, adjusted to this week's readings when place.adjust says so."
+        },
+        "unit": {
+          "const": "PSI"
+        },
+        "scale": {
+          "const": "psi"
+        },
+        "band": {
+          "$ref": "common.schema.json#/$defs/band"
+        },
+        "window": {
+          "const": "day",
+          "description": "The whole day's average, forecast."
+        },
+        "source": {
+          "const": "CAMS"
+        },
+        "source_type": {
+          "const": "computer model"
+        },
+        "issued_at": {
+          "$ref": "common.schema.json#/$defs/time"
+        },
+        "pm25_mean": {
+          "type": "number",
+          "minimum": 0
+        },
+        "hours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 24
+        },
+        "cams_value": {
+          "type": "number",
+          "minimum": 0,
+          "description": "The model's own PSI for the day, before the adjustment."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

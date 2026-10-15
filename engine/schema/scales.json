@@ -1,0 +1,84 @@
+{
+  "note": "The scales, bands and advice of docs/SPEC.md section 6, in 1 place. The engine bands numbers with it; the web page draws scales and shows advice from it; the connector will quote it. Numbers are rounded to whole numbers before banding. The last band of each scale is open; marker_max is where its marker stops on the drawn scale.",
+  "hourly_pm25": {
+    "name": "Hourly PM2.5",
+    "unit": "µg/m³",
+    "window": "1h",
+    "source": "NEA, haze.gov.sg, checked 15 Oct 2026",
+    "marker_max": 500,
+    "bands": [
+      {"word": "Normal", "min": 0, "max": 55, "colour": "#BFD3C6", "colour_name": "sage"},
+      {"word": "Elevated", "min": 56, "max": 150, "colour": "#E0A25C", "colour_name": "amber"},
+      {"word": "High", "min": 151, "max": 250, "colour": "#B8651E", "colour_name": "dark orange"},
+      {"word": "Very high", "min": 251, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
+    ],
+    "groups": {
+      "most": "Most people",
+      "vulnerable": "Older adults, children, pregnant women, heart or lung conditions",
+      "everyone": "Everyone"
+    },
+    "advice_source": "NEA's hourly guide, \"How to plan your outdoor activities during haze\" (July 2024), in plain words",
+    "advice": {
+      "Normal": {"headline": "Fine to go out this hour.", "most": "Normal activities, exercise included", "vulnerable": "Normal activities, exercise included"},
+      "Elevated": {"headline": "Go easy outdoors this hour.", "most": "Less hard exercise outside", "vulnerable": "No hard exercise outside"},
+      "High": {"headline": "No hard exercise outside this hour.", "most": "No hard exercise outside", "vulnerable": "Stay indoors"},
+      "Very high": {"headline": "Stay in if you can this hour.", "most": "As little time outside as you can", "vulnerable": "Stay indoors"}
+    }
+  },
+  "psi": {
+    "name": "PSI",
+    "unit": "PSI",
+    "window": "24h",
+    "source": "NEA's Pollutant Standards Index",
+    "marker_max": 500,
+    "bands": [
+      {"word": "Good", "min": 0, "max": 50, "colour": "#BFD3C6", "colour_name": "sage"},
+      {"word": "Moderate", "min": 51, "max": 100, "colour": "#EAD3A8", "colour_name": "sand"},
+      {"word": "Unhealthy", "min": 101, "max": 200, "colour": "#E0A25C", "colour_name": "amber"},
+      {"word": "Very unhealthy", "min": 201, "max": 300, "colour": "#B8651E", "colour_name": "dark orange"},
+      {"word": "Hazardous", "min": 301, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
+    ]
+  },
+  "api": {
+    "name": "API",
+    "unit": "API",
+    "window": "24h",
+    "source": "DOE's Air Pollutant Index; band names checked in the APIMS portal, 15 Oct 2026",
+    "marker_max": 500,
+    "bands": [
+      {"word": "Good", "min": 0, "max": 50, "colour": "#BFD3C6", "colour_name": "sage"},
+      {"word": "Moderate", "min": 51, "max": 100, "colour": "#EAD3A8", "colour_name": "sand"},
+      {"word": "Unhealthy", "min": 101, "max": 200, "colour": "#E0A25C", "colour_name": "amber"},
+      {"word": "Very unhealthy", "min": 201, "max": 300, "colour": "#B8651E", "colour_name": "dark orange"},
+      {"word": "Hazardous", "min": 301, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
+    ],
+    "doe_advice_source": "DOE, \"General Information of Air Pollutant Index\", table \"Air Pollutant Index: Health Effect\", column \"Health Advice\"",
+    "doe_advice_url": "https://www.doe.gov.my/wp-content/uploads/2021/10/General-Information-of-Air-Pollutant-Index.pdf",
+    "doe_advice": {
+      "Good": "No restriction for outdoor activities to the public. Maintain healthy lifestyle.",
+      "Moderate": "No restriction for outdoor activities to the public. Maintain healthy lifestyle.",
+      "Unhealthy": "Limited outdoor activities for the high risk people. Public need to reduce the extreme outdoor activities.",
+      "Very unhealthy": "Old and high risk people are advised to stay indoor and reduce physical activities. People with health complications are advised to see doctor.",
+      "Hazardous": "Old and high risk people are prohibited for outdoor activities. Public are advised to prevent from outdoor activities."
+    }
+  },
+  "us_aqi": {
+    "name": "US AQI",
+    "unit": "US AQI",
+    "window": "24h",
+    "source": "US EPA's Air Quality Index, as aqicn, IQAir and Google use it",
+    "marker_max": 500,
+    "bands": [
+      {"word": "Good", "min": 0, "max": 50, "colour": "#BFD3C6", "colour_name": "sage"},
+      {"word": "Moderate", "min": 51, "max": 100, "colour": "#EAD3A8", "colour_name": "sand"},
+      {"word": "Unhealthy for sensitive groups", "min": 101, "max": 150, "colour": "#E5BB7E", "colour_name": "light amber"},
+      {"word": "Unhealthy", "min": 151, "max": 200, "colour": "#E0A25C", "colour_name": "amber"},
+      {"word": "Very unhealthy", "min": 201, "max": 300, "colour": "#B8651E", "colour_name": "dark orange"},
+      {"word": "Hazardous", "min": 301, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
+    ]
+  },
+  "psi_from_pm25": {
+    "note": "NEA's PSI sub-index for 24-hour PM2.5: [µg/m³ low, µg/m³ high, PSI low, PSI high], straight lines in between. Checked: 136 µg/m³ gives 185, as NEA published at 4:00 am on 15 Oct 2026.",
+    "breakpoints": [[0, 12, 0, 50], [13, 55, 51, 100], [56, 150, 101, 200], [151, 250, 201, 300], [251, 350, 301, 400], [351, 500, 401, 500]]
+  }
+}

@@ -1,0 +1,96 @@
+# The public feed of Planet Zero, built every hour from public sources by engine/build_feed.py and published to the `feed`
+# branch, which GitHub Pages serves at https://yheushen.github.io/planetzero-feed/.
+# Moved on 16 Oct 2026 from the private code repo, where it ran every 2 hours (written there in feed-repo/ and copied here
+# by feed-repo/sync.py with the engine's code). Changed: hourly, since a public repo's minutes are free; an outside timer
+# starts it on the hour through workflow_dispatch, and GitHub's own schedule stays as a backup that builds only when the
+# feed is over 40 minutes old; no logger checkout (the private audit publishes our Google checks); .nojekyll, so Pages
+# serves the files as they are.
+name: feed
+
+on:
+  schedule:
+    - cron: "18 * * * *"   # the backup: every hour at minute 18 UTC (NEA and DOE have published the hour by then)
+  workflow_dispatch:          # the outside timer, at minute 18 of every hour, and the "Run workflow" button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENAQ_KEY: ${{ secrets.OPENAQ_KEY }}
+      FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
+      WAQI_TOKEN: ${{ secrets.WAQI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check out the feed branch
+        uses: actions/checkout@v7
+        with:
+          ref: feed
+          path: _feed
+
+      - name: Is a build due? (always when started by the timer or by hand; on GitHub's schedule only past 40 minutes)
+        id: due
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python3 engine/feed_age.py _feed 40 >> "$GITHUB_OUTPUT"
+          else
+            echo "due=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v7
+        if: steps.due.outputs.due == 'yes'
+        with:
+          python-version: "3.11"
+
+      - name: Install the 1 dependency
+        if: steps.due.outputs.due == 'yes'
+        run: pip install -q -r engine/requirements.txt
+
+      - name: Name the day (Malaysia and Singapore time)
+        if: steps.due.outputs.due == 'yes'
+        id: day
+        run: echo "day=$(TZ=Asia/Singapore date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Keep the globe grid's day cache
+        if: steps.due.outputs.due == 'yes'
+        uses: actions/cache@v6
+        with:
+          path: .cache
+          key: grid-${{ steps.day.outputs.day }}
+          restore-keys: grid-
+
+      - name: Build the feed
+        if: steps.due.outputs.due == 'yes'
+        run: python engine/build_feed.py --out _feed --cache .cache
+
+      - name: Publish to the feed branch (GitHub Pages serves it)
+        if: steps.due.outputs.due == 'yes'
+        working-directory: _feed
+        run: |
+          git config user.name "planetzero-feed"
+          git config user.email "planetzero-feed@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            touch .nojekyll
+            git add -A .
+            if git diff --cached --quiet; then
+              echo "nothing new this run"; exit 0
+            fi
+            git commit -q -m "feed $(date -u +%Y-%m-%dT%H:%MZ)"
+            if git pull --rebase -q origin feed && git push -q origin HEAD:feed; then
+              echo "pushed on attempt $attempt"; exit 0
+            fi
+            echo "push failed on attempt $attempt: another run, or the audit, committed meanwhile; taking its files and rebuilding"
+            git rebase --abort 2>/dev/null || true
+            git fetch -q origin feed
+            git reset -q --hard origin/feed
+            (cd .. && python engine/build_feed.py --out _feed --cache .cache > /dev/null)
+          done
+          echo "gave up after 3 attempts"; exit 1
