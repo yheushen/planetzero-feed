@@ -22,8 +22,9 @@
   }
  ],
  "claim": {
-  "value": 5.0,
-  "scale": "PSI"
+  "value": 101.0,
+  "high": 161.0,
+  "scale": "µg/m³"
  },
  "each": null,
  "quoting": [
@@ -31,11 +32,11 @@
  ],
  "window": "1h",
  "stated_time": "5:00 a.m.",
- "rules": "2",
+ "rules": "3",
  "scores": {
   "gave_number": true,
   "said_unit": true,
-  "said_window": "wrong",
+  "said_window": "said",
   "age_hours": 0.9,
   "stale": false,
   "freshness": "fresh",
@@ -44,15 +45,16 @@
   "number_hour": "2026-10-16T05:00+08:00",
   "check": "checked",
   "checked_hour": "2026-10-16T05:00+08:00",
-  "band_right": false,
-  "close": false,
-  "off_pct": -97,
+  "band_right": true,
+  "close": true,
+  "off_pct": null,
   "measured_ref": [
-   189
+   101,
+   161
   ],
   "measured_range": [
-   143,
-   219
+   101,
+   161
   ],
   "named_source": [
    "NEA",
@@ -311,5 +313,11 @@
     "num_requests": 2
    }
   }
- }
+ },
+ "check_changes": [
+  {
+   "on": "2026-10-16",
+   "why": "Our rules changed: a clock time or a date next to a scale's name is no longer read as the number (\"24-hour PSI (about 5 pm)\" was read as PSI 5)."
+  }
+ ]
 }
