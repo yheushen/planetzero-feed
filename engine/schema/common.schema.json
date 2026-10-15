@@ -47,6 +47,7 @@
         "distance_km": {"type": "number", "minimum": 0, "maximum": 10, "description": "From the place to a community sensor. Never more than 10 km (invariant 3)."},
         "credit": {"type": "string", "minLength": 1},
         "relayed_from": {"enum": ["NEA", "DOE"], "description": "For a relayed number (aqicn): whose monitor it comes from."},
+        "formula": {"enum": ["us_aqi", "us_aqi_older"], "description": "For a US AQI: which of the US EPA's lines turned the µg/m³ into it (scales.json, conversions). aqicn uses the older lines on NEA's hour (part 48)."},
         "earlier": {
           "type": "object",
           "description": "For the hour: the worst reading of the same monitor or sensor in the 12 hours before, when its band was worse than now ('Check again in an hour').",

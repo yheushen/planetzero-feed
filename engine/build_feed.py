@@ -142,11 +142,17 @@ def aqicn_row(p, got, now):
     if s is None:
         return None
     agency = "NEA" if p["country"] == "SG" else "DOE"
-    # In Singapore aqicn converts NEA's PM2.5 to US AQI. In Malaysia it shows DOE's API number itself (176 against DOE's 176,
-    # Cheras, 15 Oct, 7 pm), coloured as US AQI: so it is banded on the API scale (run 2 review, item 2).
-    unit, scale = ("US AQI", "us_aqi") if agency == "NEA" else ("API", "api")
-    r = reading(s["aqi"], unit, scale, "24h", "aqicn", "government monitor", s["t"],
-                {"id": f"aqicn-{s['uid']}", "name": s["name"], "lat": s["lat"], "lon": s["lon"]}, sources.aqicn_credit(agency))
+    # In Singapore aqicn turns NEA's 1-hour PM2.5 into US AQI with the US EPA's older lines (from before 2024): 33 of 33 hours in
+    # the logger's record within 1 point, 28 exact (session 6, part 48; aqicn's own FAQ says it uses the 1-hour reading). In
+    # Malaysia it shows DOE's API number itself (449 of 479 hours equal), coloured as US AQI: so it is banded on the API scale
+    # (run 2 review, item 2).
+    if agency == "NEA":
+        r = reading(s["aqi"], "US AQI", "us_aqi", "1h", "aqicn", "government monitor", s["t"],
+                    {"id": f"aqicn-{s['uid']}", "name": s["name"], "lat": s["lat"], "lon": s["lon"]}, sources.aqicn_credit(agency))
+        r["formula"] = "us_aqi_older"
+    else:
+        r = reading(s["aqi"], "API", "api", "24h", "aqicn", "government monitor", s["t"],
+                    {"id": f"aqicn-{s['uid']}", "name": s["name"], "lat": s["lat"], "lon": s["lon"]}, sources.aqicn_credit(agency))
     r["relayed_from"] = agency
     return r
 

@@ -1,6 +1,6 @@
 # nea_hourly_band and api_band copied from ~/projects/05_planet-zero/haze-logger/dashboard.py on 2026-10-15; changed:
 # the edges and words now come from engine/schema/scales.json (SPEC section 6), so engine, page and connector share them.
-"""Bands for every scale, and NEA's PSI from 24-hour PM2.5."""
+"""Bands for every scale, and NEA's PSI from 24-hour PM2.5 (the conversions themselves are in convert.py)."""
 import json
 import os
 
@@ -21,12 +21,9 @@ def band(value, scale):
 
 
 def psi_from_pm25(conc):
-    """NEA's PSI sub-index for a 24-hour PM2.5 average: straight lines between its breakpoints."""
-    c = whole(conc)
-    for lo_c, hi_c, lo_i, hi_i in SCALES["psi_from_pm25"]["breakpoints"]:
-        if lo_c <= c <= hi_c:
-            return whole(lo_i + (c - lo_c) * (hi_i - lo_i) / (hi_c - lo_c))
-    return 500
+    """NEA's PSI sub-index for a 24-hour PM2.5 average: straight lines between its breakpoints (engine/convert.py, session 6)."""
+    import convert
+    return convert.to_index(conc, "psi")
 
 
 def earlier(series, t, value, scale, hours=12):
