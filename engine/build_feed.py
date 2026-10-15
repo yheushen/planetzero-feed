@@ -392,6 +392,20 @@ def checks_file(out, now, logger):
     return {"schema_version": "1", "generated_at": stamp(now), "checks": items}
 
 
+def checks_only(out, logger, at=None):
+    """Only checks.json, from the private logger's data: how the private audit Action publishes our Google checks to the public
+    feed, which holds no token for the logger. The public feed Action then keeps these results, each with the dates it covers."""
+    now = dt.datetime.fromisoformat(at).astimezone(TZ8) if at else dt.datetime.now(TZ8).replace(second=0, microsecond=0)
+    obj = checks_file(out, now, logger)
+    obj["credits"] = credits.block(["NEA", "OpenAQ"], now, ours=("checks",))
+    errors = validate({"checks": obj})
+    if errors:
+        raise SystemExit("checks.json breaks its contract, nothing written:\n  " + "\n  ".join(errors[:10]))
+    os.makedirs(out, exist_ok=True)
+    write_json(os.path.join(out, "checks.json"), obj)
+    return obj
+
+
 # ---------------------------------------------------------------- the run
 def validate(feed):
     from jsonschema import Draft202012Validator
@@ -415,17 +429,8 @@ def write_json(path, obj, compact=False):
     os.replace(tmp, path)
 
 
-def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
-    if transport_ is not None:
-        transport.TRANSPORT = transport_
-    now = dt.datetime.fromisoformat(at).astimezone(TZ8) if at else dt.datetime.now(TZ8).replace(second=0, microsecond=0)
-    cache = cache or os.path.join(ROOT, ".cache")
-    places = json.load(open(os.path.join(HERE, "places.json"), encoding="utf-8"))["places"]
-    os.makedirs(out, exist_ok=True)
-    jobs = {"NEA": lambda: fetchers.fetch_singapore(now), "DOE": lambda: fetchers.fetch_malaysia(now), "OpenAQ": lambda: fetchers.fetch_openaq(now),
-            "CAMS": lambda: fetchers.fetch_cams(places), "FIRMS": lambda: fetchers.fetch_firms(now), "aqicn": lambda: fetchers.fetch_aqicn(now),
-            "Open-Meteo": lambda: grid_day(now, cache),
-            "Open-Meteo daily": lambda: weather_day(now, cache, places)}
+def fetch_all(jobs, now):
+    """Every source side by side: ({name: answer or the Exception}, {name: status})."""
     got = {}
     with cf.ThreadPoolExecutor(max_workers=len(jobs)) as pool:
         futs = {pool.submit(fn): name for name, fn in jobs.items()}
@@ -438,8 +443,41 @@ def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
     for name, v in got.items():
         if isinstance(v, Exception):
             status[name]["error"] = str(v)[:200]
-    # history: refill whatever the sources still keep (about 2 days), so skipped runs leave no gap
-    if not isinstance(got["NEA"], Exception):
+    return got, status
+
+
+def measured_only(out, at=None, transport_=None):
+    """Only what was measured (NEA, DOE and the community sensors) merged into out/history/, nothing else written: what the AI
+    chat audit scores against when the public feed is over 90 minutes old (audit/run.py). No grid, so it takes about a minute."""
+    if transport_ is not None:
+        transport.TRANSPORT = transport_
+    now = dt.datetime.fromisoformat(at).astimezone(TZ8) if at else dt.datetime.now(TZ8).replace(second=0, microsecond=0)
+    os.makedirs(out, exist_ok=True)
+    got, status = fetch_all({"NEA": lambda: fetchers.fetch_singapore(now), "DOE": lambda: fetchers.fetch_malaysia(now),
+                             "OpenAQ": lambda: fetchers.fetch_openaq(now)}, now)
+    merge_history(out, got, status, now)
+    return status
+
+
+def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
+    if transport_ is not None:
+        transport.TRANSPORT = transport_
+    now = dt.datetime.fromisoformat(at).astimezone(TZ8) if at else dt.datetime.now(TZ8).replace(second=0, microsecond=0)
+    cache = cache or os.path.join(ROOT, ".cache")
+    places = json.load(open(os.path.join(HERE, "places.json"), encoding="utf-8"))["places"]
+    os.makedirs(out, exist_ok=True)
+    jobs = {"NEA": lambda: fetchers.fetch_singapore(now), "DOE": lambda: fetchers.fetch_malaysia(now), "OpenAQ": lambda: fetchers.fetch_openaq(now),
+            "CAMS": lambda: fetchers.fetch_cams(places), "FIRMS": lambda: fetchers.fetch_firms(now), "aqicn": lambda: fetchers.fetch_aqicn(now),
+            "Open-Meteo": lambda: grid_day(now, cache),
+            "Open-Meteo daily": lambda: weather_day(now, cache, places)}
+    got, status = fetch_all(jobs, now)
+    merge_history(out, got, status, now)
+    return finish_build(out, at, now, places, got, status, quiet, logger)
+
+
+def merge_history(out, got, status, now):
+    """history/: refill whatever the sources still keep (about 2 days), so skipped runs leave no gap. Only the sources in `got`."""
+    if "NEA" in got and not isinstance(got["NEA"], Exception):
         rows = got["NEA"]
         status["NEA"]["hours_added"] = history.merge(out, "nea", {"source": "NEA", "unit": "µg/m³", "window": "1h", "note": "series = region, hourly PM2.5",
                                                             "credits": credits.block(["NEA"], now)},
@@ -447,7 +485,7 @@ def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
         history.merge(out, "nea_psi", {"source": "NEA", "unit": "PSI", "window": "24h", "note": "series = region, 24-hour PSI", "credits": credits.block(["NEA"], now)},
                       [(r["region"], r["t"], r["psi_24h"]) for r in rows])
         status["NEA"]["latest"] = max(r["t"] for r in rows) + "+08:00"
-    if not isinstance(got["DOE"], Exception):
+    if "DOE" in got and not isinstance(got["DOE"], Exception):
         stations, rows, errs = got["DOE"]
         status["DOE"]["hours_added"] = history.merge(out, "doe", {"source": "DOE", "unit": "API", "window": "24h", "note": "series = DOE station id",
                                                             "credits": credits.block(["DOE"], now)},
@@ -455,7 +493,7 @@ def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
         status["DOE"]["latest"] = max(r["t"] for r in rows) + "+08:00"
         if errs:
             status["DOE"]["error"] = f"{len(errs)} of the hourly tables did not answer"
-    if not isinstance(got["OpenAQ"], Exception):
+    if "OpenAQ" in got and not isinstance(got["OpenAQ"], Exception):
         sensors, errs = got["OpenAQ"]
         # only locations under an open licence are kept (none without a licence, none share-alike): each with its licence and owner
         kept = [s for s in sensors if s.get("licence") in sources.OPEN_LICENCES]
@@ -467,11 +505,15 @@ def build(out, at=None, transport_=None, cache=None, quiet=False, logger=None):
                                                         [(s["id"], t, v) for s in kept for t, v in s["readings"].items()])
         if errs:
             status["OpenAQ"]["error"] = f"{len(errs)} sensors did not answer"
-    if not isinstance(got["CAMS"], Exception):
+    if "CAMS" in got and not isinstance(got["CAMS"], Exception):
         cut = now.strftime("%Y-%m-%dT%H:%M")
         status["CAMS"]["hours_added"] = history.merge(out, "cams", {"source": "CAMS", "unit": "µg/m³", "window": "1h", "note": "series = place id; model estimate",
                                                               "credits": credits.block(["CAMS"], now)},
                                                       [(pid, t, round(v, 1)) for pid, s in got["CAMS"].items() for t, v in s.items() if t <= cut])
+
+
+def finish_build(out, at, now, places, got, status, quiet, logger):
+    """now.json, outlook.json, grid.json, checks.json and the rest, from this run's answers (history/ already merged)."""
     # now.json: from this run's answers only (invariant 10)
     out_places = []
     for p in places:
@@ -520,12 +562,18 @@ def main():
     ap.add_argument("--at", help="build as of this local time, e.g. 2026-10-15T04:12+08:00")
     ap.add_argument("--offline", action="store_true", help="replay the answers recorded on 15 Oct 2026 (default time 4:12 am)")
     ap.add_argument("--cache", default=os.path.join(ROOT, ".cache"), help="where the day's globe grid is kept")
+    ap.add_argument("--checks-only", action="store_true", help="write only checks.json, from the logger's data (the private audit Action)")
+    ap.add_argument("--logger", default=LOGGER_DATA, help="the private logger's data folder, for our Google checks")
     a = ap.parse_args()
     load_env()
+    if a.checks_only:
+        n = len(checks_only(a.out, a.logger)["checks"])
+        print(f"checks.json: {n} checks written to {a.out}")
+        return
     if a.offline:   # a replay reads no private data unless LOGGER_DATA is set on purpose
         build(a.out, at=a.at or REPLAY_AT, transport_=transport.Replay(), cache=os.path.join(a.cache, "replay"), logger=os.environ.get("LOGGER_DATA"))
     else:
-        build(a.out, at=a.at, cache=a.cache, logger=LOGGER_DATA)
+        build(a.out, at=a.at, cache=a.cache, logger=a.logger)
 
 
 if __name__ == "__main__":
