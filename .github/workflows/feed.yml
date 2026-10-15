@@ -90,7 +90,7 @@ jobs:
             echo "push failed on attempt $attempt: another run, or the audit, committed meanwhile; taking its files and rebuilding"
             git rebase --abort 2>/dev/null || true
             git fetch -q origin feed
-            git reset -q --hard origin/feed
+            git reset -q --hard FETCH_HEAD
             (cd .. && python engine/build_feed.py --out _feed --cache .cache > /dev/null)
           done
           echo "gave up after 3 attempts"; exit 1
