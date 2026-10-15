@@ -98,7 +98,23 @@
         "hour": {"$ref": "#/$defs/reading"},
         "index": {"oneOf": [{"$ref": "#/$defs/reading_ok"}, {"$ref": "#/$defs/missing"}]},
         "nearby": {"type": "array", "items": {"$ref": "#/$defs/reading_ok"}, "description": "The other community sensors within 10 km, same hour."},
-        "others": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/reading_ok"}, {"$ref": "#/$defs/missing"}]}, "description": "Comparison rows (the 6 numbers): the computer model's estimate, and aqicn's current value where aqicn relays the place's monitor (never kept in history/)."}
+        "others": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/reading_ok"}, {"$ref": "#/$defs/missing"}]}, "description": "Comparison rows (the 6 numbers): the computer model's estimate, and aqicn's current value where aqicn relays the place's monitor (never kept in history/)."},
+        "last_24h": {
+          "type": "object",
+          "description": "The 24 hours up to the hour shown, for the source that leads the page, from history/ (session 6, part 52). A missing hour is null.",
+          "required": ["source", "unit", "scale", "window", "station", "to", "values"],
+          "properties": {
+            "source": {"$ref": "#/$defs/source"},
+            "unit": {"$ref": "#/$defs/unit"},
+            "scale": {"$ref": "#/$defs/scale"},
+            "window": {"$ref": "#/$defs/window"},
+            "station": {"type": "string"},
+            "to": {"$ref": "#/$defs/time"},
+            "note": {"type": "string"},
+            "values": {"type": "array", "minItems": 24, "maxItems": 24, "items": {"type": ["number", "null"]}}
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false,
       "allOf": [

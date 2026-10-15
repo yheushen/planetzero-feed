@@ -460,6 +460,36 @@ def next_readings(out, now, build_s=None):
     return res
 
 
+# ---------------------------------------------------------------- the last 24 hours on the Now page (session 6, part 52)
+def last_24h(out, p, hour, index):
+    """The 24 hours up to the hour shown, for the source that leads the place's page, from history/: NEA's region; the community
+    sensor (when it is kept: only CC BY or CC0 sensors are archived); else DOE's index at the place's monitor, as 24-hour averages
+    on the API scale. A missing hour is None, never filled (invariant 10). None when there is nothing to draw."""
+    sensor_id = hour.get("station", {}).get("id", "") if hour.get("status") == "ok" else ""
+    if hour.get("status") == "ok" and hour["source"] == "NEA":
+        source, sid, meta = "nea", p["source_id"], {"source": "NEA", "unit": "µg/m³", "scale": "hourly_pm25", "window": "1h", "station": hour["station"]["name"]}
+        to = hour["measured_at"]
+    elif hour.get("status") == "ok" and hour["source"] == "OpenAQ" and history.series(out, "openaq", sensor_id.removeprefix("openaq-"), [hour["measured_at"][:7]]):
+        source, sid = "openaq", sensor_id.removeprefix("openaq-")
+        meta = {"source": "OpenAQ", "unit": "µg/m³", "scale": "hourly_pm25", "window": "1h", "station": hour["station"]["name"]}
+        to = hour["measured_at"]
+    elif index.get("status") == "ok":
+        source, sid = ("doe", p["source_id"]) if p["country"] == "MY" else ("nea_psi", p["source_id"])
+        meta = {"source": index["source"], "unit": index["unit"], "scale": index["scale"], "window": "24h", "station": index["station"]["name"]}
+        to = index["measured_at"]
+        if hour.get("status") == "ok":   # a sensor whose hours we may not keep: DOE's index instead, said so
+            meta["note"] = "The sensor's hours are not kept (its licence does not allow an archive), so this is DOE's index."
+    else:
+        return None
+    end = dt.datetime.fromisoformat(to[:13] + ":00")
+    hours = [(end - dt.timedelta(hours=k)).strftime("%Y-%m-%dT%H:%M") for k in range(23, -1, -1)]
+    s = history.series(out, source, sid, sorted({h[:7] for h in hours}))
+    vals = [s.get(h) for h in hours]
+    if all(v is None for v in vals):
+        return None
+    return {**meta, "to": to[:16] + "+08:00", "values": vals}
+
+
 # ---------------------------------------------------------------- the run
 def validate(feed):
     from jsonschema import Draft202012Validator
@@ -588,6 +618,9 @@ def finish_build(out, at, now, places, got, status, quiet, logger, t0=None):
                            "lon": p["lon"], "aliases": p["aliases"], "lead": "hour" if hour["status"] == "ok" else "index", "hour_rule": rule,
                            "hour": hour, "index": index, "nearby": nearby,
                            "others": [r for r in (model_row(p, got["CAMS"], now), aqicn_row(p, got["aqicn"], now)) if r is not None]})
+        l24 = last_24h(out, p, hour, index)
+        if l24:
+            out_places[-1]["last_24h"] = l24
     now_json = {"schema_version": "1", "generated_at": stamp(now)}
     if at:
         now_json["replay_of"] = stamp(now)
