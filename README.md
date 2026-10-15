@@ -4,6 +4,8 @@ The air in Malaysia and Singapore, every hour, as JSON files anyone can read: th
 
 **The feed:** https://yheushen.github.io/planetzero-feed/ (the `feed` branch of this repo, served by GitHub Pages)
 
+**Ask your AI chat:** the connector at https://mcp.planetzero.ai/mcp (MCP, Streamable HTTP, no sign-in) answers from this feed: the air now, the numbers you may be shown, the next 5 days, the places and the sources, each number with what it is. How to add it: https://planetzero.ai/ask
+
 | File | What |
 |---|---|
 | `now.json` | Every place: the hour, the 24-hour index, the community sensors within 10 km, the computer model's estimate, aqicn's current value; what each source did on the last run |
