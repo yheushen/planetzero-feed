@@ -572,6 +572,10 @@ def merge_history(out, got, status, now):
                                                      [(r["region"], r["t"], r["pm25_1h"]) for r in rows])
         history.merge(out, "nea_psi", {"source": "NEA", "unit": "PSI", "window": "24h", "note": "series = region, 24-hour PSI", "credits": credits.block(["NEA"], now)},
                       [(r["region"], r["t"], r["psi_24h"]) for r in rows])
+        # NEA's own 24-hour PM2.5, the average the PSI is worked out from: the History page's thick line (session 6, part 53)
+        history.merge(out, "nea_pm25_24h", {"source": "NEA", "unit": "µg/m³", "window": "24h", "note": "series = region, 24-hour PM2.5",
+                                            "credits": credits.block(["NEA"], now)},
+                      [(r["region"], r["t"], r["pm25_24h"]) for r in rows])
         status["NEA"]["latest"] = max(r["t"] for r in rows) + "+08:00"
     if "DOE" in got and not isinstance(got["DOE"], Exception):
         stations, rows, errs = got["DOE"]
