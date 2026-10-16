@@ -26,8 +26,10 @@ import json
 import math
 import os
 import sys
+import struct
 import time
 import urllib.parse
+import zlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -715,6 +717,121 @@ def write_global_frames(sdir, now, frames, regional, keep_from, source):
     return "earth/smoke/now.json", listed, spec["step"], at, boxed
 
 
+# ---------------------------------------------------------------- the poles (session 7d, part 107)
+# No satellite photographs a pole in its winter: on 15 Oct no sun north of about 81.5 N. So each pole's middle is always a fill, a "cap".
+# The rule, for both poles, each year: if a NOAA-20 picture within the last 8 weeks covers 99% of 85 to 90 degrees, the newest such day
+# is the cap (the Arctic in October: 1 Sep, the last day it had full sun); else NASA's Blue Marble, matched locally to the photos around
+# it in the browser (Antarctica in October; the Arctic from about December). Each day's share is asked once, from a small picture of the
+# 5 degrees around the pole, and kept in earth/poles.json; the last 2 days are asked again each run (NASA may still be adding passes).
+POLE_LAYER = "VIIRS_NOAA20_CorrectedReflectance_TrueColor"
+POLE_DAYS = 56
+POLE_FULL = 0.99
+
+
+def png_pixels(blob):
+    """(width, height, RGBA bytes) of an 8-bit PNG (grey, RGB, palette, grey and alpha, RGBA; not interlaced): enough for GIBS's
+    pictures, standard library only."""
+    if blob[:8] != b"\x89PNG\r\n\x1a\n":
+        raise FetchError("not a PNG")
+    i, idat, plte, trns = 8, b"", None, None
+    w = h = ct = 0
+    while i < len(blob):
+        n = struct.unpack(">I", blob[i:i + 4])[0]
+        t, d = blob[i + 4:i + 8], blob[i + 8:i + 8 + n]
+        i += 12 + n
+        if t == b"IHDR":
+            w, h, bd, ct, _, _, il = struct.unpack(">IIBBBBB", d)
+            if bd != 8 or il:
+                raise FetchError("a PNG this reader does not know")
+        elif t == b"PLTE":
+            plte = d
+        elif t == b"tRNS":
+            trns = d
+        elif t == b"IDAT":
+            idat += d
+    ch = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[ct]
+    raw = zlib.decompress(idat)
+    stride = w * ch
+    out = bytearray(w * h * 4)
+    prev = bytearray(stride)
+    for y in range(h):
+        f = raw[y * (stride + 1)]
+        line = bytearray(raw[y * (stride + 1) + 1:(y + 1) * (stride + 1)])
+        for x in range(stride):
+            a = line[x - ch] if x >= ch else 0
+            b, c = prev[x], prev[x - ch] if x >= ch else 0
+            if f == 1:
+                line[x] = (line[x] + a) & 255
+            elif f == 2:
+                line[x] = (line[x] + b) & 255
+            elif f == 3:
+                line[x] = (line[x] + (a + b) // 2) & 255
+            elif f == 4:
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                line[x] = (line[x] + (a if pa <= pb and pa <= pc else b if pb <= pc else c)) & 255
+        prev = line
+        for x in range(w):
+            o = (y * w + x) * 4
+            if ct == 6:
+                out[o:o + 4] = line[x * 4:x * 4 + 4]
+            elif ct == 2:
+                out[o:o + 3], out[o + 3] = line[x * 3:x * 3 + 3], 255
+            elif ct == 3:
+                k = line[x]
+                out[o:o + 3] = plte[k * 3:k * 3 + 3]
+                out[o + 3] = trns[k] if trns and k < len(trns) else 255
+            elif ct == 0:
+                out[o:o + 3], out[o + 3] = bytes([line[x]] * 3), 255
+            else:
+                out[o:o + 3], out[o + 3] = bytes([line[x * 2]] * 3), line[x * 2 + 1]
+    return w, h, bytes(out)
+
+
+def seen_share(blob):
+    """The share of a picture's pixels the satellite saw: not clear, and not black (R + G + B under 18 is a gap, as on the page)."""
+    w, h, px = png_pixels(blob)
+    seen = sum(1 for k in range(0, len(px), 4) if px[k + 3] > 0 and px[k] + px[k + 1] + px[k + 2] >= 18)
+    return seen / (w * h)
+
+
+def pole_url(pole, day):
+    bbox = "85,-180,90,180" if pole == "north" else "-90,-180,-85,180"
+    return (f"{GIBS_WMS}?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS={POLE_LAYER}&CRS=EPSG:4326&BBOX={bbox}&WIDTH=720&HEIGHT=10"
+            f"&FORMAT=image/png&TIME={day}")
+
+
+def pole_caps(last_day, folder, now):
+    """Each pole's cap: {"kind": "photo", "date": the newest full day, "share"} or {"kind": "blue_marble"}; the days asked kept."""
+    path = os.path.join(folder, "poles.json")
+    kept = read_json(path) or {}
+    checked = {p: dict((kept.get("checked") or {}).get(p) or {}) for p in ("north", "south")}
+    first = last_day - dt.timedelta(days=POLE_DAYS - 1)
+    out = {}
+    for pole in ("north", "south"):
+        got = None
+        for week in range(POLE_DAYS // 7):
+            days = [(last_day - dt.timedelta(days=week * 7 + k)).isoformat() for k in range(7)]
+            ask = [d for d in days if d not in checked[pole] or d >= (last_day - dt.timedelta(days=1)).isoformat()]
+            with cf.ThreadPoolExecutor(max_workers=7) as pool:
+                for d, share in zip(ask, pool.map(lambda d: _share_or_none(pole, d), ask)):
+                    if share is not None:
+                        checked[pole][d] = round(share, 4)
+            got = next((d for d in days if checked[pole].get(d, 0) >= POLE_FULL), None)
+            if got:
+                break
+        out[pole] = {"kind": "photo", "date": got, "share": checked[pole][got]} if got else {"kind": "blue_marble"}
+        checked[pole] = {d: v for d, v in checked[pole].items() if d >= first.isoformat()}
+    write_json(path, {"checked": checked, **out, "source": "GIBS", "credits": credit_block(["GIBS"], now)})
+    return out
+
+
+def _share_or_none(pole, day):
+    try:
+        return seen_share(get_bytes(pole_url(pole, day), timeout=60, tries=2))
+    except Exception:
+        return None   # asked again next run, never counted as seen
+
+
 # ---------------------------------------------------------------- the build
 def frame_hours(now, ahead_h):
     """The 3-hourly marks from 7 days back to `ahead_h` ahead, local time."""
@@ -760,6 +877,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         jobs["smoke_regional"] = lambda: grid_day(now, os.path.dirname(cache))
     if ads_key:
         jobs["smoke_global"] = lambda: fetch_ads(now, cache, ads_key, out)
+    jobs["poles"] = lambda: pole_caps((now - dt.timedelta(days=1)).date(), folder, now)
     got, took = {}, {}
     with cf.ThreadPoolExecutor(max_workers=len(jobs)) as pool:
         futs = {pool.submit(lambda f=fn: (time.monotonic(), f())): name for name, fn in jobs.items()}
@@ -908,6 +1026,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
                        "what": pic["what"], "colours": pic["colours"], "updates": "Once a day, the day before", "numbers": "Picture only",
                        "covers": {"date": day, **({"from": (now - dt.timedelta(days=pic["days"])).strftime("%Y-%m-%d")} if pic.get("days", 1) > 1 else {})},
                        "made_at": day, "satellite": pic["satellite"], "metres": pic["metres"],
+                       **({"poles": got["poles"]} if pic["id"] == "real_earth" and isinstance(got.get("poles"), dict) else {}),
                        "gibs": {"layer": pic["layer"], "fill": pic.get("fill"), **({"fills": pic["fills"]} if pic.get("fills") else {}),
                                 **({"layers": pic["layers"]} if pic.get("layers") else {}), **({"days": pic["days"]} if pic.get("days") else {}),
                                 **({"colormap": pic["colormap"]} if pic.get("colormap") else {}),
