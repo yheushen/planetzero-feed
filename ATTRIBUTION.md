@@ -44,6 +44,42 @@ Current values from the World Air Quality Index project (https://aqicn.org), rel
 
 Licence: aqicn's terms: credit aqicn and the agency; no paid use; no copying of its archive. The current value only, with credit to aqicn and to NEA or DOE; never kept in our history.
 
+## NASA GIBS (Earth's pictures)
+
+We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS). Real Earth: VIIRS on NOAA-20, corrected reflectance, true colour, over NASA's Blue Marble; smoke from space: MODIS on Terra, aerosol optical depth; carbon monoxide: AIRS on Aqua, 500 hPa.
+
+Licence: NASA open data, with GIBS's acknowledgement. Not copied into this feed: each visitor's browser loads the pictures from NASA. No NASA endorsement is implied.
+
+## NOAA GFS (wind)
+
+Wind: NOAA National Centers for Environmental Prediction (NCEP), Global Forecast System (GFS), 10 m wind at 1 degree, via NOMADS (https://nomads.ncep.noaa.gov). A computer model's estimate.
+
+Licence: US government work, public domain. Public domain. Asked at most 120 times a minute, as NOMADS asks. No NOAA endorsement is implied.
+
+## CelesTrak (orbits)
+
+Orbit data: CelesTrak (https://celestrak.org), general perturbations elements, fetched at most once per 2-hour update.
+
+Licence: CelesTrak's usage policy (silent on redistribution); US government orbit data. Fetched no more often than CelesTrak updates (every 2 hours); positions worked out in the browser.
+
+## CAMS global (computer model)
+
+Generated using Copernicus Atmosphere Monitoring Service information 2026: CAMS global atmospheric composition forecasts (0.4 degrees), from the Copernicus Atmosphere Data Store, under CC BY 4.0. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+
+Licence: CC BY 4.0 (since 2 Jul 2025). Labelled a computer model's estimate, never a measurement. Behind a switch until the owner's Atmosphere Data Store key.
+
+## OpenAQ (monitors worldwide)
+
+Air monitors and community sensors worldwide via OpenAQ (https://openaq.org), the latest hour only, licence per location: CC BY 4.0, CC0 1.0, US Public Domain, Japan's Government Standard Terms of Use v2.0, ODC-BY, UK Open Government Licence or CC BY-SA 4.0. Each location's owner and licence are named with its reading.
+
+Licence: Per location (7 licences); locations with no licence given are left out. Shown with credit to OpenAQ and each owner, the latest hour only, never kept in our history. IQAir's locations are never shown.
+
+## Natural Earth (place names)
+
+Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com.
+
+Licence: Public domain. Public domain; credited anyway.
+
 ## Ours
 
 Our checks of numbers we may not show (Google's Air Quality API) against NEA's monitors and community sensors. Only our results are published, never Google's values.
