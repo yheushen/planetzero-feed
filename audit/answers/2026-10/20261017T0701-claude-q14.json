@@ -1,0 +1,127 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T07:01+08:00",
+ "answer": "There are several likely reasons, and they usually come down to the two numbers measuring different things.\n\n**1. Different scales**\n- PSI (used in Singapore and a few other places) and AQI (used by the US EPA and many apps) have different formulas and breakpoints. The same pollution level can get a different label on each.\n- AQI also has an \"Unhealthy for Sensitive Groups\" tier that PSI doesn't. Some apps shorten it to \"Unhealthy,\" which sounds worse than it is.\n- Check whether your app is showing US AQI, European AQI, or the local PSI. Most apps default to US AQI.\n\n**2. Different time averaging**\n- The headline PSI is usually a **24-hour average**, which smooths out and lags behind recent spikes.\n- Many apps show **real-time or 1-hour** readings. If the air got worse in the last hour or two, the app will react first and the PSI will catch up later.\n- Singapore's NEA also publishes a separate 1-hour PM2.5 reading, which is closer to what apps show.\n\n**3. Different pollutants**\n- PSI combines several pollutants (PM2.5, PM10, ozone, NO₂, SO₂, CO) and reports the worst sub-index.\n- Some apps focus on PM2.5 alone, or on whichever pollutant is worst at that moment.\n\n**4. Different data sources and locations**\n- Government PSI comes from a small number of calibrated monitoring stations, often reported by region (north, south, east, west, central).\n- Apps may use satellite estimates, models, or low-cost sensors (such as PurpleAir). These can read higher, especially in humid conditions or near a local source like traffic, a barbecue or construction.\n- Your app may be reporting a point near you, while the PSI is a regional figure.\n\n**5. Different health thresholds**\n- The US EPA tightened its PM2.5 standards in 2024, so some apps now label levels \"unhealthy\" that older scales would call \"moderate.\"\n\n**What to do**\n- Open the app's details and check which index it uses and whether the reading is real-time or averaged.\n- Compare the PM2.5 value in µg/m³ across both sources, since that number is more directly comparable than the labels.\n- If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults), it's reasonable to go by the more cautious reading. Reduce strenuous outdoor activity or wear a well-fitted N95 or equivalent mask.\n\nIf you tell me which app and which country or city you're in, I can say more specifically why they differ.",
+ "citations": [],
+ "claim": null,
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": false,
+  "said_unit": false,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": null,
+  "checked_hour": null,
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "NEA",
+   "PurpleAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T07:01+08:00",
+  "pm25": [
+   84,
+   95,
+   104,
+   95,
+   112
+  ],
+  "index": [
+   [
+    144,
+    "psi"
+   ],
+   [
+    163,
+    "psi"
+   ],
+   [
+    176,
+    "psi"
+   ],
+   [
+    183,
+    "psi"
+   ],
+   [
+    193,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T06:00+08:00"
+ },
+ "took_s": 9.8,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6kN18QATBsnuTqtyzVZ",
+  "container": null,
+  "content": [
+   {
+    "signature": "CAQSgwoKEAgSGAI4AUIIdGhpbmtpbmcSDKymqLcOpGQTdY5RcRoMGjmqP2CHaM7fiuvyIjACit9ah13K5p69dn5FpOXECvh48YhUoMqz/Q3cekQaPhj2PlamxdIWjHIISTd8OboqoAmWnDPV+q+IpwD4mKLW5xN/dY23J76Cp/enl/6bAsJ1pdlxsdaCWZN14qNkd2ktnFmCvRCJjTs2XINxCg2B9hn51jFgbNNdIlGA/QVmSepdjJQx1pfLbH8Mtz8BJGmVMmWmIIycKjnCkaX7zOBk5zsGtQWhHvUD0EXWlIt68I3GWJHAO2pByNZAMeipTERETg+VJ9jHkS5yuFB03NcwGfcvxXKW5C4sn1ENov9vHATR6mg8ChwgR4oC0PDt6jAp6xpP78r0e1+kO1sUeOhPxdV7SRCPh4malt5UvWQAoQZzGW09cO9iGr3zNhLLvi/yJDQhra03+M3W50Y1ZdmKPwWg+E6QgwC8r7Db/tXaCmVlEo5rcb3JXbkahbAh3ts9KZbyBxm6+YCPASh2O44qFltOFGmHrGy7d/9klCQM5sREBk1h4jrsCUhAGaLJmlS9vAcnBQ0lkAKtwEu1wCzDiTLKsoBFb5i2mpdjS2ekMiOo2QKDP3n69OO5vYPhLsh7D1Ysr3lDGzexabd8X13RdAeeWaeSQRdo/W1hZ84eehR0DbbNHelRDPalng5CKkHCVD6pP/xkuEl/J+Tnwq1MEia9/0cA4sZBdcWILC+YczuUfBPFnGOHNYAk9ffYCaEGHbAu9G3jMTj1ia3XS66xk5znPOBrkSu0pmhEMWbtfqTVn4Xg6uXoJC3Ijws2H854eNNEIz053APxidkAG8GGlFJrBYWBNIrAn59Nu164CjxNJ7ir9pUZRS0k8xvynr8L+cMAqY98Pvlu5fbVPYHNjstgo2aQqh4Ghxscx2irwLeUxNlXZ7IFc/iz+FiAp27ibPb6WjysvI6H+LhhfYDwNettEQIa2UtxS0xGKJaplNMNpTOO8zgLxWuKrAjzCM99ogmQFm0HvbAk1/NQmitTEt+v6B61L5Oy8Vfs+VMlvCHwIXnafSA0pmANgFZ707YWMP61jFviq4xIt0+3nxRVFzZLkjljX8aXU6kHAErwr4y22br8jtQtUhK4PojYG2SU8hrAoCYJu52uLfpFeSp3x28YmgmnaMjYFXYYlxy1C4yEv6TMGGSXLBJptCzeu8jIEYWZxx9Hr++LTQHcu87qgtz87hUsiwY1v/Q48RJSbYClHnf1BEG/sEdEHbQnR56YP2DOAiPZbTWmWzYq/YodWoJmJSQ4l3i13xSimav+7gb3rtponhud/EM2vv6MKFNespl+oW6m80y9RHby4w7H9umFx0JKYGpBabAKMHj5b0ihh4ZofluETHAE1RzMny6750Hml6kdeNtOnYkK95cSmtnbVbrPWfgnBM5yaYZksG1ek/VrDv5WchRq8AnQQ/ERuCMzxTU87WZTNrTi+2H97buSs5Eyf7CH7cec/+lK7lAPtv9tldx1q/SP8IPJkgyT59RZ+f6nMeOzokLVbu6zLum1ZxXCAn6SMPY5htNQPq/yrWJfZIBbl8QxlCmZB2AJV7BU78tUa6LH6/bFAmG9ijSgDOZw2zmKXzoetd7QIV3Oo2VJRSmVPnKUMRMb8iVCjaWn5gUTZn6FzFS9sQku/XdnjJYMON5uCXY3us1rWdLMsRgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "There are several likely reasons, and they usually come down to the two numbers measuring different things.\n\n**1. Different scales**\n- PSI (used in Singapore and a few other places) and AQI (used by the US EPA and many apps) have different formulas and breakpoints. The same pollution level can get a different label on each.\n- AQI also has an \"Unhealthy for Sensitive Groups\" tier that PSI doesn't. Some apps shorten it to \"Unhealthy,\" which sounds worse than it is.\n- Check whether your app is showing US AQI, European AQI, or the local PSI. Most apps default to US AQI.\n\n**2. Different time averaging**\n- The headline PSI is usually a **24-hour average**, which smooths out and lags behind recent spikes.\n- Many apps show **real-time or 1-hour** readings. If the air got worse in the last hour or two, the app will react first and the PSI will catch up later.\n- Singapore's NEA also publishes a separate 1-hour PM2.5 reading, which is closer to what apps show.\n\n**3. Different pollutants**\n- PSI combines several pollutants (PM2.5, PM10, ozone, NO₂, SO₂, CO) and reports the worst sub-index.\n- Some apps focus on PM2.5 alone, or on whichever pollutant is worst at that moment.\n\n**4. Different data sources and locations**\n- Government PSI comes from a small number of calibrated monitoring stations, often reported by region (north, south, east, west, central).\n- Apps may use satellite estimates, models, or low-cost sensors (such as PurpleAir). These can read higher, especially in humid conditions or near a local source like traffic, a barbecue or construction.\n- Your app may be reporting a point near you, while the PSI is a regional figure.\n\n**5. Different health thresholds**\n- The US EPA tightened its PM2.5 standards in 2024, so some apps now label levels \"unhealthy\" that older scales would call \"moderate.\"\n\n**What to do**\n- Open the app's details and check which index it uses and whether the reading is real-time or averaged.\n- Compare the PM2.5 value in µg/m³ across both sources, since that number is more directly comparable than the labels.\n- If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults), it's reasonable to go by the more cautious reading. Reduce strenuous outdoor activity or wear a well-fitted N95 or equivalent mask.\n\nIf you tell me which app and which country or city you're in, I can say more specifically why they differ.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1166,
+   "output_tokens_details": {
+    "thinking_tokens": 329
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

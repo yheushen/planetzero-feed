@@ -1,0 +1,500 @@
+{
+ "schema_version": "1",
+ "question_id": "q7",
+ "question": "Is it safe to cycle in Kuching this evening with the haze?",
+ "city": "Kuching",
+ "where": [
+  "my-ca65q"
+ ],
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T07:01+08:00",
+ "answer": "I couldn't find a live reading for this evening. The most recent report I found is several days old, so check the current number before you ride.\n\n**What I found**\n- A Department of Environment report from Oct 11 said Kuching's API had dropped to 85 from an unhealthy 111. That is in the \"moderate\" range.\n- The haze in Sarawak has swung a lot this season. Kuching has hit 407 (hazardous) and \"unhealthy\" levels again in mid-September. A reading from several days ago doesn't tell you what tonight looks like.\n\n**Check right now**\n- The APIMS portal (apims.doe.gov.my) or the MyIPU app. Use the Kuching station reading, ideally the latest hourly value.\n- Your own eyes and nose. If you can smell smoke or the visibility is poor, take that seriously whatever the number says.\n\n**How to read the API for cycling**\n- **0–50 (good):** ride normally.\n- **51–100 (moderate):** fine for most healthy people. Consider an easier effort, since cycling makes you breathe harder and take in more smoke. If you have asthma, heart or lung conditions, or you're pregnant, be more cautious.\n- **101–200 (unhealthy):** skip the ride or move it indoors. Under Malaysia's guidelines, outdoor activities are supposed to be postponed when the API goes above 100.\n- **200+:** don't ride outdoors.\n\n**If you do ride at a moderate level**\n- Keep the effort easy and the ride short.\n- Pick a route away from heavy traffic, because exhaust adds to the haze.\n- A well-fitted N95/KN95 mask filters smoke particles, but it makes hard breathing harder. Cloth and surgical masks do little against haze.\n- Stop if you get a cough, sore throat, chest tightness, wheezing, dizziness or stinging eyes.\n\nIf the reading is 100 or lower and you're healthy, a gentle ride should be okay. If it's above 100, I'd skip it tonight.",
+ "citations": [],
+ "claim": {
+  "value": 85.0,
+  "scale": "API"
+ },
+ "each": null,
+ "quoting": [
+  "DOE"
+ ],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T06:00+08:00",
+  "band_right": true,
+  "close": false,
+  "off_pct": 31,
+  "measured_ref": [
+   65
+  ],
+  "measured_range": [
+   65,
+   65
+  ],
+  "named_source": [
+   "DOE"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T07:01+08:00",
+  "pm25": [],
+  "index": [
+   [
+    65,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Kuching"
+  ],
+  "hour": "2026-10-17T06:00+08:00"
+ },
+ "took_s": 24.1,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6kMkeWBX77YU2dndArm",
+  "container": {
+   "id": "container_0153Lj8jStxzVyXczAifPDQA",
+   "expires_at": "2026-10-17T00:01:41.023772Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01JpfEfb5vNCHS5xUSkPKSd2",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Kuching API air pollutant index haze today\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x['page_age'])\n    print(x['content'][:600].replace(\"\\n\",\" \"))\n    print('---')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01BtveCb6BTDN6yQ8MNG5S8e",
+    "caller": {
+     "tool_id": "srvtoolu_01JpfEfb5vNCHS5xUSkPKSd2",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Kuching API air pollutant index haze today"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01JpfEfb5vNCHS5xUSkPKSd2",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "5 days ago",
+      "title": "Haze: Air quality in Kuching, Miri improves to moderate levels, says DOE",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/10/11/haze-air-quality-in-kuching-miri-improves-to-moderate-levels-says-doe/238709"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Kuching Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/th-en/air-quality/malaysia/sarawak/kuching"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "8 days ago",
+      "title": "Haze persists as 38 areas record unhealthy API, Segamat highest at 187",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/10/08/haze-persists-as-38-areas-record-unhealthy-api-segamat-highest-at-187/238182"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "7 days ago",
+      "title": "Air Pollution in Kuching, Sarawak: Real-time Air Quality Index Visual Map",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/map/malaysia/sarawak/kuching/"
+     },
+     {
+      "encrypted_content": "Et4ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDIXa+oIclI7vkqqeyBoMBui3uuF/6c17BsxgIjD6XoO2s4va/jXP136MPUTx4XuaOd6HLeuGb6NdtjU6pGrEXID6UGp8r30DnvxB6Agq4Qed6h9OHwCBz+9Vd9oz+WSC0+8ntpqkv4n2i/HUjZNMylGRH4o53mSPRE7gvjgEgxkn4hqZaEKxvsFi+37jM99plHLOILcLFwcYZB06b3ObY6g0uI9qEFoAbNjq6VdEN7wXoWZd2RwkuWxfTg88pWKZkzHXtceE+nxeiEeTJYgf7pReRnNdCpAg1hO5lXEhcVBd3kTgOMSERw1MKCViQxcUquLmlAXtk01gYJRrKWKOu0rMhv9mNyhA3YxqOAdfgHMMBb692ELIeygfMDaG/r/iAtdKl5cZZgqaSSECXvr8MJdZjHxz19NTMI7Nug5kYehvxcKlywvWLSvbtcUxzauqZklUBYucRIVeO7wDI3CAzamNRCMC/0djHZs+u4oK29df7+fc/63t0nK/a6bq4picxuwntCWGIFgNssBC5y1add8jg1brRc7Tj8zFpbC1j7uLiAeEncjJNL82ErYRqEFSTFlTwp5L0wVXBsIxd28w00sG1VACH37r/BbjJXwtYotGySlbezqQVVkXvUCkIixk+nreKqFXMvsLgZwA6E4J/Ub0jLeNP6iKt6IhNxfBA9Ywm+bwBfwro3S2EJWjmoYt83omR/+zWtO05rZ5S2afuXGKSlSxZp62SItlUPuMkkND1Tq5lt/t8Kc3COlKt8athdAsBydP9x07D+x6sWEEcwdcPwUsgZNve2pxl+kdb7LB0H8zSaljEF2X1ageUJAAca1yLjV0lso+PqOd3b3HiKrahNR25iypKvh3Mjm/6jIpwBEhZLG2hRSZuOf1onWRdeIWpbeYtjwd2i54YGRzMGYP3jxPimV+ZAWd+CmQVNByamkbAJ7/k7ZHQwPk3M541Zc1SBtQ3QRp9f9MvEbVCy1OJVNKLISCBPZHsrWpQp8r2H75UKuKb2WGp1Va4hFKKMD+L0cvDzQhdr5+Bh+/P+zXyks5OkZh/y9f7Yy1h2F9K2n2NrMQ6gW09ruFIePxyUOV+WgnVUVMDYw8pzF0eMAJNIeotHqDsKDbe7E3sdIF/IOYhf6jRcpJ4pQH7N+Mdk0Ro4LSO8kLoGlWJ5KOy040Oum4yXfqY3eZa1pC+hxti6352O7FH4YCDke+19rcvTQsVx3zAsMoRgHbELGAHHh9Yjb8Xkgs5bFgpELbdlDxg2DJRyOWu9Bsxid/YhgouLWFYCR/bre3sTraBTWYX5AZm+om65EGG2G7guz7ZT6lLWJOQbSdJwh5UQnCUDioyun2c9cO4e6v62QvN1tdVA6CU4lGW0XexgCBIG9LVzhL6cNt7fH8l265sbRemlmbrokR4JdFRj0ONXAKn7uBPjEYAw==",
+      "page_age": "2 days ago",
+      "title": "Lubok Antu records highest API at 160 as at 10am (Oct 14) with three other areas in unhealthy range",
+      "type": "web_search_result",
+      "url": "https://dayakdaily.com/lubok-antu-records-highest-api-at-160-as-at-10am-oct-14-with-three-other-areas-in-unhealthy-range/"
+     },
+     {
+      "encrypted_content": "EqILCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDGcoJLab5BwiEUQeXxoMTDQcY//dkrOLRrmvIjAIZVo1KbER7E4sTQdbMUhYHKwodDdGmRCAIsQ0CsphDsw/Bz3vt9IRzZ9uhH4vz4oqpQrxlViT1Q1c+whmPEH3M4is1enCdXmGrx5/ESMl+ZX30Ja73bCIoSUH+F3w0hsrduw8H4Xl4dPif9ivoGn21vtdPUck/z31VdQeDMezxVhGnNZfiS0CuauQZ4JIikTKkWb0tS9UtwZEX/UlOsccQFj3R5DforH+MkeMMMFjSqYvj5d84iaSggzSgKdo12YTeI+UF32GW9vvHKURn0hbUTfIb0Hizz1Cj8Cx518TkobGDAeXjRFybMC37CE3BwhKAmTV1aUs77EJEJelgvistvzMxQK1SpHzcnhz8SlwHuamOzrhB0QYgBaRWTS3FwxEKpax4ikld5iK7x/o7LgPY/CY/53vdTELMq2C9KpbtB2F6TsRqb1QW2Qdom+gXTL8RkrwC/aseJdv9+mev+pE0mwREm/AqZhf2dAVNm3ACwVh3xSevxr0UiHrxqn266JK1z41psUOkjPhMWImDqSxJmcMrYsQ4LHQam925+A1uEeUoch6cPMZVs5kKgw0ReT849K1Y3Fgw8Y6Q8twv9cA647HwL+JomU4sCopoZQHM36PpJq7EgHcOXIz8F+TzaLHkI/GK0K/2R4fN0mRaRMGVSh2DH9D5EB8DoiO0JeIaHlReD3Oj909E4gmiM9LxAsfoN2bkha2j2q1Y0HPG9tcTN0D2uwDB5NgxvE5BZ6a4oE32PScLqO+IYde/X/xH7mR1TUU55+O0xjTIeoGzHxcQYSl7KXpaBjDoErEchWeRhVUl+Gvd9dw5KFPuNwPeXQdDUcTd3Lcu2nT+ndFaJVc1ON6d2biDOtJk54di+7dR58IoP1IoHp97pAugYnyHIqWrkmH8oU590E7xK31cqDFYm/dc5uy3wS/4ev+VsXtb4bmRghShi9kiu5WEfjtxOiJ7A5EPDHyeGu2hmHODgT+omD3EV1UjTN+XyIHpOVEuHZdRnYmG1vUpmFXWfVvd2/bi3k7+Vy1UoLnQmA+yNf1gjhKp0AOgt15JWgN8vrBay2/2krVe5Syv9haePxM0yvcJmA8NbXSOSlW8c5AO8TgXpU4cevkyes+I37+76e7zxu11nTXcm32ioB++qOeeNzB0iijh/cFW0aDprEq1Fc+qrxeUiA2JJ/EEPOkmir3UNrZunVQS0KHGYtzeC2n3Kc2UHjetpPm/scWmX0SbOXiO1gT465Ngyb4NbxAT5+1iFTxqUCiyrvRxl70GC5faoxAStzdgcVZrgEjMJFv5o4NIW/sz3/xgdSq7b/idJerm75XLYrDGLvO8NgwbMUqCalbzVljONg1pWKxfM+QKnURFsku7981M4YUtGpp+aPCVnHKUqOKSmP1GV9qYNGPM/MAHT7f7zTEHu1XW54kCfCDsO0/6SROA3iYModOE846perWybPnBnmwJph9NgbX+Su/UTrCKdxq0q1himThD8zP/4K2i8FoI8aU3V+SY/KJ06PbogGjxypgaKHpQX3rEwzqRQbTkSL7ut8JzKKPX50+nxAe/NmD2A8cRaGe9vB0uhfzcL6nirjby+V4ZxQk12a4T7Yy5/W74BD0j2kq6SYa3vpPINrwIs4n7oWj6Xe2oWAxCCFR36ho5q9+HtNGLlYIMBhCBINQjFEIMU8zfWmL9Wc++T4oPEZcvWK2vaaC+EtjZ4kbLgaMnZh1F4pBanIeyvVcf+u+rF7jBB3fv33K7QlV0DH5xCvQOGyzyHf3+NWlEBFLxEZd9y0v+WGb9IXHRYKXGwrfFkEjMtY9h3z8EWB2QUFhv18YAw==",
+      "page_age": null,
+      "title": "Malaysia API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Kuching Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/sarawak/kuching"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Malaysia AQI & Haze Today (API/IPU)",
+      "type": "web_search_result",
+      "url": "https://hazemonitor.com/"
+     },
+     {
+      "encrypted_content": "Et0ECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDKndMtObnRFtu1YJCxoMAuDgE/TYBgGUnRUnIjDIWjyGoE6jkfd+yGTqJnjMw5eD3bGN4Bk2kHkB0h5qMOtqfNnsfHo1NDf9QS/JNy8q4AOuFgFJWhH124XjOILV0m7uj0Jk1LocfVHpPMIeTWkSK5ozczQjF8n7HTwEhkv4w8nh6Za4uvoFVHadFfCCJ7wkx7IBolU83XS6gIC6GehFwIaFqxJ92rNiGEQ4G5hqf3w+qZQRW4/AqsbTf0gEFWNT/LY/KkJtMuxmR888QO2/m5lv0OP+EI+R7loeFuPJK4Sr/1QhcRNE22l807CRvo0RPEQE9t3FP+bAKW8iZ2uaVs2ZrwL7+ESMeoIFVQNx2FMZl2/TvR8fJ/DTdlEEaigPJpVUYSDk9wOSuVuk3945ZIbjaPib67nsgOHaBLQVO5fA34yAM29L5+G4rbV3aGhkHeXo0a9HWU1cG/O+Fjgtcjcl04eFpaB2Kup0p8slW+JZt9a3FxuRI54HI1YEcF0cptuqocACQMG7XFvUK0ku/pmGk2D9PaQx7SZ01IE9n5xK8nHkEigEF7aw9eA2/IBxXV1WPpadmxc0HE1uH3lIsyOf4fzSk/ET/PZCiKAVtKxLMZNp1r2vOrBv9CtE4hDr+zy/sNwGQPNquq3HE9s7W23P/byCT4rfDWtJwJTOYn06SGeshMU+zUPOov5qzcuDuyLGBnZpAKpgaX+YuLoPcEUOATTh+mH2iW1xU0h7eyoYAw==",
+      "page_age": "67 days ago",
+      "title": "Malaysia Air Pollutant Index (API) Readings",
+      "type": "web_search_result",
+      "url": "https://blissair.com/api-my"
+     },
+     {
+      "encrypted_content": "Es0HCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDF66a2ygZbEWjCj/uBoM2nUGFjgNFkG1ynYXIjA284zQrGFNew4jTpBU+MUK1/xDbDeyIU3tMoifsLBft4E1P2qKEcSv/3K0hwku9G4q0Abk5o2w/iT9KCyKDaoGZSfYJRNFGrKMryWSeWgC+YNCviye9Kp4siohp2nnyrgxRMZ8vt8BvIPsC4g5HZsD1EHLitwHcG2d0WPe9AU4eAVJSSHew3fZzXlNp2s+1sGOnlgIuIxihk2tn6aPvTeYNTGZSGTZK4BLkCwTdSy6r5oAvMbozdKPZxC5mNG+DGzvestDnjDan8Lh2pm3qnPZl7fR/X/sHjv4sNKdZ65omwTQenAZt4KZUw764gzjj8/sHsqKeOEygm1LkasR9z9WdFISwdJTt9Um6NyPvYAtEHT3a1VHZqfXkybuEKmfr9kFN+JVHvm+awXRFluwg7zRGSiFC/A5KEQwfxQOlg9G+NE7+E0Jl0Ckx59goXc4X1zqKtJRR2iHvbBcrF7iIxOPe1C2ld20qJOCMPpih/SIeKMbtAq15ugi4+rDUGtg8nqssDjPZI8wuYBQkNDk5uzeygKETrPmFhYjtnquj8OgvZjlVG4j3cYlYHHtCgGjfTo7FivTjmarqi0KVeZuzbv4o+NPPsL7DWg7/ZrLAxqTrBkOlPLgWf/44V2HAB9vBQSB8m95LaOAuNFlyidsAbzMVHTeja0juMENS6ABFZQ7dt9Ffnq30AtyK+++OKqj9ZnIuupT/apPGE5JtaOwl5mzh8BdHZuvHyjzBAs2vsgH35CZqizrc0sc6zbDz0u/uckaz2Y0xZfj7BAXqAOm1K41W20Sj+wUqOF1wAl9ZavhPGRt6NogCOru2vzZUjnW0sUCbM5IAh6R3GgXSFvO292WXUtylrLtqt14nCdYgT+/q7N+b1sWOzBQJDatyWdqaYNTe44JoyBiO8dSavfLov5ORXGEoKZC7AX7B7F6ZMsu/iXgk38xbkTsGRsCM+MSSXPzEXtDUDuiSZs5beOHMSpIwzg9q4f1jiU23x7/4DUlQUzuvTolJnev3f2XPEW5WwijJNQxLDjgBclp7j5oYJCieqPFKz4qXVPHgtSozSGlw7Y8E2J2pjM/14btPd3z6OOB/evM2mpRLab6CYBAHYxLwQ8Kdp6xtKVIL1yR4U+4VO/5lYSiV6VZmkuVVTLAzsGoKStn4pQxuiQ9teZS48hKuwagr+1qGqOZp1Q+yCEAtwfz3BgD",
+      "page_age": "3 days ago",
+      "title": "Air Pollution in Malaysia: Real-time Air Quality Index Visual Map",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/map/malaysia/"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01BtveCb6BTDN6yQ8MNG5S8e",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLVMdwwgfseqRvgF/hoM7bcjHl4D4zvdA6+3IjC2My675KYdRAiHCvF2oN0Ix3EznX/6Do407jdL9tDKKeuH/InbsUScEb19JlNJsQQqEkJyE+NJjroqWZJbSPOPKryCixgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01JpfEfb5vNCHS5xUSkPKSd2/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x['page_age'])\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01JpfEfb5vNCHS5xUSkPKSd2",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_0129Jp1PtKuajPmYbTaMaYQF",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Haze: Air quality in Kuching, Miri improves to moderate levels, says DOE\", \"url\": \"https://www.malaymail.com/news/malaysia/2026/10/11/haze-air-quality-in-kuching-miri-improves-to-moderate-levels-says-doe/238709\", \"content\": \"KUCHING, Oct 11 \\u2014 Air quality in Kuching and Miri has improved but remains in the moderate category, according to the Department of Environment\\u2019s (DOE) Air Pollutant Index of Malaysia (APIMS) portal on Sunday.\\n\\n## \\u2018We want to breathe fresh air\\u2019: Indonesians on fire-ravaged island sue Prabowo, officials over haze\\nDatuk Seri Fadhlina Sidek, said that under the coordinated procedures, outdoor activities would be postponed when the API\\u00a0reading exceeds 100, while schools would be closed when the reading exceeds 200, in accordance with the PTJK.\\n\\n# Haze: Air quality in Kuching, Miri improves to moderate levels, says DOE\\n- Air quality in Kuching and Miri has improved but remains at a moderate level according to Malaysia's Department of Environment's Air Pollutant Index.\\n- Kuching's API, which had reached unhealthy levels of 111, decreased to 85.\\n- Similarly, Miri's API, which hit 104, declined to 99, with both cities staying within the moderate category.\\n\\n\\n\\n- As of 3pm, all air quality monitoring stations in Sarawak reported moderate API readings.\\n\\n## Subscribe to Newsletter\\nKUCHING, Oct 11 \\u2014 Air quality in Kuching and Miri has improved but remains in the moderate category, acc\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_0129Jp1PtKuajPmYbTaMaYQF",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01NVHpcviL8oUsFMUdMzEUGd",
+    "input": {
+     "code": "import json\nr=json.loads(r)\nfor i,x in enumerate(r[:8]):\n    print(i,x['title'], x['url'], x['page_age'])\n    print(x['content'][:500].replace(\"\\n\",\" \"))\n    print('---')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/tmp/srvtoolu_01NVHpcviL8oUsFMUdMzEUGd/cell.py\", line 11, in <module>\n    print(i,x['title'], x['url'], x['page_age'])\n                                  ~^^^^^^^^^^^^\nKeyError: 'page_age'\n",
+     "stdout": "0 Haze: Air quality in Kuching, Miri improves to moderate levels, says DOE https://www.malaymail.com/news/malaysia/2026/10/11/haze-air-quality-in-kuching-miri-improves-to-moderate-levels-says-doe/238709 5 days ago\nKUCHING, Oct 11 — Air quality in Kuching and Miri has improved but remains in the moderate category, according to the Department of Environment’s (DOE) Air Pollutant Index of Malaysia (APIMS) portal on Sunday.  ## ‘We want to breathe fresh air’: Indonesians on fire-ravaged island sue Prabowo, officials over haze Datuk Seri Fadhlina Sidek, said that under the coordinated procedures, outdoor activities would be postponed when the API reading exceeds 100, while schools would be closed when the read\n---\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01NVHpcviL8oUsFMUdMzEUGd",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSnQUKEAgSGAI4AUIIdGhpbmtpbmcSDMtBs3CvuvRxuTvprhoMhPjRZB3OWr8cNx/iIjC3IVHVxQXoxWUK2+/erJxtK/wjynioxrhUF/Uil2bl07Gz5ajNpNM0jYtqDCXxklcqugRp+vkzKDGl77lmPAihvO47YS8KqvFGd7vU5GvmxpqorOSM9JE8PNzbgSZyd72ZMul/kUWoDAZG+KKpybSgXfiXruXd+G64yKif6w0Ack9E8Z+LbyH25GFDxCWm9o8ilmKMvicP8/6h3sNXssUIV+unIdbmXZNXAoUy1f4wmtSy8hXUGvZrlTTRs5JnanNSR8DhCIDORkNRxfZ9RZJxxY801zcVMYr8zZMexPXskzDiBtEJpa5RxH8IPIMwOOcRMOz9kpbk+GpzLPnq53whH15rMKI1AP9WxRsrPZWNwrMtnX0hx9Q795CfdGmd8+DfAa1ozI/IBbDDGiXcvkKCLAUjMgF8P45tSlFJfLho34JoAcOezyTenL7NDaV9TQI7P8ndwITqp922E7esBb/9kR9dUFwvKjRQfSXdi0Hvxesm8ohln+mQenGp0RzqdMXRD9oPGVJEnpdosNZFhHF2/gIAORZsb77rGUSirNSbRqcbmzgpQQdffw8lyePSoKPBE5a6NM+swBj14RokJJZzPQXmQ9z4z3mMNYsL5NPQFHaPrydMiSvRH+E/bMDqaaKKjkrSaIyKd1raMAIg/W+ULhZByNY9UIHXoNERln59wbxu6SaQQuVigiAoobyNMOj/lNO6yHw1JLlbzbN8w6rFg+5F179KcQ9NnYEii9X1PscDM0NATIoUexFRA4Dzi21ckkA2ebStMmsElsiPRH3svvadmCTt6CGcPilcsjTmcvZIdoYIVVowAlkU6gIYAQ==",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+    "input": {
+     "code": "for q in [\"Kuching haze API reading latest\",\"Sarawak jerebu IPU Kuching hari ini\"]:\n    r2=json.loads(await web_search({\"query\":q}))\n    for x in r2[:6]:\n        print(x.get('title'), x.get('url'), x.get('page_age'))\n        print(x.get('content','')[:300].replace(\"\\n\",\" \"))\n        print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01QoztLiYhnoGgkFniQ62Cxk",
+    "caller": {
+     "tool_id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Kuching haze API reading latest"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "47 days ago",
+      "title": "Haze: Serian, Samarahan, Kuching record hazardous API readings",
+      "type": "web_search_result",
+      "url": "https://www.thestar.com.my/news/nation/2026/08/30/haze-serian-samarahan-kuching-record-hazardous-api-readings"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "45 days ago",
+      "title": "Sarawak haze crisis: Kuching API hits 407, six areas in hazardous zone",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/09/01/sarawak-haze-crisis-kuching-api-hits-407-six-areas-in-hazardous-zone/233470"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "68 days ago",
+      "title": "Sarawak haze thickens, Serian tops API at 170 as Kuching, Bintulu readings hit 155",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/08/09/sarawak-haze-thickens-serian-tops-api-at-170-as-kuching-bintulu-readings-hit-155/230703"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "29 days ago",
+      "title": "Haze returns as Kuching, Serian record unhealthy API readings",
+      "type": "web_search_result",
+      "url": "https://dayakdaily.com/haze-returns-as-kuching-serian-record-unhealthy-api-readings/"
+     },
+     {
+      "encrypted_content": "EsMICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDEk6z7TqlwrF82pcURoMHYsFFEkts9maxVczIjArvoxrqCeagjeSt28SirmaLN7/0I6ZtBzPZHXqzrQlXNWru2NTJYVHqL/Id7nlmU8qxgdQpm5FmxvDY0YYIKW1fHA8UfOJgg3cVIIcvsEi2KveyxPDekDbG4UlD/GhB3+50dJQpw9OtCNPYVDwkpSdSpLPKXuQbQR/++m2cF/hwsOyQfS8oAvR6I/V7UAw0Y/Ok4QdxZX1DDBn39EgvLuHQpu3gopVfcmnsEj+efixZqJHvjIur8WIv8uFCohjH92is844mSx8cJmUH6tPGDshf+BBNbVIjzob9Pb9sdgi//deChY64oRivg0x3T80mTjf2J37dWYM5rSieqjqMUK0RtCQisj2NcqnJSkABsHr02+wbN/glGSq+0HCoSd+5tA1Bk2ew1BVzdUQ5+Xr0HK2gwzFEyYyFyzzuV+DVpvZX6tXDb0KVpmP4+eAnb1p/OhGh+prgaLB0bWfI5UePwNOvk6RIFrphHfx02NWcrD6tkkVhXSiG1CW1iOjXVOtcZSuhNYq5vSyzujPDuOF2zwoAr2ejWneBNoyIOiYD3FHqSWUdtNoLKOI1zd1DHb5k60nBk+giMcl9szfJae0MAFmi8E162WxcPgwgb/rCZIrgSE6flGzo2D/52VSEkKNEWzbWRJJCqrtC4hizG8eOFY13IZu3YSw3tq5szptU7aCmBdt9qe6rHHb6ADoIW+ZhXap+rbbAu1ExhluBzWSp+iCgu67Sybb0Em+l7Wf/gV1ycg1I6wxBJvxxZowp4wGjPL7kiOwIMTVGy6xSLaExBscWsefczQUkzPwwRbdqvCHt8epnJY5ufncPYrwDkqoOE2NNhsW9vbJQXs52Ey6yIi3dgdx3jYRjW7jqZ+4itVmoEDQFXQFVYoQ5EjNuRX9crSGhegs5B4N9s0s1/t0aP722sazu1/xCyPGbMSjBAqNWzcjIn8ul/ajQMHrGdmfu8sDk2xqDFLAoUHggRLqlXuLEXT6xlncxl3xv2KMeLnareraey6Km0/lwsezRxroo/RD0jJwYWw/cZYEO7dqv0TVZBDR8B1IiW9RDQYgX7vgzoYRkdN4r2/jArXHkcZJalLY1r6DGKrYcHchntfcfzEQ/USEVbvucpdt0ZULbtS10sRkNhlsNiVF56ph5zblQKEx4O9NXBIvG30kkUGNbpnMadWuoXsW+gjkF45epIxO1WEjhhm+Vw7en4nJ+hOQqdFUwsnr4iRNZwMZ/9KTICPfHIO6sZQPjB6wSj/FH8GuNEetKQBnKDze+Cxn065qG7JB/C6oKc/MThlONrI0q3HNH11GXdgJthexnLcCX84AB78GV5kcXMrI6ZCX1ZC0ZEMsHvgt2BLEhFUYAw==",
+      "page_age": "0 days ago",
+      "title": "BERNAMA - Haze: Serian Records Very Unhealthy API Reading At 4 Pm",
+      "type": "web_search_result",
+      "url": "https://www.bernama.com/en/general/news.php?id=2606396"
+     },
+     {
+      "encrypted_content": "EucHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCy5Z8GSfK9uM/YfmhoMBDf18YD8tEaD/FmHIjBokT0qUd6zM/xhtPxgAGkDWj9zhHxq/wog985Wv2lLJkjh8ZsPE8Xs+mX7E11Mywcq6gbxoZC/cKgEKWcwsitg1DIW4RjRZOJ6U8VOQHdZdnjEHTqIFYtt5GmLHs40Y/J+2Tm/3s9n65qqmyvfclTnY0+2Pw2+TDy1E6etig7UFekC7bff+eeY13NBof1kil6MJPNsraaIvNNAByDQS9qDKefKO/Cax+6NFCQ18JfANRsdZQCob0X0q/50tAFl+ElUu5Y0U8XylxAh1UtwNBc93eUl4LjknHs7ZePH7xEcUXw4DgYPl10TYcjv0EsG/4blHTimCOUgmH8jJDbYX9VKHiURH99TVOYQJG2esS6cE5/O0V4TYiF+Y3l7bb0pXTEY/INQR4HtwNA++3bFD4/m26QQMw84FPt1F7bi/jqRkoKziswFFWizgTjtRyrdZwyzOBkvtwSDcHDZlCOBBU8VWAdRL70ExvSamXcgRa8aVhSxl58ser+u0efW2ByhHvnnEhAZalwSPTaggHBfFljE7FuKL1FTxPMDQ90JglBxNhilUdUaXx1iH+EEUpmP699Ohsymq4BLeZv0i6nsUPtuJxih1J8NR6E3d1ZNJwQGDhOJL6qnSsGhJFI30fxUBWE3mvmesUMKWhqayu0Q8Y/cKPgk47PV4ao+IzCeh7oH5bB4NdvcmmXQrBtO+afQNo4S4GRgPhHFvHW/PYEVQaCSEYv+pBSoPZglUmNu1bPMY/99C9IhTPPKZMQDHxrpJfE33eju5UFCPilzCta3hFLNDzsQVBylb5wZvz25zanjPxzQ3yX4+8+qNaEIT+ZxbQHGYw5L4EgvkiSpkJsPf390B6rHm+DShFH4+/5M1n1nAD8OgxJmGknUv88Zdr9UMKpVuIcVb1Hlht8QtjW3WOBt3gRCghK5EyPTDSRckTFSIDigCKzdL8ITIAFYuiqRbt0SCOrTYKT0WYtpcyFGv8rvCScL+eN+QWuloz4xBLCd1QWOK74iY/svDFlV6OHwORi/BER17ViupytRTH4+6VDZupzLAHFZki5zhuo9JQFJO9/6Y8hDSxvA4VfDDk3jO8o3zU3viBFazZ+8S/2Tat6ObYFjo01AcncTaNnbAldCPKFqzFHNedltDzYr3YAN8mlszekPHqq1qDnaPmY3c3guMifMNRBXDX/3fsWyYNEZ2ztpNq07Jt0sHgVcExkS7N7FUNFxhPsUH+tPTnhAGAM=",
+      "page_age": "8 days ago",
+      "title": "Haze persists as 38 areas record unhealthy API, Segamat highest at 187 - Yahoo News Malaysia",
+      "type": "web_search_result",
+      "url": "https://malaysia.news.yahoo.com/haze-persists-38-areas-record-000000849.html"
+     },
+     {
+      "encrypted_content": "EuYJCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDI9XWsWlPw3eqOeYgRoMknS905d0C6/j7PDzIjABgFRO6MFdDR2P1pG0zcrohXEF6JsMc3WR09Qgx1YSCmVk2o2BCu0MX2ZG/wZwDaoq6QjvhQ6Ho6WmBrsHWvUf3z9J8Faux/VT81ZKse3TieZ6bvk+xJG/YX7ZkGf9NJH2AeUGUfFltdK3I1WyhDS4Wh/DuT1F7Sadz6YpAcjt8zBu5C//khUes8tiQWpY5314oYT7VtYTAxIGMV1hw3C6ZXNjhmLA0em2CQGvy0yte6vNcmCaHcXM/nefr8srt4F0wm0rm9edhEkuwSz2tpqH7xPt3+5q5ulANBlI55fzFDql93lQkjdik7SfVqe5i1AZ+qh1RwZI94TwWe6pus4Gt0Yq1qRS5+zvIlJqzZNfI4rp3Mcb+sCm/zTTM8K3lmeBWE9a7WRV0ZRp3z1IVrERhgyU/AuAI2fF1RJTsO/IxUBUK8LKukuaKp6o2rlIvy2VusVzXJtb0Hy+1OQ5p12KakWVDiqnVcyTQXu+FGzKKbCsBGT5aaytjGjl48NL3KIwA0C1eXDXMctY4Sa5TbDSl8LKxilJ0u8dGy3ytJO0Wgg1ldTzR781SVw/8xO2BW48H3PZTSBEhK6+mZSrb9JEVYf7mJOqgUDRZirGnTpH9yeaGZGY/KG35WDZqcEzx6NH078JT8uDHnw3F+sWQZ+789yOuzSYV0FI86NaO00UL1Y3hmahkcIcW/KhJGLIaaFyGvxcTfLSag78JALFaT+JXYfjI7n2H15G1TEddim8gQNkflQs61s9h9nnUiR7P6KFiOhuYg17F7ZqOIC3sI7JsTvFqKATJnPaW0Tz7jv9nmZZyEkKGcGfnrEc/HvpnTD7NQ2q7J3fHHEGX5+yQZTQ6vPkKK9FvibLGCPkiaBALmaY7dAl4LmKzmQCt4NpTkuK4aX8awiX7fSz6SkgvFaPPMeGjKVmt6s4IPuBtLyEfWedauh2MaFVkCotb9AMCCI9Qz2kiQnBicgQCfR2bqWkD8y0dgED9o+lpb/bjhGEjgrZJg6eopnr8T9xKnNyJBFlbRjqFHig/zgRG4/Ioee1lZSPXf9DavNWdhNCxJSWUuePwIDGvBsuHWvUb9MfwKq7lWOVhEmGFdhx9fMn7CXdDBJR08liXr67jUmCvM3YOubr3MIfsFwBgVA60Jz5bx+Uyd1DiNtTph+pRZzyZjt94CDZTcjnsl1RvSv4ReAeFWepYTbv89Z0YcIqehNt2P5Wk7abx2VBRfYIgR4Co2/XjSI3vkPeEguVCOhG01zWLpQkAwFNRMO6PuDCK9N81+duMBPVGooC9wVsCatUWDaKF5YyPBpDPI3s2i6VCIDYkTlQRxex3Vf1jnvtgOiDtAyR0MBH7HlMtlyxRsCdWT/I7SiQTaG0slw5VxDYYyK7Y2aoL6DYPB18sQnNbpVMqdtu8psHvw40DI/mgJ0uKRbaR3Ncf8LDTGaRCyQVMq9t+vALH86ah1KW+munEEzR6lCxfBe9KGQtbUcvuCVtm8b+wQ4oeyUJv9d9msYHbD9fC4S+PoJlvn9KVIJVQaZECIwCD/lNVBPfGHbecXYmjrU/63SJ9QMrMcIVAW3oGAM=",
+      "page_age": "47 days ago",
+      "title": "17 areas in Malaysia record unhealthy to hazardous API readings as of 9am",
+      "type": "web_search_result",
+      "url": "https://www.thestar.com.my/news/nation/2026/08/30/17-areas-in-malaysia-record-unhealthy-to-hazardous-api-readings-as-of-9am"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "25 days ago",
+      "title": "Air Pollution & Haze in Malaysia - Reading the API, Masks ...",
+      "type": "web_search_result",
+      "url": "https://malaysia4u.com/air-pollution-guide"
+     },
+     {
+      "encrypted_content": "EskICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFeplxitYbh2FlGwYhoMZZiKcYPHD5Y69tSAIjBF38BmNurOVjP4ygf3exum+iBhCWaI78Rn7BqP7G+KSpElgsosstnMQK2GYDEK3yoqzAcf5Ln2y93960LslGXzbqkNGCfpI4dbE/6ir+07/i9JIG1ImWjnp4xlojQfe0DCtECAhdx3bwuyxAeB0WWlU7kW2aE5ZRfgZ48Cs880tmDZdB0HwwY5UJToflIVKVdfIEUfv4ubYxlpNeW9gfvRUw6g6zwOJqoRRszf/COeOS5g2f++2wePRH1InQjbZZ54Jep2deNR7aMMnY0psPUybMJHsLhge2k6IvSIPOfx2VRU7Bc+8f4agQd1j2/eGQzX5TPSxTrHH3R2QP2l/gBsCOwkibu/mZqWxq7GlhHGvneY4EyjHXTHe4XTvOoyEa96pfJV7LC2FYd3drxNAYjNurldNVE40lPXFbUgluxAz0KvJfAIyZjaV3RfP91K5JYIaBiZysGPDjtXd/TpX4ZTZHM27PKOY/qeM49ApIalGqMXVvYahDq+azIFbZMrNHxEXw4TOxEBdu4WKNyBkwRp/9Z8HTEoN/XMAcYlTCqaouTCDLNBelkZLNHP/sZzRQI7r7TXdrHWvka1+m6KXA60xBo95zSBz48apNKht6P/UhmijBOryDENGTjLdjS856aGXuvrcaoPBJKysM86+b7x61KZtbsS7sZEcD5D+b4HCkcl+pVN/qh54Cdu49bCOOd/uFS3f3h/ybKewxnYnGQchaFthYgZ2E13zkxmCBJ0agJBs5QS+f82w5sxUb2Pm1UWUXPF/Y84Bk+vrrnaGaoPVq0xx7UWtW3n9d33IaGUXZEkDnrnHWOQsKmbVK5MC6VDSCT0lK8+yr/RpNNmmCEjL7QMlUURtKy3L+aSgmA7bLBlN7LU2QKKuzNUHShjG+6eNwd4ozONW8Eqeax/ed/YYtSl+Lwe0hsrBeRr5iu7UlM38a/mTe5YU0XY8XD8cXW40JY+STRvlw62JG+njZKYc8JBj/s4MwdKFz3wE6oNPeYMAV9Kq44L6tEBy1U9X0NuT+qfrWFHQPbQFNCGTMOB1O6iZPOi8H1mmwRIlDAx3mjdv2fETeEaM3dVYBkPt104cXvdopmCObCyodntuIA+AGusH6zRBmXYOutxzBe+RyzlMh0msouuGmCJyqHho2evjW41ZWimUv+Dqnap3eGdpdxiQPt0wAeOVUU8t9/jvRIYRSGF5xQqsE8bttwi1SGlt7qWrIH9RoYYFMlOJ4UbdeFUBgRHhMswJagKB1MV49b2tTevnwWwa7Qv2UR1RP4qFbOME8tSpU2LCiZk42hAFAfdx319DDqiaPb8hXdcAc0YM4sZ45kkGnnMOz3yzZJbqLCOmb/0+sM2kYiziSEYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/malaysia/2019/09/23/haze-api-readings-drop-in-kuching-samarahan/1793258"
+     },
+     {
+      "encrypted_content": "EosICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDMH1d4boPgDaEQWfVRoMJxWMxrGfimNzLAY1IjBHLFd1yUGxsF8fHaGr26ZQeuxQhruONW+atSj8qJK/a7i0fYePTSRlWjUZqqP7cy4qjgfx4rkd/75nJeg/xW3eF2BNwxy0SqLOvh4XUMsfcwssj7aPpZRHml7VohTqpa8McsB7FFaFDFey6HfEBAIo0FiUJK2KUejujP64ZNiVJJ3jNiTlYoGpcI36B8z112SSxu1yYhaPz+87GHa/vwwDKcmHnP17bDpDLAp7hT7OcgYXmWNqbAk4Zgd3CZgb+v9K+XKO2rwmPx6LbKKgTDnQjUyXB+gzKE6zuwlsTeDVgQbqYcPkZjNVLOwobpQNLYZI+AQo+s7sZjj5aE6RsX16pmNdaZUk2k+7WX0kavKhJwWURVyuM84PSpzQGY6kjkoZyIUIex5ds2gO0qjWLkc6IxfuTmtGu7BNZxFcD6Ws9MktxrKQ4YxoOnqZkkemIKFT2cEwN6PxfiOeTZs4/8wtTox096RSUfILC+HKheMeYHB84NKtdlp645umNLk3voIzaRcwB7ZpUVkRmXd5741KtjxV4iF+3zxjobw9OEYKGDEPbKfiZU40NATOMtAeDqtd83BHtYLlOaUttfbe9a/57JZ0n3AIdHt9z3U4leGUGPTTeAfVHbUuaJfX9P0AmB1BSIUEJAj9AXlBnJoQIkXtC3iiXXysxmwpId6zEbxrEUOXYORTfLsw7v/9d7QgmDNupW8clCWP3UQCGMiAf1J3cmZUasleQyGE2U0P7ut40iq4LAc0eL+gnHKC8qBlO2H1mHUVB9AFvZmJWmAfwgWRRIi+1rferTCs8Yi4hw5oQzVi9YLqN9utqSvxC40SqsxlrK4YBGFOXcPTuFQHAdXS7+eRF88/2Ok2WeXmjFIUqWKGcmPZ37tdH7/W2Le6AvPdRrG5AGwiZJ0AG55vvbSIpjvT61lGH8W71bnESeGC1ABWTQcRxOROJw/YrDHS6Q0AKWmbFZmTyEe7yCSjd7I2NEs26+2KJeyJY9XhJ79cXnsdZZXKmFcHrKkmkS8JKjOnLzt4ZwFrFR205lmqMUQRmaE4/m9Y6iQ2gxhQ2NW04oKOD4+224UolZeH1uxUBQZoNC4V4Tu3Wet+H0hQ7jktT8pwMyvZLTGKj7CeIvbKK+qzHRDRQX27mtJK2mKGx4ZoSes+pVkBykbk/y2e+Bw/12te1teV/rl7rz82SNeSaI5bW9bGhTUtryfE6CnQLPm4FMHnYM2lCyRhB1Aq34ga1m8MxIS8MqowF9wBuiQQJTG+gZwjh0on1Kw26FjfLaEMGAM=",
+      "page_age": null,
+      "title": "malaymail.com",
+      "type": "web_search_result",
+      "url": "https://malaymail.com/news/malaysia/2019/09/23/haze-api-readings-drop-in-kuching-samarahan/1793258"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01QoztLiYhnoGgkFniQ62Cxk",
+    "type": "web_search_tool_result"
+   },
+   {
+    "id": "srvtoolu_01LE4NLkE6gaM4NXkn4vbFTk",
+    "caller": {
+     "tool_id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Sarawak jerebu IPU Kuching hari ini"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "EpAECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOIzkZhHPWka39zzbhoMXlb9Ja80DCdOYjpXIjBtmUD8fjS4uB8vWXPu3XP7DLL/D7kM06e0aLTfLmwxV80xWOZmZSpm3p9ILYqDycYqkwOG/svb1qp2/oe2IgsYafzRjF2QCIWLPNUOnesd+h9pOqIK3qCYg+Vy8u37/jdSEWwfaDW5T4TRyOKX8u/KFTL2T9ZSkrOLlWCDAhH0zTsS81OXlHgT2JSNeADlszCZwpd9b4loBpJ4+y0mjJ6130BQXhK9kURK/H5cJPQeOCVDo6ls0Shgpz064cr/IlkeHSarMxVfMmB69ASlLH99zO8WyCIE9hycBdx42tWO6NZNhb30cXfWg/TcXl7rglctgguoSR71zdGgueerZXwPgTFgj5vbix/7/Io6w/c2RryDEPKsO+0/GAbT1y2wcNT0dvvAu4iz/uuHxwoiB69pvmdmwxk7pVGjx1f7C0dLLiGi4lWnTl1BmyWLoz9eA2Aqq29MqykavxlxqhA7Tmzu7UCuqna6NpXUZsgLMVaduFRi1hbfeX4gzrnOE4LGfL7RwnfUe8V1cK3sn5vUxcsUUYRyRI48hLArtzv66b2eeEzbrVFGWN7X7v5bzWMtzsPuAjNKIxIdiDM1mvZEzLqhNhXDopkLGAM=",
+      "page_age": "66 days ago",
+      "title": "Jerebu: 11 kawasan di Sarawak catat IPU tak sihat",
+      "type": "web_search_result",
+      "url": "https://www.bharian.com.my/berita/nasional/2026/08/1600242/jerebu-11-kawasan-di-sarawak-catat-ipu-tak-sihat"
+     },
+     {
+      "encrypted_content": "ErYECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDA1gammPCfhvI1b9uRoMeE3YRgZhzOHm/1LIIjDVgsCS5zIhV5lJgBzIWYTNh+vNoVBeZH+DKmZnPvmRzzsqwZrjvEtT+K3+BibYP1kquQOYCYAfvzz/qX9GRJGQG9uCsif3r95wCcIOcdu0aqizk6liLPJ8Iptbw/PVxsG9DRZuHBBL40RsVKpsnHt9kI6XqYp+VmRQlS+1gA77GwemjjS2mvwKlG/pC5gJvR9pNwucXhjd38yFTs95uh80+ETJZ3+OxY9JhFNLv9bvnW1Q7f7snKsS0VthPdL7iCP1zfH76d42EMXu6/5i3T6405NlTucHVBin5w81MZtfljkRUlcV1FGUqxfyiLqPyQ4px7gHguE9OEHHRWEc5/7MqIGsK+Bg96+OpBM4xafJpROK1F6VXv6oIUhPueyLlKQGZR+eWZiyiB+KA4rvN574FOBF0axQ4+tDOopSJTdg9OBz/Tf+PkJbmFTsVXwiYz170YRAdF0fKaa214yqztMKV9Ahb9FDTtgipZgd7HT2tiG2FgZEOg6MgLr2KYZU4oBHEo3C40G0b//Jdma4H4GPGYLN0JrU+5lkfUOl9ZrU8fStRiBrsBz4r370jHDoXsPMnKf2kyH2i8iTOe9GSq4wuxlS7fZK/qIrRzKHrrSsJMq5x0LRuRGAlo4qojajJ8CC4Z43914oI1m1pCQYAw==",
+      "page_age": "64 days ago",
+      "title": "7 kawasan di Sarawak catat IPU tidak sihat pagi ini",
+      "type": "web_search_result",
+      "url": "https://www.hmetro.com.my/mutakhir/2026/08/1397344/7-kawasan-di-sarawak-catat-ipu-tidak-sihat-pagi-ini"
+     },
+     {
+      "encrypted_content": "EpAECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDXM/l34UoiIF3Ag2BoMjku8s4+NjML9noeMIjBDpWRMshKBPKHafITEnTsCacdXxewfWhyfMZx8W4AXebbmEEvOr1nqgpdJaO4uIl8qkwPAeTYbwh1/IEKx0mmf6EZK2peNszASYueEO9X4tIhptRp0c+NnhByKSf+ojAFnZVHLX9k/dOJzL4BYLVaDsrBrVRxNqp88U5wQiYGZYyESz/F1AddI1IBaq2emlysxNo1hJbtQ0kuWUvHwlg9O/hmdICGMs1Y0+4ITQ+d52K3tbzK9ba6QmEHvj7I9CxzWaMtbtNzlPu4FL2WpueQ1COnlNVJLD4dSWFRoxGUzeYcOllYVdvZYKiXfsps18Pigo8LRkEWS48bjlTDhO0FxheDcxKL1DGd11EoIhB2v5XJYV2bB4hx3HgXi4+R4a679AsUaws2Q8j3lUJmXZgY9munSdI6TenN/qhD/HY01gFZHgYPQKSV/eNN7z2lz9F2pSVRYpDwUL/I5nbTBCdfG3x6+JM8+HefjWXaCOPIS8bPsVdratgjDbHCN40jPIrLyT/lrthY0Q0divm0vp9N4H5bpQN61KnxDjneXbLY4Z4BvNdcu8fVDaiTxTmLS5bsWC4ewlpihA5Q7dhgrPXJ5AreCIvWxGAM=",
+      "page_age": "41 days ago",
+      "title": "Jerebu: 6 kawasan di Sarawak catat IPU sangat tidak sihat, Kuching tertinggi",
+      "type": "web_search_result",
+      "url": "https://www.bharian.com.my/berita/nasional/2026/09/1620654/jerebu-6-kawasan-di-sarawak-catat-ipu-sangat-tidak-sihat-kuching"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Kuching Declaration",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Kuching_Declaration"
+     },
+     {
+      "encrypted_content": "EuAQCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDKqdR5qNjSUApM2ukRoMQ89dYsWIDNmQPNXuIjD+0wDTwUES0IkmrTsyJexSu/5i0y4OCpYkRcjDhJjBQ2gMJCkgRh97KK+F/5TI0pAq4w8qkYOYCgS7g71cYAGqYH29+k1oTG0r/MJV5uXWriX8/Bf8tQmnRIocKb09LuDmG6SOPsymxpT7r5jIWGmMND3wdwIJjq20WDpDZ/HBVL/awrXHTFHswfjiZd9NK8EzelDgs0iD6SeNnWuPyo8k41C0AeMgfO3IghiXQb/umFnRr2YffFX1uQbh4t+RTQAqfuNOTDITUIMSjB4K2nlagH4mbLTUibUI/1QJA78PHQ9cvp1cWFVmVvScKo40+KvDr+uiFUFeR4/QPtnp3wZDjQkIn11EZy7RhLnJy9yxvXcJkU1K8WZzCY33VMvWiQdWGQ+9NkMshVEm4zdksl8z2ver6WtEr8XXMPk37dkPXzoKFbCN8PnD3WQMGIbZHQmFSEWIxIylJcaI6tmK7bscUbONs1XpaBKRHmyx5FSy/pDoSi2rFUiKJoHUwDVWuCLxDwdOyrn9QKp6cXOSg5zy2L9TVYelQ5P8SbOdoSrSq26GJd0d03qHjsj/KM5g1rcfHNRhp18dXudR2x/cdPcVWY2sc3iTVEsjRE2TuB78S57rLbZWVkTytKxoieCe8qaDuFbSy2tYM2YA10Si+TcYZAUSOIy8UP+DurMV8OsBE7A68Yk0XRltDei2WoSOAS+xIps/8LkMbBqdwSPrOZp5tGojtts7WvpZ5uJSzX4cScn7ZUMwHDOwHBYPWvdOwAcViUZAO+08E8RxcofesSD/kuvLLbHhPbCRRdRGNxHqC/fCO2zq9ttxTCANxlEGyEkhmWQd91jmuVHOZpahjelNkfouTlcT/9FruyMhhZWVxMNS0t+F1NBcVbdtLxisyjLy7V5lIHgcLentY51pbsrD7f+iQMa4vMJmqs4JXJyxlkkJfZ0xC467zozgfmBxysY7ZJRnZTHfk+MML2xZVH5kNvWSau2ebAZKVxyl4i0Fa7B/M2Q7FitPUsP/v6RbeiWzbw9TvEawGzxNqV27vSttmM6M/HWKYB43jsbqD+KJDgF9YsKigvbMeKYmp02o07P+99z630G9LNqCg+P9fslCcQWKJlAsF25FjMW20swWDD6fsQu8srgcjlo1dd43LzydDD29dcY3JcV2Gqlyf3RDw3obZuwqIhYJUoc58CZH/pHQQwCLQdOcwVZhCCBrdqJ0ahJ5xpB6o+BYYBmcugjMbvYBouCne6VYMaYhJo827Jxtpt1oMmmWsrT3O4okoSJl4AvTEyVDQlZ3wa8u6yWgGd5gbNw85EXnJ2hYdJfFL3finzszPSYswHC14Js9Sm0CuRE2xQYO2OIJ2IcOyezS60F9i4Dzi9islsBb/Df0gyjMZv1sdtAbs4K6NtJKN5u4lcuBh8S6Hu/Ul0Ne4LBTFHXiOLYJt+eeZ0yQscPFtGjbSQsAu0apa5LX2WVA1bYYRm65pZDjpA60HASjUodOUF+KuRQ116w9Q3Z0LDvooqQI6B8FQqkLTcnH3uCcenWUvvyP9UQ/F6EgTy7O0JMuWre1+FxC8aoeqO7e9hiz7qtgB0P/foe3v9kyfEwRBDjQgmPXvfF8NmoZWhqRHHkEjp7Sp8pweifliqqRHuH0i+suFmVMO+PbYvAytOTw6QEaOkHqnFrmLeKNHHAAmf8sCpoAkepLbt+kGkN+yP/OLKipIO54kKfN/c/zGF2LdnQ7r5fVJsDM/17QjtDtTjyLqFtoFmO0WGt4WAovjAyGwxZqD3ypjtEppYY3ixT7h5mm7IXoWb0lEXXAdWo8dwGeDaG10jkTaezBlgdaEN1cSlfomITCQYlJBpuPxaY7XCn54Inef2nvhf1NDnwpjNfg9oxhL/CJdq0JptB1TYIWyjruyQ+iNK0YMp2nBxsKj4/qLKUV699QsbdO0TfJ1vGHaAxCvfY/c1cUT/W+EAg1/YfyOtN2EpjUorzshL2YHU9O+LbI07hY1AZkYhZiOvxt2xJLs7PiHNPyuOJQzww8aJogFYoz8IX9U26uLQZbsDWdk9IZ9pUeI1IadW96bqWN7Vp6bG9JDZLUOYywVsYkl+A2m8+aTQANrwwjaCRSXOmnwbW9/bJM3NH8svLDiPEvtsiY4o1GfDDagfjLxnITlkUir0bMSyT0py35pO3RrvCWMFK7Eu32BYRTtgnkwyv57wWMPJqo0sOreQfB4g7Xa2IP04FMqqezdXNRCWe8ZlTopVMf1r+iDihHPMJUmlJ1b8Ve9yheDOfUwr0Y32M53oC14pvB7nkkG+TeT3urx+LCzjzCuuQ8zz5mcrxoemD0TPHCNxZCTxS4kJefNVmXMBxTse6nUd5m0s/lT4QWE4uv/FP3DPLCB5hr5zqEh45x64TRx0KZWONKi6TxZXYL1Q6K+32jmEeHShBRVVaB0SRW7j9sDaJdW/RqTG12jWKr6eUwBxuSCDC+AjuxkLbmgvDZDwVujuUCGK/RcbFZKsRkQ9rJcoDRxfs3yU2fI0fh6BSkdsSrS3RFXI8DxaTTLjQ+ht8UY50E6bhI/gOZcbQ//OIolsBUWrDWRaBJgPtpqWY/Eh9KfM8IRn62IT7D3FRnWCGsGe5Z5tQOibOn5wj7YIY8nLIP37UJPPxZsKIOEvmrh34mnJvd/vbNxMXxouUxtdoefsrE4yVr2y/slYV3e8/8CAVsGAR0AALOVLcZToh2v/K9NSOBBUvoUIi3ey6a/jClKyJ3OiGJZs4UThgi9vWkJoQYAw==",
+      "page_age": null,
+      "title": "Kuching Waterfront",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Kuching_Waterfront"
+     },
+     {
+      "encrypted_content": "EpAICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDJ5d1VLQ9+dFJ8CKxoMgqwaREt5IScHWI4CIjDLikmWLNC91xuZpVU+A1CJyUngZilTo48Yoo1aRk1M3GjWUGH8YFMuSUgXTD3VmpAqkwdwMNL1g7FyvpgIyZ5VErgW+HKUDbD1Y0U6t1CjrDIVoCCWh8ttRApp34Jytm3ZJo12yXwJAGDrGQfK5CC/zkDLYLR6Y9fXAdBxsVBKDxY35kgLGT4d7N9vesfgxnooSqnQzPVnoQNpvIE/1YWSgTqL5Q6mCZvFualpd3nxVpUBacoZMdC6RkqxjB2XMz1/+BVsd7YX9HH/5/0CNhfpeiuBsYvGExFrRgIoGmSaRFw68i+KZlhkNX3DTn+EM7zFLAxZ4D8PIBFBIu1HBgl2lMWIsjRTrJuUfGpLvlk5KfxzOLRSHDvvJHcXiWaCMWHag8MBq+VA4frAfQq/fiJQRdOf7IZLQa1UXbwUiqU7C+yLtDDJavpSQcXVKKl56lJ3//K84ykudhFDXc1UaxdPJ4Woqm0C1OB8zr0jWuW1Yo8qmujSrl+SdWfMbBcJ+hZLAt3PSGAVKdbt5hDmcrvH1DY+srFJNU6hlDfJkMJDzuhXZZveMOz1kbE+ujdNJpamB/828gfjEspw5jWCsLen5iczT1RJMrSggW9fq7zUimFpawLYtJkgrSlkTxWhNJ8K0Ib3YrAkDKn/l66Apfp+sHQJAKbhVIBBIzNBeZgOhua/5SyukIvqP+Bu9piac1u2YKgI5UjfdvRJjycvIOapCAtG/BwOasVhld8Hlduqin94e9/YsqebI75CRmF/6NXmS/BsCp79JFr4bRlmIrnEY63FacmX+Zw1m+Vq/MiKxbF0Bx4goT/rFCLk4PD7Fg3Dv983DHzxf93XoD67EIGiktHUxojqX3I74Q0+zUyF3K3YnHIIyrdZH10m5rin67YKzXbmOK6lCOsp5ECKperZnEGGBTu1pRUlNWgJ5knRyMRGGGEkEB4RKi1gSh/WdN7qsKAY1Xi92zS8h39EsckNer6B0946cR7fB5HNKRRiSvhlGL91KMYo4HxQojfiib3XBZJL/TXAloJT9jRG1fN38yD4Kv4xiIawukitFoGX3y+7Qzryi5kc+woguI/0sbdvS1aOkCinVeRtwUJX3/OuoP+NatSk2DU1uHCim4JUOb5yhfybLbJDyvrQm2+oSlpFF2bp4oe+rZ6X68UWdtKNXiVDoaIkzrOnt5jQkfkXQa+Wb8AfeSWuuLxQbcp3sqsnFOmWUG9OGV7zz1x5PVIFUhWUPWcyAqFbQ+J6GZzTOkZNJZpAIGHnQJH+M8alOzTIXR7SwUkYAw==",
+      "page_age": null,
+      "title": "Sarawak FM",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Sarawak_FM"
+     },
+     {
+      "encrypted_content": "EqMHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCe1pkkRTsTYf+ND7xoMP8Th7cTaThua5pgIIjAr8Nk6l4SeE0lcfA64Cgq2oel8vtcJmIvE+YgH9J7V6KJmQPppFExbXIBRjdtXFogqpgaiN9KpwhqDPbI+0VybTTPdX3AvkmCw0mUDYNXA+Okp15gZgRjaqeRDwK1i/3mfV+o4B3B4B63ARR4+zJlj12UgWXZQKOTNZwiK3FC9UDWMrIqKcMqqXpvaOxi49dIFwTWTe2kyRXjB/DrKMe5l7ytJx3rZcgxW2nlnrDr7icg/UX60w4NDRc7wXzBGik/2uAX2OurOWyX4xq+eVn3iJyOrY2ZcTxhhzTH0Vdoj4AKFWJik/MqUu5Z+w6TZ1beNyCaDC/DMs8l9yHZ2lQQpU9lDqvykkHPwEJAbnPjK+bpeQzWqEXWWLnNymhBxOFuHVRoONgt4XSyv5AYaduqDymHh5BOlKXELUv/3HJCELodfyRitLMbE350taesfixUNIGLEYePZ2CuXDcaL2UoPzX0seo8dpkMVjR8TNtOHvPb+lYyXNKWPVJF1PjhDRHxnq3h2Xc0OlA9wi8m6TQ+s1bKf4AoPECsNmiyNaGjU8SyOfrHml44MvOtv0kWLd4Td6zZhNEkelcIu4rnvvJm4RcHH6u50A47VtEKcA/NKQxhZDr35Oql48AixeN/cBTsBjD6GSy9nnB9alOlNiPi3qcaFmotuoEx8+6l0Jt9xd6zrjV8+a6NK5n2Xxu9YayKe3w8J79UYGPMMphOoa7tH9Mr5+6yWwXyu6v9bUH5F6+TNx4YvnW2tdqNB9syRFAoHZd0EpxcEuEzeyfkBSr8r7N1Y/cUa0TF+aAM2Y0LTEn8WEncVrkjZxmJvMa98BizrVr2+cSepBsF/ICHZbv92rOsgx6VfCFZCkQyQVsgNRiUtSVIKW8jCCnXuH+70tI13do06GzJqfoWv1sntAOAi1qMhug/nBbK3FzICz2gAi2mzX08i0y7+ugNXV8Pyzna137Esa0exqwC7pn4aJsorB/l1EBmc19+SNGPc7sXRjuTMJR5mDFcRSidsS6bDDXHr7iXYcTHkVEYu5r+GCFOU8ulxGiwWdrUp/3WIUitl8AGOqeC1uc2erE67IOMjWbj87l/e0lnDNjnbj3ednFGrQmLRCwL2/UH0OpabfOhblHw9chbw2JltyRgD",
+      "page_age": null,
+      "title": "Kupi-Kupi FM",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Kupi-Kupi_FM"
+     },
+     {
+      "encrypted_content": "EtMHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDD4pB+vJhksKBY00pRoMYoAn3JBEb6/ZgKSpIjBhJK6Kdlg70YhDgu3vHEZFodcrXZLKK3MShmMj8mGE4kPTM10nxRr54wDxkVxgsukq1gZgy9T7OI76r90B1zP8A/rkc3YNIfu9mwZpkg9QGFMO+cT0RmcobFpWPdFsz/1yCvUeXnRIuez8lVigUBi/xqOcLmZ5tHKTUrsP7N/GdSTlQKI5SGtZwecUbQp37/VgevFlYPyZx9lZsQWy8A0gyu3SgNhpuasOfow0P5xMRuNGcWM8odgN+apYMyVkFyMnNSPWYHpG8nCp/S8F8HSOx7SOaVyWCsdsRAaKLlF5R1odueVMOjPMCQXN3edc2DBS5Ht6dLvn/0zZqhsds8ZmRrI1E0p2FatnBDXGb7jCK9bWgnb7b/YX/CfIxf6PYzaUtp1uhyX3YEtER2SHfO4ndOSGzEFtwjTa01qsYB9cY5zDKmKQaPTfMIVCd8MzEXCVuqVwtPzsaH0qUFQgdYj+5AOclsFNQQC9JqBskTf7nFCuxZfVg3cQVJhGounGCZVNtJJ1Aa+sOijq/GR6OBUY3+ckoTDfgTUHXpUcKrYxNaNe0SimcuAQCqsr7sddVR7ffy3ziAJa7Y7to/7M82UeYofLB2ppC+FYnKvhvQv9vs2ZGyHggZ1vjtjaL5nHMV/tn7e+7Nt6CW1+Ry8nFSy0z8JH8WO+FS7wJ7blYGqRw2xtWw8bpcyiMwtK39zbcs1yujjx3OnveyhJpZmLXDBX4JwpjJC+k6sYrzuOMwvZOWVsg/PDiCi75AcPS/iDlB6c/AP/tHYc90kqj2R/A+xPEUljY2nXSDMw4W9BKgCl/4MAsIdT5RB5CjK71LTuWBxOyg2oZ82Z26Nk5DJSXIggzX0HjN64yuYW3XTrA9Npz1htCW6GUVRx3cl/SHIFEPPK0utth5ilXr3Dw3cis0hvxA6fZPc4+3kPIYA52TVowNu72PEPrYj4AFVJopMG971WkfbDsfvtK0SVESJhNUtX/gAlF6ZSm/P5MQMZ7sLpPditSSgx8ndzgqmY1bhB7Saq2CJqNN7/hQ1JQzm2c6g6G/QoOlaWfelldcyLkHop9XkYqXm/4hExBYpCYkxT9IvXe8tCHl3ERs4gNGJkGmb5E4SLMZmI7tqB7IQADavzngkeui8abCelZorJqdhBfL2B8M4O1b6F69A/VtX7pb0MzPSQnGlY5UutxPXsjp4cFlM0hrk8EKDhpRgD",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2019/09?pgno=49"
+     },
+     {
+      "encrypted_content": "EvYICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFjZcjLSVjO9Wx5MexoMFykbtUUaRhcqutv3IjD7e159l5tpuyDrrwiUWt3aYXh3mqeQXCekarOH/Eg6m63ICLCerdI9uZvofDMiffYq+QfhhJ1p4sEqlQg6QU1eSZwosgKgERTWSyldPmA1KBFhyewQ4gHlpImLuh8UeBQak5e9VCq066VPnahwlSOgG3v80fzqy0fnbI92dDPXNetYZwcjGp5YdVUSb4GWf8TqOjpuyK6eV42nUKNA5YYmF9V/3ItrFA+n+e53DIkQR8FsxfzN8343+oRxzAC/z/4q13XcOrwEThzeoeh8UpnLTXyOI8U/EzpeuS5BlSutI+Fj+W1h03XNRFwb+K0GkEYMAS3xIgI2XVphik10U1fjA7a93k6pj3UacLkeFCNyL9pWFu+/5OWehlkJdbJnNEboyi0rN6pow2W/cssL4wl3YWvz/KGhWgDm5C534EWib4rFdv5b4+WXoWilXdVW7Yk35snKMPXVa4k4o7ytcUIhKmldgj08u0WLcKtuzugdClgziHu6BsevwKo4kI5gQBuzGTEZdziO8mX7e+uWT6zDOLq4vj9Tv3rdp6NI84mTgK8ASDEXxKXnLqqkgG30ayCAmIwgkkMFN14MsK5U/9Q6QpGY0o7UDEhc00652bbGZfghVGTlg4RFRS8jshATJlUWuw8ljRgSQYXy+W7GrJaES4O5GP982yaLbAl1Z6/OhuM8u4MMvJPYDFZotpNDBM3qKf5yBvA3QRtXy6jmQCftfS4EW51UeaPL2jV8mTVpBuRo4etJgdhXs1B4rWzN1Mw/LON2coGktvNf83fodLXCYJuQUWBdYNscSApRzJ8I+yhJ+gE8nMkK71mMs4ifkUZ6MM7VCQuXMsnLA7jfU+kXCDd++/UTmycXf3qFTnKLsiBlhYXmrbv+d14HN1+YSlSeDh1qmvYrOvhUdx4a94QJPNeV1cmJ/nCw/xa9sRw2GyA9eEbaMBQ5pbV0BZwqzVHFVDLWO8hvTxdxyheBpzM9Ee8EQeOaVmyv+6cAUymDMVTvVx+0M7CUTShQc2aNWWX7lV2F0yfuCypCBp0LMwQh/Okfe+fWjzqcFf60d6LDPNw+7tWYRLBKxJz8ma7IJwNhWUaNtRCdPJwmYadv2QkeIZ6l7R9rUnLRKG2kivQG29r1Yh2RB0ZGVB//f64rusv/tLpuF09GBzpe8qWll0euko6p2a4pZfqov4XAaKjqNNoFegXELe754NGTals578eE7pXV4rvbPxrslu4QWmzM74mwO07D7aTxis2pcb7+o8jhMTbYeX2VokgDhd6xjuim+BIfbqXC9tFzB/o5y/qENUjvW6TH4N5PvBcpcZ66sBENKtegckWKdznRJTsaMI3nTc5A9AdTOfT3CXJCzpgvUXQKjSVZ/vqYe+Ig7Z9m4f38rj97aXxMpHCFSenWgcFAJwXXBBQkom34nAIYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2019/09?pgno=54"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "There are 3 ways to get from Sarawak to Ipoh by plane",
+      "type": "web_search_result",
+      "url": "https://www.rome2rio.com/s/Sarawak/Ipoh"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01LE4NLkE6gaM4NXkn4vbFTk",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eq8sCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDQQtlh+cTwTREsMQBoM2HwJmDetqZoYG8jdIjDYHmle7J5+Zmlj7dkPsEzS/OKpH593VwXL5w1Jwj3c482Js2r/alzJflISCgfoysEqsiustk9hny4DI6dUAVGi3oPsqfK+Yu4NWqZEIDKzVQozzISWBWqq7FVIGqQThLADMaiS3H24dI4B8doUj29ZXSw4yKiiyfP/CMHjjmQZNER97j5+8umOUowR97CymIov1k04Yus0KTp8NrFJaWPcygKu3KKb/8Cib8Dq2ZIsZLXyyGF7hu65uDWLImha5DuwrQnLo5q6HX2LnsHB7L5rKY/lxvRoDqTjGc8yMnByQCsgxvvnBf+74gv1bEcHii8qVxJoI+FQQvQHParbiLzWEZdirxURGyoAJx1teOQ2IwBWA014xCzFfx/i5STOPxkiaBseWIO9sZVJIzkXoSKb5nMvtmopE0r0C/zN0oGtMZFmHNpYt1kDOyBiltlMho/xzFlJYmRZHQa188XPrJr8FQxFRzQW0wGtKn18s4CgK6cpapNQXK0QD0WDR7m/AzRMZkVqGl0OA6t9eNzqBrAqvzVJ3D5210vkOXi4Ml0I9vrk9vCF0gTlriImA//KITe5jPLro06GP+vCUArRsiHJOJRf0pcyYfhMeKm3rEaZ5ONqJU/nx7SRc40AB18B6rgzpvHSZB3nzSe1/AFdMUtCN93S8H1GOfCqXqArhHkLEEUvT4phzBvVGCUHbbExWSQzi1Xxu+lRhS4eCHyWtbeGqKJ/hde38BWJ7v5U4y3WhUR1Obxx1bSfbryr8kOgwwUM2EK/m4405PkJMdhen6W1mlso5GHjQtKowXl4Cy88ysHUsUpFJrzbJCPFJZZpuKF54R8WYdrynf1tM/iWTPAOVI0M1PjW6TN2uVmjfmgDDvAQtGyJu3U6DNsXn5r3ABs42mql7VKrEhZoiURaQBEX1x73K0JjBvDolFSCQAzp9VMrQ/agcOot00BUQTQQX+CfSktbPUhDrsROE5ohDZLvgn4PerDF1uW3dIfE1N18/YryPScWknQmoNxlp5g3rxyKza3/+fg5WccPJfETu5V6VgPLztKjGXJVU7XLDkqGskdAdcxnXf4YbDYLlxl6LIMyXuIAuNq4wY2yMxjizbZsazfcRzykrOMOTDr6Sp5IlrSi7gd4l4W3m6+DUKHeZIqHBK7X3d2ioBB2AZGacKfLgmnBVmYPKQJZLrDxViYnSBK4TzCZlAXkgrxa9AtTCkgzt5rXgbXlTcL5djBNSnA03+RTTSGmSX6ufNxhsXs7M37HtRzB1c7upU1WVQspJ9mLsCaQywSL7m2xmiYmFKZSBpWOKwpMtwR7tckDOGO4xQ0D1V/wjJeVooJp3oRd7GTwk15UTkWqZAEBAOeR1tOoq/L0COy86so/OM1nFsWz5WyjtJymmV4QjDsP6q511I8efhs9XRsg+7HPfHK7RAPajtiYOoqgYfMoHCXJUK9ZySSO7rzjKhL1zmsRi/VllQASRj30D7OefAuFR2ClyV13bX4j6ZXucBWvjKFW4aCqbM4eQ2WSHINnO/41/JwNj8BImEN+WTtFj9U2KEoesgBypRK95cPR2b6V1CBoNi6uIInqx31nzB/uNyqUMZthY1qLAC2efs9ccB7Dp6nMTT9rNkFAUrqB0l89WC6IeRjt0K3mU8WtQH5URW5H2r4G9F4CuP5efv3/zNi3al725PK3RElZH487s//gwXojVSpgsdSQp0AHsdzLV2hgeVZ9iubZYbzmoVNDElE4wpIrafjJuVH9Z5stIvVBVmuNOvWI45k+Cm923ohm17s5vyT8PoG5n/i5/bZMrww6iHqAdp8ad19lmlRPb1c36r/e9LB1vLrD2b7CVKegFc2Rspzsqxjl13bLK3P9L4dTm6HfMiTIIjzKbXBmhCodByhucpktGPmr8zIGoanDBvXfuLQlwFc1htwIShGsVgnLgmkEuKrXl7bv2eNgerbG6gp+UA4jUMDYcHz0OkJbe7C1FIeaSFKW4Nb7R2Lds4RWSmbIfjOLK7YtCOSW+pVGIrEM5vg7kghntD+ARDRnikLbrICIchTv+b+ov2/p0LDBMSH7PleiUFDIUEQv9SmOnKXPidFcwif8HzIfJOgulkIBnBkegjwk/N3cs7doDpxugo/H5EEP80uKX24pdScNiFM7vFY0VgE08+dfHGbQibxFY+/t13gB5oFFvaPXSZLUI5ZYWFItQyXjNG2Ob8Qsy1yqxeORvCUQJhbXsruhUG7fINs+wowyfUAJ49J9NB4R4DfpFIiqFLo4RTADr98r2EXALZ2UipwlE4bwCT3s1x83HFPk1ZEF92a96gkMJXDs3Vrfpq8PqeKzlI9BYTVu3XjNFEmdYL1CtWZ45UsdyYf8ULKGXoE1Qu+oU2tQ9SkIY7Iht3XbwvwV3A+KWKMYCOHzws4+RIV+8DidHyzfRzSOmeRytE7pbq8yksmLN/JeAiim22VhJJfM6kwxkBrxg0iTfdt8XfgsTg2v9gfKLTGOiRcD1l+sbmAWHLVdSwKZ5uwFMPROrOhalZkZtJDRs/JR87mSP99yw328d4Jyg0Vurd2K2V6XK0GBxNfXuVP9R3Y6OouP+o8I/2QzFyhB8XGGHaXtjqjS9As3QMEeVZgwqCyW7ICmLY9NlEC0B3Zz2IzBPb4nFWNhJOsA1O9qd3itidIUf0CzLGepHoTgQ/LbbMAkKZhvKB868T4qw87b/NGAtEk7dNkUNIMzQ5HQD4in3hjTFOeYk+zqQmZlZUD3tSWYH/Z3NxZTxSKI83oSPYI8uIEUqIDd4xX9b/TKnEbrt39pJTDX+8EGtIimhYG3BMqDhb+Ex8KOb7FOSK0uGsd5qtaw0gdRgs0cf5GnU5TvqR50GwhxOdDCwCgUPyyxCXMXN2npVjzJ2Myt4YQLt8Hns3sYJFAH6YKz+eC6fQtK+H93kH6Owas/r7c/+tKUb7ly1C6R9p6izcBX7eSBC8/uAzjxB3aRLWCqeHA3/RStEFWt9T2MJdbkd1FD/gIn+fbmjFJeyKjEok5RcaG4cM6xzEshHEUz0CluvtsdGz0hZiXVNzJC9DxKwU+XiQY/OCOQBUNGyHSsRjPQdav6s7/l06sEdoCMlfl8PijW7jH3+fzV4ZkdNqWRh5QNH0WhWd3dx9IgpnNtX57nekBI/3y7xv5hpSe1i9AGtKguGkAlo17kJY8nIHcorN+sTh1HF1iqD/CpRz0uims51J+lMsxOJolyKZSHG8BFx9suWuaxcfI8hLv7qoZNmF+k9GlczeA9YQX0wG2ef9SQtnLWMSnOnRJB/aIj95bZ99A+lWim1g2oXbqLA2qCw5c/LanTU34C0dunFmzFfAjwnv+a7qNYuGoQKkQoNBAyD88/oueC3TMilEJF3GSepHMuZ5KNFEs04Ufc7mRJ7YvhHHydZc7+kgirylZCAWacBa6buux8oTqcOMxkPwZ+nVdIPfatojf9pFf/GK5vThIqfVx9yHKjRFdthB5Cjvlrr0cAOPxAkvKmxU5f9u+ratJwezT7IKIfnIla2ZhTfSvh5mMJbu3HO/Q9CwBB3SDVpfKGCA657bQ3H7f4hbSB+IYTzDnK8DSXCDeO3bqRE/0x/YmF1ao6b4acdg4Imyjz4IYg3HY8o87nHywWjWrtxihjcmndaBNbjv6KHpnwXIdublMzR9MMTN5XtHT71ToaJJAN7ZwiSkH+VbFV/knYMRVnioPqcZgBS9QpAAvMvTKHp9Bh87uMrDXskMSEZlEXAjpP7GWLzzDV5RHF/3cpMe4lFfHqWQvc62+ev2eg+6UXfqOo+SXoLpd0kkbD7oBmKQxKiZiP5evkJT1RHY6wzhI/V245l6IHx7AldwEWb1VdNO66HdYuu7x9C9iBnzB/QKkSApdaYtU9cYFjMUq5w1Y84CCXlFmb0B+r9o1KtZHO4+w+1pIy27K6czaURpkCz4/QjZKNGyCviSxMA6jFufxYRT0QHbcn5xkCcHtDRpFehRk93UMBQ8nNvs+aGRkwSjQ3f/x6NTqFTOcPlws9IWmkSf2cTNxQXyRZgL2FMRcHD0mHwzhJ0hBZ7H5deWoPOBGp9iZt5N3A3awwD8kPRLxHRrZ/aI4XU7RDRCQhX6mMDHn8r6AfASLuKibLtTTnoIvzq8rs7TK6xxM4TF0A2C18Y5c5rt/cnOpwXYDAxk9o/XwTtWkhQbpfnarWFfRoYb+2rMqzmy5nTDzB8pbT8XwbmXMs38dH3xbmiw9kHkWcAiEQjP6keu3Vwetl4tETRbramsjfmO+DumW/sa1DrgOntcb3+ClThi0BVtvjLnjFpGtt6fABXYfv+M/NM4M22K6OhUvMUrX294xfHNg5bx0JSWR8hxFIfog2OlyDBcu/v12jdyH5lsrmj1iKuXPn4yS4LJnYY2Lm/WKg+2dPZBv9tL0FIuIGOs3S8+BPqLgj/1ZHEpmLLNN3WLNnIqRoLcbp4gfNT6YACAwowbszMEfR1UIuoF19x/MTnAZAbh5lsxzA4hXvtgDwbjPYqXPOi7xqKeIMlzUkOd0amthhlGEPHk7+ovWKw21xKVIKkNwW2UcwIH0xMxgZVXJi9U1mPkWuTik6ec3sWu9FlzOX+Y9hc37rGGuojduEOBgGPh7QbJN4AyAYQrQqy6yG9s9A7JnhGDtkr0k3OvuicwK3wqu0GWUo5fuT2fzxjBlEKLFki5lbhsPSHh/fpZY+5c7Zpwy1fOyGQgVScUfWjKWMrqrqypbV2nfp5vREEsFIY0X4skq+4JVxK4utqxu5swYfC3t+JoDtN2zfW4sx9Rwufy8MjnfQZ0ryHuVEouhxaVaBmn17kMsCcfiEBq7aDr7JBBvx5xXOaazyyFUrOoiBaVAHY4znqG16Rd9O/ORMfR1v09SXckO/FKQsLQrK3pGT/A8NDFzX2BH3M5erxeOFMmO15dL6XW0JWMxsMuxNIqVumgmwEATGPUi6hbakobfMIlhfzScb2yeqSnPPht19Kv1JEXf2scMqMg9zoJ1HXAJ/+Ep7paS8slAJRzqLx6lvAtxkerkvJdk32ynYgn7gYBzVu9jMX8czeiB3/BTYVXQiMejWJGSabkz7wW+r5g9gNUPhpeKiUQWht4qWK1CGgTkRCzq4jYRl5ND9n90JScRTQ+3ZzezlKwvMupk/eeJXpCjNYEhvnMydI8MWReiJ7P3V4WamjPgWC+iiETrLjbpL1qA4tdhH0eJ6sNAXVFPYuFCLApPLYiDW/4c2Ne1qT/GIpLHCUA6uuW0hTV2/zWqta4OIHkoOaWs5oO8rAqrl0fxKJTV0KJuW3+F/bFRqKQWG2lm1fuqrZLcQAiYalQ171tj5JHFT09ldvJz2lk4+P0Q+wmRf0MUL1M+g6dkrHXsL3M4RMiymlk31jY6o+epz0lIQr5oGB+UA1IUtmtoZEkG1XA9klcJ18229l2RaBGeAHNeyNHQgkapj2e0IzLUUhhFMY+QnG1jOgC7pH1pQqcC+JmxM7FG4+UUZQPcJF/PnXMDpIxN75t2YHigEHptH8sv4rDqQGVPf7PYcEqYJIFE3nbHsq5xWIbI6vXLOiJiV6V15XTZ+voUeXshLLzq/+4L0jf954H6jkpJXl2bapvepVoXIvlYKc1oDG5OuBB2Wdx3Gy5FTlcSEbaoMzpfLAxYKDBhcd0P1r7x20y4GaaiahABtNVop/uDerjONz8nWX40My/fu0z0I4pg6W9yXkvS0Ih7TNUlotPvyaWGj/Gc7PL6b7WLJ+Pn01N8I4lyw7QZzPJFCzb1l9dfdSCwuPZ0+d2b7o/gRIRzY+eAw1CSnDk68ceGVqPDH5uevPhLW9joOdV2sanOvKYM1mC/+S4QxzlC/AGv8LwX0uLdPCzx7nK3/ZD8c/JLQr+qpHpeaC8axavyBAuTpFv/VWPWTDHaCockwJWZarEEfTL4GKogZIYdtN1UBUcyY8snNRYCqQ8Zd8jA+vpSip9mWx/3ub3cA8nMhMu1Fh+WOOfdd/FRL4Y8lIh0v/Bud/uuTXu2abtnG+8WJJccRg4rEfu80+Ea7bogcWsW9wSDpjPXsYN8CYyPeiMNv3ggggaNGQDZXb4qn4CiNUMWOe+KZFFg74QKoI26YC0cAA7UKhwtralfcNoCqbvCRQ9lMMJ9i9DTIcbpY7eeguXAtqSTvidTaa3QteFBO/kgoaO6qnfJ7OPKcmXYjgc8hswVQrf2OigqKKmzOxxUZyczL/1GUjea2aXqwpzbjtJUlflk0a274LqvfkRP0RGzbXK1cyscSU1VicAixlxdUaBm+dulsTnKkFq3JfxYFhGfhWjrAxi7aSZ3F13WJHjkncwDDDOTQd6uRy9gzJ+xO6r2BEUNAumm7KDGxxjtbU9yxT00DU243zONPHzIL0ub7Q3Uxf09ct3q/KIkQFQp4Y9Qh6fY5lNC4hxfgQSju4M7H4336DR1DlcfZWVQ7hIAQeo2Qb/NjG7/h2uyFigR7nYFEN/Bc0YpxxOKHtD+KPn4Al2chenSxTLeZlcODjJ//GS66hH/vConCvcsWBpS8jJsn3L9qoMC7YW9TLPJ10BRBZmXlMOgp0In8SeAUxjNpiH7JbI/nUYiOT2cbK9Om1LhuWqflEePY0JOiFrBZ/wopo2b8dIS4roWFYtLIug7tyEUxXmqUMMU3XHRDNqJ6D61krd1bzWJAl2wSEWpXFgJwtlgS6CaJwpRtuABuqskljC2LYLsXUKTy9v+vASmG8PIgUCqEkCNySMTXnIst7NPxmL6zoNQT9C90FlS/f5yRRy5UEcGZGgAQ+uua0vtbcCVHB2+OTbskt0nOSOplJ0udlbizpc/CrfBkpGcaA8iaYxrEz0D/AozGV31IjCfijC+fhqchoNisHBE/JrbMkmlyQ0fzMQc7V3t4ljVGSoGFKxTUA8iSKSpcAXPDvwMNVbBnzEm0xYqIAjFfDoLv0JAQBebf1Lha/ZlRYFgPyAUx+q+IU7YZKu7rUDgwaYbmElA6SvWqwtfsuoYzB9btXkj4fE4aFCnTVC1jscMf/NwasZe12O1y94A5BG9Gg9vAzfevocR2gNSYJRrtuYCmmdJoLFyQCnfuHyC5xp23gGMCzJ2/AZcTEs79OAfg2g21bxBBbB+25JsmKYvao7zgtuG1FIDfQmIaO13MqTdPBe56sz5JMJ2Ll2oxbBIxl/KbPh19NHIbmBJSYcS9iBeQwcEnWvtxZ96cLNPSt6KlMH0vUmtQAF+wWbLR3/aaL5GVAxWbo6PKzqq3mfru6X99DdkAt+ygftNYuN7OqDmGpl3h7lihH3SshjvbnQhdzk32LRBfEnGtBR5xwOI/hS67pSvDXrkN9gw9nZCD+Gz9ymOhf37ogRoVKY1o3rV/6XRMM1j2SdSPhF8936RYgCWqPXEEgLhilgmxjrTc8FkZPypFGvtdLNRYzWGjDhuCvFc6m0wwUZ7WWaylbX+QId7aKLBzsZq/gFyl0tYYrMnZgOrDSrJWGaJpGAM=",
+     "return_code": 0,
+     "stderr": "",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01DYJea7ZT9yc4thyFi9aBKu",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "text": "I couldn't find a live reading for this evening. The most recent report I found is several days old, so check the current number before you ride.\n\n**What I found**\n- ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "A Department of Environment report from Oct 11 said Kuching's API had dropped to 85 from an unhealthy 111.",
+    "type": "text"
+   },
+   {
+    "text": " That is in the \"moderate\" range.\n- The haze in Sarawak has swung a lot this season. Kuching has hit ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "407 (hazardous)",
+    "type": "text"
+   },
+   {
+    "text": " and \"unhealthy\" levels again in mid-September. A reading from several days ago doesn't tell you what tonight looks like.\n\n**Check right now**\n- The APIMS portal (apims.doe.gov.my) or the MyIPU app. Use the Kuching station reading, ideally the latest hourly value.\n- Your own eyes and nose. If you can smell smoke or the visibility is poor, take that seriously whatever the number says.\n\n**How to read the API for cycling**\n- **0–50 (good):** ride normally.\n- **51–100 (moderate):** fine for most healthy people. Consider an easier effort, since cycling makes you breathe harder and take in more smoke. If you have asthma, heart or lung conditions, or you're pregnant, be more cautious.\n- **101–200 (unhealthy):** skip the ride or move it indoors. ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "Under Malaysia's guidelines, outdoor activities are supposed to be postponed when the API goes above 100.",
+    "type": "text"
+   },
+   {
+    "text": "\n- **200+:** don't ride outdoors.\n\n**If you do ride at a moderate level**\n- Keep the effort easy and the ride short.\n- Pick a route away from heavy traffic, because exhaust adds to the haze.\n- A well-fitted N95/KN95 mask filters smoke particles, but it makes hard breathing harder. Cloth and surgical masks do little against haze.\n- Stop if you get a cough, sore throat, chest tightness, wheezing, dizziness or stinging eyes.\n\nIf the reading is 100 or lower and you're healthy, a gentle ride should be okay. If it's above 100, I'd skip it tonight.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 38018,
+   "output_tokens": 1241,
+   "output_tokens_details": {
+    "thinking_tokens": 23
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 3
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

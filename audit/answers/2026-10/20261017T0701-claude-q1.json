@@ -1,0 +1,292 @@
+{
+ "schema_version": "1",
+ "question_id": "q1",
+ "question": "Is the haze bad in KL today?",
+ "city": "Kuala Lumpur",
+ "where": "kl",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T07:01+08:00",
+ "answer": "Yes, the haze in KL is bad right now. The latest reports I found are from 16 October 2026, and they put the air quality in the \"Unhealthy\" range.\n\n**Official readings (Department of Environment API)**\n- At 9am, Batu Muda was at 170 and Cheras at 168. Putrajaya was at 174.\n- By about 5:30pm, Batu Muda and Cheras were both at 163, and Putrajaya was at 170.\n- An API of 101–200 is \"Unhealthy\", 201–300 is \"Very Unhealthy\", and above 300 is \"Hazardous\".\n\n**Elsewhere in Malaysia**\n- Pasir Gudang and Larkin in Johor reached \"Very Unhealthy\" levels (API 202–207).\n- Selangor was also hit hard. Johan Setia was at 184 and Klang at 176.\n- Nationwide, around 29–30 areas were unhealthy. Only Sarikei in Sarawak reported good air.\n\n**Other readings**\n- A US AQI monitor in KL read 165 at 5pm, which is also \"Unhealthy\".\n- Readings had improved slightly from the previous day, but they are still not good.\n\n**What to do**\n- Limit prolonged outdoor activity, especially children, older people, and anyone with asthma or heart or lung conditions.\n- Keep windows closed and use air-con or an air purifier if you have one.\n- Wear a well-fitted N95 mask if you have to go out. Surgical masks don't filter fine particles well.\n\nReadings update hourly and I can't pull live data, so check the Department of Environment's APIMS site, or an app like semakapi.my or IQAir, for the current number.",
+ "citations": [],
+ "claim": {
+  "value": 101.0,
+  "high": 200.0,
+  "scale": "API"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T06:00+08:00",
+  "band_right": true,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   158,
+   160
+  ],
+  "measured_range": [
+   158,
+   160
+  ],
+  "named_source": [
+   "DOE",
+   "IQAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T07:01+08:00",
+  "pm25": [
+   169.0,
+   112.0,
+   172.0,
+   136.0,
+   186.0,
+   156.0
+  ],
+  "index": [
+   [
+    158,
+    "api"
+   ],
+   [
+    160,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Batu Muda",
+   "DOE Cheras",
+   "sensor Taman Tun Dr. Ismail",
+   "sensor ENVIRO EXCELTECH SDN BHD",
+   "sensor Mont Kiara",
+   "sensor Setapak",
+   "sensor KLCC",
+   "sensor Zenia"
+  ],
+  "hour": "2026-10-17T06:00+08:00"
+ },
+ "took_s": 16.9,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6kMkandj9j2ryR1CygB",
+  "container": {
+   "id": "container_01WL87UiCni8jadoKWtXwGWU",
+   "expires_at": "2026-10-17T00:01:35.378360Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01HfK2gP72nv2HVceiNaMCsJ",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Kuala Lumpur haze API air quality today\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:600].replace(\"\\n\",\" \"))\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01TXdvZVQAwifi4WszpwLk4u",
+    "caller": {
+     "tool_id": "srvtoolu_01HfK2gP72nv2HVceiNaMCsJ",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Kuala Lumpur haze API air quality today"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01HfK2gP72nv2HVceiNaMCsJ",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Malaysia’s haze map turns red: Klang, Nilai, Shah Alam among worst affected at near‑200 API",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/10/15/malaysias-haze-map-turns-red-klang-nilai-shah-alam-among-worst-affected-at-near200-api/239237"
+     },
+     {
+      "encrypted_content": "EpkLCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDG5nXUw96Mbjjyl3NxoM7gGtSIl6odSvlS0BIjBpzn0EDXK2lBJ5HXzo+/Co+CzWqsCL4FXYFzYYtz4pGCunRkAhcN53uwwgpO9mXy0qnAqPf356PiKilBZtoKGSW/b+vqxWG8gQz8yrkFgpTpAyCTBIhl1LiLrwR8Q8B1xVS6MjmZZqSAnA8lqET/Cp45CIc9WzhobA31k0EHHEyz0bfMbJwjUgHtfqOWxQnxnsOpLCB12oa2lnZ9MPNsn5vAO38LlGtATW9F8JAfjKbXCw4MrwzUelPs+rAdnK8EX60mJngH1oXhOle5gomTuoHemzXRY8KS+rxz3JiTFLTTAex9P2nT6fUcABCV9Vu4yy+fJiW+uENFr36SrKUAIfOVi8s/dUoHWdDJ/Je5HBg5Tq5eKKMd73BTPeTtnlv5R84vXH8T3XaXRcOnb6k+RJ9zXF3V+MLqLFsGKW7bkz4leye2uGnYRGp3AAiQDo2PHBJfmsgAN00wdTXSqkt09ckJZAHzIqM0C+2SGSMzZE5xDUFk+pRNusPQvsPaxVHZ7avnf8ROyJvp6cQvCgom/UVcrEcVuzKCTaP/rLBgYs7LCTd2xsiCy1i2iUJ7z8tS0LZNHC84+GDoZuHIbFy5BSmbYwdv+A9hQlVXGGQSdE8KugMm/2e/nrwI+QQ++nQv4Tp4fNelwlaLrzOsJx8fePX5ejZO/rtD1aehvSWay3Yit+0NDnoxtHZyi6ltXuKgHajk/kOWwyOxSt2ZaSNe1xXH9fYiLqg+kFEfXmHwHXvnvCyRN/DtJswfmUn1nZqOWW0EnGRZku/bY87RVj6zHlJ8t4miOcvpU/HmoBoNV0G/QRobprqEANLu6+k3y72qqjE95jF+P0QRRFlsGovdIJ6fnhHyeDOfrVwK9V1aoHdnQYY7+J+ahvK2lJ8dK/ykt+JWDIm9wblTADqDA7m/1im8UidTN8JcZpsUPwDmVmutVaF4+blUpKLaiIq8lwy2AsSfS/7zsfyfY4UVCa1p6jFqACc4km5wwoFpV7TbNBMuVEf+NubWOytmxLJlHT89gfFTpN7bqEZJrPSrNhRWy4WkB+dxZoyxKsbGcBjA37AxJDdojePa2SoEzx8wxvZ6tzPMorHEZlF1RN1i701w1djlBt+/N00294WrD7fV8rKABEUQUInJcp9qspdNHsVyuM9DOyjWUS8U+pC2y2+AAF453vcKtqeNUOGWcXzXgBaz37Yg3okYWL4By6ALK2YnifMqB4GpnqqCeaiJost6ycRiro1U9Nu0aZKowfbn/cz9bVm1dgh3qTynn6td6+I4tNcyb+5KCNrC1KntKn9wuFkFv3PFj8CQOg9KcbFHD+3qz2xwY9v36MkYD+AFl7Gr/h4CRkGUgerbNHnHwEUn0nvhVHid0e5PDYNv1/JYwhc55FNTVySk52y/Uk2koo/X8jxBMfIPBtVjFjI3UqVxQCFS2D5LJviewtzRG9mvQPPSaoC1GFMliUcqPTaEwzwcTVXCfMm/OT/ukx6DWVm/dwlO8uXp+hiFeae/LN+PGluAjDgyd4/cMvkPdiu0bqenuTT6drwDG7d5R33F6sakblYWAxbNXxtERpM6cAwshaWktYdwwN78lqx+ENu476Mtp7Qqc30zZS2ULiU88GagGAvD/XO6R1PBYknQwSGmwDP2sbXgwHcD0jnMJZ1VV1W/rEkCK12wv5DN0UbYGRZaYWloCiuceJr7dhU98yzbKBo/GLk/JLTd8KNqJLIpn3aYsGQ8Rfm+IxBfL+2vfkpmha3Ti/bAXJXe/H4Mj2bNMBU4zbZgpoMRwH9D9d6aUUBkwcg3hukgJkSpKpVcGpjfwYAw==",
+      "page_age": "0 days ago",
+      "title": "Haze watch: 29 areas recording unhealthy or worse air, Larkin, Pasir Gudang API hits 202",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/10/16/haze-watch-29-areas-recording-unhealthy-or-worse-air-larkin-pasir-gudang-api-hits-202/239370"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Johor’s Pasir Gudang records API 207, highest nationwide as 30 areas hit unhealthy levels",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2026/10/16/johors-pasir-gudang-records-api-207-highest-nationwide-as-30-areas-hit-unhealthy-levels/239305"
+     },
+     {
+      "encrypted_content": "EvsKCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDPiQJEYsNWwVgnOcxRoMaHqS6OM+PKk0NbVSIjDv4tlbjeAvnBOrVfCVlwkEvfDSgPgo7GbNKNeJiPCa4fic/oAfUvxfKS3/TUCGZq4q/gkcBIdA+Izqil4w4n7B4vpOto0cb4IgEcgIs1T18B3POT4j1Y/IniRD4DrdsASYqE5/z7a3xnhMYjs0yjDU3z6sXFsMY8JW1+tnghF5IDazY+syPuwQCJXWnK4vK8mnAGnNIO2jQRjBSks3W/mKfPRAzNxHXiMaSvXU7cjjanT8p3anjgE6WS65THbwql3UFPLb73NcsAptpUij30Q6u1ei1vpjCwCVQ0Nc0H9V5ps6RIypZLEVXmgQblxVctPVkbXbQA1qTKdWiW07RrRJYmzXUuCwR7rKuTV+x73kAVsYiM9Csv9EEQ97WqOdtoAJX+DcKQ/rqrq9QXlw2cNvSDf268U7NyXm6rBGB8GmX/0hg66RvBUpH9WJs6w5vaHQuj42yfLSuELPhHpMyB6kQnHnyVGSlk8VP0NcCi3hseF6Kxg5ntC+6pU+v/BdCcVk3wiGZ+yZO95lrMgSaQx6I99R6grbdN3ik1Z/AXXuQDEhJoWW3OCNEodDcbV1d03XPJN78hVnRAIE/K6dQbeSbp5pjPH3x6m9ST8kotRQgU+boFv6nUykS2gWGNGqxsBddHff8GYbaQH+c5PT/jHqk6QIFXgB88wqOeU6SBRWQL4iqsSmqT3enDtpCgGvQAuA7c44pgiGghPSGtfdJCzvpMN+NYcxE2NfXglwg7xgrLFi5u80QnevDE3ZeKl3DiM3+f1rZ8Kgi3erMfZtA2XIzACnLEEdl9GZQm3UwqOVJa5Qc1ApFl4QlU1DTNfar8kZEKHGuRYSzm6/YY4weP33ZPei8CYE/ss9DrUCu5dXnd9+8gMESqiL+1AddMVTFUdhoUwX7m7nT5/1V+KwOLgv9osJJDSmc1JyJLbbmV/PdJTUo+3qQYYgCsK03o9k/YXF97BERC3LA7wAuaFeRAwJ3v+z2LzuNfkhnjyYV5TSSiQleAt8+xraRlV5Q0zBhFi5OdeawisrLIScXLvjJUfv3MluhzznLFdTkaiHMssuiZNR+Jbq+DbP9C7AFq7fN+JLVEKVESFhcWcCqEGocG5Duw/RHzQqBZz1mUnM6QCA7sVMxOMT3TiMzakkXEuJzI7T65nHDnD55K7D+QpejshWqi70Wts2kQbCbBvkGoQAykk3uqJEXM6C2pWDe29i5s6qof2JwAM8k3pgIhGJg1BwHlEt2tj/5YypOnPzS/hMmhXgYfqHsaqfitA6kz5Gc1Aan8QDQqRLfrtda9HQG/E0CzyAedU9MPvG9ltEKO3SE64ZzYXkOwtAzQ3WQotHDFuC0BKcqXr3wHEjyx8ZmXCXMZFTUyDCUEAw9sxKViMMDmUdSr8+D6cunSaG7UdXSqWy/isyPHn6ZwdMiaMTuZfnGMaoN+r2TrFUZIXo28gjXdGDVZRIxpL7cKeAsWd6o9QBrWCx99UlE9/Kd71zQYcm3979mtgEBJ+RRikzDV0t9mFmGbFfHWGXOy9/mDWcm3O4TBpX1AdKwQhp1rd+EcXscG9koH2yTX+J68rbxix6kP7K5c2tstiuQYyv+/PmqvLq28Q5ceXs3RtyDJv+rnKDGeHi2vnl7QgrhQWsBx1QLJEpgdK9KhUexD/LioXznrB7KVu7rHWyyLuNUmIjoH64VFvUlqWq8U/bM9RxHYzHPVA49KtX+AXhlkSfLwVrDsChqUSU7DT+dLFR2vYBkjm21BsYS7zRrA+qmAcun6a4xKMYAw==",
+      "page_age": null,
+      "title": "Malaysia API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en"
+     },
+     {
+      "encrypted_content": "EvIDCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFn1EGCObzA1Hp440BoMkJmUNK9/4Cunus6IIjAnI8oqDE2UcWQQ82JQrhfON2dh9dMDFR1hJbwzgbEhXygGvhw3hIx0j4rLrbRyVccq9QL9e6C0h0+L08gR0xShqTKH8NI1nrjYXgidiu5ZDLa//+JaxSjfnajjivqnuK0YGEZf0ujkL3Bpjze4X+lsnfjnn+I5WRiJWEECVEoldw6yJLtEJRSPVNUFHPVf9yTzvb/EfoGpyQTINU+vTxBHdW7sbA9A3W50wPnTihn7LRYtvx446Y3grLmNvRjwTOd3s2Nq72vpJlppvn1RobLJTGopAJtZmW7M+S6BS2V/Gt+785P6jmXZbBPJzM7c54uuASEuiztRmCKntdhJWnxqgTdCsxBtC4wI0+3lVmpOhKj1yLhE/v8CDY3IHhHzCnXJievrRyQdZ0DtOMz7hV3gscUXXHpsU9uqtE7E6MBO2nwjL6bUa8rwxa92tkT6iwZn7gq0tMlXhslQRZwCMcyykaESIO8W1m9PsXgeck5j5XP3M1XcnEMTxhnCm1xkcW0b86OhmtUZ5suYEswgr6yx21nOSzoQnO6iKGZPlccwRgsZDvxaMB30GAM=",
+      "page_age": "0 days ago",
+      "title": "Malaysia Air Quality Index (AQI) and Air Pollution information",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/air-quality/malaysia"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Kuala Lumpur (KL) API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "4 days ago",
+      "title": "Kuala Lumpur AQI & Air Quality Today (API/IPU)",
+      "type": "web_search_result",
+      "url": "https://hazemonitor.com/state/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Haze in Kuala Lumpur Today: Live Air Quality and AQI",
+      "type": "web_search_result",
+      "url": "https://hazenow.app/malaysia/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "Et4ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDM/3UDURpWwmT4g0KBoMElxaf6jtZnAXLTNCIjCzySSbIr8GCcJwYYsME7QdRjVrESVtMBBlJO2DHYNPjyE3NKTqN0BIBZGedci9TBAq4QeneVX4+X0KfQzpjok0MRsNqk9DUqoQAQVC6SImMYPlGAlm6NikesrgRRry3QMTHdty3wkTi07Wpfiu+s+viEyWBvRhVg+4EAZadAukKj3Gj3Sz3mgSzcifD9ENh1HLXjGHex9lyZFxpsfmV1qzg00M2btoykcVC+omq76nthzDrbEpp+jEOJC4SwrITWudyYvbd85hTv35t6g97aHHhGkY23EB9a19P4OWMSrhmHWhuIhpBAFoErhCuIIPoQND3eZyl8gCfJsGDDTgFrU4WeeRcs5Mc0hvb+OSa2pLrCoUTwq0uYbeDw1Mr3Pt0DmF1LV7qzXQESL8oFtPItbavviXpCo/fC3lLftLiamZyQ7mgiyf04BMlPnF7/ItRFFOXdywA8LH0VC2vP6mYliSdZcmadUTahancRHZfgZ5iSmQafdyArShmEBOiLauCKaRRAKtriuSZ9IM8RInOKoWta0cbuATPZSn26Cgauj1lSjNnnquImInjeJMCIEQRLs9yIg2nniRXMJI1+OWUR/5RB5GLt4AAU21xa4mXKLDDBjQO03wQSHzCCqoDbi2fm5OipcjNF9R4nIheA3ME+mJpBD2JWyr09QWaM49hzekOCRamWQWnGBrQH994OwZ1eHSDqNVlz6cExQVXl3iM18VuBejTkYP3RMRWQiQVDlqddbZihw/lG+tEVvWP7PJJChgaYMtFnvLrzEm6nwQyb38HfT3fKq9y3tg1uSFIs9Fl61YQoYDRyXe3TdSHHWuDp6lF0JFJbJtfkwU0aHZGWbmbbBYJ/ivSHEoNiQFqz9Kb7nhU8rU+Zw2n9Kh1cBsYTie4lm7Vhq4mH82GH4hUbErJMObRe9W6AFYe/lofOjR5TLUWXEPKotDthxplV4M+O9jtnNbbJmUqllVwSp0MyWtRKLiNimdezSYyslNhFQGWuYygxNeGb32vmbKBS2eaUSdrFSqVZCE31FC+0XpklX6acOzoJE5Sv06IqWR9jRSOsXfYfyvU22vKJj27VCwDPQZOFCi5HndNcb1wlq4wWKyxMpKVqPfR6c05ddTrdIX5fl/7WS6iMi0qooBA4CnyZjpnKbh9nwwjJ24gzWQKJcgUpOFylllYMgEKldOiYQRsoE0MXbCuvDBrsVLwNmrYPsvZNvqdXBDWihTwfHUO5CbDbw1srcJyPwiUgYmMMN52+SI/CgNO4g2owwzWDs6YDhD4PCf+L5pAqkVGEBrKZ0iduzR5t3k/Nx2giH8HWl7tH5NDCOhDkptLK3nJEIFfs/QnL2rKE9To8w7punBLyV/zkK6EPjI/0XikZgn0h585r2peYMYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/malaysia/2023/04/16/haze-kelantan-kl-johor-record-unhealthy-api-readings/65089"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2019/09/13/more-spots-affected-by-haze-in-malaysia-today/1790095"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01TXdvZVQAwifi4WszpwLk4u",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOLZVdUOqvJdqDFvmhoMOZKntHS+dkHqan7bIjCNkDu6teRKc9zLlH0iUlRAifW0thQsmDwevpIEvL7laAYeX23Qer2QhZu5pydYM1cqEkkMLMcimwl6ULrvdKXaSaYL6hgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01HfK2gP72nv2HVceiNaMCsJ/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01HfK2gP72nv2HVceiNaMCsJ",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01Vg1cZ4dDjcYc5hcAeDYjrU",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Malaysia\\u2019s haze map turns red: Klang, Nilai, Shah Alam among worst affected at near\\u2011200 API\", \"url\": \"https://www.malaymail.com/news/malaysia/2026/10/15/malaysias-haze-map-turns-red-klang-nilai-shah-alam-among-worst-affected-at-near200-api/239237\", \"content\": \"As of 5 PM, 34 areas across Malaysia recorded unhealthy Air Pollutant Index (API) readings, with Klang, Selangor, having the highest API of 195. Johor reported eight areas with unhealthy air quality, including Pasir Gudang at 184, while Selangor, ...\\n\\n## Fatal Jalan Kuching pile-up: 24-year-old BYD driver claims trial to causing child\\u2019s death\\nHaze envelops the capital city as several skyscrapers are barely visible from the Merdeka 118 Tower in Kuala Lumpur on October 14, 2026.\\n\\n# Malaysia\\u2019s haze map turns red: Klang, Nilai, Shah Alam among worst affected at near\\u2011200 API\\n- As of 5 PM, 34 areas across Malaysia recorded unhealthy Air Pollutant Index (API) readings, with Klang, Selangor, having the highest API of 195.\\n- Johor reported eight areas with unhealthy air quality, including Pasir Gudang at 184, while Selangor, Negeri Sembilan, Melaka, Kuala Lumpur, and other states also recorded high readings.\\n\\n\\n\\n- No areas reported good air quality, and 34 locations registered moderate readings, according to the Malaysian Air Pollutant Index Management System (APIMS).\\n\\n## Subscribe to Newsletter\\nKUALA LUMPUR, Oct 15 \\u2014 A total of 34 areas recorded\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01Vg1cZ4dDjcYc5hcAeDYjrU",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS9QQKEAgSGAI4AUIIdGhpbmtpbmcSDPgSLabGNJwr/MI+exoMxVJTCrodfROXsmpBIjB8OxJpVbYpXe2+qV5Cka6u7g90DFaE8OIwPGnIxzLdSe7+RNAAHFteCcGUeDwkHGMqkgSDw2jGT5fv5uDaXDpWpAAaSEmW5xjyjIQTKu5l7eLQL9W4tnpZfJwVCRkM/2zod5b0jGElNENS5ETp7FtvT+sqkc0nFzKFi/j7lSzFWkS98F//wN3czHMrjjriyWbYwZe33H4CG0CRMBRHUGqGJamorifkK0TNZg4tFsdN1ECrjBpaGdgugbIhD5+qyI2B0ursK/z7ScLHtZbEzaM51Dg3nDARRJvWvzLRtrsn+vZ3Df2kDFgt0jXQB623jwstoihVBndBJ5k2viyBDdNtktAUGbcLOehT0VGZm3AYF4zVjnY+79gM+qbjzAhjjC+moIf1UumVz5+8ezgtCYbqYaCkrNxjPh+9P05rLSrF3AhUr6j9SWUIm6CPrp6zJOeYjBpiI1+ZyhmK3Vmv1rZ/BlI7Jst1di5O+shodUUT2nlPgBq+YMYf8r2O9SdpwGCMsHKNErlX9PIuJQMLcp2B2YwvH/z0cTbntbCuhuovm8frZ2OHRkYix8DLc36Si0vjQcVRVfWqjJmRNuPd2+oTV7lG1dtqBr5npvo7TR0R1wNLzRJkK/ZmfQvvScOs8FkbjELdM5Jzu+vW8HOoN9K18XSiZL7RhWCXTHEl4m0WS3Z59F4LGlfvMMFSutvoM2UdXeZHGWqehyEEHLFQIQmd+3FMwQRYVkBBNqPSx1M+yf7eXmBq+LYKZzdbGjjK1W5B7hr+qRgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01LvgCm67DhYpFXTY8bCbC7i",
+    "input": {
+     "code": "import json\nr2=json.loads(r)\nfor x in r2[:8]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:1500].replace(\"\\n\",\" \"))\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "Malaysia’s haze map turns red: Klang, Nilai, Shah Alam among worst affected at near‑200 API https://www.malaymail.com/news/malaysia/2026/10/15/malaysias-haze-map-turns-red-klang-nilai-shah-alam-among-worst-affected-at-near200-api/239237 1 days ago\nAs of 5 PM, 34 areas across Malaysia recorded unhealthy Air Pollutant Index (API) readings, with Klang, Selangor, having the highest API of 195. Johor reported eight areas with unhealthy air quality, including Pasir Gudang at 184, while Selangor, ...  ## Fatal Jalan Kuching pile-up: 24-year-old BYD driver claims trial to causing child’s death Haze envelops the capital city as several skyscrapers are barely visible from the Merdeka 118 Tower in Kuala Lumpur on October 14, 2026.  # Malaysia’s haze map turns red: Klang, Nilai, Shah Alam among worst affected at near‑200 API - As of 5 PM, 34 areas across Malaysia recorded unhealthy Air Pollutant Index (API) readings, with Klang, Selangor, having the highest API of 195. - Johor reported eight areas with unhealthy air quality, including Pasir Gudang at 184, while Selangor, Negeri Sembilan, Melaka, Kuala Lumpur, and other states also recorded high readings.    - No areas reported good air quality, and 34 locations registered moderate readings, according to the Malaysian Air Pollutant Index Management System (APIMS).  ## Subscribe to Newsletter KUALA LUMPUR, Oct 15 — A total of 34 areas recorded unhealthy Air Pollutant Index (API) readings as of 5pm today, with Klang, Selangor recording the highest reading at 195.  Other areas with unhealthy API readings include Bukit Rambai (178), Melaka City (176) and Alor Gajah (175) in Melaka, Putrajaya (177), Cheras (174) and Batu Muda (166) in Kuala Lumpur, as well as Tanjung Malim (174), Seri M\n---\nHaze watch: 29 areas recording unhealthy or worse air, Larkin, Pasir Gudang API hits 202 https://www.malaymail.com/news/malaysia/2026/10/16/haze-watch-29-areas-recording-unhealthy-or-worse-air-larkin-pasir-gudang-api-hits-202/239370 0 days ago\nIn Selangor, Johan Setia recorded the highest reading at 184, followed by Klang (176), Petaling Jaya (173), Shah Alam (168), Banting (162) and Kuala Selangor (152). Three stations in Negeri Sembilan also recorded unhealthy readings: Nilai (181), ...  # Haze watch: 29 areas recording unhealthy or worse air, Larkin, Pasir Gudang API hits 202 - Selangor's Johan Setia and Negeri Sembilan's Nilai recorded high API levels of 184 and 181, respectively. - The Malaysian Air Pollutant Index Management System reported that nationwide, numerous locations showed unhealthy air quality, whereas Sarikei in Sarawak remained the only area with good air quality.  ## Subscribe to Newsletter KUALA LUMPUR, Oct 16 — Air quality in Larkin and Pasir Gudang, Johor, deteriorated to very unhealthy levels this evening, with the Air Pollutant Index (API) reaching 202 as at 5.30pm, while 27 other areas nationwide recorded unhealthy readings.    In Kuala Lumpur, Batu Muda and Cheras both recorded an API of 163, while Putrajaya registered 170.  An API reading of zero to 50 indicates good air quality; 51 to 100, moderate; 101 to 200, unhealthy; 201 to 300, very unhealthy; and above 300, hazardous.  {\"headline\":\"Haze watch: 29 areas recording unhealthy or worse air, Larkin, Pasir Gudang API hits 202\"}\n---\nJohor’s Pasir Gudang records API 207, highest nationwide as 30 areas hit unhealthy levels https://www.malaymail.com/news/malaysia/2026/10/16/johors-pasir-gudang-records-api-207-highest-nationwide-as-30-areas-hit-unhealthy-levels/239305 0 days ago\nAs of 9 am, Pasir Gudang in Johor achieved the highest Air Pollutant Index (API) in Malaysia with a very unhealthy reading of 207, while 30 other areas, including parts of Johor, Kuala Lumpur, Negeri Sembilan, Melaka, Pahang, Perak, and Sabah, ...  ## Woman brushing teeth behind wheel flashes middle finger before kicking auxiliary cop in groin at Glo Damansara Petronas Twin Towers and surrounding commercial buildings shrouded in haze, Kuala Lumpur, October 13, 2026.  # Johor’s Pasir Gudang records API 207, highest nationwide as 30 areas hit unhealthy levels - As of 9 am, Pasir Gudang in Johor achieved the highest Air Pollutant Index (API) in Malaysia with a very unhealthy reading of 207, while 30 other areas, including parts of Johor, Kuala Lumpur, Negeri Sembilan, Melaka, Pahang, Perak, and Sabah, recorded unhealthy levels.  ## Subscribe to Newsletter   KUALA LUMPUR, Oct 16 — Pasir Gudang in Johor recorded a very unhealthy Air Pollutant Index (API) reading of 207, the highest in the country, while 30 other areas recorded unhealthy readings as of 9am today.  In Kuala Lumpur, Batu Muda recorded an API reading of 170 and Cheras 168, while Putrajaya registered 174.  In Perak, Seri Manjung recorded 169, Tanjung Malim 162, Pegoh 154 and Tasek, Ipoh 151; while in Sabah, Tawau had an unhealthy API reading of 152.  {\"headline\":\"Johor’s Pasir Gudang records API 207, highest nationwide as 30 areas hit unhealthy levels\"}\n---\nMalaysia API Today 2026 https://semakapi.my/en None\nMalaysia air quality index today. Official API readings from all 68 stations across Malaysia, worst first. One number, one colour, instantly clear. … Kuala Lumpur. Kuala Terengganu. Kuantan. Kuching. Labuan.  # Malaysia air quality index today Last 24 hours 178 – 193  Official Department of Environment readings, updated hourly. Each city is represented by a single monitoring station.  ## Major cities, worst first Kuala Lumpur  Stale  1  6  8  Unhealthy Cheras, W.P. KUALA LUMPUR  Tawau  1  5  2  ## Check by state - Johor 207 - Selangor 181 - Kuala Lumpur 170 - Perak 169 - Pahang 155 - Sabah 152 - Terengganu 85 - Sarawak 78 - Labuan 61 - Perlis 59 - Kedah— - Kelantan— - Negeri Sembilan— - Penang— - Putrajaya—  ## Every DOE station ### Selangor  ### Kuala Lumpur Federal Territory  - Batu Muda 170  ## Common questions 0 to 50 is good, 51 to 100 moderate, 101 to 200 unhealthy, 201 to 300 very unhealthy, and above 300 hazardous.   It is set by the pollutant with the highest sub-index, which during haze is almost always PM2.5. **Where do these readings come from?**: Readings come straight from the Department of Environment's Air Pollutant Index Management System (APIMS), every hour. They are the same official values APIMS publishes.\n---\nMalaysia Air Quality Index (AQI) and Air Pollution information https://www.iqair.com/air-quality/malaysia 0 days ago\nWhilst this city narrowly beat out Kuala Lumpur, which came in with a reading of 21.6 µg/m³, there were several months of data missing from the readings, as such the results may be skewed somewhat and Kuala Lumpur may unofficially take the top spot, with the haze and pollution spike in Kuala Lumpur being far more prominent than that of Putrajaya’s.\n---\nKuala Lumpur (KL) API Today 2026 https://semakapi.my/en/kuala-lumpur None\nKuala Lumpur API today. UnhealthyPM2.5 ≈ 69.1 μg/m3. 24-hour average. Reduce outdoor activity. … Kuala Lumpur's reading here comes from the Department of Environment's Cheras, W.P. KUALA LUMPUR station (CA16W), about 5 km from the city centre.  Kuala Lumpur (KL) API is 158 right now, Unhealthy (15:00 MYT, 6 Oct). Official DOE reading every hour, with a 3-day forecast and health advice.  Updated 15:00 MYT·hourly reading Kuala Lumpur Federal Territory  Station Cheras, W.P. KUALA LUMPUR · 15:00 MYT  # Kuala Lumpur API today Unhealthy PM2.5 ≈ 69.1 µg/m³ · 24-hour average  Last 24 hours 132 – 158  Official Department of Environment readings, updated hourly. Each city is represented by a single monitoring station. For all 68 stations, see the official APIMS.  ## 3-day forecastForecast 1. Today 180 API Unhealthy PM2.5 ≈ 111.6 µg/m³ 2. Tomorrow 171 API Unhealthy PM2.5 ≈ 93.5 µg/m³ 3. 8 Oct 159 API Unhealthy PM2.5 ≈ 70.1 µg/m³  ## Daily history   The highest reading each day over the last 23 days.  6 Oct 158 High Average 146 · Low 132  14 Sep 0 – 200 6 Oct  ## Common questions: Kuala Lumpur API **What is the API in Kuala Lumpur right now?**: The API in Kuala Lumpur is 158 (Unhealthy) as of 15:00 MYT, 6 Oct, read at the Department of Environment's Cheras, W.P. KUALA LUMPUR station. Reduce outdoor activity. Sensitive groups should avoid it. Keep windows closed and wear an N95 if you must go out.  **Which station represents Kuala Lumpur?**: Kuala Lumpur's reading here comes from the Depa\n---\nKuala Lumpur AQI & Air Quality Today (API/IPU) https://hazemonitor.com/state/kuala-lumpur 4 days ago\nCompare Kuala Lumpur AQI and air quality with official DOE API/IPU readings, observation times, haze categories and station details. … Kuala Lumpur air quality today. Kualiti udara Kuala Lumpur hari ini.  Malaysia›Kuala Lumpur  # Kuala Lumpur air quality today  Kualiti udara Kuala Lumpur hari ini · Indeks Pencemaran Udara (IPU) mengikut stesen  Highest eligible station · Cheras  US AQI · PM2.5  143 Unhealthy for Sensitive Groups  Highest official DOE API: 123  Calculated from DOE’s rounded PM2.5 API using a 24-hour average and US AQI breakpoints. Not an official all-pollutant US AQI or real-time NowCast. Calculation details  # Kuala Lumpur air quality today ## Official DOE API across Kuala Lumpur Keadaan semasa di seluruh Kuala Lumpur  2 of 2 DOE stations in Kuala Lumpur are reporting as of 08:00 MYT, 12 Oct 2026. The highest Air Pollutant Index is 123 (Unhealthy) at Cheras; 1 station is unhealthy or worse.    2 daripada 2 stesen JAS di Kuala Lumpur melaporkan bacaan setakat 08:00 MYT, 12 Oct 2026. Bacaan IPU tertinggi ialah 123 (Tidak Sihat) di Cheras; 1 stesen tidak sihat atau lebih teruk.  **Stations reporting**: **2** of 2 **GoodBaik**: **0** **ModerateSederhana**: **1** **UnhealthyTidak Sihat**: **1** **Very UnhealthySangat Tidak Sihat**: **0** **HazardousBerbahaya**: **0**  Latest observation 08:00 MYT, 12 Oct 2026. Source: Department of Environment Malaysia.  ## US AQI (PM2.5) by station in Kuala Lumpur Semua stesen JAS di Kuala Lumpur  1. Cheras air quality Cheras, W.\n---\nHaze in Kuala Lumpur Today: Live Air Quality and AQI https://hazenow.app/malaysia/kuala-lumpur 0 days ago\nKuala Lumpur, Malaysia haze now: live air quality (US AQI) from the nearest monitor where there is one, the last 24 hours and what to do about it, with advice for kids and the elderly.  Kuala Lumpur, Malaysia haze now: live air quality (US AQI) from the nearest monitor where there is one, the last 24 hours and what to do about it, with advice for kids and the elderly.  Right now  Unhealthy  165  US AQI · measured  # Kuala Lumpur haze now: air quality today ## More detail ## Where the haze is coming from  ### When will it clear?  Latest hour: PM2.5 75 µg/m³ Kuala Lumpur, 0 km away  Nearest monitor  Kuala Lumpur  0 km  US scale (AQI, from PM2.5)  -  -  PM2.5, last 24 hours  Singapore by region  | Region | PM2.5 1-hr | PSI 24-hr | | --- | --- | --- |  ## More detail | Place | US AQI now | | --- | --- | | Kuala Lumpur Malaysia | 165 Unhealthy |    {\"name\":\"Haze in Kuala Lumpur Today: Live Air Quality and AQI | Haze Now\",\"abstract\":\"Kuala Lumpur, Malaysia, 16 Oct 2026, 5:00 pm local time (UTC+8): US AQI 165 (Unhealthy), measured at Kuala Lumpur (0 km away). US EPA advice: everyone, reduce prolonged or heavy exertion; sensitive groups, avoid prolonged or heavy exertion.\"}  {\"name\":\"Haze readings for Kuala Lumpur, Malaysia\",\"isAccessibleForFree\":true,\"dateModified\":\"2026-10-16T17:00:00+08:00\",\"temporalCoverage\":\"2026-10-15T17:00:00+08:00/2026-10-16T17:00:00+08:00\",\"description\":\"The latest US Air Quality Index (US EPA scale, from PM2.5) for Kuala Lumpur, Malaysia, measured at the ne\n---\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01LvgCm67DhYpFXTY8bCbC7i",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS/QYKEAgSGAI4AUIIdGhpbmtpbmcSDMC4Tt2i2Pt0SBSUexoMI07dAYCLYS7S7BvLIjD8q6jtpjlJqYYn6Mf72pB5c7c4Ibvf4yuaoAmAZs/lJJEcvkyRnIAoKuD44ylt6oAqmgbRnXZQtai/b5pWCK5mGS/zl2641Vc/Gq35Qlp/BMeyxd6REJua66c00oi5c+JY0KGExYIQvxajWMKWPgKoC8P/Gzbv1ivnLxU2itTu8HdMsmspBM/2a5noDZQOwmLliNxqoDAMDMYofIfz6ygFm/qRCcpTsga+8erStk3/+YiPYyu+fE6NnHKT5wT6lt8iyrtDcGmVkVbbg882e0ynJFm4ehAsADSwofw4kndiWCCFh/Nh3dhHBaE8n1FCkZaVS4WRcGVCNhgek8TroLEeKUOciwZ0BBw/3sCsoEE7NbK6wbAujWiV6f7JF4294QRFvQ7/wdaeZer6vVL03gQ9290hA3o6cUows1WFbCwKhQjkXkjQHZkbunqajyS0JG7y3RWY67UFy18mOMD3C2zLdeRSHZBmLDDYG9fZ8xM6fFzXqamBUrNnsnVIewX540JWL2NLI9ISPMXbyarLqmg/U49dfmEFkGWmuKElkL/7Z92roFrkGYspt8zdUtq9DBNzm92BYEulfiimftYXhQ5BTVcuXBSrAB/kRyvDyDG4uxD83bHaoz9ItYJ0LSK+G6jZtJS06wFY8rOV0H27vRE9TDFmaxbh0cldHydGi5CQp56QQ3tz1TO5On5ErwL64V94yuKzWMPU0DSsr9AxLrozeaXxDzcqsw358n7f7jl3LFCJopvMSE8AY3bZvJa30HRGQmi2FhCoOQSeE9m4OkCV/eCRB6o7fGxu75dcCgxpbo+xWarifQp/Xa3zyEJQ9rTHbcq481v5tLC9ujBjdy+EUlceOfGFrSpaNmCbgC0fN/oj2N8K/FJm/b5HQZviVkNipaLTQmYFN8AVNpxwO3tPWBFjLqzujolqTLZbJNCxf9ANvBeEB0nU6WOJf6WY1Yo0lG21mYUiVWbcojNN7T+bh4IATJVeR3+yggMYfaXR/h9UHB2o6VDkQJp8nZGsYnH8Ml15YKYGUDtYXYwQpR/Sn6k/iOAIbNmJEsOFOuxxdL3ICFic12T4Z7fWmYkZDrB04LZWfLZN8irCkWKMEeTlVq7ioTlfTr/mh4VL7xgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "Yes, the haze in KL is bad right now. The latest reports I found are from 16 October 2026, and they put the air quality in the \"Unhealthy\" range.\n\n**Official readings (Department of Environment API)**\n- At 9am, Batu Muda was at 170 and Cheras at 168. Putrajaya was at 174.\n- By about 5:30pm, Batu Muda and Cheras were both at 163, and Putrajaya was at 170.\n- An API of 101–200 is \"Unhealthy\", 201–300 is \"Very Unhealthy\", and above 300 is \"Hazardous\".\n\n**Elsewhere in Malaysia**\n- Pasir Gudang and Larkin in Johor reached \"Very Unhealthy\" levels (API 202–207).\n- Selangor was also hit hard. Johan Setia was at 184 and Klang at 176.\n- Nationwide, around 29–30 areas were unhealthy. Only Sarikei in Sarawak reported good air.\n\n**Other readings**\n- A US AQI monitor in KL read 165 at 5pm, which is also \"Unhealthy\".\n- Readings had improved slightly from the previous day, but they are still not good.\n\n**What to do**\n- Limit prolonged outdoor activity, especially children, older people, and anyone with asthma or heart or lung conditions.\n- Keep windows closed and use air-con or an air purifier if you have one.\n- Wear a well-fitted N95 mask if you have to go out. Surgical masks don't filter fine particles well.\n\nReadings update hourly and I can't pull live data, so check the Department of Environment's APIMS site, or an app like semakapi.my or IQAir, for the current number.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 32322,
+   "output_tokens": 967,
+   "output_tokens_details": {
+    "thinking_tokens": 92
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
