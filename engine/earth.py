@@ -64,6 +64,8 @@ SATELLITES = (("suomi-npp", "Suomi NPP", 37849), ("noaa-20", "NOAA-20", 43013), 
               ("terra", "Terra", 25994), ("sentinel-5p", "Sentinel-5P", 42969), ("himawari-9", "Himawari-9", 41836), ("iss", "ISS", 25544))
 ADS = "https://ads.atmosphere.copernicus.eu/api"
 ADS_DATASET = "cams-global-atmospheric-composition-forecasts"
+ADS_WAIT_S = 360               # how long 1 hourly run waits for the Data Store; a job not done by then is asked again the next hour
+CAMS_COARSE_DEG = 1.2          # the 3-hour frames of the global model, coarser than its own 0.4 degrees, so the feed stays small
 KIND_WORD = {"measured": "Measured", "from_space": "From space", "estimated": "Estimated"}
 
 # the pictures, loaded by the browser straight from NASA (docs/TERMS-CHECK-EARTH-2026-10-16.md, section 1)
@@ -456,33 +458,67 @@ def ads_request(now):
                  "leadtime_hour": [str(h) for h in range(0, 121, FRAME_STEP_H)], "type": ["forecast"], "data_format": "grib"}
 
 
-def fetch_ads(now, cache, key):
-    """CAMS global PM2.5 through the Atmosphere Data Store's REST API (the same calls as ECMWF's datastores client): submit, wait,
-    download; kept in the cache for its run. (run, {valid time UTC: (spec, µg/m³ values)})."""
+class Pending(FetchError):
+    """The Data Store has the request but has not finished it: asked again the next hour."""
+
+
+def cams_dir(cache):
+    """Where the global model's files are kept, 1 per run: CAMS_CACHE (the feed Action keeps it per run), else the engine's cache."""
+    return os.environ.get("CAMS_CACHE") or os.path.join(cache, "cams")
+
+
+def ads_run(now):
+    """The run of the global model this hour asks for, as its cache key: '2026101600'."""
+    return f"{ads_request(now)[0]:%Y%m%d%H}"
+
+
+def fetch_ads(now, cache, key, out):
+    """CAMS global PM2.5 through the Atmosphere Data Store's REST API (the same calls as ECMWF's datastores client): (run,
+    {valid time UTC: (spec, µg/m³)}). A run's file is fetched once and kept (cams_dir). A job waits at most ADS_WAIT_S in 1 hourly
+    run, so the feed is never held up: its id is kept in the feed's earth/ads-job.json and asked again the next hour; meanwhile the
+    newest run already kept is used, else Pending (the regional grid, said so)."""
     run, req = ads_request(now)
-    p = os.path.join(cache, f"cams-{run:%Y%m%d%H}.grib")
+    cdir = cams_dir(cache)
+    p = os.path.join(cdir, f"cams-{run:%Y%m%d%H}.grib")
+    jobfile = os.path.join(out, "earth", "ads-job.json")
     if not os.path.exists(p):
         hdr = {"PRIVATE-TOKEN": key, "User-Agent": "planetzero", "Content-Type": "application/json"}
-        job = transport.post_json(f"{ADS}/retrieve/v1/processes/{ADS_DATASET}/execution", {"inputs": req}, hdr)
-        jid = job.get("jobID")
-        if not jid:
-            raise FetchError("the Atmosphere Data Store did not take the request")
-        for _ in range(60):   # up to about 20 minutes, within the Action's own limit
+        job = read_json(jobfile)
+        if job and job.get("run") == stamp(run) and job.get("job"):
+            jid = job["job"]
+        else:
+            jid = transport.post_json(f"{ADS}/retrieve/v1/processes/{ADS_DATASET}/execution", {"inputs": req}, hdr).get("jobID")
+            if not jid:
+                raise FetchError("the Atmosphere Data Store did not take the request")
+            write_json(jobfile, {"run": stamp(run), "job": jid, "asked_at": stamp(now),
+                                 "note": "A request to the Copernicus Atmosphere Data Store for the global smoke model's run, not yet finished: asked again next hour."})
+        deadline = time.monotonic() + ADS_WAIT_S
+        while True:
             st = get_json(f"{ADS}/retrieve/v1/jobs/{jid}", hdr).get("status")
             if st == "successful":
                 break
             if st in ("failed", "dismissed", "rejected"):
+                os.remove(jobfile)
                 raise FetchError(f"the Atmosphere Data Store's job {st}")
-            pause(20)
-        else:
-            raise FetchError("the Atmosphere Data Store's job did not finish in 20 minutes")
+            if time.monotonic() >= deadline:
+                kept = sorted(f for f in os.listdir(cdir) if f.startswith("cams-") and f.endswith(".grib")) if os.path.isdir(cdir) else []
+                if kept:   # the newest run already here, while the next one is made
+                    older = dt.datetime.strptime(kept[-1][5:15], "%Y%m%d%H").replace(tzinfo=UTC)
+                    return older, cams_frames(open(os.path.join(cdir, kept[-1]), "rb").read(), older)
+                raise Pending(f"the global model of {run:%d %b, %H}z is still being made at the Data Store (asked at {clock(now)}); the next hourly run asks again")
+            pause(15)
         href = ((get_json(f"{ADS}/retrieve/v1/jobs/{jid}/results", hdr).get("asset") or {}).get("value") or {}).get("href")
         if not href:
             raise FetchError("the Atmosphere Data Store gave no file")
-        os.makedirs(cache, exist_ok=True)
+        os.makedirs(cdir, exist_ok=True)
         with open(p + ".tmp", "wb") as f:
             f.write(get_bytes(href, timeout=600))
         os.replace(p + ".tmp", p)
+        if os.path.exists(jobfile):
+            os.remove(jobfile)
+        for old in os.listdir(cdir):   # earlier runs' files
+            if old.startswith("cams-") and old != os.path.basename(p):
+                os.remove(os.path.join(cdir, old))
     return run, cams_frames(open(p, "rb").read(), run)
 
 
@@ -514,8 +550,8 @@ def cams_frames_eccodes(blob, run):
             eccodes.codes_release(h)
         if la1 > la2:
             vals = [v for r in range(nj - 1, -1, -1) for v in vals[r * ni:(r + 1) * ni]]
-        spec = {"lat0": min(la1, la2), "lon0": lo1, "step": di, "nlat": nj, "nlon": ni}
-        out[run + dt.timedelta(hours=step)] = (spec, [round(v * 1e9, 1) for v in vals])
+        spec = {"lat0": round(min(la1, la2), 6), "lon0": round(lo1, 6), "step": round(di, 6), "nlat": nj, "nlon": ni}
+        out[run + dt.timedelta(hours=step)] = (spec, [round(float(v) * 1e9, 1) for v in vals])
         i += n
     return out
 
@@ -524,7 +560,7 @@ def cams_frames_grib2(blob, run):
     out = {}
     for m in grib2.messages(blob):
         g = m["grid"]
-        spec = {"lat0": g["lat0"], "lon0": g["lo1"], "step": g["di"], "nlat": g["nj"], "nlon": g["ni"]}
+        spec = {"lat0": round(g["lat0"], 6), "lon0": round(g["lo1"], 6), "step": round(g["di"], 6), "nlat": g["nj"], "nlon": g["ni"]}
         out[run + dt.timedelta(hours=m["product"]["hours"])] = (spec, [None if v is None else round(v * 1e9, 1) for v in m["values"]])
     return out
 
@@ -546,6 +582,63 @@ def regional_where_finer(global_spec, gvals, region_spec, rvals):
                 if v is not None:
                     out[i * global_spec["nlon"] + j] = v
     return out
+
+
+def block_mean(spec, values, k):
+    """A grid k times coarser: the mean of each k by k block of cells (gaps left out), whole blocks only."""
+    nlat, nlon = spec["nlat"] // k, spec["nlon"] // k
+    out = []
+    for i in range(nlat):
+        for j in range(nlon):
+            got = [values[(i * k + a) * spec["nlon"] + j * k + b] for a in range(k) for b in range(k)]
+            got = [v for v in got if v is not None]
+            out.append(sum(got) / len(got) if got else None)
+    return ({"lat0": round(spec["lat0"] + (k - 1) * spec["step"] / 2, 6), "lon0": round(spec["lon0"] + (k - 1) * spec["step"] / 2, 6),
+             "step": round(spec["step"] * k, 6), "nlat": nlat, "nlon": nlon}, out)
+
+
+def whole(values):
+    return [None if v is None else int(round(v)) for v in values]
+
+
+def write_global_frames(sdir, now, frames, regional, keep_from, source):
+    """The global model (part 87): the step nearest now at the model's own cells in now.json (whole µg/m³), rewritten only when the
+    step changes; every 3-hour step a frame at CAMS_COARSE_DEG, a past one written once, ahead ones with every new run; the
+    regional grid laid in where it is finer. Returns (the now file, the frame list, its cell size, its time) or None."""
+    import grid_spec
+    os.makedirs(sdir, exist_ok=True)
+    by = {t.astimezone(TZ8): v for t, v in frames.items()}
+    if not by:
+        return None
+    nearest = min(by, key=lambda t: (abs((t - now).total_seconds()), t))
+    if abs((nearest - now).total_seconds()) > 1.5 * 3600:
+        return None
+    spec, vals = by[nearest]
+    if nearest in regional:
+        vals = regional_where_finer(spec, vals, grid_spec.BOX, regional[nearest])
+    write_json(os.path.join(sdir, "now.json"), {"at": stamp(nearest), "grid": spec, "values": whole(vals), "unit": "µg/m³", "kind": "estimated",
+                                                "source": source, "credits": credit_block([source], now)})
+    k = max(1, round(CAMS_COARSE_DEG / spec["step"]))
+    for t, (sp, vs) in by.items():
+        p = os.path.join(sdir, f"{hour_name(t)}.json")
+        if t < now - dt.timedelta(days=PAST_DAYS) or (t < nearest and os.path.exists(p)):
+            continue
+        cs, cv = block_mean(sp, vs, k) if k > 1 else (sp, vs)
+        if t in regional:
+            cv = regional_where_finer(cs, cv, grid_spec.BOX, regional[t])
+        write_json(p, {"at": stamp(t), "grid": cs, "values": whole(cv), "unit": "µg/m³", "kind": "estimated", "source": source,
+                       "credits": credit_block([source], now)})
+    prune(sdir, keep_from)
+    listed = [{"at": stamp(nearest), "file": "earth/smoke/now.json", "when": "now"}]
+    for f in sorted(os.listdir(sdir)):
+        stem = f.split(".")[0]
+        if len(stem) != 13:
+            continue
+        t = from_name(stem)
+        if t != nearest:
+            listed.append({"at": stamp(t), "file": f"earth/smoke/{f}", "when": "past" if t < nearest else "ahead"})
+    listed.sort(key=lambda x: x["at"])
+    return "earth/smoke/now.json", listed, spec["step"], nearest
 
 
 # ---------------------------------------------------------------- the build
@@ -592,7 +685,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     if grid_day is not None:
         jobs["smoke_regional"] = lambda: grid_day(now, os.path.dirname(cache))
     if ads_key:
-        jobs["smoke_global"] = lambda: fetch_ads(now, cache, ads_key)
+        jobs["smoke_global"] = lambda: fetch_ads(now, cache, ads_key, out)
     got, took = {}, {}
     with cf.ThreadPoolExecutor(max_workers=len(jobs)) as pool:
         futs = {pool.submit(lambda f=fn: (time.monotonic(), f())): name for name, fn in jobs.items()}
@@ -616,8 +709,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         run, frames = got["smoke_global"]
         reg_now = regional_frames(reg, now) if reg is not None and not isinstance(reg, Exception) else {}
         smoke.update(source="CAMS-ADS", credit=credits.CREDITS["sources"]["CAMS-ADS"]["short"], scope="global", made_at=stamp(run), fetched_at=stamp(now))
-        files = write_smoke_frames(sdir, now, {t.astimezone(TZ8): v for t, v in frames.items()},
-                                   {dt.datetime.fromisoformat(h).replace(tzinfo=TZ8): v for h, v in reg_now.items()}, keep_from, "CAMS-ADS")
+        files = write_global_frames(sdir, now, frames, {dt.datetime.fromisoformat(h).replace(tzinfo=TZ8): v for h, v in reg_now.items()}, keep_from, "CAMS-ADS")
     elif reg is not None and not isinstance(reg, Exception):
         import grid_spec
         hourly = regional_frames(reg, now)
@@ -625,14 +717,19 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         smoke.update(source="CAMS", via="Open-Meteo", credit=credits.CREDITS["sources"]["CAMS"]["short"], scope="regional",
                      scope_note="Southeast Asia only for now: the global model needs a key we do not have yet.", made_at=stamp(now), fetched_at=stamp(now))
         if ads_key:
-            smoke["scope_note"] = f"Southeast Asia only this hour: the global model did not arrive ({str(got['smoke_global'])[:120]})."
+            g = got.get("smoke_global")
+            smoke["scope_note"] = (f"Southeast Asia only until the global model arrives: {g}." if isinstance(g, Pending)
+                                   else f"Southeast Asia only this hour: the global model did not arrive ({str(g)[:120]}).")
         files = write_smoke_frames(sdir, now, frames, {}, keep_from, "CAMS")
     else:
         why = reg if isinstance(reg, Exception) else "no grid"
         files = None
         smoke = missing({**smoke, "source": "CAMS", "credit": credits.CREDITS["sources"]["CAMS"]["short"], "made_at": stamp(now), "fetched_at": stamp(now)},
                         f"The smoke model did not answer at {clock(now)} ({str(why)[:120]}).")
-    if files:
+    if files and len(files) == 4:   # the global model: its now.json and 3-hour frames
+        now_file, frame_list, cell, at = files
+        smoke.update(status="ok", now=now_file, covers={"at": stamp(at)}, frames=frame_list, cell_deg=cell, cell_km=round(cell * 111.2))
+    elif files:
         now_name, frame_list, cell = files
         smoke.update(status="ok", now=f"earth/smoke/{now_name}.json", covers={"at": stamp(from_name(now_name))}, frames=frame_list,
                      cell_deg=cell, cell_km=round(cell * 111.2))
@@ -782,8 +879,8 @@ def write_smoke_frames(sdir, now, frames, regional, keep_from, source):
         t = from_name(stem)
         if t.hour % FRAME_STEP_H == 0 or t == hour:
             listed.append({"at": stamp(t), "file": f"earth/smoke/{f}", "when": "now" if t == hour else ("past" if t < hour else "ahead")})
-        elif t < hour:   # an hour that is neither a mark nor now: not listed, removed
-            os.remove(os.path.join(sdir, f))
+        elif t < hour and (read_json(os.path.join(sdir, f)) or {}).get("source") != "CAMS-ADS":   # an hour neither a mark nor now: removed
+            os.remove(os.path.join(sdir, f))                                                       # (the global model's 3-hour steps are kept)
     return hour_name(hour), listed, cell
 
 
@@ -852,7 +949,11 @@ def main():
     ap.add_argument("--at", help="build as of this local time")
     ap.add_argument("--offline", action="store_true", help="replay the answers recorded on 16 Oct 2026 (8:49 am)")
     ap.add_argument("--cache", default=os.path.join(ROOT, ".cache"))
+    ap.add_argument("--ads-run", action="store_true", help="print the run of the global smoke model this hour asks for (the Action's cache key), and stop")
     a = ap.parse_args()
+    if a.ads_run:
+        print(ads_run(dt.datetime.now(TZ8)))
+        return
     import envfile
     envfile.load_env()
     import build_feed

@@ -71,15 +71,37 @@ jobs:
         if: steps.due.outputs.due == 'yes'
         run: python engine/build_feed.py --out _feed --cache .cache
 
+      - name: Which run of the global smoke model this hour asks for (it has its own cache, 1 file a run; session 7bc, part 87)
+        if: steps.due.outputs.due == 'yes'
+        id: cams
+        run: echo "run=$(python3 engine/earth.py --ads-run)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore the global smoke model's file of that run, or the newest kept while it is made
+        if: steps.due.outputs.due == 'yes'
+        id: cams-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .cams
+          key: cams-${{ steps.cams.outputs.run }}
+          restore-keys: cams-
+
       - name: Build Earth (its own step after the feed; if it fails, the feed is still published)
         if: steps.due.outputs.due == 'yes'
         continue-on-error: true
         timeout-minutes: 12
         env:
           ADS_KEY: ${{ secrets.ADS_KEY }}
+          CAMS_CACHE: .cams
         run: |
           if [ -n "$ADS_KEY" ]; then pip install -q eccodes; fi
           python engine/earth.py --out _feed --cache .cache
+
+      - name: Keep the global smoke model's file for its run (once it has arrived)
+        if: steps.due.outputs.due == 'yes' && steps.cams-cache.outputs.cache-hit != 'true' && hashFiles(format('.cams/cams-{0}.grib', steps.cams.outputs.run)) != ''
+        uses: actions/cache/save@v6
+        with:
+          path: .cams
+          key: cams-${{ steps.cams.outputs.run }}
 
       - name: On the 1st of a month, start the feed branch fresh (1 orphan commit with every file; session 7bc, part 86)
         if: steps.due.outputs.due == 'yes'
