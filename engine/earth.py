@@ -77,12 +77,17 @@ PICTURES = (
      "matrix": "GoogleMapsCompatible_Level9", "max_level": 9, "ext": "jpg", "metres": 375,
      "what": "The planet as NOAA-20, Suomi NPP and NOAA-21 saw it the day before: clouds, deserts and the haze itself. Blue Marble where none saw anything.",
      "colours": "True colour.", "satellite": "NOAA-20, Suomi NPP, NOAA-21, VIIRS"},
-    {"id": "smoke_space", "name": "Smoke from space", "layer": "MODIS_Terra_Aerosol", "matrix": "GoogleMapsCompatible_Level6", "max_level": 6,
-     "ext": "png", "metres": 10000, "what": "How much light the smoke and dust in the air block, seen from above. Gaps are where the satellite did not pass.",
-     "colours": "Pale yellow (a little) to dark red (a lot), as NASA draws it.", "satellite": "Terra, MODIS"},
-    {"id": "co", "name": "Carbon monoxide", "layer": "AIRS_L2_Carbon_Monoxide_500hPa_Volume_Mixing_Ratio_Day", "matrix": "GoogleMapsCompatible_Level6",
-     "max_level": 6, "ext": "png", "metres": 45000, "what": "A gas from burning, about 5 km up.",
-     "colours": "Pale yellow (a little) through orange and red to purple (a lot), as NASA draws it.", "satellite": "Aqua, AIRS"},
+    # session 7bc, part 92: VIIRS Deep Blue from 3 satellites over 3 days, newest on top (was MODIS on Terra, 1 day: 17% of the planet)
+    {"id": "smoke_space", "name": "Smoke from space", "layer": "VIIRS_NOAA20_AOD_Deep_Blue_Land_Ocean",
+     "layers": ["VIIRS_NOAA20_AOD_Deep_Blue_Land_Ocean", "VIIRS_SNPP_AOD_Deep_Blue_Land_Ocean", "VIIRS_NOAA21_AOD_Deep_Blue_Land_Ocean"], "days": 3,
+     "colormap": "earth/colormaps/aod.json", "matrix": "GoogleMapsCompatible_Level6", "max_level": 6, "ext": "png", "metres": 6000,
+     "what": "How much light the smoke and dust in the air block, seen from above by 3 satellites over 3 days. No colour where cloud hid the ground.",
+     "colours": "Pale yellow (a little), orange, dark red (a lot), as NASA draws it; clear where there is little.", "satellite": "NOAA-20, Suomi NPP, NOAA-21, VIIRS Deep Blue"},
+    # 6 days of day passes, newest on top: carbon monoxide lasts weeks in the air, so a few days make 1 fair picture (99% between 60 S and 60 N)
+    {"id": "co", "name": "Carbon monoxide", "layer": "AIRS_L2_Carbon_Monoxide_500hPa_Volume_Mixing_Ratio_Day", "days": 6,
+     "colormap": "earth/colormaps/co.json", "matrix": "GoogleMapsCompatible_Level6",
+     "max_level": 6, "ext": "png", "metres": 45000, "what": "A gas from burning, about 5 km up, from 6 days of passes.",
+     "colours": "Pale yellow (a little), orange, red, purple (a lot), as NASA draws it; clear where there is little.", "satellite": "Aqua, AIRS"},
 )
 
 
@@ -825,8 +830,11 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         layers.append({"id": pic["id"], "name": pic["name"], "kind": "from_space", "unit": "picture", "picture": True, "status": "ok", "source": "GIBS",
                        "credit": credits.CREDITS["sources"]["GIBS"]["short"], "words": "yesterday" if pic["id"] == "real_earth" else "picture",
                        "what": pic["what"], "colours": pic["colours"], "updates": "Once a day, the day before", "numbers": "Picture only",
-                       "covers": {"date": day}, "made_at": day, "satellite": pic["satellite"], "metres": pic["metres"],
+                       "covers": {"date": day, **({"from": (now - dt.timedelta(days=pic["days"])).strftime("%Y-%m-%d")} if pic.get("days", 1) > 1 else {})},
+                       "made_at": day, "satellite": pic["satellite"], "metres": pic["metres"],
                        "gibs": {"layer": pic["layer"], "fill": pic.get("fill"), **({"fills": pic["fills"]} if pic.get("fills") else {}),
+                                **({"layers": pic["layers"]} if pic.get("layers") else {}), **({"days": pic["days"]} if pic.get("days") else {}),
+                                **({"colormap": pic["colormap"]} if pic.get("colormap") else {}),
                                 "matrix": pic["matrix"], "max_level": pic["max_level"], "ext": pic["ext"],
                                 "wmts": GIBS_WMTS, "wms": GIBS_WMS}})
 
