@@ -97,7 +97,7 @@ def singapore_place(p, nea, now):
     return hour, index
 
 
-def malaysia_place(p, doe, oaq, now):
+def malaysia_place(p, doe, oaq, now, model=None):
     cut = now.strftime("%Y-%m-%dT%H:%M")
     if isinstance(doe, Exception):
         index = missing("DOE", f"DOE did not answer at {clock(now)}.", now)
@@ -110,7 +110,7 @@ def malaysia_place(p, doe, oaq, now):
     if isinstance(oaq, Exception):
         return {"status": "missing", "source": "OpenAQ", "reason": f"OpenAQ, which carries the community sensors, did not answer at {clock(now)}.",
                 "checked_at": stamp(now)}, index, []
-    hour, nearby = hour_rule.choose_hour(p, oaq[0], cut)
+    hour, nearby = hour_rule.choose_hour(p, oaq[0], cut, model=model)
     return hour, index, nearby
 
 
@@ -616,7 +616,8 @@ def finish_build(out, at, now, places, got, status, quiet, logger, t0=None):
             hour, index = singapore_place(p, got["NEA"], now)
             nearby, rule = [], "nea_region"
         else:
-            hour, index, nearby = malaysia_place(p, got["DOE"], got["OpenAQ"], now)
+            m = model_row(p, got["CAMS"], now)
+            hour, index, nearby = malaysia_place(p, got["DOE"], got["OpenAQ"], now, model=m.get("value") if m.get("status") == "ok" else None)
             rule = "sensor_within_10km"
         out_places.append({"id": p["id"], "country": p["country"], "name": p["name"], "short": p["short"], "region": p["region"], "lat": p["lat"],
                            "lon": p["lon"], "aliases": p["aliases"], "lead": "hour" if hour["status"] == "ok" else "index", "hour_rule": rule,

@@ -47,6 +47,9 @@ REPLAY_AT = "2026-10-16T08:49+08:00"
 RECORDED = os.path.join(HERE, "tests", "recorded_earth")
 
 LATE_H, DROP_H = 3, 8          # invariant 4
+SUSPECT_OVER = 55              # µg/m³: a PM2.5 of 0 under smoke this thick is a broken sensor, not clean air (session 7bc, part 82)
+SUSPECT_MAX = 1000             # µg/m³: no real hour reads more
+SUSPECT_KM = 50
 PAST_DAYS = 7
 FRAME_STEP_H = 3               # smoke frames every 3 hours, past and ahead; the hour itself in smoke-now
 GFS = "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_1p00.pl"
@@ -310,6 +313,63 @@ def openaq_monitors(latest, locations, now):
     return rows, left
 
 
+def grid_at(spec, values, lat, lon):
+    """A grid's value at a point, bilinear between its 4 nearest cells (as the page samples it); None outside it or next to a gap."""
+    fi = (lat - spec["lat0"]) / spec["step"]
+    fj = ((lon - spec["lon0"]) % 360) / spec["step"]
+    i, j = math.floor(fi), math.floor(fj)
+    if fi < 0 or fi > spec["nlat"] - 1:
+        return None
+    whole = abs(spec["nlon"] * spec["step"] - 360) < 1e-6
+
+    def cell(a, b):
+        if b >= spec["nlon"]:
+            b = b - spec["nlon"] if whole else -1
+        if b < 0:
+            return None
+        return values[min(a, spec["nlat"] - 1) * spec["nlon"] + b]
+    v = [cell(i, j), cell(i, j + 1), cell(i + 1, j), cell(i + 1, j + 1)]
+    if any(x is None for x in v):
+        return None
+    t, u = fi - i, fj - j
+    return v[0] * (1 - t) * (1 - u) + v[1] * (1 - t) * u + v[2] * t * (1 - u) + v[3] * t * u
+
+
+def suspects(rows, smoke=None):
+    """[True where a reading disagrees with everything around it] (Cowork's rule, session 7bc): a PM2.5 of 0 where the model at
+    that place, or another monitor within 50 km, says over 55 µg/m³; or any reading over 1,000. 0 alone is not the test: most
+    zeros are in clean places, where 0 is plausible. `smoke` is the hour's model grid (spec, values), or None."""
+    pm = [r["value"] if r["unit"] == "µg/m³" else r.get("pm25_24h") for r in rows]
+    cells = {}
+    for k, r in enumerate(rows):
+        cells.setdefault((math.floor(r["lat"]), math.floor(r["lon"])), []).append(k)
+    out = []
+    for k, r in enumerate(rows):
+        v = pm[k]
+        if v is None or r["unit"] != "µg/m³":
+            out.append(False)
+            continue
+        if v > SUSPECT_MAX:
+            out.append(True)
+            continue
+        if v > 0:
+            out.append(False)
+            continue
+        model = grid_at(*smoke, r["lat"], r["lon"]) if smoke else None
+        if model is not None and model > SUSPECT_OVER:
+            out.append(True)
+            continue
+        reach = math.ceil(0.5 / max(0.05, math.cos(math.radians(r["lat"]))))
+        smoky = False
+        for a in range(math.floor(r["lat"]) - 1, math.floor(r["lat"]) + 2):
+            for b in range(math.floor(r["lon"]) - reach, math.floor(r["lon"]) + reach + 1):
+                for o in cells.get((a, b), ()):
+                    if o != k and pm[o] is not None and SUSPECT_OVER < pm[o] <= SUSPECT_MAX and km(r["lat"], r["lon"], rows[o]["lat"], rows[o]["lon"]) <= SUSPECT_KM:
+                        smoky = True
+        out.append(smoky)
+    return out
+
+
 def agency_monitors(now_json, now):
     """NEA's 5 regions (1-hour PM2.5) and DOE's monitors (24-hour API, as the Now page shows it) from this run's now.json."""
     rows = []
@@ -348,12 +408,13 @@ def monitor_file(rows, now, left, status):
         band = bands.band(r["value"], "hourly_pm25" if r["unit"] == "µg/m³" else "api")
         out.append([round2(r["lat"]), round2(r["lon"]), r["value"], units.index(r["unit"]), r["at"][:16], 1 if r["late"] else 0,
                     idx(provs, r["provider"]), idx(owners, r["owner"]), idx(lics, r["licence"]), idx(names, r["name"]), 1 if r["monitor"] else 0,
-                    band, r.get("pm25_24h")])
+                    band, r.get("pm25_24h"), 1 if r.get("suspect") else 0])
     return {"schema_version": "1", "generated_at": stamp(now), "status": status,
-            "columns": ["lat", "lon", "value", "unit", "at", "late", "provider", "owner", "licence", "name", "government", "band", "pm25_24h"],
+            "columns": ["lat", "lon", "value", "unit", "at", "late", "provider", "owner", "licence", "name", "government", "band", "pm25_24h", "suspect"],
             "units": units, "windows": {"µg/m³": "1h or the latest reading", "API": "24h"},
             "providers": provs, "owners": owners, "licences": lics, "names": names, "rows": out, "left_out": left,
-            "rule": f"Late after {LATE_H} hours; left out after {DROP_H}. OpenAQ's locations only under the licences that allow showing them; never IQAir's."}
+            "rule": f"Late after {LATE_H} hours; left out after {DROP_H}. OpenAQ's locations only under the licences that allow showing them; never IQAir's. "
+                    f"Suspect: a PM2.5 of 0 where the model or a monitor within {SUSPECT_KM} km says over {SUSPECT_OVER} µg/m³, or any reading over {SUSPECT_MAX:,}."}
 
 
 # ---------------------------------------------------------------- satellites: CelesTrak
@@ -626,11 +687,17 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         rows, left = openaq_monitors(*got["monitors"], now)
         rows, status = rows + agency, "ok"
     if rows:
+        hour_grid = None   # the model's hour, for the suspect rule
+        sm_now = read_json(os.path.join(out, smoke["now"])) if smoke.get("status") == "ok" and smoke.get("now") else None
+        if sm_now:
+            hour_grid = (sm_now["grid"], sm_now["values"])
+        for r, f in zip(rows, suspects(rows, hour_grid)):
+            r["suspect"] = f
         mf = monitor_file(rows, now, left, status)
         mf["credits"] = credit_block(["OpenAQ-world", "NEA", "DOE"], now)
         write_json(os.path.join(folder, "monitors.json"), mf)
         ats = sorted(r["at"] for r in rows)
-        mon.update(status="ok", file="earth/monitors.json", count=len(rows), late=sum(1 for r in rows if r["late"]), left_out=left,
+        mon.update(status="ok", file="earth/monitors.json", count=len(rows), late=sum(1 for r in rows if r["late"]), suspect=sum(1 for r in rows if r["suspect"]), left_out=left,
                    covers={"from": ats[0], "to": ats[-1]}, made_at=ats[-1], note="" if status == "ok" else status)
         layers.append(mon)
     else:
