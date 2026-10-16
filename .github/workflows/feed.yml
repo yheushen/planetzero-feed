@@ -22,7 +22,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # the feed (up to about 10 minutes when the day's globe grid is fetched), Earth (12 at most) and publishing: the job must outlast
+    # them all, or the hour's feed is lost (16 Oct, 3:30 pm: a 20-minute limit cancelled a run while Earth waited for the Data Store)
+    timeout-minutes: 28
     env:
       OPENAQ_KEY: ${{ secrets.OPENAQ_KEY }}
       FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}

@@ -64,7 +64,7 @@ SATELLITES = (("suomi-npp", "Suomi NPP", 37849), ("noaa-20", "NOAA-20", 43013), 
               ("terra", "Terra", 25994), ("sentinel-5p", "Sentinel-5P", 42969), ("himawari-9", "Himawari-9", 41836), ("iss", "ISS", 25544))
 ADS = "https://ads.atmosphere.copernicus.eu/api"
 ADS_DATASET = "cams-global-atmospheric-composition-forecasts"
-ADS_WAIT_S = 360               # how long 1 hourly run waits for the Data Store; a job not done by then is asked again the next hour
+ADS_WAIT_S = 240               # how long 1 hourly run waits for the Data Store; a job not done by then is asked again the next hour
 CAMS_COARSE_DEG = 1.2          # the 3-hour frames of the global model, coarser than its own 0.4 degrees, so the feed stays small
 KIND_WORD = {"measured": "Measured", "from_space": "From space", "estimated": "Estimated"}
 
