@@ -9,7 +9,8 @@ others, and Earth failing never touches now.json (the Action runs this as its ow
 
   smoke       estimated   CAMS PM2.5. Global at 0.4 degrees from the Copernicus Atmosphere Data Store when ADS_KEY is set (the
                           owner's free account); until then the regional 1 degree CAMS grid of grid.json, which says so.
-  wind        estimated   NOAA GFS 10 m wind, 1 degree, every 6 hours to 5 days, from NOMADS, read by grib2.py.
+  wind        estimated   NOAA GFS 10 m wind, 1 degree, every 3 hours to 5 days, from NOMADS, read by grib2.py (part 112); past
+                          frames every 3 hours for 24 hours, then every 6.
   fires       from space  NASA FIRMS VIIRS (Suomi NPP, NOAA-20), worldwide, the last 24 hours, as 0.1 degree cells with counts;
                           and each of the last 7 days, kept once.
   monitors    measured    OpenAQ's latest PM2.5 worldwide, only under the licences of sources.EARTH_LICENCES, never IQAir's;
@@ -55,8 +56,11 @@ SUSPECT_KM = 50
 PAST_DAYS = 7
 FRAME_STEP_H = 3               # smoke frames every 3 hours, past and ahead; the hour itself in smoke-now
 GFS = "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_1p00.pl"
-GFS_STEPS = tuple(range(0, 121, 6))
+GFS_STEP_H = 3                 # GFS at 1 degree gives a step every 3 hours to 5 days: the step at or before now is never over 3 hours old (part 112)
+GFS_STEPS = tuple(range(0, 121, GFS_STEP_H))   # 41 files a run (was every 6 hours, 21, and the wind 5 hours old at 1:25 am)
 GFS_READY_H = 3.5              # a GFS cycle reaches NOMADS about 3.5 hours after its time
+GFS_PAUSE_S = 0.6              # between NOMADS requests: under 100 a minute (NOMADS allows 120)
+WIND_THIN_H = 24               # past wind frames older than this keep every 6 hours (00, 06, 12, 18 UTC), so the feed stays near its size
 FIRMS = "https://firms.modaps.eosdis.nasa.gov/api/area/csv/"
 FIRMS_SATS = ("VIIRS_SNPP_NRT", "VIIRS_NOAA20_NRT", "VIIRS_NOAA21_NRT")
 FIRE_SATS = ("VIIRS_NOAA20_NRT", "VIIRS_SNPP_NRT", "VIIRS_NOAA21_NRT")   # the order of the `sats` bits: 1 NOAA-20, 2 Suomi NPP, 4 NOAA-21
@@ -182,7 +186,7 @@ def coarser(spec, u, v, k=2):
 
 def fetch_gfs(now, cache):
     """(run, {step: (spec, u, v)}) from the newest GFS cycle on NOMADS; decoded steps are kept in the cache for the run's 6 hours,
-    so each step is asked for once (NOMADS allows 120 hits a minute; a new run takes 21)."""
+    so each step is asked for once (NOMADS allows 120 hits a minute; a new run takes 41, GFS_PAUSE_S apart)."""
     os.makedirs(cache, exist_ok=True)
     errors = []
     for run in gfs_runs(now):
@@ -202,7 +206,7 @@ def fetch_gfs(now, cache):
                 continue    # a step not out yet: the frames ahead stop earlier, and the next run asks again
             frames[step] = (spec, u, v)
             write_json(p, {"grid": spec, "u": u, "v": v})
-            pause(0.6)
+            pause(GFS_PAUSE_S)
         if frames:
             for old in os.listdir(cache):   # earlier runs' steps
                 if old.startswith("gfs-") and not old.startswith(f"gfs-{run:%Y%m%d%H}"):
@@ -933,7 +937,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     wind = {"id": "wind", "name": "Wind", "kind": "estimated", "unit": "km/h", "window": "at the time shown", "source": "GFS", "words": "white",
             "credit": credits.CREDITS["sources"]["GFS"]["short"], "what": "Wind 10 m above the ground. It shows where the smoke is going.",
             "colours": "White lines moving with the wind on Real Earth; grey blue on Plain. Faster and brighter where stronger.",
-            "updates": "Every 6 hours, and 5 days ahead", "numbers": "Yes: tap, or ask your AI", "fetched_at": stamp(now)}
+            "updates": f"Every {GFS_STEP_H} hours, and 5 days ahead", "step_hours": GFS_STEP_H, "numbers": "Yes: tap, or ask your AI", "fetched_at": stamp(now)}
     if isinstance(got["wind"], Exception):
         layers.append(missing({**wind, "made_at": stamp(now)}, f"NOAA's wind model did not answer at {clock(now)} ({str(got['wind'])[:160]})."))
     else:
@@ -1087,9 +1091,15 @@ def write_smoke_frames(sdir, now, frames, regional, keep_from, source):
     return hour_name(hour), listed, cell
 
 
+def thinned(t, now):
+    """A past wind frame older than WIND_THIN_H that is not at 00, 06, 12 or 18 UTC: not kept (part 112: every 3 hours for the last
+    24 hours, then every 6 as before, so the 7 days of past wind stay near their size)."""
+    return t < now - dt.timedelta(hours=WIND_THIN_H) and t.astimezone(UTC).hour % 6 != 0
+
+
 def write_wind_frames(wdir, now, run, steps, keep_from):
     """The step at or before now at 1 degree (part 99; part 85 took the nearest, which could be later than now), every step ahead at
-    2 degrees; past frames kept as written. Returns the layer's fields."""
+    2 degrees; past frames kept as written, every 3 hours for 24 hours, then every 6 (thinned). Returns the layer's fields."""
     os.makedirs(wdir, exist_ok=True)
     valid = {run + dt.timedelta(hours=s): s for s in steps}
     past = [t for t in valid if t <= now]
@@ -1102,7 +1112,7 @@ def write_wind_frames(wdir, now, run, steps, keep_from):
         spec, u, v = steps[s]
         if t != shown:
             spec, u, v = coarser(spec, u, v)
-        if t < now - dt.timedelta(days=PAST_DAYS):
+        if t < now - dt.timedelta(days=PAST_DAYS) or thinned(t, now):
             continue
         write_json(p, {"at": stamp(t), "run": stamp(run), "grid": spec, "u": u, "v": v, "unit": "km/h", "kind": "estimated", "source": "GFS",
                        "credits": credit_block(["GFS"], now)})
@@ -1111,6 +1121,9 @@ def write_wind_frames(wdir, now, run, steps, keep_from):
     for f in sorted(os.listdir(wdir)):
         stem = f.split(".")[0]
         t = from_name(stem)
+        if thinned(t, now):
+            os.remove(os.path.join(wdir, f))   # a 3-hour step now over 24 hours old
+            continue
         frames.append({"at": stamp(t), "file": f"earth/wind/{f}", "when": "now" if t == shown else ("past" if t < shown else "ahead")})
     # a step later than now is a forecast, and says so wherever it is shown (part 85)
     return {"now": f"earth/wind/{hour_name(shown)}.json", "covers": {"at": stamp(shown)}, "forecast": shown > now, "frames": frames, "cell_deg": 1.0, "cell_km": 111}

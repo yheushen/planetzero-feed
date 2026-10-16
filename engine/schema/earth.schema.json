@@ -29,11 +29,13 @@
         "reason": {"type": "string", "minLength": 1},
         "picture": {"const": true},
         "cell_deg": {"type": "number", "exclusiveMinimum": 0},
-        "cell_km": {"type": "number", "exclusiveMinimum": 0}
+        "cell_km": {"type": "number", "exclusiveMinimum": 0},
+        "step_hours": {"type": "integer", "minimum": 1, "maximum": 24, "description": "The wind: hours between the model's steps (part 112)."}
       },
       "allOf": [
         {"if": {"properties": {"status": {"const": "missing"}}}, "then": {"required": ["reason"]}},
         {"if": {"properties": {"status": {"const": "ok"}}}, "then": {"required": ["covers"]}},
+        {"if": {"properties": {"id": {"const": "wind"}}, "required": ["id"]}, "then": {"required": ["step_hours"]}},
         {"if": {"properties": {"picture": {"const": true}}, "required": ["picture"]}, "then": {"properties": {"unit": {"const": "picture"}, "numbers": {"const": "Picture only"}}, "required": ["gibs"]}}
       ]
     }
