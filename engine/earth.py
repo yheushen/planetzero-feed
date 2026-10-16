@@ -68,9 +68,10 @@ GIBS_WMTS = "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/{layer}/default/
 GIBS_WMS = "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi"
 PICTURES = (
     {"id": "real_earth", "name": "Real Earth", "layer": "VIIRS_NOAA20_CorrectedReflectance_TrueColor", "fill": "BlueMarble_NextGeneration",
+     "fills": ["VIIRS_SNPP_CorrectedReflectance_TrueColor", "VIIRS_NOAA21_CorrectedReflectance_TrueColor"],
      "matrix": "GoogleMapsCompatible_Level9", "max_level": 9, "ext": "jpg", "metres": 375,
-     "what": "The planet as the camera on NOAA-20 saw it the day before: clouds, deserts and the haze itself. NASA's Blue Marble where it saw nothing.",
-     "colours": "True colour.", "satellite": "NOAA-20, VIIRS"},
+     "what": "The planet as NOAA-20, Suomi NPP and NOAA-21 saw it the day before: clouds, deserts and the haze itself. Blue Marble where none saw anything.",
+     "colours": "True colour.", "satellite": "NOAA-20, Suomi NPP, NOAA-21, VIIRS"},
     {"id": "smoke_space", "name": "Smoke from space", "layer": "MODIS_Terra_Aerosol", "matrix": "GoogleMapsCompatible_Level6", "max_level": 6,
      "ext": "png", "metres": 10000, "what": "How much light the smoke and dust in the air block, seen from above. Gaps are where the satellite did not pass.",
      "colours": "Pale yellow (a little) to dark red (a lot), as NASA draws it.", "satellite": "Terra, MODIS"},
@@ -661,7 +662,8 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
                        "credit": credits.CREDITS["sources"]["GIBS"]["short"], "words": "yesterday" if pic["id"] == "real_earth" else "picture",
                        "what": pic["what"], "colours": pic["colours"], "updates": "Once a day, the day before", "numbers": "Picture only",
                        "covers": {"date": day}, "made_at": day, "satellite": pic["satellite"], "metres": pic["metres"],
-                       "gibs": {"layer": pic["layer"], "fill": pic.get("fill"), "matrix": pic["matrix"], "max_level": pic["max_level"], "ext": pic["ext"],
+                       "gibs": {"layer": pic["layer"], "fill": pic.get("fill"), **({"fills": pic["fills"]} if pic.get("fills") else {}),
+                                "matrix": pic["matrix"], "max_level": pic["max_level"], "ext": pic["ext"],
                                 "wmts": GIBS_WMTS, "wms": GIBS_WMS}})
 
     earth = {"schema_version": "1", "generated_at": stamp(now)}
