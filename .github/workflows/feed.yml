@@ -96,6 +96,7 @@ jobs:
           CAMS_CACHE: .cams
         run: |
           if [ -n "$ADS_KEY" ]; then pip install -q eccodes; fi
+          pip install -q -r engine/requirements-earth.txt || echo "no Pillow or numpy: Real Earth's day picture is left out, the page builds it"
           python engine/earth.py --out _feed --cache .cache
 
       - name: Keep the global smoke model's file for its run (once it has arrived)

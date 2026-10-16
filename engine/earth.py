@@ -16,7 +16,8 @@ others, and Earth failing never touches now.json (the Action runs this as its ow
   monitors    measured    OpenAQ's latest PM2.5 worldwide, only under the licences of sources.EARTH_LICENCES, never IQAir's;
                           NEA's 5 regions and DOE's 68 monitors from now.json. Late after 3 hours, dropped after 8 (invariant 4).
   satellites  from space  CelesTrak's elements for 8 satellites, fetched at most once per 2-hour update (its usage policy).
-  pictures    from space  NASA GIBS (Real Earth, smoke from space, carbon monoxide): named, never copied.
+  pictures    from space  NASA GIBS (Real Earth, smoke from space, carbon monoxide): named for the browser; Real Earth also built once a
+                          day as 1 finished picture, its gaps filled, poles completed and joins softened (day_picture.py, parts 114, 116).
 """
 import argparse
 import concurrent.futures as cf
@@ -829,6 +830,16 @@ def pole_caps(last_day, folder, now):
     return out
 
 
+def day_picture_of(folder, now, caps):
+    """Part 114: Real Earth as 1 finished picture of the day (day_picture.py), or None, and what happened. Only this step needs Pillow and
+    numpy (engine/requirements-earth.txt): without them the field is left out and the page builds the picture from GIBS as before."""
+    try:
+        import day_picture
+    except ImportError as e:
+        return None, f"not built here ({e})"
+    return day_picture.step(folder, now, caps)
+
+
 def _share_or_none(pole, day):
     try:
         return seen_share(get_bytes(pole_url(pole, day), timeout=60, tries=2))
@@ -1022,15 +1033,24 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         else:
             layers.append(missing({**sat, "made_at": stamp(now)}, note or f"CelesTrak sent nothing at {clock(now)}."))
 
-    # pictures, from NASA GIBS: named, never copied
+    # pictures, from NASA GIBS: named, the browser loads them; Real Earth also as 1 finished picture a day, built here (part 114), whose
+    # date the layer then covers (the day before's while a new day is still arriving)
     day = (now - dt.timedelta(days=1)).strftime("%Y-%m-%d")
+    t1 = time.monotonic()
+    try:
+        whole, whole_note = day_picture_of(folder, now, got["poles"] if isinstance(got.get("poles"), dict) else None)
+    except Exception as e:   # never stops the run: without it the page builds the picture from GIBS as before
+        whole, whole_note = None, f"the day's picture failed ({type(e).__name__}: {str(e)[:160]})"
+    took["day_picture"] = round(time.monotonic() - t1, 1)
     for pic in PICTURES:
+        pday = whole["date"] if whole and pic["id"] == "real_earth" else day
         layers.append({"id": pic["id"], "name": pic["name"], "kind": "from_space", "unit": "picture", "picture": True, "status": "ok", "source": "GIBS",
                        "credit": credits.CREDITS["sources"]["GIBS"]["short"], "words": "yesterday" if pic["id"] == "real_earth" else "picture",
                        "what": pic["what"], "colours": pic["colours"], "updates": "Once a day, the day before", "numbers": "Picture only",
-                       "covers": {"date": day, **({"from": (now - dt.timedelta(days=pic["days"])).strftime("%Y-%m-%d")} if pic.get("days", 1) > 1 else {})},
-                       "made_at": day, "satellite": pic["satellite"], "metres": pic["metres"],
+                       "covers": {"date": pday, **({"from": (now - dt.timedelta(days=pic["days"])).strftime("%Y-%m-%d")} if pic.get("days", 1) > 1 else {})},
+                       "made_at": pday, "satellite": pic["satellite"], "metres": pic["metres"],
                        **({"poles": got["poles"]} if pic["id"] == "real_earth" and isinstance(got.get("poles"), dict) else {}),
+                       **({"day_picture": whole} if whole and pic["id"] == "real_earth" else {}),
                        "gibs": {"layer": pic["layer"], "fill": pic.get("fill"), **({"fills": pic["fills"]} if pic.get("fills") else {}),
                                 **({"layers": pic["layers"]} if pic.get("layers") else {}), **({"days": pic["days"]} if pic.get("days") else {}),
                                 **({"colormap": pic["colormap"]} if pic.get("colormap") else {}),
@@ -1051,6 +1071,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     write_json(os.path.join(out, "earth.json"), earth)
     if not quiet:
         print(json.dumps({l["id"]: l.get("status") + (f": {l.get('reason')}" if l.get("reason") else "") for l in layers}, indent=1, ensure_ascii=False))
+        print(f"Real Earth's day picture: {whole_note}")
         print(f"earth.json and earth/ written to {out} in {earth['took_s']['all']} s")
     return earth
 

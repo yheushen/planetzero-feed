@@ -11,6 +11,7 @@ The air in Malaysia and Singapore, every hour, as JSON files anyone can read: th
 | `now.json` | Every place: the hour, the 24-hour index, the community sensors within 10 km, the computer model's estimate, aqicn's current value; what each source did on the last run |
 | `outlook.json` | The next 5 days per place on the PSI scale, from the CAMS model, with how it scored against what was measured |
 | `grid.json` | For the globe: smoke and wind from computer models, and the fires NASA's satellites saw in the last 24 hours |
+| `earth.json`, `earth/` | The whole planet's layers: smoke, wind, fires, monitors, satellites; and `earth/real/`, Real Earth as 1 finished picture a day (NASA GIBS's photos from NOAA-20, Suomi NPP and NOAA-21, Blue Marble where none saw), the last 2 days kept |
 | `checks.json` | Our checks of numbers we may not republish (Google's): only our results, never Google's numbers |
 | `scales.json` | The bands, their words and colours, and the advice for each |
 | `status.json` | What each source did on the last run |
