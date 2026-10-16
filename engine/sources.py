@@ -5,7 +5,9 @@ evals/feed (F2) parses that file and fails if this list ever names a source the 
 Google, IQAir and aqicn's archive stay in the private logger; they never reach this engine. aqicn's current value may be shown
 with credit (the owner confirmed its terms, 15 Oct 2026), but never kept: NO_HISTORY.
 """
-ALLOW = ("NEA", "DOE", "OpenAQ", "CAMS", "Open-Meteo", "FIRMS", "aqicn")
+ALLOW = ("NEA", "DOE", "OpenAQ", "CAMS", "Open-Meteo", "FIRMS", "aqicn",
+         # Earth (session 7, part 68; docs/TERMS-CHECK-EARTH-2026-10-16.md)
+         "GIBS", "GFS", "CelesTrak", "CAMS-ADS", "NaturalEarth")
 # shown now, never archived: history.merge refuses these (docs/DATA-TERMS.md: no redistribution of aqicn's archive)
 NO_HISTORY = ("aqicn",)
 
@@ -18,7 +20,14 @@ TERMS_ROW = {
     "Open-Meteo": "CAMS via Open-Meteo",
     "FIRMS": "NASA FIRMS",
     "aqicn": "aqicn / WAQI",
+    "GIBS": "NASA GIBS (Earth's pictures)",
+    "GFS": "NOAA GFS via NOMADS",
+    "CelesTrak": "CelesTrak",
+    "CAMS-ADS": "CAMS global via the Atmosphere Data Store",
+    "NaturalEarth": "Natural Earth",
 }
+# Earth's worldwide monitors come from OpenAQ under its own row (the 16 Oct check); the row Earth's OpenAQ layer answers to
+EARTH_OPENAQ_ROW = "OpenAQ, worldwide"
 
 CREDIT = {
     "NEA": "NEA via data.gov.sg",
@@ -27,6 +36,11 @@ CREDIT = {
     "Open-Meteo": "Open-Meteo weather models",
     "FIRMS": "NASA FIRMS (VIIRS, Suomi NPP and NOAA-20)",
     "aqicn": "aqicn.org (World Air Quality Index project)",
+    "GIBS": "NASA GIBS",
+    "GFS": "NOAA GFS via NOMADS",
+    "CelesTrak": "CelesTrak",
+    "CAMS-ADS": "Copernicus CAMS global (Atmosphere Data Store)",
+    "NaturalEarth": "Natural Earth",
 }
 
 
@@ -36,6 +50,13 @@ def aqicn_credit(agency):
 
 # community sensors whose readings may be kept in the public history: an open licence (docs/TERMS-CHECK-2026-10-15.md)
 OPEN_LICENCES = ("CC BY 4.0", "CC0 1.0")
+
+# Earth's monitors worldwide (docs/TERMS-CHECK-EARTH-2026-10-16.md, section 5): shown live only under these licences, as OpenAQ names
+# them; never kept in history/. Locations with no licence given, or under terms not yet read, stay off.
+EARTH_LICENCES = ("CC BY 4.0", "CC0 1.0", "US Public Domain", "政府標準利用規約（第2.0版） (Government Standard Terms of Use v2.0)", "ODC-BY",
+                  'UK OGL "Open Government License"', "CC BY-SA 4.0")
+# providers never shown, whatever their licence on OpenAQ: invariant 6 (IQAir is never fetched)
+NEVER_PROVIDERS = ("IQAir",)
 
 
 def openaq_credit(provider, owner=None, licence=None):
