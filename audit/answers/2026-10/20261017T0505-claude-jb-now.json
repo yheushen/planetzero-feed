@@ -1,0 +1,303 @@
+{
+ "schema_version": "1",
+ "question_id": "jb-now",
+ "question": "What is the air quality in Johor Bahru right now?",
+ "city": "Johor Bahru",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T05:05+08:00",
+ "answer": "Johor Bahru's air quality is **Unhealthy** at the moment, based on the most recent reading I found. I can't pull a live feed, so these figures come from search results and may be a little out of date.\n\n- **Latest reading:** The US AQI is 180 (Unhealthy), with PM2.5 at 111 µg/m³ and PM10 at 151 µg/m³. That was last updated on 2026-10-16 at 15:51 local time.\n- **Other sources:** One Malaysia-focused tracker lists Johor Bahru as Unhealthy, with a 24-hour average PM2.5 of about 136.8 µg/m³. That is roughly US AQI 212, or Very Unhealthy, but it's an estimate, and the page flags the data as stale. Another aggregator shows Johor Bahru at an Unhealthy 166.\n- **Older reading:** An IQAir page showed a Moderate reading of 62, but it appears to be an old snapshot, so I wouldn't rely on it.\n\nThe sources don't agree exactly, but most point to unhealthy air. At that level, everyone can start to feel effects, and sensitive groups can be affected more seriously. It's sensible to:\n- limit prolonged outdoor exertion\n- wear an N95 or KN95 mask outdoors\n- keep windows closed\n- use an air purifier indoors if you have one\n\nFor the official number, check the Malaysian Department of Environment's API (Air Pollutant Index) or the IQAir page for Johor Bahru.",
+ "citations": [],
+ "claim": {
+  "value": 180.0,
+  "scale": "US AQI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": "15:51",
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": 13.2,
+  "stale": true,
+  "freshness": "older",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": "2026-10-16T15:00+08:00",
+  "check": "checked",
+  "checked_hour": "2026-10-16T15:00+08:00",
+  "band_right": false,
+  "close": true,
+  "off_pct": -26,
+  "measured_ref": [
+   244
+  ],
+  "measured_range": [
+   244,
+   244
+  ],
+  "named_source": [
+   "DOE",
+   "IQAir"
+  ]
+ },
+ "measured": {
+  "at": "2026-10-17T05:05+08:00",
+  "pm25": [
+   118.0
+  ],
+  "index": [
+   [
+    182,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Larkin",
+   "sensor Ponderosa"
+  ],
+  "hour": "2026-10-17T03:00+08:00"
+ },
+ "took_s": 19.1,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6bZ3s7UVd3kdS7Z1TLH",
+  "container": {
+   "id": "container_01KxUM3BbpoaHsq5MQAAHNRe",
+   "expires_at": "2026-10-16T22:06:07.753194Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01LKJ1bHkoD2sEjJ1vBJfVhz",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Johor Bahru air quality index now API reading\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:500].replace(\"\\n\",\" \"))\n    print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_0184mQcGQMtudgxi7nCWDRzp",
+    "caller": {
+     "tool_id": "srvtoolu_01LKJ1bHkoD2sEjJ1vBJfVhz",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Johor Bahru air quality index now API reading"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01LKJ1bHkoD2sEjJ1vBJfVhz",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "Et4ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDWVihpYsIRYtyoqWBoMSqOPUEBK0CbuEBDBIjCshuFciceBaj0eouUK0PfjzGLskLk+0GYcrmTvmyAUxDYl6j2ikz8Ge57anc5ipOAq4Qe2cRsfEmrWqNObT8WltnCE5KQgRhtzVbdTGeY7//GO6+CzW+ygVeQEo3FMFCmbILWIHKsK4xXfAtt4ltsek3nW2Qp7+qYlrqBtt/QIubx6XzU7Dc3YugTsBeOmjTATW1xtdC/rDRQcGhkP+1R6ce/yl37oWnkROsKJRsuLn/B8UdVadOZ7zyBZzXzzits98KymwkG5UMlyUZtxgVJ+QXB/Q2A79+oxur6lyisD6xXzHIJ23h57fnDFj6ThBs1QgcIQXGRvli4EQMj5aYpr6DRDCtBP3nKuh4J+DOT7tTaO2R3gxsUOGkgIDY4pL0Q69UF3pW9bK7kTaDwWrjNPvgjHxnwvrauOZunIPYCeBG4daxLTBqv9amNrcsSJizu2XWVIAVc2wIEddpo+Hg7GMsviMEQ96u9pqFau1B+TcPQM5DKUxj3M9Ct3WnF7/aMm5vyzbVLN+TZPgphR4HFb3GCy1DTx2qjag+AQS3jw1RqZe3cjE+biWLQ4mNSperLVVsqzckbZiAhw+okqISiUMJFftuGdYA/nC5teLTnztuRi+jzWkuE0qzyw60tTPzHIv2mmlS25+jgtqirc9H7tI4o9E/6ZzL7xIg+zeEdrbNPgu2J/8UpsBn3qW4SwGt55SctIrEFgP7eJxPcIPcsqdsQCLtIIqI1JZsY9PGAJXeXCK769BEL1iGJY63krjQecxpRLnXmruJiHQEZwr2rhqN0d15vqQyZNdWJeLkrEqiRPpmM+nq4k0Vvm9w8C9JujpCv/IaOP+DjgABj7aAaO8GK6SeUxq2EmZmIvN2phUKjK3wW0E7bx6wzNRg2j905HEW6VutspbIqH1AnDgmFh0+2G1hkv/EYRnid8XNwzf9SKNANXBnd0WoCZmLcN2M2d29COgcv0PYVbNkz8LDZGgo5k8dQ5R7CIfRHqvbS6MZZEGwY+6CoT+Kqw7tVTbjH/zA/GvjHMpKSJKGU0MbEc1sJKX6A/23JOmpwC3dnLgcV4kCNtdMGhfGYoDeSYs8ZAVI06+/003D4EtvfGiVmo1MlstOSaOkXm8nPLdDkJzDZm1koCuYetonPw/fLIwWaKgLtPgyjBubdH+mo91fH/D4Ol15ASJrEHsAm3NKrPgZWHGU9cm2gwjYCzc0krDwHfUwN8gvTMwWuDyis2P2gKsfbltor1qL5ATDrPBubStxOkEyXL+ye6cQI6HfvQDMMGAUNLWnuY0VFbTUlL2Iiss5MoXqgDsttxiM0FsTkyOkGtNyeYYEK7yRaH3Q8s80Wqv81ALFno+jw6DDIJzg6tNLDFbLRNG+dUkMJoq1uVkDZriOAYAw==",
+      "page_age": null,
+      "title": "Johor Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/air-quality/malaysia/johor"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "790 days ago",
+      "title": "Johor Bahru Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/in-en/malaysia/johor/johor-bahru"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "6 days ago",
+      "title": "Johor-bahru Air Pollution: Real-time Air Quality Index (AQI)",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/city/johor-bahru/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Johor Bahru Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/johor/johor-bahru"
+     },
+     {
+      "encrypted_content": "EuIECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHteAv2Co+8OBPUJcxoMCElaNkSHxhIDAel9IjD4E4zPVz5VceR2OY+Sdomgt8iOG6xJ1glcHujAG+OZ07//6uN6sjZsOdkCH9u/ABwq5QPAosmLrUE7HsuxmhrmwtHshypAgY3AkNsjcxZ0eURE+v6RLgBH+MbSOYNS0fjcqwuOvobYZGpQFQ+/Ooz5IlYZrfchzTg0vij+8n4Lmh/tUCJlT2AIowafDOQBwdkfPdCGI753c94NMCDaKW/AFohqrbJAQcxUdnDNZGJwzfXcGRsK4WibZzfirW5IbzdwQRq120Qz5ITfXG4amYL0W5YTB4KxWBHCr5wpXSsv9ypNn4L80GDIb0jqsk610ETcHUhDUU/ErKVEcHte4a8IA3Lb3Z/zngCoGoyIWp1OfO6Za1sw3QgYpKZiRiRIC5hmkTpAENJa/qBHouUZnP6o28K7wq4JmnbkO30wokb9AKEJ25rfw2lYdcgWNvRGAoJ5QgWPkm7ZcN6HWBLtEizcVezuzAGP3mCLVuTasAq8gt+ooihCbZGfagNF67MXxGIKM/V9nPcYcXs+crp8Ebcm2z+pG/7g8um35pfd1xV2xu+8jAoiMfMHhPq764Htku8FSjF1ju9lXVssO5jrnVyq/u+L0lfJz8+0+lPZv2o5mgMIAVqZcwClU246eiCU9VsbTo4BqQPoekAES3nEJH6ZYDOajgWCEKc9hTQXGyNi8xo6/6WLiHynkwrnRzBBfwu06ZXiivJOfBgD",
+      "page_age": "5 days ago",
+      "title": "Johor Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/johor"
+     },
+     {
+      "encrypted_content": "EoMHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFXwBXTWXkJWH+c+CxoMYfDLRWY5uT1zoAZiIjCahbj2ch3WAcLJOqgIVCITqZBfqxNnEzo0GyJP8aDqnaQyEunjsM9gc4k2NXgoYwsqhgY89mRf7+GALInSojqV8A2F4AZI2HC9LEgxFWthnHugRoHSvGmroHGKEBCPPWW8Gvw/WfuebhPWVkqLPd+0fnU8HUeHFc/7PVBMSEB5HoCu09Aqpd9BIuFYu3TTfA1AFzQQbAzH+Cgpm6WY2TqiJYRHQs76/QBFOk3I1WCdj3elnSGbM1hvrtwVU5h4GqOrjbOCzX+6krhC0VbuuGXZTGRwIEHFjb84n1PJeO1HRPyojMzoUyZlhObaEH+Hy5bZBl77oV4Iy0o4eQ8TVUuJIJMRSODhLhpm/wC3HOw9pbuSjTXjWv5GM4gcJWEMa9cu0CH74lKElyMSE0Ljzthn7OzBpMAsrP1mS6wkl/sBJwFJ8jG5qaeHoYBC/+k3W9sqFLJ5C6fXGG1yb67nHX42rTGFRAu1IWp4q0fErZ6zvSpGvDRHvCwbgrZvvHKEnuJnM0cs6ZEozuWfu3WaKtFCzDj0uvySCCqE+p8qlf1w8fYgkeXnKApoO5PbMh4AnT8qo6+Hh8vbi0ymZa5VNBVeSWdk6FuTH6SmGwnsjFAXPPdjQTJPkplhzdB8f250eBE3aA/Y3/CCPE77v9JibLrF9GlBDaI61ddr5w1DIaf1ESpDgvzmsBsj1WNoN9+EI5i+Q1Gfp8jAnjx9jsWqGHD4RE4VaYGUE6bwE8jZQHTpuf1+djx4ADKUxcw3wtCleZOsvr8x1R6fv6CMcITXJ6pZocMBOaH4WEYvCKN01GdB8Z7xxAPUgQ10jTij4sdwvq1srjqPiTQLLzQkiPSGLFwpUhQVFTE+Hx42AVA1gPfbcDngBfSNY8aAh1iI6C3A9bG2t9sfrpTQ7Jir0gDz2R2RJrXOyZ6b6Egfb6UXX9+hNOMehEh2S0994prJusiK0xbe5logkzWaVmunlWQyRaOxACn2EGQ6CORr/z2I28tS1eZSJdqKC3uMOVHmsZwV6UEi+6rb8EaeK012sWBbGs8KJPvzyA8AyaQctrRWOti/uJQNYPiPSrFMt0SBF7xqUk1EKpxE0PmRpbcYAw==",
+      "page_age": null,
+      "title": "Malaysia API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en"
+     },
+     {
+      "encrypted_content": "EvoGCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDNhi+fo2lGOu9MssKBoMj7O8/LgqJ4DBgkqeIjCQcPhRzirJ7ZQJ+tSjF2t5U5omsYX4qXks6HvQ5RpHcx4jwCBGBAmzcnUNvAGE+kMq/QX1WcEkrQFc3Q14tClCP5FwHrqY+k/jq5yeCNEvx9ZvHKOk+TZiOzLOoOGYYaWyj/ZKHjCBAkn79Gs2nXRQ1yXOYlOQmOsN51wG2JZGpaCQ7qfiRpOSOfvtgaGYP0/vJvEDyczikBlYSLGUWmjGiYGvT3Ae7zqDG87j47C/8qctwTAvh2usPaGqUt1XjzWR0eahbd6aS75i9zusJfif1IRbRTWyTvjuQtvE/sZL5dFf0/Y19xRvjSfCeQimIb1Zjcw4YUd8ar4wWwwbZ/uRw+V489NyaGwht4msi8CcMtoWK34VgXBXu14+HtthoL8Kr95KNs60G6yukG/Cpdis2mzObdcItxyhAW2ZkRPO11nic8qxfusyxmdOLLYM9lUk/BvIWjNLHRgfRg6ZVBejjnwN/gNkoRbPBKiQ6JNgKtH6q4CsWtpfRcwbpIoaMfm6a9QUg8fVdbhVMx0gseXbCAT4Wkg6j0skwdJCKvFM4SJZzQHF8DOfOB8OHnKH2TqKB6e9X/JjkKP5KqWH5bzeO/CGuq6SCLGFm7vMyGMdyOvT1EzyuNwI4zoUyxsEwEp9sWTkRcoLx/3zvOYQUrrwRh3f4BToEXFDqWw1wd5S53ArcH7pHy2NcBgHHKvjJYR8O4ycXpdmTJs7hNIkggvxSDXkQON7l8SsmqSsR0VJppPeUq8LbJS+oIvgeTMCTRTwv+p7IkwkjUrX+hemh/41BJjyeUem4CvRllIdMkMcSD9Q08t4Us/lwYSTycd3ruP5Dztf5vWK5JvWDOsz6lq/5Ggg+FAUu/BNiWPvVREXAUazPabpHR2l2qj7HYF+7Ium3MEdD3eiMygk4IRYC7mtd637scf/CE/dPkZ6aFNZae1KE3EWxMcajSoLJKoDFXXPkup72ssbiJ4cFyfgC1djLACXJ3DSGFBkk2HIM2eRr+cjjW3HV83/n6MjiRfrj5tGIt/wksfhtA4A59TAPKSxjQQVWZ/OdjP7IITaSnB9cm8POq82B7POdtjVKv7vC5gYAw==",
+      "page_age": "0 days ago",
+      "title": "Pasir Gudang Air Quality Turns Very Unhealthy, 32 Areas Record Unhealthy API",
+      "type": "web_search_result",
+      "url": "https://www.businesstoday.com.my/2026/10/16/pasir-gudang-air-quality-turns-very-unhealthy-32-areas-record-unhealthy-api/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "AQI in Johor Bahru: 174 (Unhealthy)",
+      "type": "web_search_result",
+      "url": "https://time.now/johor-bahru/aqi/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "3 days ago",
+      "title": "Johor Bahru AQI & Air Quality Today (API/IPU)",
+      "type": "web_search_result",
+      "url": "https://hazemonitor.com/johor-bahru"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Air Quality in Johor Bahru — AQI Forecast & Pollutant Levels",
+      "type": "web_search_result",
+      "url": "https://airindex.today/en/air-quality-index-johor-bahru-1732752"
+     }
+    ],
+    "tool_use_id": "srvtoolu_0184mQcGQMtudgxi7nCWDRzp",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDnWdWlPw0LWOa3c1hoMpzPxpB7BFF6rZgOEIjBbIE2UBeb1li1ThJZdWYl5gSAvkyw67h6+5nPz0UPhz6ZCNHeG3FA3ecAHwBBrcnsqEie3Vfm000CVaPnOTDJkBK482xgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01LKJ1bHkoD2sEjJ1vBJfVhz/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01LKJ1bHkoD2sEjJ1vBJfVhz",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_017T9Jr9Yfzb7uaEY9vz7Du6",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Johor Air Quality Index (AQI) and Malaysia Air Pollution\", \"url\": \"https://www.iqair.com/air-quality/malaysia/johor\", \"content\": \"PM2.5 refers to fine particulate matter that is 2.5 micrometers or less in diameter, making them approximately 3% the size of a human hair. Due to this extremely small size, PM2.5 has a highly negative effect on human health when inhaled, and ...\\n\\nJohor Air Quality Index (AQI) is now --.\\n\\n# Air quality in Johor\\n## How bad are the pollution levels in Johor?\\nBack to Johor Bahru's reading, in 2019 it came in at 16.8 \\u03bcg/m\\u00b3, putting it into the lower end of the \\u2018moderate\\u2019 pollution bracket, which requires a reading of anywhere between 12.1 to 35.4 \\u03bcg/m\\u00b3 to be classed as such.\\n\\n## Which is the most polluted city in Johor?\\n- Pasir Gudang 183\\n- Parit Sulong 182\\n- Johor Bahru 181\\n- Tangkak 179\\n- Kluang 165\\n- Pengerang 165\\n- Segamat District 163\\n- Bandar Penawar 158\\n- Mersing 112\\n- Kota Tinggi 111\\n- Buloh Kasap 110\\n\\n## Real-time Johor most polluted city ranking\\n| # | Cities | AQI\\u207a US |\\n| --- | --- | --- |\\n| 2 | The national flag of Malaysia Johor Bahru | 183 |\"}, {\"type\": \"web_search_result\", \"title\": \"Johor Bahru Air Quality Index (AQI) and Malaysia Air Pollution\", \"url\": \"https://www.iqair.com/in-en/malaysia/johor/johor-bahru\", \"content\": \"Johor Bahru air quality index (AQI+) forecast. Air pollutants. What is the current air quality in Johor Bahru? PM2.5 con\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_017T9Jr9Yfzb7uaEY9vz7Du6",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01W4idhEqEJxaVJjQR1tdPek",
+    "input": {
+     "code": "import json\nr=json.loads(r)\nfor i,x in enumerate(r[:6]):\n    print(i,x['title'],x['url'],x.get('page_age'))\n    print(x['content'][:800].replace(\"\\n\",\" \"))\n    print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "0 Johor Air Quality Index (AQI) and Malaysia Air Pollution https://www.iqair.com/air-quality/malaysia/johor None\nPM2.5 refers to fine particulate matter that is 2.5 micrometers or less in diameter, making them approximately 3% the size of a human hair. Due to this extremely small size, PM2.5 has a highly negative effect on human health when inhaled, and ...  Johor Air Quality Index (AQI) is now --.  # Air quality in Johor ## How bad are the pollution levels in Johor? Back to Johor Bahru's reading, in 2019 it came in at 16.8 μg/m³, putting it into the lower end of the ‘moderate’ pollution bracket, which requires a reading of anywhere between 12.1 to 35.4 μg/m³ to be classed as such.  ## Which is the most polluted city in Johor? - Pasir Gudang 183 - Parit Sulong 182 - Johor Bahru 181 - Tangkak 179 - Kluang 165 - Pengerang 165 - Segamat District 163 - Bandar Penawar 158 - Mersing 112 - Kota Tinggi 111 -\n--\n1 Johor Bahru Air Quality Index (AQI) and Malaysia Air Pollution https://www.iqair.com/in-en/malaysia/johor/johor-bahru 790 days ago\nJohor Bahru air quality index (AQI+) forecast. Air pollutants. What is the current air quality in Johor Bahru? PM2.5 concentration is currently 3 times the World Health Organization annual PM2.5 guideline value.  Johor Bahru Air Quality Index (AQI) is now Moderate. Get real-time, historical and forecast PM2.5 and weather data.  # Air quality in Johor Bahru ## Air quality index (AQI⁺) and PM2.5 air pollution in Johor Bahru • 72.9K Followers • 11:00, May 05 Local time 62  US AQI⁺  Moderate  Main pollutant:  PM2.5  15 µg/m³  ## Hourly forecast Now 62 Weather icon 31° IQAir AirVisual Air Quality Map Wind rotating 343 degree 4 km/h Humidity icon 66% · 13:00 61 Weather icon 32° IQAir AirVisual Air Quality Map Wind rotating 302 degree 2 km/h Humidity icon 64% · 14:00 60 Weather icon 80% 31° IQAir\n--\n2 Johor-bahru Air Pollution: Real-time Air Quality Index (AQI) https://aqicn.org/city/johor-bahru/ 6 days ago\n| PM10 AQI | 91 | Johor-bahru PM10 (respirable particulate matter) measured by Malaysia Department of Environment (DOE); Air Polluant Index Management System. Values are converted to the US EPA AQI standard. | 72 | 130 | | O3 AQI | 2 | Johor-bahru O3 (ozone) measured by Malaysia Department of Environment (DOE); Air Polluant Index Management System. Values are converted to the US EPA AQI standard. | 2 | 26 | | NO2 AQI | 5 | Johor-bahru NO2 (nitrogen dioxide) measured by Malaysia Department of Environment (DOE); Air Polluant Index Management System. Values are converted to the US EPA AQI standard. | 1 | 11 | | SO2 AQI | 1 | Johor-bahru SO2 (sulfur dioxide) measured by Malaysia Department of Environment (DOE); Air Polluant Index Management System. Values are converted to the US EPA AQI standa\n--\n3 Johor Bahru Air Quality Index (AQI) : Real-Time Air Pollution https://www.aqi.in/dashboard/malaysia/johor/johor-bahru 0 days ago\nCurrent Johor Bahru Air Quality Index (AQI) is 180 Unhealthy level with real-time air pollution PM2.5 (111µg/m³), PM10 (151µg/m³), Temperature (29.5°C) in Johor.  Current Johor Bahru Air Quality Index (AQI) is 180 Unhealthy level with real-time air pollution PM2.5 (111µg/m³), PM10 (151µg/m³), Temperature (29.5°C) in Johor.  # Johor Bahru Air Quality Index (AQI) \\| Air Pollution Real-time PM2.5, PM10 air pollution level in Johor Bahru  Last Updated: **2026-10-16 15:51:01** (Local Time)  Live AQI  180AQI (US)  Air Quality is  Unhealthy  PM2.5 :  111 µg/m³  pm10 :  151 µg/m³  Humidity 70 %  Wind Speed  Wind Speed 8.6 km/h  UV Index  UV Index 7.6  Last Updated: **2026-10-16 15:51:01** (Local Time)  Rank23^rd  Currently, Johor Bahru ranks 23^rd among the most polluted cities globally.  ## Histo\n--\n4 Johor Air Quality Index (AQI) : Real-Time Air Pollution https://www.aqi.in/dashboard/malaysia/johor 5 days ago\nJohor Air Quality Index (AQI) | Air Pollution. … Johor Bahru, Johor. Unhealthy. 5xabove Standard. Kuantan, Pahang.  # Johor Air Quality Index (AQI) \\| Air Pollution ## Johor's Cities Johor Bahru  Unhealthy  166  86  117  28  72  ## Most Polluted Cities 2026 Unhealthy  6x above Standard  Johor Bahru, Johor  160  Unhealthy  5x above Standard  ## Johor's AQI Data Analytics Solutions Compare AQI levels across multiple locations.  aqi api integration for Johor  API\n--\n5 Malaysia API Today 2026 https://semakapi.my/en None\nMalaysia air quality index today. Official API readings from all 68 stations across Malaysia, worst first. One number, one colour, instantly clear. … Johor Bahru. Batu Pahat. Langkawi. Alor Setar.  # Malaysia air quality index today Highest right nowChoose your city Use my exact location Johor Bahru Unhealthy PM2.5 ≈ 136.8 µg/m³ · 24-hour average≈ US AQI 212 (Very Unhealthy) · estimate, for comparison with international apps  ## Major cities, worst first Johor Bahru  Stale  1  9  3  ↑6  Unhealthy Larkin, JOHOR  ## Check by state - Johor 207 - Selangor 181 - Kuala Lumpur 170 - Perak 169 - Pahang 155 - Sabah 152 - Terengganu 85 - Sarawak 78 - Labuan 61 - Perlis 59 - Kedah— - Kelantan— - Negeri Sembilan— - Penang— - Putrajaya—\n--\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01W4idhEqEJxaVJjQR1tdPek",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSzwUKEAgSGAI4AUIIdGhpbmtpbmcSDHzGk0BHM2cH/MxPhBoMP5n3H1+qvo++EIzOIjBycD7KXIuSAd0Bu4pe+5XjX7TFML4XgaXwmGdIdKT69Q11ZWDJMsRcrGDD8kudShgq7ATIQnAEkj5JBnyqU8y51Dho0Th0i9WuM9w9djyi8wCecrwhUWb0CxwzFALwsY4Wgh3uawoLPH2Wi85XwTfi/Oj78jt8PyokAPMNVPBnyxWnQEK+1iiGpr9ooXWR/LA1y1w1vzi7kqiX++WjLstYB/+QEe34Epfo/MiySLpjixkaJscp3AjyQP9zZvt9f5xLkaY5BARrI/7gnbl9FilqpT/9oC+eO/6bY+2zFzGJkgMIQpRkJmbgpgvnIjjDdUzaUjF+3ghg9h7IyWXkUFOif47kgYHyP+ye5nrly6C2Dnw+HWg4D/mwnxPWSc2IBJagvVcCVapTlSbSnOGO9MgDuTTsO4wjCwjNYEym40ZXVXvK8BSL98+jIeapaPesOX5q7mupU7ipzt9V41r0pEDovMjTIl1Sd3PpPjLhA+jjRS3vvz7HwBTQooxGJZ8QfjWXfJwrErv/Kg8id30O6BpmxKBc33kC7I1PIn2OISjd9NGR48c/aRL746d+qZ2aAxhIVdhofw9xuEGjE/z87I8gH/KgXyWakcsOxc/NLM7iF7VSuviZtLZG6IluJRBb1nce9/9slEJfYsaARWXzaBDVzRoB50CNVCyd1vbED38YB2Qs0TCgZrIZOS3JeOwhu8Z0oAeTEsKr8scKmr6KIEriUZMmn67WQ0MORMddv60/VPB+OAtjnXFyA/eMmsCdJ22i8GR08GBfRVSk+P34Tzz9atwVj73krE15cQuZsHTV+TDlDQ7HBPbBAwlPuZiQEhkoEVjdR15lE1lYPA0lP4Rk/lkS/hjTtrFl2VoC24uAIhQihRbgmmySu3Kr3uQVYhgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "Johor Bahru's air quality is **Unhealthy** at the moment, based on the most recent reading I found. I can't pull a live feed, so these figures come from search results and may be a little out of date.\n\n- **Latest reading:** ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "The US AQI is 180 (Unhealthy), with PM2.5 at 111 µg/m³ and PM10 at 151 µg/m³.",
+    "type": "text"
+   },
+   {
+    "text": " ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "That was last updated on 2026-10-16 at 15:51 local time.",
+    "type": "text"
+   },
+   {
+    "text": "\n- **Other sources:** One Malaysia-focused tracker lists ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "Johor Bahru as Unhealthy, with a 24-hour average PM2.5 of about 136.8 µg/m³.",
+    "type": "text"
+   },
+   {
+    "text": " That is roughly US AQI 212, or Very Unhealthy, but it's an estimate, and the page flags the data as stale. Another aggregator shows ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "Johor Bahru at an Unhealthy 166",
+    "type": "text"
+   },
+   {
+    "text": ".\n- **Older reading:** An IQAir page showed a Moderate reading of 62, but it appears to be an old snapshot, so I wouldn't rely on it.\n\nThe sources don't agree exactly, but most point to unhealthy air. At that level, everyone can start to feel effects, and sensitive groups can be affected more seriously. It's sensible to:\n- limit prolonged outdoor exertion\n- wear an N95 or KN95 mask outdoors\n- keep windows closed\n- use an air purifier indoors if you have one\n\nFor the official number, check the Malaysian Department of Environment's API (Air Pollutant Index) or the IQAir page for Johor Bahru.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 29556,
+   "output_tokens": 957,
+   "output_tokens_details": {
+    "thinking_tokens": 58
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
