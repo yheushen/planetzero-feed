@@ -643,27 +643,59 @@ def whole(values):
     return [None if v is None else int(round(v)) for v in values]
 
 
+BOX_BLEND_DEG = 1.0   # part 99: the regional hour eases into the global step over the box's outer degree, so no straight seam
+
+
+def regional_inside(spec, gvals, box, rvals):
+    """Part 99: the regional box's hourly values laid into a global grid, bilinear between the regional cells; over the box's outer
+    degree they ease into the global step (half and half 0.5 degrees in, where the box's hour starts to lead). Returns the values and
+    the box where the regional hour leads (west, south, east, north)."""
+    w, s_, e, n = box["lon0"], box["lat0"], box["lon0"] + (box["nlon"] - 1) * box["step"], box["lat0"] + (box["nlat"] - 1) * box["step"]
+    out = list(gvals)
+    for i in range(spec["nlat"]):
+        la = spec["lat0"] + i * spec["step"]
+        if la < s_ or la > n:
+            continue
+        for j in range(spec["nlon"]):
+            lo = (spec["lon0"] + j * spec["step"]) % 360
+            if lo < w or lo > e:
+                continue
+            r = grid_at(box, rvals, la, lo)
+            k = i * spec["nlon"] + j
+            if r is None:
+                continue
+            a = min(1.0, min(la - s_, n - la, lo - w, e - lo) / BOX_BLEND_DEG)
+            out[k] = r if out[k] is None else out[k] * (1 - a) + r * a
+    h = BOX_BLEND_DEG / 2
+    return out, [w + h, s_ + h, e - h, n - h]
+
+
 def write_global_frames(sdir, now, frames, regional, keep_from, source):
-    """The global model (part 87): the step nearest now at the model's own cells in now.json (whole µg/m³), rewritten only when the
-    step changes; every 3-hour step a frame at CAMS_COARSE_DEG, a past one written once, ahead ones with every new run; the
-    regional grid laid in where it is finer. Returns (the now file, the frame list, its cell size, its time) or None."""
+    """The global model (part 87): its 3-hour step at or before now (part 99: never a later one, which is a forecast and belongs on the
+    time line) at the model's own cells in now.json (whole µg/m³), with the regional box's hourly grid of this hour laid in, its own
+    time beside it (`box_at`, `box`); every 3-hour step a frame at CAMS_COARSE_DEG, a past one written once, ahead ones with every new
+    run; the regional grid laid in where it is finer. Returns (the now file, the frame list, its cell size, its time, the box or None)."""
     import grid_spec
     os.makedirs(sdir, exist_ok=True)
     by = {t.astimezone(TZ8): v for t, v in frames.items()}
-    if not by:
+    past = [t for t in by if t <= now]
+    if not past:
         return None
-    nearest = min(by, key=lambda t: (abs((t - now).total_seconds()), t))
-    if abs((nearest - now).total_seconds()) > 1.5 * 3600:
+    at = max(past)
+    if (now - at).total_seconds() > 4.5 * 3600:
         return None
-    spec, vals = by[nearest]
-    if nearest in regional:
-        vals = regional_where_finer(spec, vals, grid_spec.BOX, regional[nearest])
-    write_json(os.path.join(sdir, "now.json"), {"at": stamp(nearest), "grid": spec, "values": whole(vals), "unit": "µg/m³", "kind": "estimated",
+    spec, vals = by[at]
+    hour = now.astimezone(TZ8).replace(minute=0, second=0, microsecond=0)
+    boxed = None
+    if hour in regional:
+        vals, inner = regional_inside(spec, vals, grid_spec.BOX, regional[hour])
+        boxed = {"box_at": stamp(hour), "box": inner}
+    write_json(os.path.join(sdir, "now.json"), {"at": stamp(at), **(boxed or {}), "grid": spec, "values": whole(vals), "unit": "µg/m³", "kind": "estimated",
                                                 "source": source, "credits": credit_block([source], now)})
     k = max(1, round(CAMS_COARSE_DEG / spec["step"]))
     for t, (sp, vs) in by.items():
         p = os.path.join(sdir, f"{hour_name(t)}.json")
-        if t < now - dt.timedelta(days=PAST_DAYS) or (t < nearest and os.path.exists(p)):
+        if t < now - dt.timedelta(days=PAST_DAYS) or (t < at and os.path.exists(p)):
             continue
         cs, cv = block_mean(sp, vs, k) if k > 1 else (sp, vs)
         if t in regional:
@@ -671,16 +703,16 @@ def write_global_frames(sdir, now, frames, regional, keep_from, source):
         write_json(p, {"at": stamp(t), "grid": cs, "values": whole(cv), "unit": "µg/m³", "kind": "estimated", "source": source,
                        "credits": credit_block([source], now)})
     prune(sdir, keep_from)
-    listed = [{"at": stamp(nearest), "file": "earth/smoke/now.json", "when": "now"}]
+    listed = [{"at": stamp(at), "file": "earth/smoke/now.json", "when": "now"}]
     for f in sorted(os.listdir(sdir)):
         stem = f.split(".")[0]
         if len(stem) != 13:
             continue
         t = from_name(stem)
-        if t != nearest:
-            listed.append({"at": stamp(t), "file": f"earth/smoke/{f}", "when": "past" if t < nearest else "ahead"})
+        if t != at:
+            listed.append({"at": stamp(t), "file": f"earth/smoke/{f}", "when": "past" if t < at else "ahead"})
     listed.sort(key=lambda x: x["at"])
-    return "earth/smoke/now.json", listed, spec["step"], nearest
+    return "earth/smoke/now.json", listed, spec["step"], at, boxed
 
 
 # ---------------------------------------------------------------- the build
@@ -768,9 +800,9 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         files = None
         smoke = missing({**smoke, "source": "CAMS", "credit": credits.CREDITS["sources"]["CAMS"]["short"], "made_at": stamp(now), "fetched_at": stamp(now)},
                         f"The smoke model did not answer at {clock(now)} ({str(why)[:120]}).")
-    if files and len(files) == 4:   # the global model: its now.json and 3-hour frames
-        now_file, frame_list, cell, at = files
-        smoke.update(status="ok", now=now_file, covers={"at": stamp(at)}, frames=frame_list, cell_deg=cell, cell_km=round(cell * 111.2))
+    if files and len(files) == 5:   # the global model: its now.json and 3-hour frames; the regional box at its own hour (part 99)
+        now_file, frame_list, cell, at, boxed = files
+        smoke.update(status="ok", now=now_file, covers={"at": stamp(at), **(boxed or {})}, frames=frame_list, cell_deg=cell, cell_km=round(cell * 111.2))
     elif files:
         now_name, frame_list, cell = files
         smoke.update(status="ok", now=f"earth/smoke/{now_name}.json", covers={"at": stamp(from_name(now_name))}, frames=frame_list,
@@ -937,17 +969,19 @@ def write_smoke_frames(sdir, now, frames, regional, keep_from, source):
 
 
 def write_wind_frames(wdir, now, run, steps, keep_from):
-    """The step nearest now at 1 degree, every step ahead at 2 degrees; past frames kept as written. Returns the layer's fields."""
+    """The step at or before now at 1 degree (part 99; part 85 took the nearest, which could be later than now), every step ahead at
+    2 degrees; past frames kept as written. Returns the layer's fields."""
     os.makedirs(wdir, exist_ok=True)
     valid = {run + dt.timedelta(hours=s): s for s in steps}
-    nearest = min(valid, key=lambda t: (abs((t - now).total_seconds()), t))   # the earlier on a tie (part 85)
+    past = [t for t in valid if t <= now]
+    shown = max(past) if past else min(valid)   # a run whose first step is still ahead (never on the live feed) says forecast
     for t, s in valid.items():
         name = hour_name(t)
         p = os.path.join(wdir, f"{name}.json")
-        if t < nearest and os.path.exists(p):
+        if t < shown and os.path.exists(p):
             continue   # the past as it was shown
         spec, u, v = steps[s]
-        if t != nearest:
+        if t != shown:
             spec, u, v = coarser(spec, u, v)
         if t < now - dt.timedelta(days=PAST_DAYS):
             continue
@@ -958,9 +992,9 @@ def write_wind_frames(wdir, now, run, steps, keep_from):
     for f in sorted(os.listdir(wdir)):
         stem = f.split(".")[0]
         t = from_name(stem)
-        frames.append({"at": stamp(t), "file": f"earth/wind/{f}", "when": "now" if t == nearest else ("past" if t < nearest else "ahead")})
+        frames.append({"at": stamp(t), "file": f"earth/wind/{f}", "when": "now" if t == shown else ("past" if t < shown else "ahead")})
     # a step later than now is a forecast, and says so wherever it is shown (part 85)
-    return {"now": f"earth/wind/{hour_name(nearest)}.json", "covers": {"at": stamp(nearest)}, "forecast": nearest > now, "frames": frames, "cell_deg": 1.0, "cell_km": 111}
+    return {"now": f"earth/wind/{hour_name(shown)}.json", "covers": {"at": stamp(shown)}, "forecast": shown > now, "frames": frames, "cell_deg": 1.0, "cell_km": 111}
 
 
 def fire_days(fdir, now, rows):
