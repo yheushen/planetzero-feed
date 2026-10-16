@@ -81,6 +81,22 @@ jobs:
           if [ -n "$ADS_KEY" ]; then pip install -q eccodes; fi
           python engine/earth.py --out _feed --cache .cache
 
+      - name: On the 1st of a month, start the feed branch fresh (1 orphan commit with every file; session 7bc, part 86)
+        if: steps.due.outputs.due == 'yes'
+        id: month
+        run: |
+          git -C _feed config user.name "planetzero-feed"
+          git -C _feed config user.email "planetzero-feed@users.noreply.github.com"
+          touch _feed/.nojekyll
+          base=$(git -C _feed rev-parse HEAD)
+          out=$(python3 engine/feed_month.py _feed)
+          echo "$out" >> "$GITHUB_OUTPUT"
+          if [ "$out" = "fresh=yes" ]; then
+            # the lease: only if nobody pushed since this run checked the branch out; else the next step publishes as usual
+            git -C _feed push -q --force-with-lease=feed:$base origin HEAD:feed && echo "the feed branch started fresh" \
+              || { echo "someone pushed meanwhile; the fresh start waits for the next run"; git -C _feed reset -q --soft "$base"; }
+          fi
+
       - name: Publish to the feed branch (GitHub Pages serves it)
         if: steps.due.outputs.due == 'yes'
         working-directory: _feed

@@ -46,7 +46,7 @@ Licence: aqicn's terms: credit aqicn and the agency; no paid use; no copying of 
 
 ## NASA GIBS (Earth's pictures)
 
-We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS). Real Earth: VIIRS on NOAA-20, corrected reflectance, true colour, over NASA's Blue Marble; smoke from space: MODIS on Terra, aerosol optical depth; carbon monoxide: AIRS on Aqua, 500 hPa.
+We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS). Real Earth: VIIRS on NOAA-20, Suomi NPP and NOAA-21, corrected reflectance, true colour, with NASA's Blue Marble where none saw anything; smoke from space: MODIS on Terra, aerosol optical depth; carbon monoxide: AIRS on Aqua, 500 hPa.
 
 Licence: NASA open data, with GIBS's acknowledgement. Not copied into this feed: each visitor's browser loads the pictures from NASA. No NASA endorsement is implied.
 
