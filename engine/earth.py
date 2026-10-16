@@ -56,7 +56,11 @@ GFS = "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_1p00.pl"
 GFS_STEPS = tuple(range(0, 121, 6))
 GFS_READY_H = 3.5              # a GFS cycle reaches NOMADS about 3.5 hours after its time
 FIRMS = "https://firms.modaps.eosdis.nasa.gov/api/area/csv/"
-FIRMS_SATS = ("VIIRS_SNPP_NRT", "VIIRS_NOAA20_NRT")
+FIRMS_SATS = ("VIIRS_SNPP_NRT", "VIIRS_NOAA20_NRT", "VIIRS_NOAA21_NRT")
+FIRE_SATS = ("VIIRS_NOAA20_NRT", "VIIRS_SNPP_NRT", "VIIRS_NOAA21_NRT")   # the order of the `sats` bits: 1 NOAA-20, 2 Suomi NPP, 4 NOAA-21
+FIRE_SAT_NAMES = ("NOAA-20", "Suomi NPP", "NOAA-21")
+FIRE_BOX = (90, -15, 145, 25)  # west, south, east, north: Southeast Asia, where each detection is kept at its place (part 93)
+FIRE_MERGE_M = 400             # 2 satellites seeing the same fire this close: 1 fire
 OAQ = "https://api.openaq.org/v3/"
 CELESTRAK = "https://celestrak.org/NORAD/elements/gp.php"
 CELESTRAK_EVERY_H = 2          # "For GP data, updates are once every 2 hours" (celestrak.org/usage-policy.php)
@@ -206,7 +210,7 @@ def fetch_gfs(now, cache):
 
 
 # ---------------------------------------------------------------- fires: NASA FIRMS, worldwide
-def firms_rows(text):
+def firms_rows(text, sat=0):
     if not text.startswith("latitude"):
         raise FetchError("FIRMS: not a CSV answer")
     out = []
@@ -214,26 +218,59 @@ def firms_rows(text):
         if not rec.get("acq_date"):
             continue
         t = dt.datetime.strptime(rec["acq_date"] + rec["acq_time"].zfill(4), "%Y-%m-%d%H%M").replace(tzinfo=UTC)
-        out.append((t, float(rec["latitude"]), float(rec["longitude"])))
+        out.append((t, float(rec["latitude"]), float(rec["longitude"]), sat))
     return out
 
 
 def fetch_firms_world(start_utc_date, days):
-    """Every VIIRS detection worldwide from both satellites for `days` UTC days from the date: [(time UTC, lat, lon)]."""
+    """Every VIIRS detection worldwide from the 3 satellites for `days` UTC days from the date: [(time UTC, lat, lon, satellite)], the
+    satellite as its index in FIRE_SATS. A satellite that does not answer is left out; none answering is an error."""
     key = os.environ.get("FIRMS_MAP_KEY", "").strip()
     if not key and isinstance(transport.TRANSPORT, transport.Live):
         raise FetchError("no FIRMS_MAP_KEY")
-    out = []
+    out, errors = [], []
     for sat in FIRMS_SATS:
-        out += firms_rows(get_text(f"{FIRMS}{key or 'KEY'}/{sat}/world/{days}/{start_utc_date}", timeout=300))
+        try:
+            out += firms_rows(get_text(f"{FIRMS}{key or 'KEY'}/{sat}/world/{days}/{start_utc_date}", timeout=300), FIRE_SATS.index(sat))
+        except FetchError as e:
+            errors.append(f"{sat}: {e}")
         pause(1)
+    if errors and not out:
+        raise FetchError("; ".join(errors))
     return out
+
+
+def fire_detections(rows, lo, hi, box=FIRE_BOX):
+    """Each detection with lo < time <= hi inside the box, at its place to 3 decimals (part 93): [[lat, lon, minutes after lo, sats]],
+    `sats` a bit for each satellite that saw it. 2 satellites seeing the same fire within FIRE_MERGE_M make 1, at the newer place and time."""
+    west, south, east, north = box
+    kept = sorted((r for r in rows if lo < r[0] <= hi and west <= r[2] <= east and south <= r[1] <= north), key=lambda r: r[0], reverse=True)
+    cells, out = {}, []
+    for t, la, lo_, sat in kept:   # newest first: an older sighting by another satellite joins the newer
+        ci, cj = math.floor(la * 100), math.floor(lo_ * 100)
+        joined = False
+        for a in range(ci - 1, ci + 2):
+            for b in range(cj - 1, cj + 2):
+                for k in cells.get((a, b), ()):
+                    f = out[k]
+                    if not (f[4] & (1 << sat)) and km(la, lo_, f[0], f[1]) * 1000 <= FIRE_MERGE_M:
+                        f[4] |= 1 << sat
+                        joined = True
+                        break
+                if joined:
+                    break
+            if joined:
+                break
+        if not joined:
+            cells.setdefault((ci, cj), []).append(len(out))
+            out.append([la, lo_, t, 0, 1 << sat])
+    return [[round(la, 3), round(lo_, 3), int((t - lo).total_seconds() // 60), bits] for la, lo_, t, _x, bits in out]
 
 
 def fire_cells(rows, lo, hi):
     """Detections with lo < time <= hi as 0.1 degree cells: [[lat, lon, count]], sorted; and how many detections they hold."""
     cells = {}
-    for t, la, lo_ in rows:
+    for t, la, lo_, *_ in rows:
         if lo < t <= hi:
             k = (round(la * 10), round(lo_ * 10))
             cells[k] = cells.get(k, 0) + 1
@@ -765,13 +802,20 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     else:
         rows = got["fires"]
         cells, n = fire_cells(rows, lo, hi)
-        newest = max((t for t, _a, _b in rows if lo < t <= hi), default=None)
+        newest = max((r[0] for r in rows if lo < r[0] <= hi), default=None)
         write_json(os.path.join(folder, "fires.json"), {"schema_version": "1", "generated_at": stamp(now), "from": stamp(lo), "to": stamp(hi),
                                                         "columns": ["lat", "lon", "count"], "cells": cells, "detections": n,
                                                         "credits": credit_block(["FIRMS"], now)})
+        # part 93: in Southeast Asia, each fire where it was seen
+        sea = fire_detections(rows, lo, hi)
+        write_json(os.path.join(folder, "fires-sea.json"), {"schema_version": "1", "generated_at": stamp(now), "from": stamp(lo), "to": stamp(hi), "box": list(FIRE_BOX),
+                                                            "columns": ["lat", "lon", "minutes", "sats"], "satellites": list(FIRE_SAT_NAMES),
+                                                            "note": f"Each fire seen in the box, its place to 3 decimals (about 100 m), the minutes after `from`, a bit for each satellite that saw it (1 NOAA-20, 2 Suomi NPP, 4 NOAA-21); 2 satellites within {FIRE_MERGE_M} m make 1 fire.",
+                                                            "rows": sea, "detections": sum(1 for r in rows if lo < r[0] <= hi and FIRE_BOX[0] <= r[2] <= FIRE_BOX[2] and FIRE_BOX[1] <= r[1] <= FIRE_BOX[3]),
+                                                            "credits": credit_block(["FIRMS"], now)})
         days = fire_days(os.path.join(folder, "fires"), now, rows)
         fires.update(status="ok", file="earth/fires.json", covers={"from": stamp(lo), "to": stamp(hi)}, detections=n, cells=len(cells),
-                     made_at=stamp(newest) if newest else stamp(now), days=days)
+                     made_at=stamp(newest) if newest else stamp(now), days=days, sea_file="earth/fires-sea.json", sea_box=list(FIRE_BOX), sea_fires=len(sea))
         if n == 0:
             fires = missing(fires, f"NASA FIRMS answered with 0 fires worldwide in 24 hours at {clock(now)}.")   # the logger's rule
         layers.append(fires)
@@ -931,7 +975,7 @@ def fire_days(fdir, now, rows):
         if not os.path.exists(p):
             lo = dt.datetime.combine(d, dt.time(0), TZ8)
             hi = lo + dt.timedelta(days=1)
-            src = rows if rows and min(t for t, _a, _b in rows) <= lo.astimezone(UTC) else None
+            src = rows if rows and min(r[0] for r in rows) <= lo.astimezone(UTC) else None
             if src is None:
                 try:
                     src = fetch_firms_world((lo.astimezone(UTC).date()).isoformat(), 2)
