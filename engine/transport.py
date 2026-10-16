@@ -55,6 +55,17 @@ def key_file(key):
 
 
 class Live:
+    def post(self, url, body, headers=None, timeout=60):
+        """1 POST, no retry (a repeated submission would start a second job): the Atmosphere Data Store's requests (Earth)."""
+        req = urllib.request.Request(url, data=body, headers=headers or {}, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read()
+        except urllib.error.HTTPError as e:
+            raise FetchError(f"HTTP {e.code} from {urllib.parse.urlsplit(url).netloc}")
+        except Exception as e:
+            raise FetchError(f"{type(e).__name__} from {urllib.parse.urlsplit(url).netloc}")
+
     def fetch(self, url, headers=None, tries=4, timeout=60):
         req = urllib.request.Request(url, headers=headers or {"User-Agent": "Mozilla/5.0"})
         err = None
@@ -73,13 +84,16 @@ class Live:
 
 
 class Recorder(Live):
+    def __init__(self, folder=RECORDED):
+        self.folder = folder
+
     def fetch(self, url, headers=None, tries=4, timeout=60):
         body = super().fetch(url, headers, tries, timeout)
         key = request_key(url)
-        os.makedirs(RECORDED, exist_ok=True)
-        with gzip.open(os.path.join(RECORDED, key_file(key)), "wb") as f:
+        os.makedirs(self.folder, exist_ok=True)
+        with gzip.open(os.path.join(self.folder, key_file(key)), "wb") as f:
             f.write(body)
-        index_path = os.path.join(RECORDED, "index.json")
+        index_path = os.path.join(self.folder, "index.json")
         index = json.load(open(index_path)) if os.path.exists(index_path) else {}
         index[key] = key_file(key)
         json.dump(dict(sorted(index.items())), open(index_path, "w"), indent=1)
@@ -88,17 +102,19 @@ class Recorder(Live):
 
 class Replay:
     def __init__(self, folder=RECORDED):
-        self.folder = folder
+        self.folders = (folder,) if isinstance(folder, str) else tuple(folder)   # the first folder holding the answer wins
+        self.folder = self.folders[0]
         self.asked = []
 
     def fetch(self, url, headers=None, tries=4, timeout=60):
         key = request_key(url)
         self.asked.append(key)
-        path = os.path.join(self.folder, key_file(key))
-        if not os.path.exists(path):
-            raise FetchError(f"no recorded answer for {key}")
-        with gzip.open(path, "rb") as f:
-            return f.read()
+        for folder in self.folders:
+            path = os.path.join(folder, key_file(key))
+            if os.path.exists(path):
+                with gzip.open(path, "rb") as f:
+                    return f.read()
+        raise FetchError(f"no recorded answer for {key}")
 
 
 class Failing:
@@ -124,6 +140,16 @@ def get_json(url, headers=None, tries=4, timeout=60):
     body = get_bytes(url, headers, tries, timeout)
     try:
         return json.loads(body)
+    except ValueError:
+        raise FetchError(f"not JSON from {urllib.parse.urlsplit(url).netloc}")
+
+
+def post_json(url, body, headers=None, timeout=60):
+    """POST a JSON body and read a JSON answer; only a transport that can post (Live, or a test's fake) may."""
+    if not hasattr(TRANSPORT, "post"):
+        raise FetchError(f"no posting to {urllib.parse.urlsplit(url).netloc} in a replay")
+    try:
+        return json.loads(TRANSPORT.post(url, json.dumps(body).encode(), headers, timeout))
     except ValueError:
         raise FetchError(f"not JSON from {urllib.parse.urlsplit(url).netloc}")
 

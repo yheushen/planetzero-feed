@@ -71,6 +71,16 @@ jobs:
         if: steps.due.outputs.due == 'yes'
         run: python engine/build_feed.py --out _feed --cache .cache
 
+      - name: Build Earth (its own step after the feed; if it fails, the feed is still published)
+        if: steps.due.outputs.due == 'yes'
+        continue-on-error: true
+        timeout-minutes: 12
+        env:
+          ADS_KEY: ${{ secrets.ADS_KEY }}
+        run: |
+          if [ -n "$ADS_KEY" ]; then pip install -q eccodes; fi
+          python engine/earth.py --out _feed --cache .cache
+
       - name: Publish to the feed branch (GitHub Pages serves it)
         if: steps.due.outputs.due == 'yes'
         working-directory: _feed
@@ -92,5 +102,6 @@ jobs:
             git fetch -q origin feed
             git reset -q --hard FETCH_HEAD
             (cd .. && python engine/build_feed.py --out _feed --cache .cache > /dev/null)
+            (cd .. && python engine/earth.py --out _feed --cache .cache > /dev/null) || true
           done
           echo "gave up after 3 attempts"; exit 1

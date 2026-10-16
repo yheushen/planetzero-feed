@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "earth.schema.json",
+  "title": "earth.json: Earth's layers (docs/SPEC.md section 27). Every layer says its kind, unit, source, credit, the time it covers and the time it was made; a missing layer says why.",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "kinds", "layers", "credits"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "generated_at": {"type": "string", "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d\\+08:00$"},
+    "replay_of": {"type": "string"},
+    "kinds": {"type": "object", "required": ["measured", "from_space", "estimated"]},
+    "layers": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/layer"}},
+    "took_s": {"type": "object"},
+    "credits": {"type": "object", "minProperties": 1}
+  },
+  "$defs": {
+    "layer": {
+      "type": "object",
+      "required": ["id", "name", "kind", "unit", "source", "credit", "status", "made_at", "what", "colours", "updates", "numbers", "words"],
+      "properties": {
+        "id": {"enum": ["smoke", "wind", "fires", "monitors", "satellites", "real_earth", "smoke_space", "co"]},
+        "kind": {"enum": ["measured", "from_space", "estimated"]},
+        "status": {"enum": ["ok", "missing"]},
+        "unit": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "credit": {"type": "string", "minLength": 1},
+        "made_at": {"type": "string", "minLength": 10},
+        "covers": {"type": "object", "minProperties": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "picture": {"const": true},
+        "cell_deg": {"type": "number", "exclusiveMinimum": 0},
+        "cell_km": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "missing"}}}, "then": {"required": ["reason"]}},
+        {"if": {"properties": {"status": {"const": "ok"}}}, "then": {"required": ["covers"]}},
+        {"if": {"properties": {"picture": {"const": true}}, "required": ["picture"]}, "then": {"properties": {"unit": {"const": "picture"}, "numbers": {"const": "Picture only"}}, "required": ["gibs"]}}
+      ]
+    }
+  }
+}

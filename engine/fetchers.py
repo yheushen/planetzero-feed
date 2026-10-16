@@ -222,13 +222,16 @@ def fetch_aqicn(now):
 
 # ---------------------------------------------------------------- the globe's grid, once a day
 def fetch_grid(day):
-    """{kind: [{time: values}] per point, in grid_spec order} for the given local day and the next.
+    """{kind: [{time: values}] per point, in grid_spec order} for the given local day and the next (the smoke: 5 days ahead).
     About 4,000 Open-Meteo calls; paced to stay under 600 a minute."""
     nxt = (dt.date.fromisoformat(day) + dt.timedelta(days=1)).isoformat()
+    # the smoke 5 days ahead for Earth's time line (session 7, part 69): the same number of calls, since Open-Meteo counts a
+    # location as 1 call up to 2 weeks of data
+    ahead = (dt.date.fromisoformat(day) + dt.timedelta(days=5)).isoformat()
     out = {"smoke": [], "wind": [], "hemi": []}
     for kind, url, pts, hourly in grid_spec.requests():
         q = {"latitude": ",".join(str(a) for a, b in pts), "longitude": ",".join(str(b) for a, b in pts), "hourly": hourly,
-             "timezone": "Asia/Singapore", "start_date": day, "end_date": nxt}
+             "timezone": "Asia/Singapore", "start_date": day, "end_date": ahead if kind == "smoke" else nxt}
         res = get_json(url + "?" + urllib.parse.urlencode(q), timeout=120)
         res = res if isinstance(res, list) else [res]
         if len(res) != len(pts):
