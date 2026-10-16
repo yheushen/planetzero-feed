@@ -791,7 +791,7 @@ def write_wind_frames(wdir, now, run, steps, keep_from):
     """The step nearest now at 1 degree, every step ahead at 2 degrees; past frames kept as written. Returns the layer's fields."""
     os.makedirs(wdir, exist_ok=True)
     valid = {run + dt.timedelta(hours=s): s for s in steps}
-    nearest = min(valid, key=lambda t: abs((t - now).total_seconds()))
+    nearest = min(valid, key=lambda t: (abs((t - now).total_seconds()), t))   # the earlier on a tie (part 85)
     for t, s in valid.items():
         name = hour_name(t)
         p = os.path.join(wdir, f"{name}.json")
@@ -810,7 +810,8 @@ def write_wind_frames(wdir, now, run, steps, keep_from):
         stem = f.split(".")[0]
         t = from_name(stem)
         frames.append({"at": stamp(t), "file": f"earth/wind/{f}", "when": "now" if t == nearest else ("past" if t < nearest else "ahead")})
-    return {"now": f"earth/wind/{hour_name(nearest)}.json", "covers": {"at": stamp(nearest)}, "frames": frames, "cell_deg": 1.0, "cell_km": 111}
+    # a step later than now is a forecast, and says so wherever it is shown (part 85)
+    return {"now": f"earth/wind/{hour_name(nearest)}.json", "covers": {"at": stamp(nearest)}, "forecast": nearest > now, "frames": frames, "cell_deg": 1.0, "cell_km": 111}
 
 
 def fire_days(fdir, now, rows):
