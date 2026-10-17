@@ -522,6 +522,51 @@ def adjusted_file(grid_file, rows, now, source):
             f"{len(used):,} monitors used")
 
 
+# ---------------------------------------------------------------- Highest now (session 8, part 126)
+CITIES = os.path.join(HERE, "cities.json")   # Natural Earth's populated places of 1 million or more, kept with its source and date
+CITY_KM = 25
+CITY_MIN = 3
+CITY_ROWS = 10
+HIGHEST_RULE = "Big cities, this hour: the middle of their monitors within 25 km, µg/m³. Cities with 3 or more open monitors."
+_cities = None
+
+
+def load_cities():
+    """[(name, country, lat, lon, population)] from engine/cities.json."""
+    global _cities
+    if _cities is None:
+        _cities = [tuple(r) for r in (read_json(CITIES) or {}).get("rows", [])]
+    return _cities
+
+
+def highest_file(rows, now, cities=None):
+    """earth/highest.json: big cities ranked by the median of the monitors the adjusted field uses (field_monitors) within CITY_KM of the
+    city's point, whole µg/m³ (an even count: the mean of the middle 2), with its band on NEA's hourly scale; only cities with CITY_MIN
+    or more. Highest first; a tie goes to more monitors, then the name. `cities` defaults to engine/cities.json."""
+    import statistics
+    kept, _ = field_monitors(rows)
+    cities = load_cities() if cities is None else cities
+    cells = {}
+    for r in kept:
+        cells.setdefault((math.floor(r["lat"]), math.floor(r["lon"]) % 360), []).append(r)
+    found, fewer = [], 0
+    for name, country, la, lo, _pop in cities:
+        reach = max(1, math.ceil(CITY_KM / 111.2 / max(0.05, math.cos(math.radians(la)))))
+        vals = [r["value"] for a in range(math.floor(la) - 1, math.floor(la) + 2) for b in range(math.floor(lo) - reach, math.floor(lo) + reach + 1)
+                for r in cells.get((a, b % 360), ()) if km(la, lo, r["lat"], r["lon"]) <= CITY_KM]
+        if len(vals) < CITY_MIN:
+            fewer += 1
+            continue
+        med = bands.whole(statistics.median(vals))
+        found.append({"city": name, "country": country, "lat": round2(la), "lon": round2(lo), "median": med, "monitors": len(vals),
+                      "band": bands.band(med, "hourly_pm25")})
+    found.sort(key=lambda c: (-c["median"], -c["monitors"], c["city"]))
+    ids = (["OpenAQ-world"] if any(r.get("source") == "OpenAQ" for r in kept) else []) + (["NEA"] if any(r.get("source") == "NEA" for r in kept) else [])
+    return {"schema_version": "1", "generated_at": stamp(now), "at": max((r["at"] for r in kept), default=stamp(now)), "rule": HIGHEST_RULE,
+            "rows": [{"rank": k + 1, **c} for k, c in enumerate(found[:CITY_ROWS])], "left_out": {"fewer_than_3": fewer, "cities": len(cities)},
+            "credits": credit_block(ids + ["NaturalEarth"], now)}
+
+
 # ---------------------------------------------------------------- satellites: CelesTrak
 def fetch_satellites(now, prev):
     """(elements, fetched_at, note): the kept elements when they are under 2 hours old (no request at all); else each satellite
@@ -1086,6 +1131,19 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         os.remove(adj_path)   # never an older field beside this hour's model (invariant 4)
     took["adjusted"] = round(time.monotonic() - t1, 1)
 
+    # part 126: Highest now, from the same monitors (named at earth.json's top level: it ranks cities, and comes even from NEA alone)
+    hi_path = os.path.join(folder, "highest.json")
+    try:
+        hi = highest_file(rows, now)
+        write_json(hi_path, hi)
+        highest = {"file": "earth/highest.json", "rows": len(hi["rows"])}
+    except Exception as e:   # never stops the run, never leaves an older ranking named
+        highest = None
+        if os.path.exists(hi_path):
+            os.remove(hi_path)
+        if not quiet:
+            print(f"Highest now failed: {type(e).__name__}: {str(e)[:160]}")
+
     # satellites
     sat = {"id": "satellites", "name": "Satellites", "kind": "from_space", "unit": "km", "window": "live", "source": "CelesTrak", "words": "white",
            "credit": credits.CREDITS["sources"]["CelesTrak"]["short"], "what": "Where the satellites that take these pictures are now, and where they passed in the last 50 minutes.",
@@ -1134,6 +1192,8 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
         earth["replay_of"] = stamp(now)
     earth["kinds"] = KIND_WORD
     earth["layers"] = layers
+    if highest:
+        earth["highest"] = highest
     earth["took_s"] = {**took, "all": round(time.monotonic() - t0, 1)}
     used = sorted({l["source"] for l in layers} | ({"OpenAQ-world", "NEA", "DOE"} if any(l["id"] == "monitors" and l["status"] == "ok" for l in layers) else set()))
     earth["credits"] = credit_block([s for s in used if s in credits.ALL] + ["NaturalEarth"], now)

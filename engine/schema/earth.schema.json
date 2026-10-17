@@ -11,7 +11,12 @@
     "kinds": {"type": "object", "required": ["measured", "from_space", "estimated"]},
     "layers": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/layer"}},
     "took_s": {"type": "object"},
-    "credits": {"type": "object", "minProperties": 1}
+    "credits": {"type": "object", "minProperties": 1},
+    "highest": {
+      "description": "Highest now (session 8, part 126; engine/schema/highest.schema.json): this hour's file and how many rows it has (at most 10). Top level, not on the monitors layer: it ranks cities, from the monitors and Natural Earth's places, and is written even when OpenAQ fails (from NEA's monitors).",
+      "type": "object", "additionalProperties": false, "required": ["file", "rows"],
+      "properties": {"file": {"const": "earth/highest.json"}, "rows": {"type": "integer", "minimum": 0, "maximum": 10}}
+    }
   },
   "$defs": {
     "layer": {

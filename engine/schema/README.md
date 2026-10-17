@@ -16,6 +16,7 @@ A number never travels alone. Every reading carries its **unit**, **scale**, **b
 | `checks.json` | Our check results on numbers we may not republish (Google, IQAir); empty until shot 2 | `checks.schema.json` |
 | `earth.json`, `earth/` | Earth's layers. The `real_earth` layer may carry `day_picture`: Real Earth as 1 finished picture a day, `earth/real/<date>-2048.webp` and `-4096.webp` with JPEG fallbacks, its gaps filled, its poles completed and its joins softened by the engine (parts 114 and 116); example in `fixtures/day_picture.json`. Without it the page builds the picture from GIBS | `earth.schema.json` |
 | `earth/smoke/adjusted.json` | The hour's smoke model adjusted to the monitors near it (part 125), on the grid of the smoke layer's now file; named by the smoke layer's `adjusted`. An estimate, never an hour; history, downloads and the connector keep the model. Example in `fixtures/adjusted.json` | `adjusted.schema.json` |
+| `earth/highest.json` | Highest now (part 126): big cities (Natural Earth, 1 million people or more, `engine/cities.json`) ranked by the median of their open PM2.5 monitors within 25 km this hour, cities with 3 or more; named by earth.json's top-level `highest`. Example in `fixtures/highest.json` | `highest.schema.json` |
 | `scales.json` | The bands, colours and advice (SPEC section 6), shared by engine, page and connector | (data, not a schema) |
 
 Shared pieces live in `common.schema.json`.

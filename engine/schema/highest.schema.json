@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "highest.schema.json",
+  "title": "earth/highest.json: Highest now (session 8, part 126). Big cities (Natural Earth's populated places of 1 million people or more, engine/cities.json) ranked by the middle (median) of their open PM2.5 monitors within 25 km this hour, the same monitors the adjusted field uses; only cities with 3 or more. Written every hour; named by earth.json's `highest`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "at", "rule", "rows", "left_out", "credits"],
+  "properties": {
+    "schema_version": {"const": "1"},
+    "generated_at": {"type": "string", "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d\\+08:00$"},
+    "at": {"type": "string", "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d\\+08:00$", "description": "The monitors' hour: the newest reading among the monitors used."},
+    "rule": {"type": "string", "minLength": 1, "description": "The rule in the page's words."},
+    "rows": {
+      "type": "array", "maxItems": 10,
+      "description": "Highest first; a tie on the median goes to the city with more monitors.",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["rank", "city", "country", "lat", "lon", "median", "monitors", "band"],
+        "properties": {
+          "rank": {"type": "integer", "minimum": 1, "maximum": 10},
+          "city": {"type": "string", "minLength": 1},
+          "country": {"type": "string", "minLength": 1},
+          "lat": {"type": "number", "minimum": -90, "maximum": 90},
+          "lon": {"type": "number", "minimum": -180, "maximum": 180},
+          "median": {"type": "integer", "minimum": 0, "description": "The middle of the city's monitors, whole µg/m³ (an even count: the mean of the middle 2)."},
+          "monitors": {"type": "integer", "minimum": 3},
+          "band": {"enum": ["Normal", "Elevated", "High", "Very high"], "description": "The median's band on NEA's hourly PM2.5 scale."}
+        }
+      }
+    },
+    "left_out": {
+      "type": "object", "additionalProperties": false, "required": ["fewer_than_3", "cities"],
+      "properties": {
+        "fewer_than_3": {"type": "integer", "minimum": 0, "description": "Big cities with fewer than 3 such monitors within 25 km (0, 1 or 2)."},
+        "cities": {"type": "integer", "minimum": 0, "description": "Big cities in all."}
+      }
+    },
+    "credits": {"type": "object", "minProperties": 1}
+  }
+}
