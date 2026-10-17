@@ -31,15 +31,30 @@
         "cell_deg": {"type": "number", "exclusiveMinimum": 0},
         "cell_km": {"type": "number", "exclusiveMinimum": 0},
         "step_hours": {"type": "integer", "minimum": 1, "maximum": 24, "description": "The wind: hours between the model's steps (part 112)."},
-        "day_picture": {"$ref": "#/$defs/day_picture"}
+        "day_picture": {"$ref": "#/$defs/day_picture"},
+        "adjusted": {"$ref": "#/$defs/adjusted"}
       },
       "allOf": [
         {"if": {"properties": {"status": {"const": "missing"}}}, "then": {"required": ["reason"]}},
         {"if": {"properties": {"status": {"const": "ok"}}}, "then": {"required": ["covers"]}},
         {"if": {"properties": {"id": {"const": "wind"}}, "required": ["id"]}, "then": {"required": ["step_hours"]}},
         {"if": {"required": ["day_picture"]}, "then": {"properties": {"id": {"const": "real_earth"}}}},
+        {"if": {"required": ["adjusted"]}, "then": {"properties": {"id": {"const": "smoke"}}}},
         {"if": {"properties": {"picture": {"const": true}}, "required": ["picture"]}, "then": {"properties": {"unit": {"const": "picture"}, "numbers": {"const": "Picture only"}}, "required": ["gibs"]}}
       ]
+    },
+    "adjusted": {
+      "description": "The smoke layer, when this hour's field adjusted to the monitors was written (session 8, part 125; engine/schema/adjusted.schema.json): its file, how many monitors it used and how many were left out, by why (as the file says).",
+      "type": "object", "additionalProperties": false, "required": ["file", "used", "left_out"],
+      "properties": {
+        "file": {"const": "earth/smoke/adjusted.json"},
+        "used": {"type": "integer", "minimum": 0},
+        "left_out": {
+          "type": "object", "additionalProperties": false, "required": ["zero", "doe_index", "late", "not_pm25", "suspect", "no_model"],
+          "properties": {"zero": {"type": "integer", "minimum": 0}, "doe_index": {"type": "integer", "minimum": 0}, "late": {"type": "integer", "minimum": 0},
+                         "not_pm25": {"type": "integer", "minimum": 0}, "suspect": {"type": "integer", "minimum": 0}, "no_model": {"type": "integer", "minimum": 0}}
+        }
+      }
     },
     "day_picture": {
       "description": "Real Earth as 1 finished picture of the whole planet, built by the engine once a day (session 7e, parts 114 and 116): the gaps filled, the poles completed and the joins softened in it. Optional: without it (the replay, or no Pillow on the runner) the browser builds the picture from GIBS as before. Its date is the real_earth layer's covers.date.",

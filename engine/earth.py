@@ -468,6 +468,60 @@ def monitor_file(rows, now, left, status):
                     f"Suspect: a PM2.5 of 0 where the model or a monitor within {SUSPECT_KM} km says over {SUSPECT_OVER} µg/m³, or any reading over {SUSPECT_MAX:,}."}
 
 
+# ---------------------------------------------------------------- the smoke field adjusted to the monitors (session 8, part 125)
+def field_monitors(rows):
+    """The monitors the adjusted field and Highest now use, and the others counted by why, each once, in this order: DOE's 24-hour index
+    (doe_index) or another unit (not_pm25); over LATE_H hours old (late: not this hour); exactly 0 (zero); marked suspect. Every row of
+    Earth's monitors is open data. Suspect readings are left out too: a 0 under thick smoke is already a 0, and the other kind reads over
+    1,000 µg/m³, which would lift a whole region or a city's middle. Returns (rows used, {why: count})."""
+    left = {"zero": 0, "doe_index": 0, "late": 0, "not_pm25": 0, "suspect": 0}
+    kept = []
+    for r in rows:
+        if r["unit"] != "µg/m³":
+            left["doe_index" if r["unit"] == "API" or r.get("source") == "DOE" else "not_pm25"] += 1
+        elif r["late"]:
+            left["late"] += 1
+        elif not r["value"] > 0:
+            left["zero"] += 1
+        elif r.get("suspect"):
+            left["suspect"] += 1
+        else:
+            kept.append(r)
+    return kept, left
+
+
+def adjusted_file(grid_file, rows, now, source):
+    """earth/smoke/adjusted.json for the hour's model file (`grid_file`: at, box_at, grid, values) and Earth's monitor rows: (its content,
+    what happened), or (None, why) without numpy (engine/adjusted.py). Each monitor is compared with the model where the page samples it
+    (grid_at); a monitor outside the model's grid is left out (no_model)."""
+    try:
+        import adjusted
+    except ImportError as e:
+        return None, f"not written here ({e})"
+    kept, left = field_monitors(rows)
+    spec, vals = grid_file["grid"], grid_file["values"]
+    left["no_model"] = 0
+    used, at_model = [], []
+    for r in kept:
+        m = grid_at(spec, vals, r["lat"], r["lon"])
+        if m is None:
+            left["no_model"] += 1
+        else:
+            used.append(r)
+            at_model.append((r["lat"], r["lon"], r["value"], m))
+    out_vals = whole(adjusted.field(spec, vals, at_model))
+    why = (f"Readings of exactly 0 are left out ({left['zero']:,} of {len(rows):,} at {clock(now)}, {now.day} {now:%b}). DOE's index monitors give a "
+           f"24-hour index on another scale ({left['doe_index']:,} left out). Readings over {LATE_H} hours old ({left['late']:,}), suspect ones "
+           f"({left['suspect']:,}), other units ({left['not_pm25']:,}) and monitors outside the model's grid ({left['no_model']:,}) are left out too.")
+    ids = [source] + (["OpenAQ-world"] if any(r.get("source") == "OpenAQ" for r in used) else []) + (["NEA"] if any(r.get("source") == "NEA" for r in used) else [])
+    return ({"schema_version": "1", "generated_at": stamp(now), "at": grid_file["at"], **({"box_at": grid_file["box_at"]} if grid_file.get("box_at") else {}),
+             "grid": spec, "values": out_vals, "kind": "estimated", "unit": "µg/m³",
+             "method": {"radius_km": adjusted.RADIUS_KM, "ratio": list(adjusted.RATIO), "offset": adjusted.OFFSET, "weight": f"(1 - d/{adjusted.RADIUS_KM})^3",
+                        "coverage": "sum of weights / 2, at most 1", "smooth_km": adjusted.SMOOTH_KM},
+             "used": [[round2(r["lat"]), round2(r["lon"])] for r in used], "left_out": left, "why": why, "credits": credit_block(ids, now)},
+            f"{len(used):,} monitors used")
+
+
 # ---------------------------------------------------------------- satellites: CelesTrak
 def fetch_satellites(now, prev):
     """(elements, fetched_at, note): the kept elements when they are under 2 hours old (no request at all); else each satellite
@@ -1014,6 +1068,24 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     else:
         layers.append(missing({**mon, "made_at": stamp(now)}, f"No monitor answered at {clock(now)}."))
 
+    # part 125: the hour's smoke model adjusted to the monitors near it (an estimate, never an hour; history, downloads and the
+    # connector keep the model alone)
+    adj_path = os.path.join(folder, "smoke", "adjusted.json")
+    sm_file = read_json(os.path.join(out, smoke["now"])) if smoke.get("status") == "ok" and smoke.get("now") else None
+    adj, adj_note = None, "no smoke model this hour"
+    t1 = time.monotonic()
+    if sm_file:
+        try:
+            adj, adj_note = adjusted_file(sm_file, rows, now, smoke["source"])
+        except Exception as e:   # never stops the run: the page shows the model alone
+            adj, adj_note = None, f"the adjusted field failed ({type(e).__name__}: {str(e)[:160]})"
+    if adj:
+        write_json(adj_path, adj)
+        smoke["adjusted"] = {"file": "earth/smoke/adjusted.json", "used": len(adj["used"]), "left_out": adj["left_out"]}
+    elif os.path.exists(adj_path):
+        os.remove(adj_path)   # never an older field beside this hour's model (invariant 4)
+    took["adjusted"] = round(time.monotonic() - t1, 1)
+
     # satellites
     sat = {"id": "satellites", "name": "Satellites", "kind": "from_space", "unit": "km", "window": "live", "source": "CelesTrak", "words": "white",
            "credit": credits.CREDITS["sources"]["CelesTrak"]["short"], "what": "Where the satellites that take these pictures are now, and where they passed in the last 50 minutes.",
@@ -1072,6 +1144,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     if not quiet:
         print(json.dumps({l["id"]: l.get("status") + (f": {l.get('reason')}" if l.get("reason") else "") for l in layers}, indent=1, ensure_ascii=False))
         print(f"Real Earth's day picture: {whole_note}")
+        print(f"The smoke adjusted to the monitors: {adj_note}")
         print(f"earth.json and earth/ written to {out} in {earth['took_s']['all']} s")
     return earth
 
