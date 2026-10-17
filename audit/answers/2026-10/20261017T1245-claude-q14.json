@@ -1,0 +1,137 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T12:45+08:00",
+ "answer": "The two numbers are probably measuring different things, even though both are called air quality. I'm assuming \"PSI\" means Singapore's Pollutant Standards Index. The usual causes are:\n\n1. **Different scales and labels.** The same pollution level can get a different label depending on the system. Singapore's PSI calls 51–100 \"Moderate\" and 101–200 \"Unhealthy\". Many apps use the US AQI, which has an extra \"Unhealthy for Sensitive Groups\" tier at 101–150. Some apps also label by stricter WHO guidelines. Check which standard your app uses, usually in its settings or \"About\" section.\n\n2. **Different averaging times.** The headline 24-hour PSI averages the last 24 hours, so it reacts slowly. Many apps show a real-time or 1-hour reading. If haze or smoke has just arrived, the app can show \"unhealthy\" while the 24-hour PSI still says \"moderate\". Singapore's NEA also publishes a separate 1-hour PM2.5 reading, which is closer to what apps show.\n\n3. **Different pollutants.** The PSI takes the worst sub-index across several pollutants. Your app may show only PM2.5, or ozone, which can look worse at certain times of day.\n\n4. **Different data sources and locations.** Official PSI comes from regulatory monitoring stations and is often reported by broad region. Apps may use a closer station or crowd-sourced low-cost sensors, such as PurpleAir. Low-cost sensors can read high in humid conditions.\n\n5. **Update lag.** One source may simply be newer than the other.\n\n**What to do:** If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults), the more cautious reading is reasonable to follow, especially if it's a real-time one and you can see or smell haze. Compare the app's 1-hour PM2.5 value with the official 1-hour PM2.5 reading to see if they roughly match.\n\nIf you tell me which app you use, your location, and the two readings, I can work out which of these explains it.",
+ "citations": [],
+ "claim": {
+  "value": 51.0,
+  "high": 100.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T12:00+08:00",
+  "band_right": false,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   136,
+   184
+  ],
+  "measured_range": [
+   136,
+   184
+  ],
+  "named_source": [
+   "NEA",
+   "PurpleAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T12:45+08:00",
+  "pm25": [
+   91,
+   165,
+   144,
+   206,
+   174
+  ],
+  "index": [
+   [
+    136,
+    "psi"
+   ],
+   [
+    153,
+    "psi"
+   ],
+   [
+    173,
+    "psi"
+   ],
+   [
+    178,
+    "psi"
+   ],
+   [
+    184,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T12:00+08:00"
+ },
+ "took_s": 10.2,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7Ccthdp8TDcu22xZdcr",
+  "container": null,
+  "content": [
+   {
+    "signature": "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",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "The two numbers are probably measuring different things, even though both are called air quality. I'm assuming \"PSI\" means Singapore's Pollutant Standards Index. The usual causes are:\n\n1. **Different scales and labels.** The same pollution level can get a different label depending on the system. Singapore's PSI calls 51–100 \"Moderate\" and 101–200 \"Unhealthy\". Many apps use the US AQI, which has an extra \"Unhealthy for Sensitive Groups\" tier at 101–150. Some apps also label by stricter WHO guidelines. Check which standard your app uses, usually in its settings or \"About\" section.\n\n2. **Different averaging times.** The headline 24-hour PSI averages the last 24 hours, so it reacts slowly. Many apps show a real-time or 1-hour reading. If haze or smoke has just arrived, the app can show \"unhealthy\" while the 24-hour PSI still says \"moderate\". Singapore's NEA also publishes a separate 1-hour PM2.5 reading, which is closer to what apps show.\n\n3. **Different pollutants.** The PSI takes the worst sub-index across several pollutants. Your app may show only PM2.5, or ozone, which can look worse at certain times of day.\n\n4. **Different data sources and locations.** Official PSI comes from regulatory monitoring stations and is often reported by broad region. Apps may use a closer station or crowd-sourced low-cost sensors, such as PurpleAir. Low-cost sensors can read high in humid conditions.\n\n5. **Update lag.** One source may simply be newer than the other.\n\n**What to do:** If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults), the more cautious reading is reasonable to follow, especially if it's a real-time one and you can see or smell haze. Compare the app's 1-hour PM2.5 value with the official 1-hour PM2.5 reading to see if they roughly match.\n\nIf you tell me which app you use, your location, and the two readings, I can work out which of these explains it.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1194,
+   "output_tokens_details": {
+    "thinking_tokens": 522
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "paid",
+ "plan": "Pro",
+ "model_asked": "claude-opus-5-5",
+ "model": "claude-opus-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T12:45+08:00",
+ "answer": "Usually both readings are correct. They're just measuring the air in different ways. Assuming you're in Singapore, where PSI is the official index, there are a few common reasons for the mismatch:\n\n**1. The app probably uses the US AQI, which is a stricter scale**\nMany popular apps, like IQAir and some weather apps, show the US EPA's Air Quality Index rather than Singapore's PSI. Both run from 0 to 500 and use similar labels, but the same amount of PM2.5 (fine particles) gets a higher score on the US scale. For example, a 24-hour PM2.5 level of about 40 µg/m³:\n- **PSI:** about 85, which is \"Moderate\"\n- **US AQI:** about 110, which is \"Unhealthy for Sensitive Groups\"\n\nAt higher levels the US scale says \"Unhealthy\" while PSI still says \"Moderate\" or has only just reached \"Unhealthy.\" So an app can say \"unhealthy\" when the PSI says \"moderate\" for the same air.\n\n**2. Different time periods**\nThe PSI that NEA reports is a **24-hour average**. Apps often show a reading from the **last hour or so**. If the air got worse recently, for example from haze, traffic or a nearby fire, the hourly number goes up quickly while the 24-hour PSI changes slowly.\n\nNEA also publishes **1-hour PM2.5 readings** for exactly this reason. If you're planning activities in the next few hours, that number is the one to check.\n\n**3. Different sensors and locations**\n- NEA uses official monitoring stations in five regions.\n- Some apps add data from cheap consumer sensors, which can be closer to you but are less accurate. In humid weather like Singapore's, they often read PM2.5 too high because moisture can register as particles.\n- Your app may be using a sensor next to a busy road while the nearest NEA station isn't.\n\n**Which one to trust?**\n- **For official health advice in Singapore:** use the PSI and NEA's advisories (haze.gov.sg or the myENV app).\n- **For what's happening right now:** look at the 1-hour PM2.5 reading.\n- **If you're sensitive to pollution** (asthma, heart or lung conditions, elderly, pregnant, young children): a high reading on either one is a good reason to cut back on long or intense outdoor exercise.\n\nIf you tell me which app you're using and where you are, I can help you work out which scale it uses.",
+ "citations": [],
+ "claim": {
+  "value": 0.0,
+  "high": 500.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [
+  "IQAir"
+ ],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T12:00+08:00",
+  "band_right": false,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   136,
+   184
+  ],
+  "measured_range": [
+   136,
+   184
+  ],
+  "named_source": [
+   "NEA",
+   "IQAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T12:45+08:00",
+  "pm25": [
+   91,
+   165,
+   144,
+   206,
+   174
+  ],
+  "index": [
+   [
+    136,
+    "psi"
+   ],
+   [
+    153,
+    "psi"
+   ],
+   [
+    173,
+    "psi"
+   ],
+   [
+    178,
+    "psi"
+   ],
+   [
+    184,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T12:00+08:00"
+ },
+ "took_s": 16.6,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7CdmHS63wrzbAWNwvCD",
+  "container": null,
+  "content": [
+   {
+    "signature": "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",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "Usually both readings are correct. They're just measuring the air in different ways. Assuming you're in Singapore, where PSI is the official index, there are a few common reasons for the mismatch:\n\n**1. The app probably uses the US AQI, which is a stricter scale**\nMany popular apps, like IQAir and some weather apps, show the US EPA's Air Quality Index rather than Singapore's PSI. Both run from 0 to 500 and use similar labels, but the same amount of PM2.5 (fine particles) gets a higher score on the US scale. For example, a 24-hour PM2.5 level of about 40 µg/m³:\n- **PSI:** about 85, which is \"Moderate\"\n- **US AQI:** about 110, which is \"Unhealthy for Sensitive Groups\"\n\nAt higher levels the US scale says \"Unhealthy\" while PSI still says \"Moderate\" or has only just reached \"Unhealthy.\" So an app can say \"unhealthy\" when the PSI says \"moderate\" for the same air.\n\n**2. Different time periods**\nThe PSI that NEA reports is a **24-hour average**. Apps often show a reading from the **last hour or so**. If the air got worse recently, for example from haze, traffic or a nearby fire, the hourly number goes up quickly while the 24-hour PSI changes slowly.\n\nNEA also publishes **1-hour PM2.5 readings** for exactly this reason. If you're planning activities in the next few hours, that number is the one to check.\n\n**3. Different sensors and locations**\n- NEA uses official monitoring stations in five regions.\n- Some apps add data from cheap consumer sensors, which can be closer to you but are less accurate. In humid weather like Singapore's, they often read PM2.5 too high because moisture can register as particles.\n- Your app may be using a sensor next to a busy road while the nearest NEA station isn't.\n\n**Which one to trust?**\n- **For official health advice in Singapore:** use the PSI and NEA's advisories (haze.gov.sg or the myENV app).\n- **For what's happening right now:** look at the 1-hour PM2.5 reading.\n- **If you're sensitive to pollution** (asthma, heart or lung conditions, elderly, pregnant, young children): a high reading on either one is a good reason to cut back on long or intense outdoor exercise.\n\nIf you tell me which app you're using and where you are, I can help you work out which scale it uses.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-opus-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5906,
+   "output_tokens": 1529,
+   "output_tokens_details": {
+    "thinking_tokens": 732
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

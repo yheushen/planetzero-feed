@@ -1,0 +1,340 @@
+{
+ "schema_version": "1",
+ "question_id": "q3",
+ "question": "Is the haze in Johor Bahru worse than Singapore right now?",
+ "city": "Johor Bahru",
+ "where": "jb",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T12:45+08:00",
+ "answer": "Going by the most recent data I could find, there's no clear difference. The two places are at similar levels, and the readings aren't from the same moment.\n\n**Latest readings**\n- **Johor Bahru:** On one tracker, the 15 Oct, 6pm reading was US AQI 261 (Very Unhealthy), measured at Larkin Lama, 0.6 km away. A separate tracker showed Malaysia's official API at 175 (Unhealthy) at the Larkin station at noon on 13 Oct.\n- **Singapore:** As of 17 Oct, 10am, the 24-hr PSI was 140 to 185 across the five regions, highest in Central (Unhealthy), with 1-hr PM2.5 between 69 and 140 μg/m³.\n- **Same-moment comparison:** The Johor Bahru page's comparison table put Singapore (Central, PM2.5 208) at US AQI 283 and Johor Bahru at 261, both Very Unhealthy. On that snapshot, Singapore was slightly worse.\n\n**Caveats**\n- The scales differ. Singapore uses PSI and Malaysia uses API, and both differ from the US AQI. A PSI of 185 and an API of 175 aren't directly comparable, so look at PM2.5 or a single AQI scale for a fair comparison.\n- The Johor Bahru data is a day or two older than Singapore's latest reading.\n- Haze readings change hour by hour with wind direction.\n\n**Bottom line:** Both are in the Unhealthy to Very Unhealthy range. The smoke is coming from fires in Borneo and Sumatra and has covered parts of Indonesia, Malaysia and Singapore for weeks.\n\nFor a live check, use NEA (or the myENV app) for Singapore and the DOE's APIMS or hazemonitor.com for Johor Bahru. If you're deciding whether to cross the Causeway, wear an N95 and limit time outdoors in either place.",
+ "citations": [],
+ "claim": {
+  "value": 261.0,
+  "scale": "US AQI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": "6pm",
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": 42.8,
+  "stale": true,
+  "freshness": "older",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": "2026-10-15T18:00+08:00",
+  "check": "checked",
+  "checked_hour": "2026-10-15T18:00+08:00",
+  "band_right": true,
+  "close": true,
+  "off_pct": -2,
+  "measured_ref": [
+   266
+  ],
+  "measured_range": [
+   266,
+   266
+  ],
+  "named_source": [
+   "NEA",
+   "DOE"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T12:45+08:00",
+  "pm25": [
+   153.0
+  ],
+  "index": [
+   [
+    176,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Larkin",
+   "sensor Ponderosa"
+  ],
+  "hour": "2026-10-17T11:00+08:00"
+ },
+ "took_s": 21.0,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7CcjHbZmW5QjpmANDRh",
+  "container": {
+   "id": "container_01QQAyuNDpRk87Ckb1ifShAH",
+   "expires_at": "2026-10-17T05:45:58.158139Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_014h4AV5KjKtXD8ayAe9ycU4",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Johor Bahru haze API today Singapore PSI\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:600].replace(\"\\n\",\" \"))\n    print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_019sVVkSuJY1fND7gKPNMJN6",
+    "caller": {
+     "tool_id": "srvtoolu_014h4AV5KjKtXD8ayAe9ycU4",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Johor Bahru haze API today Singapore PSI"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_014h4AV5KjKtXD8ayAe9ycU4",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "EusECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOyAMWceZBTM6p6x4xoMBqPlyCg1op/jYi75IjAHiQ5bopo8+HXMQDCjhLfnVxnjYD5fyCRx8UmGNogq0D5ZPvYjH14FvbbuXklP2Psq7gMFpbK7Z05gzAWGNa5+zmfuTCnS8mApYi8EHaMpO8u2XRPon3VXOyUgBrmdazASNA1AUIyamfg/TrXlj8mwLC80KU9YCu41LtWBXPfDN5wT7cxkV0FwhTTS7y3cPlmvgzFikdsHBveLbaQ/CE6YztVL4bo0H2IxMspcVeIKukFd/yh1el4KuXAN2Vq0MWFkki/Ns26WebqceAoCo4dwuwOKxNh92yRNcxv1jJzr+7oG0Kn2GmvzpHPi7uDD2XeQTakXspnjgCWiD0VVnlCqy3v325Cac31s+rsdznsgzL9YnhdwhGXpEBx7nKNeJrVKpJWmh+fVGjFfOe1/tWuIWuZzDr5K/NhvMxt29cHngg8lj5BUYhEXilOdlwrJEZXBkaGv3F8RGhzbYfBxoQEkri9Dwr/Qne8+ag2qS/hEucQ4bv0DVDC7totQgJrjSXwrQpeelIrFwS3z/5mLqyh9uRexG9Iz8UcRp+JMYiSR3xTNmPZt1zaposZh4BaboZgKvwA64yB3c7hLGGaF+JF0KIt4F+NcSM3M06wrEXrqMGgUgS3D/HqVjTyxuVhzcr4n8NMaeAVX+6sg8fpjJXU0mMlR12lQQBB20m1gUA5nMQ21UyyDggDubO9Jigiks/upwHRwuzNLyXWotDlYtkkBuBgD",
+      "page_age": null,
+      "title": "Johor Bahru, MY Air Quality & Pollen",
+      "type": "web_search_result",
+      "url": "https://www.wunderground.com/health/my/johor-bahru"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "In Johor Baru, theatre gives voice to communities living under the haze",
+      "type": "web_search_result",
+      "url": "https://www.thestar.com.my/lifestyle/culture/2026/10/16/in-johor-baru-theatre-give-voice-to-communities-living-under-the-haze"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "2010 Southeast Asian haze",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/2010_Southeast_Asian_haze"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "4 days ago",
+      "title": "Johor Bahru AQI & Air Quality Today (API/IPU)",
+      "type": "web_search_result",
+      "url": "https://hazemonitor.com/johor-bahru"
+     },
+     {
+      "encrypted_content": "EpcPCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLZcRuETSK3fb1P0bRoMm0s4Xe7LWKM6paEmIjAu9FHN03P+QWrPHV9zx9WRP3opZ+mRvcLEJ+x9ul6pVR9e0B470RzE1zE8tD7kY9gqmg7R6w133ZpBSYWpAdyFuXeOB7m3KwfR56/neG5CLNVjcDhnacmVMUomqGc4ruGrx+CnoU3Prczj4qQjfaCZKZtYCHZ66eedsbUEO9x6FQFAoRnrl0pR7DGZIrg/w9C9om73UyjRxbalY6R2I9zPHezwWe9sDotHPepkz+1Yi8gkxZSWB+NayILfoGuBvkPD9guE3ptRcc7ZfvzIzgA3kKDitsgpy1Rb9osHvHusiKbE8e7TN3MPR6R7XzD6xfOW6gsRl61quHAweZztOBMGiaAIThJEEMm+iffjULRFKmaKmEB6XqUIYSR17hYW4fcFg+jVEfAUofbrpssD/obmIMhUwsy81hFU8EiueEbWLc+eba8oogP17i8OQUOLjeh6wjfzGmaQtfZ48u8QqYOHAYDpKIQXpZmo/QFUHZjxbv/zOJkjKQ1Xovrbh6DB2JrsgGgI6dElbAvApnQvURXUW0QJxXj0VwcKOa5vZhjdVx/iunymr+rSH5FTvB7ap79YcrfhZjVE602YkthyaJavhxUg8/vuqCPEHJi5vs6u+bfMaEnC9jU/9rEeLPkvs/Ws2Relr+FNQphoTnJtjHDsQhPOYQ4EnJa8w01LSS2lIP1DA1R7KmRIe6ypBRjawXQbPAST1NG/JeFkUk6b7P6YgzaQlkbqphVejFUTtArYdUP3c+X1T2h6PM89bu5JZHaNQezw1TwAKjK9dMrmwKFPhH5Vql5Vkj+uRQzsOSOy9IlD8IytEVJU5hbNweIdparwvSIRl4yD0XSlLP0/rYELQ/xAFEHSSKhA+IBSfD/NBYMT8ve1hEdPW4IM8ADEdsF5yZqAbrruD29abKnLPu9gPU1LFsOSwAtRatPI906AQ6ICeiB3Hi79kc/lkFxR/coEe9n/0gWkwvkDgKkGzABayAgKY6QgBd5lW5comhV3JLKIp0MsvHXcaqXTnHkBEsrFthmGGR9JC2cj8/z3y0km1WOpytyqLoYGliRE2i1TAh4c+Pf0WgTC6KFQ8qfQaAjvLiTgL2XMdlOvKE/uvTzYO87PiUTrTWxYf1NkTO4KAhdasi7P2RNOxi10bkB5NkEb2ZWalk/KKD89rA1WFwd4DFHQBlpQDuS/uLuNxpqCSd09d3VNHHMJ5BlnwbuwC5OkZbMQVUFnhM4B2DDI05iwjeP14F3pKADYe2HeNWyvLgiQ0T49fzkg5XpAWH178VTAxe3vQraVmYzh91TgUVjxWSlx3ePxuRTkt3wyK1WbjQODbA9qDQ3MOo1/3VhXvjrD5G3I5zexAqyOAoebl21Zg1+C/U4lCxxsaysprFZN7XCCeFs2g+zOYY6e/eZxo6E6voq00711H4afd2RMsnT8Pgb5hQhN5IZjLSlFeijjMIeBx3et0uAS0gVVjC5dxj4ZrvD4b4z1ZlSgpvLL9uakKJea8hp0VL9oN1xd++xiuTCiRHamP7DnQ+PY1DdDDV/MdD05CK+edV4HMNMfKuVKPmGBk4lb/wnXhbDdPQaQAsuQ+nfv1PGSYi0x4IOCzEz45jmyXdUotKFSPUz6FM3gd0vO03btGnJ90Qu1g1X4GXV3yaYIg4P9mgZJ6PwzxpDqE5xEUwVSTz/yWWXQjYzDX5+uPSdypSdsuD7gpTgR1JQQsE98SYSpJoNTMRBTbSjdxohF92ghUd+TnRAtYWwL5jU+y17OD5dAVW0f9AjMMyYvJv72/A8Y1AZ6rrr79vRDWwXmoHEE+7WVZtnuswkCwlcB6ljNYWhUq/7bqzRnSdvg3vokcE7ChNzLU5awvdmS5OhLKIw2TjMeCStwGSMHXqu2NS5w8MPH+kjqEbDWZcErCCrUjjSaVtwjWSrpolesnp1VMC7wP/8mXMBcNHCPdQqWbmNrhUgOposKaMq29M1tOmQmwWHWRtItEbQxVFctYTBBxT+0usA1aJT7igF9g1RXGPZsDBJxfsYdKw+2PLxzvF0TGY9jOVu14a+XhVl9jNnXjMEnaMhdMqCOUpYypFqJo/FpV3MzJu0nEwgC92vUGjfZM3q+7GrpoaYyGupxr30PAL75IIntwFeD3CfddSlJZOZr/CNlJdR3U68iSkGfai7yTm46jbxqFpsZeqieVVFxyvaJ/kML8rRJAzKu40vqe/ioFWxwSR5FuXaOCJiWspYPRgSklPb3JCOjNOLpgpPSb6AwPpM1RKESG8I5X8fafiw3ySG+SgjdhooNBNszHJtgpPkBUiW/nTiYNJJ7f2Dri3htfLB1pD4FJSCAxFAS7XJZ1yfDOfUKecWQ3bTUgGPydGE+fRLErODlxU7cSMyvwAXK6ZXN1xRWctO+LaqUqWOSRApmH/raXpkj6V5+6Ejfp5AlIbxC+KZKx3YCpfbBIW92q7ngjqVOht+tNLEomMqUcKITOne7lP0ke6T9SThO+15i8be4BtAYAw==",
+      "page_age": "0 days ago",
+      "title": "Haze Today Near Me: Live Air Quality, PSI and AQI",
+      "type": "web_search_result",
+      "url": "https://hazenow.app/"
+     },
+     {
+      "encrypted_content": "ErYKCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDJq10vwCSDRBBD8uXxoMZV2RY1HrwB7Fa1qfIjD1sjCC3XOzcWOpR+jgZfaSJ79IC52yOsVCn2e2Ew473+HLzJ17uj41dgkeT3+mJf8quQn7ylxK9sK1fXi4l4GGO2Ea9xk9UamXd14JsVHFLGLEKvl0e3MPjLVKyGZI2p+t7rFOOZplgN4ks34IoMpKPLJA0BXCHi83oa0Adxvcjb8YS/gleK/Y2Sd+jaNkMcByAqczXkxQeMGFLOVHzcYEeQDFI4MPp3bmu/z91p94WG71TBh3MU4asKaQrtBUqlOZyIZVHGiDR7OfzYUAaiFSlsba2lP9XkJGQtTcpgIqV9kHlRB5+mbNS8QwAidCGhwQqxOB+eRigvbrCZb8odabyzcCMRuBWsiP5lrXgsDkyI0ZwqQygCBDMFlP1bunSm97J0VMp53Tv6VLyk24rexdptbVKAyf+MGB/Bm+JjIiQqWRzykB65OSQ+mnMBO71wE9Ucu8vtFNaqcIqjBKiSgLF8zYOKXEbyg8bCHTqSwPpp+DRaKdEKlsTQqmEyFTjRqsadO14uO/J43FIQlUfuvPYwCGhYLFqevysjF/PyLjo54iU9yfNmwIZNiokek/luB3UwM+2xUJNIAzqWemm84gjCFchQ0ig00Zj3K5EbmLio1NWu64UpeKgK6eEwqAUgRPmhdj+20XjVyvqylyEblE9IaGo9z6OtdvQZAotscty/5vUTIl29JVJrjZQb4eqYM+f+VByIHveHY9i4X01CmWNpOeCg/oqGBJ3UF+fOxQ4ZQVP3IjCVk1HdL7vLycARevsh+EO4e8ay+EoEpBXwYGy4a9JUW8gh4aR0UV7BeDDKpEbxkgrjbaqxI8Oeum4qMyKlHXHFW2L7OMqH1/xq6hGgnzxxcjJEsKI1uwDR5U/7HKXwG6uKK9bL36HMJ/6yf8uAMkt2bYHXlTKYqp86S4ItU8P8y7UCaDLQeGzLy3OkO4SHg+/jFTkgv74MbQ86pDQVkUTsxL74bUccTgN80mC/CaU9RzwqOMFDeEra6EE1MhlH6+MKItB7TpuGt2QP8buxe9FYBY9KrJTkK2o8e/CFRqrKKd+dysP5LqG46vhAq2MgrrJyyt4lwAs7BqpUDMYKhSz53hPzZW0k1yFFoVwV8/0De3nm7hEflnCVh9GHaDX+rS21jkzMgXrhrVTComM03T4fR3iysuW2mx4p6EsCKuNF/1PRla1Fp2Sxo2UVc/tP52UlH6UT8bRT4r2CB3iu+p9MgLRsQM6o/l9xEksAG7iH3KauHcYzQ5bFVDekcta3vVoTFXK8PwPXff1VnDweXNZVK7zMR09JYT9xp4WPOhFKY7udsb4WgoEBRP4lAPyaIdC5t1XsQjT8VfRErmRqFCojSjKrvv515dLLw09mCVeetH4Gv/0Twb6VcGwixgvJh5CRufPIwyT9nUHZdn91110v6nBpW9kznhored+MD5LPABrF0BHEFSic+yzO+qc+nUx7RkFd5pMRIde9GPawXEn9cEx6cH5Of9svkxaDbtoEu2IQ/wT+CzOIwMMphI8KO96guQQxGFfku2Z/eJaJiuK+iXTLriev6yPfPGV2RArB1zvweR9yfW/2EsTUyf1XLxb+RNTg2jqe+TYDVXR8A7tJIA6NrWkM5LkZZg4Gy0ZBrxVk879OfoRRrWgV941/NO7Ae3j6Yx842RI+RM7eXbZa9iTAQILQMYAw==",
+      "page_age": "1 days ago",
+      "title": "Haze in Johor Bahru Today: Live Air Quality and AQI",
+      "type": "web_search_result",
+      "url": "https://hazenow.app/malaysia/johor-bahru"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Singapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October",
+      "type": "web_search_result",
+      "url": "https://news.theonlinecitizen.com/2026/10/15/singapore-haze-worsens-as-western-24-hour-psi-hits-very-unhealthy-level-of-212-at-noon-on-15-october"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/malaysia/2023/04/16/haze-kelantan-kl-johor-record-unhealthy-api-readings/65089"
+     },
+     {
+      "encrypted_content": "EuoICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDNXlaYf3iJQe8w81RoMVuaW3XjgzTHVDriJIjBI7PiL5dE73t/BvGcupyeybZn5f3m65wp8pv/xflCUqY6zRDWGb3Lw/QdbC5zLLgQq7Qd7iz+NHaN4ngp38EIVayl+oR0RDPlFMeU09OC/0dfn0TKhtHV+7ecrGE2tzdJS79PPQbQjzICyksPO1/+qDkfZnLYf6er8ZuWaqAcQADkTf4dgjDoi/cG8Q5jZv1IWNBEWazVzEaM0UyDJamB4JyAKrStpqMCLcHzFXkdKEUI9ALb66Cx/5ax/Hi+fAHrZ8vsfY5PeEaKBDV1bPscLqYYgtlNixZAQHCH+xtPGL9eGGqy2xH4UFEkES0kmHi231KZ6CXDzrfQoDjRkU2FNdOxiEcw9I1Exd0e/J0SRcVLxkAoymM0bWPkwS+meia/ZOFL8AsfdkK9pDHxjnI4Tkmn3S4hF7UEUXtvw/7M84nhZkcr7ftUNtCvc9N1zJbiManJVMf+4pW0u2i6+pJOKtH3byMxS/SQevssO/Oj5IXflK3q39DXR4EFzCwN6b7iELnqJfFgo+TA2lkVROEq2LaAnmJLOUVodZGGP7x/wbnyF+tVZyaYkfl1PY7Lj5VZvj8tfcVkN1+j8ugewl0Lc6YIYfkUMGJHTphuueRpEUDySaln59Ofmr2Sa7EuJk7elXB0TqV5Mi5Lk0r6cMlMw3g1EdF0l3mqGEtX/5UtrG9zmd2WeYlv5Sao3rxN8R2x6e96nWUqtKzcFCozY96JRBuPEI9f4516KOCsTB53Tm1E4eG9YKDg6ECSyGKK0fWDz6F/gIExNcqHUDsY9o8Ap3tItwGTcSismyXCQiVvMMgSZ9NSKTnKcqPrcgimSV2S4ZeJQXgwAnbqkwAeLJvaGH2gzeSezU2j53uUoypWn7ZXWt6IFfD2Hfu2LKt5sJariF10H427v/Xfaj85M6g20lCHpzVY2GuHyhKziXLUtPvCziqsnwOyC2dn6UY1b51DS5WTx4siP/Soxcbpu9W/ZbaulOU//JmAZNYq3Aosa12mapecbnKGgD8haeyl3i7hH6Sz1q4GNPfU4NRSZ8tuh7gFSmDoZEsru0vLejVdFzcBoMgLMNbkuR4w4FNkIXgVMS7epQfYSU666Cvy7lRdENt/0ZgPgLkXindd44Pmu4Zelkr0oOeCnHsIge8ys7PZtivPD+Ocz6vtECM3HIq/r3JRbd1eqUyAP3r5UlNY+w7H5hMG1+h86Nm3uXoSeUvBSLmYl1QUuqO1Jqo78KR+99AfaBN5fCHzdwfRZPPr0SXR7ZWcUThImVYNY5w4Ub8kfW3TgrKusOh/uNWaEW4IoTqJ1rNmUwHkw9DCpUHNGHOkagv4HoR2kjpa/pn/6kF/6C7BB6x/L9GIbei/cNTFgN5962wZ1iMQhpuE9I7gskULB9j7CoaxtbZjI139w3SUYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/malaysia/2018/04/11/hazy-conditions-expected-over-parts-of-singapore-due-to-hotspot-in-johor/1618820"
+     },
+     {
+      "encrypted_content": "EtMICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLLYTovxwbLf8wrCjBoMy46sfs+xaEiIJ33KIjDwpvP1EuR/1RNIJsvBkwNZW2yg34n46l1iz0L4Ze5kh9O4FHrkZ6rrBttPQJ7fcDYq1geB97+EMQ/yL3PYY8hAdicpFgJ47jfQLH9MzrcI/ok9TpT8qiNb7F313r4xYbFOlVERUdWdJ4Bc4VRT2XsRuk/Ix8wHTzsZjlYYnnu1WatDiQ8UbKdH96LHxOs53m8GeMLl9/h/xtSn9t8yPOLtrZVpYRvJu6+4C4ggt1ZgHT7IMbgFyXBheMgtsnMfC0572mj+dBBUDyHdUauHS1p9KmL/lmNNjvG9Bl5bv6sGgcpgMpIIJ1Po/i4kUVl5H2lvJkhB8Gu+Vae+e6DO+r5WEFFNJR0xfxVmBxZk2oCKkimtOhtuIH04GcNGHo1wuUwNs4t2vAJ2wuLm+qw2F2C+1SguOtcYaZHH/ZUMuFS06fh3QIbc5H1k+uJfBm2jIXYRAeXJsd4enffIF76W0Q7h0Qz22YICyiB69qp2JEkYc0rfFM5PjrSrKfd8ZszGXwpPsZ5cOuj7XtvACQ6KeOZ+IuLk6I0K+TpUO5CZySKqcbe9iW/4fMIHKxxCZXExFgnpkJY53hfLqeueUfQOdbTAUgMZyGBcqYp4cI/6n6Ixo3IEMhidzQ5+gqKcVqkVEQL9L7ptRu40qXvHXthTU033fXgRHWdCWq9XdRXgRniqLrEoLDzhXeSZlgzgIbY7vzEQCYpS70Uc+xolzOth6xGAwL/MHuC2vlbRNSAWx+0vhNwmdOeayiG/iHAwLqRjB50a+Z4+Dc9R6cOVW2zQ9fav0mkG1CfIY2ph2eKrOQgD0YytaZOM7UfvzUdoeo8ivJ2uMuft2BIG7dKUAsIqkSsL5tyOqWU2/gmozvkZOU9y7zbXR518XpNnEaD1684esb88JCzXPnQEhBojRylNgkI0jOgrSZlYlNINE2zkHunySHP4LcmgMdiQJ6TbtVo0sZNmodBgxy4MkuVnGWiOdKuCCh9EKCsdAMCXptHYTpDxDNKYLxxGrCRckcyXjlpvztGihBTTzS6APDq9PBxNYIJ24HE7/qoPQiq+RNDlV6pzHUgacBEXrxDzkbDU37sBEeZ7E/sxgPjI3PWVNVIeBMUVbgfv8cQvoph1eSPR79h/A57BEk3mPf6XfHslZEJKkVHcXFsvWNuPhSRzMO4tBzeMx+Sg2V5WjlPmuB2D/8P4rRg5scnv4EiG+ttR7pb98npqah55ATVTNx+3KWK9ektvY71XLtEXbuZJKuwGUHXU9VkojUO2k6taQOTUHrc9DYNWceqrAhvaCpDhrp3CsbegnUNowUvGwUv/9gtaxE36/f944MCHIarNv9q2LeJvVfm2eyvKJ+QUQ26BnsxaZpaSToEWn3Wz9J45GAM=",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2018/04/11/hazy-conditions-expected-over-parts-of-singapore-due-to-hotspot-in-johor/1618820"
+     }
+    ],
+    "tool_use_id": "srvtoolu_019sVVkSuJY1fND7gKPNMJN6",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDIUXbjNs+Vj+KjmcfhoM9VWb6HpdsRioXTn5IjCfw+r+zVkxluvMvn6HP+xIimuW057vMq+SU1BDIodbd00pGLe8ohBDmQVAseSbYEcqEjDsrSW2EpzP1OIbH/E9F0l7sRgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_014h4AV5KjKtXD8ayAe9ycU4/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_014h4AV5KjKtXD8ayAe9ycU4",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01FB7ipKKCTppGazE1j6zuaJ",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Johor Bahru, MY Air Quality & Pollen\", \"url\": \"https://www.wunderground.com/health/my/johor-bahru\", \"content\": \"Johor Bahru, MY. Singapore Station91\\u00b0. 3 minutes ago.\\n\\n# Johor Bahru, MY\\nSingapore Station 91\\u00b0\\n\\nUpdated: **11:44 AM GMT+08:00 on October 7, 2026 (GMT +8)**\\n\\n94\\u00b0\\n\\n78\\u00b0\\n\\n91\\n\\nFeels Like 102\\n\\nHaze\\n\\nN\\n\\n3\\n\\nToday\\n\\nWed 10/07\\n\\nHigh 94\\u00b0f\\n\\nAir Quality\\n\\n171\\n\\nUnhealthy\\n\\nUV Index\\n\\n11\\n\\nExtreme\\n\\nAdditional Conditions\\n\\n1. Pressure **29.98** in\\n2. Visibility **2.2** miles\\n3. Clouds **Partly Cloudy**\\n4. Dew Point **74**\\u00b0F\\n5. Humidity **59**%\\n6. Rainfall **0** in\\n7. Snow Depth **0** in\"}, {\"type\": \"web_search_result\", \"title\": \"In Johor Baru, theatre gives voice to communities living under the haze\", \"url\": \"https://www.thestar.com.my/lifestyle/culture/2026/10/16/in-johor-baru-theatre-give-voice-to-communities-living-under-the-haze\", \"content\": \"For Cech Adrea, director and playwright of Jerebu Di Johor Bahru, making theatre amid the haze is a way to reflect local sentiment and offer a sense of solidarity to those affected.\\n\\n# In Johor Baru, theatre gives voice to communities living under the haze\\nBuildings in Johor are shrouded in haze, as seen from Singapore on Oct 16. Toxic haze has blanketed parts of Indonesia, Malaysia and Singapore for weeks as fires continue to burn across Borneo and Sumatra, sending smoke across the region.\\n\\nAs haze continues to affect Johor\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01FB7ipKKCTppGazE1j6zuaJ",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS9wQKEAgSGAI4AUIIdGhpbmtpbmcSDNsySs2HuFwgezpJUxoMWyyulK+EY6yLrNBuIjDwW0r7As0nwumPWRHJ5p9PdMtcFW6eHpVpi1t+vMcx9m5SPAwAXEHakZgE0y+V4B4qlATrgxhPtGhA+F9VKtcE4J+tbl7aEDpthOp6AQQS1R8D140JPHOIU9H0L0Bi8ww6In0qDogjK+GCF1/77X52Mt3bFowAeuTbA/XsECKTITWNFs46LKHffaoV6NmRyP9TVXlBBtzWzz9Ienl9lQ2M71RzvzIPn5wMX0Lz7vLQVESQS/5ee/IbPO6BhhiIBmZ0BdvT5kVAre8d5czyaDk/l5Thacj22lsZyfOzyxNK28Y5GLaI8Y19RpfNExtaWFgVRVejvQoCfCYJ0/Gf2oMKpGJBUEiu78zz0FFkDopGCSLQO+jx8Oq1w4/hGBLhvNG0lvv7/v4XCYqfOeQ4tgS3gM3pYnfpexpW6wIpkuinp3pGxh1nAHhbmTzmCW4ITv1ASnUKqyKJTQCZ7gsd0AaywLdRvD5EH5HiW4cuqqVOV0AzXU0r5n1BBk8qCWj865iFtzxbVM5LlMsMZXsTWAeFrzGSGiB0OuaTzlLIKTzPcGlMpstB/1T16YhN2JYmm/jAM2dATikQ6sxfpdNnqYiB0j4Xr+ZsRTWx2d+K2zqJylo0l9A32Feohw6oo2OD0NJ7kcIOY/1Dl8x9Tno7ksP6iXVyhcJUDgj3i2gdCKx4rtcc4Tz5tyLxkizMeb4CxAA52U50iSyBzUMp5aEJJgwLG0vcA4xZC6zLDaTaErGFv0LjpiLz2hgX8/hUxNz7DE8LMrltTM5aGAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_011Xs5yReF33jhfA9qtbbgy8",
+    "input": {
+     "code": "import json\nr2=json.loads(r)\nfor x in r2:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:700].replace(\"\\n\",\" \"))\n    print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "Johor Bahru, MY Air Quality & Pollen https://www.wunderground.com/health/my/johor-bahru None\nJohor Bahru, MY. Singapore Station91°. 3 minutes ago.  # Johor Bahru, MY Singapore Station 91°  Updated: **11:44 AM GMT+08:00 on October 7, 2026 (GMT +8)**  94°  78°  91  Feels Like 102  Haze  N  3  Today  Wed 10/07  High 94°f  Air Quality  171  Unhealthy  UV Index  11  Extreme  Additional Conditions  1. Pressure **29.98** in 2. Visibility **2.2** miles 3. Clouds **Partly Cloudy** 4. Dew Point **74**°F 5. Humidity **59**% 6. Rainfall **0** in 7. Snow Depth **0** in\n--\nIn Johor Baru, theatre gives voice to communities living under the haze https://www.thestar.com.my/lifestyle/culture/2026/10/16/in-johor-baru-theatre-give-voice-to-communities-living-under-the-haze 0 days ago\nFor Cech Adrea, director and playwright of Jerebu Di Johor Bahru, making theatre amid the haze is a way to reflect local sentiment and offer a sense of solidarity to those affected.  # In Johor Baru, theatre gives voice to communities living under the haze Buildings in Johor are shrouded in haze, as seen from Singapore on Oct 16. Toxic haze has blanketed parts of Indonesia, Malaysia and Singapore for weeks as fires continue to burn across Borneo and Sumatra, sending smoke across the region.  As haze continues to affect Johor Baru, local arts practitioners are turning to theatre and film to confront its impact.  The highlight of Kelab Bandar Kita Johor Bahru’s (Bando Kita) community arts prog\n--\n2010 Southeast Asian haze https://en.wikipedia.org/wiki/2010_Southeast_Asian_haze None\n[[1]](./2010_Southeast_Asian_haze#cite_note-:0-1) The hazy conditions not only resulted in the reduction in air quality but also caused poor visibility, multiple closures of schools in Malaysia and an influx of [respiratory illnesses](https://en.wikipedia.org/wiki/Respiratory_disease). [[4]](./2010_Southeast_Asian_haze#cite_note-4) The recorded air quality in Singapore was the worst it had been since 2006, [[5]](./2010_Southeast_Asian_haze#cite_note-:7-5) and on October 18 the hotspot count in Sumatra reached a maximum of 358. [[1]](./2010_Southeast_Asian_haze#cite_note-:0-1) Despite ministers meeting up a week before the crisis for the 6th meeting of the   [[1]](./2010_Southeast_Asian_haze#\n--\nJohor Bahru AQI & Air Quality Today (API/IPU) https://hazemonitor.com/johor-bahru 4 days ago\nJohor Bahru air quality today. … Thailand. Modelled AQIIndonesia. Modelled AQIVietnam. Modelled AQISingapore. PSI & PM2.5Explore all stations. Understanding the official DOE API.  ## Johor Bahru air quality today Kualiti udara Johor Bahru hari ini  US AQI (PM2.5): 184 · Unhealthy.  Calculated from DOE’s rounded PM2.5 API using a 24-hour average and US AQI breakpoints.  Johor Bahru air quality is unhealthy with an Air Pollutant Index (API) of 175, measured at 12:00 MYT, 13 Oct 2026 at the Larkin station, 0.6 km from the city centre.  Kualiti udara Johor Bahru berada pada tahap tidak sihat dengan bacaan Indeks Pencemaran Udara (IPU) 175 pada 12:00 MYT, 13 Oct 2026 di stesen Larkin, 0.6 km dari\n--\nHaze Today Near Me: Live Air Quality, PSI and AQI https://hazenow.app/ 0 days ago\nSingapore haze now (17 Oct 2026, 10:00 am): 24-hr PSI 140 to 185 across the five regions (highest Central, Unhealthy); 1-hr PM2.5 69 to 140 μg/m3 (highest East, Elevated). … Place: Johor Bahru Malaysia.  Live air quality for your area, anywhere: NEA's PSI and PM2.5 in Singapore, the US AQI from the nearest monitor elsewhere, with advice for kids and the elderly.  Right now (last hour)  Elevated  117  PM2.5 µg/m³  # Haze now: live air quality where you are ## Is it safe to go outside in Singapore today? Based on the 24-hr PSI (Unhealthy, 185) in Central Singapore · updated 17 Oct 2026, 10:00 am  ## More detail ## Where the haze is coming from  ### When will it clear?  Official 24-hr PSI: 185,\n--\nHaze in Johor Bahru Today: Live Air Quality and AQI https://hazenow.app/malaysia/johor-bahru 1 days ago\nJohor Bahru haze now: air quality today. … Singapore by region. Other citiesKuala Lumpur, Jakarta, Bangkok and more, on the US AQI.  Johor Bahru, Malaysia haze now: live air quality (US AQI) from the nearest monitor where there is one, the last 24 hours and what to do about it, with advice for kids and the elderly.  Right now  Very Unhealthy  261  US AQI · measured  # Johor Bahru haze now: air quality today ## More detail ## Where the haze is coming from  ### When will it clear?  Latest hour: PM2.5 186 µg/m³ Larkin Lama, Johor, Malaysia, 0.6 km away  Nearest monitor  Larkin Lama, Johor, Malaysia  0.6 km  US scale (AQI, from PM2.5)  PM2.5, last 24 hours  ## More detail | Place | US AQI now | \n--\nSingapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October https://news.theonlinecitizen.com/2026/10/15/singapore-haze-worsens-as-western-24-hour-psi-hits-very-unhealthy-level-of-212-at-noon-on-15-october 1 days ago\nSingapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October. Singapore's haze worsened on 15 October 2026, with the western region's 24-hour PSI reaching 212, a very unhealthy level.  # Singapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October Singapore's haze worsened on 15 October 2026, with the western region's 24-hour PSI reaching 212, a very unhealthy level. Sports facilities remained closed in the west as authorities distributed N95 masks and monitored transboundary smoke from fires in Indonesia.  Singapore's western region recorded a very unhealthy 24-hour Pollutant Standards Index (PSI) reading of 212\n--\nwww.malaymail.com https://www.malaymail.com/amp/news/malaysia/2023/04/16/haze-kelantan-kl-johor-record-unhealthy-api-readings/65089 None\nMalaysia Haze: Kelantan, KL, Johor record unhealthy API readings A hazy scene with an Air Pollution Index (IPU) reading of 97 around Kuala Terengganu, April 13, 2023. — Bernama pic  KUALA LUMPUR, April 16 — The Air Pollutant Index (API) readings in areas in Kelantan, Kuala Lumpur, and Johor recorded unhealthy air quality as of 4pm today.  According to the air pollutant index management system (APIMS) website, Segamat in Johor recorded an unhealthy API reading of 152 whereas Cheras, Kuala Lumpur also Kota Baru and Tanah Merah, Kelantan recorded an API reading of 106, 107 and 104 respectively.  An API of zero to 50 indicates good air quality; 51 to 100 (moderate); 101 to 200 (unhealthy); 201 t\n--\nwww.malaymail.com https://www.malaymail.com/amp/news/malaysia/2018/04/11/hazy-conditions-expected-over-parts-of-singapore-due-to-hotspot-in-johor/1618820 None\nMalaysia Hazy conditions expected over parts of Singapore due to hotspot in Johor Tourists at Merlion Parkon Sept 16, 2015 during the haze period. u00e2u20acu201d TODAY pic  SINGAPORE, April 11 — Expect hazy conditions — and a \"burning smell” — over parts of Singapore this evening, the National Environment Agency (NEA) warned, following the detection of a hotspot in the south-eastern part of Johor in the afternoon.  In a Facebook post, the NEA said that the smoke haze from the hotspot is being blown by the prevailing easterly winds towards Singapore, resulting in the hazy conditions.  \"For the next few hours, hazy conditions are expected over parts of Singapore, and members of the public may\n--\nwww.malaymail.com https://www.malaymail.com/news/malaysia/2018/04/11/hazy-conditions-expected-over-parts-of-singapore-due-to-hotspot-in-johor/1618820 None\nSINGAPORE, April 11 — Expect hazy conditions — and a “burning smell” — over parts of Singapore this evening, the National Environment Agency (NEA) warned, following the detection of a hotspot in the south-eastern part of Johor in the afternoon.  In a Facebook post, the NEA said that the smoke haze from the hotspot is being blown by the prevailing easterly winds towards Singapore, resulting in the hazy conditions.  “For the next few hours, hazy conditions are expected over parts of Singapore, and members of the public may also detect a burning smell,” said the NEA.  “The 24-hour PSI is forecast to be in the higher end of the Moderate range.”  As at 5pm today, the 24-hr PSI was 48-57, in the M\n--\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_011Xs5yReF33jhfA9qtbbgy8",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS3gYKEAgSGAI4AUIIdGhpbmtpbmcSDAwAmGZrxxrZHYcPTBoM49acj/m6P5X23alfIjA46hpayoXjXa/2Y+QmpPbz/Us/6U2JPc/F0ktEvXGQ7gK61CDFja/a8eq2hnHOsbAq+wVrNBCrKMIrOFGnCib3xtMoXyNDEIdC9QVisUhbfc0p2MTwilji93hDHWEpVPMb4d2qOwUYqhYZJLWFgZ5PUHC0H0M7pBWhYwZ8hDN/y8CoDZNgWpOD1ZxuVvceSxrPvV9eng0+iGGRzdt9pTirvO6w/QTJ1XX7ZzTssRVrLm7SXC6bX5VigPWdOkvuZtlzOCxZGL6Wy/nLcj0WWsre1NpQiEnaH6b5dhG0d2zjSiiO9kmk7M3+t2o8CfD5HPTiOlvrYA2TMUipm0VDIPMLPTmDcbHjMn38hGLevUpaz4RUnoAKq814kNAIBo5bs6cnYicox4N6tylWFSmGmQYNORgC1aRT0kFk80Dyp30Q3+RItiMtEGgIOKgFdGQK2koUgtG81KMVBMjsD353Jg0jAkqHqTnI9Q1G9XY0XlT+RKThWgl8/SY29UmEkPed5D/H5PxYiblrKk+n/3cFT97b6krKP5RjZTOVtRdaUPkm53rOgz4+CR4FcaJvaymECkUJi2BujIw8ZAmDJEVHI7JJ1QsdUDNGyajnHoWixlzL6YwEF345vMOM5/8dy5If/gRywQ2r+/i60JHdCSAZn801orfA5A9dWcXzUFquZfnLLrt0Sh0chBT8XEySMa1nSxyWYEM5C2Kdrl84GUPlxjCB4nYw2Q9qCNpr/slUkcz2XjtHwU1RqCrqolJphKW0nOiLz6HfYxfWHFDMsKI2svVTYqd2gVXkP9wxURStK4ah8+qAbjt/MrSEbShHLmmKVBsgpUdt6/+hly+pbySdFhiK7ixfg2aqSW+CyFnZtlJRX5EAcEvcYAOYVSQKwjZs46HZi7Fe3bCTgaZDZPfYWmfsFrkH4BYjwFsmKbqPAtOSDZ2gl1nEVY2jC5uOMjwRNKc6w902Ew7960LC+cBJYANshv2PNeR8dCcJs5DSH6CH6717/je5BsRE85TS4BTfKuXVTyJdO5/my9JviVjpSFus+NqObwf0cNIqZYh2MQGKoRcXfNt4n9wnSepFthDeGAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01HnShkvc7csZr4aNgN2nAS7",
+    "input": {
+     "code": "for x in r2[5:7]:\n    print(x['url']); print(x['content'][:3000]); print(\"=====\")\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "https://hazenow.app/malaysia/johor-bahru\nJohor Bahru haze now: air quality today. … Singapore by region. Other citiesKuala Lumpur, Jakarta, Bangkok and more, on the US AQI.\n\nJohor Bahru, Malaysia haze now: live air quality (US AQI) from the nearest monitor where there is one, the last 24 hours and what to do about it, with advice for kids and the elderly.\n\nRight now\n\nVery Unhealthy\n\n261\n\nUS AQI · measured\n\n# Johor Bahru haze now: air quality today\n## More detail\n## Where the haze is coming from\n\n### When will it clear?\n\nLatest hour: PM2.5 186 µg/m³ Larkin Lama, Johor, Malaysia, 0.6 km away\n\nNearest monitor\n\nLarkin Lama, Johor, Malaysia\n\n0.6 km\n\nUS scale (AQI, from PM2.5)\n\nPM2.5, last 24 hours\n\n## More detail\n| Place | US AQI now |\n| --- | --- |\n| Singapore Highest region: Central (PM2.5 208) | 283 Very Unhealthy |\n| Johor Bahru Malaysia | 261 Very Unhealthy |\n\n\n\n{\"name\":\"Haze in Johor Bahru Today: Live Air Quality and AQI | Haze Now\",\"abstract\":\"Johor Bahru, Malaysia, 15 Oct 2026, 6:00 pm local time (UTC+8): US AQI 261 (Very Unhealthy), measured at Larkin Lama, Johor, Malaysia (0.6 km away). US EPA advice: everyone, avoid prolonged or heavy exertion; sensitive groups, avoid all physical activity outdoors.\"}\n=====\nhttps://news.theonlinecitizen.com/2026/10/15/singapore-haze-worsens-as-western-24-hour-psi-hits-very-unhealthy-level-of-212-at-noon-on-15-october\nSingapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October. Singapore's haze worsened on 15 October 2026, with the western region's 24-hour PSI reaching 212, a very unhealthy level.\n\n# Singapore haze worsens as western 24-hour PSI hits very unhealthy level of 212 at noon on 15 October\nSingapore's haze worsened on 15 October 2026, with the western region's 24-hour PSI reaching 212, a very unhealthy level. Sports facilities remained closed in the west as authorities distributed N95 masks and monitored transboundary smoke from fires in Indonesia.\n\nSingapore's western region recorded a very unhealthy 24-hour Pollutant Standards Index (PSI) reading of 212 at noon on Thursday, 15 October 2026, as worsening haze continued to affect air quality across the island.\n\nThe 24-hour PSI remained in the unhealthy range across the other regions, with readings ranging from 128 to 194. \n\nThe western region had also registered a very unhealthy reading of 211 around midday.\n\nHourly PM2.5 readings were in the high range in central, western and southern Singapore on Thursday morning, following a sharp increase in pollution levels the previous day.\n\nAt noon, hourly PM2.5 readings across the three regions ranged from 138 to 161. In central Singapore, the reading reached 197 at 10am before easing to 161 by noon.\n\nWestern Singapore experienced particularly severe conditions on Wednesday, 14 October, when its hourly PM2.5 reading peaked at 288, a level not recorded locally since 2015.\n\nThe region's 24-hour PSI also entered the very unhealthy range on Wednesday, reaching a peak of 205.\n=====\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01HnShkvc7csZr4aNgN2nAS7",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "text": "Going by the most recent data I could find, there's no clear difference. The two places are at similar levels, and the readings aren't from the same moment.\n\n**Latest readings**\n- **Johor Bahru:** On one tracker, ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "the 15 Oct, 6pm reading was US AQI 261 (Very Unhealthy), measured at Larkin Lama, 0.6 km away",
+    "type": "text"
+   },
+   {
+    "text": ". A separate tracker showed ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "Malaysia's official API at 175 (Unhealthy) at the Larkin station at noon on 13 Oct",
+    "type": "text"
+   },
+   {
+    "text": ".\n- **Singapore:** As of 17 Oct, 10am, ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "the 24-hr PSI was 140 to 185 across the five regions, highest in Central (Unhealthy), with 1-hr PM2.5 between 69 and 140 μg/m³",
+    "type": "text"
+   },
+   {
+    "text": ".\n- **Same-moment comparison:** The Johor Bahru page's comparison table put ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "Singapore (Central, PM2.5 208) at US AQI 283 and Johor Bahru at 261, both Very Unhealthy",
+    "type": "text"
+   },
+   {
+    "text": ". On that snapshot, Singapore was slightly worse.\n\n**Caveats**\n- The scales differ. Singapore uses PSI and Malaysia uses API, and both differ from the US AQI. A PSI of 185 and an API of 175 aren't directly comparable, so look at PM2.5 or a single AQI scale for a fair comparison.\n- The Johor Bahru data is a day or two older than Singapore's latest reading.\n- Haze readings change hour by hour with wind direction.\n\n**Bottom line:** Both are in the Unhealthy to Very Unhealthy range. ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "The smoke is coming from fires in Borneo and Sumatra and has covered parts of Indonesia, Malaysia and Singapore for weeks",
+    "type": "text"
+   },
+   {
+    "text": ".\n\nFor a live check, use NEA (or the myENV app) for Singapore and the DOE's APIMS or hazemonitor.com for Johor Bahru. If you're deciding whether to cross the Causeway, wear an N95 and limit time outdoors in either place.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 43338,
+   "output_tokens": 1270,
+   "output_tokens_details": {
+    "thinking_tokens": 118
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
