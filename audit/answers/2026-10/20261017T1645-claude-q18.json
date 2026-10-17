@@ -1,0 +1,332 @@
+{
+ "schema_version": "1",
+ "question_id": "q18",
+ "question": "Is the air better in the north or the west of Singapore right now?",
+ "city": "Singapore",
+ "where": [
+  "sg-north",
+  "sg-west"
+ ],
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T16:45+08:00",
+ "answer": "The north has better air than the west right now, according to the most recent readings I found (17 Oct 2026). Singapore is under haze, so the air is unhealthy in both regions.\n\n| Region | 24-hr PSI | Hourly PM2.5 (µg/m³) |\n|---|---|---|\n| North | 135 (unhealthy) | 91 (elevated) |\n| West | 185 (unhealthy) | 243 (high) |\n\nThese are the 2pm figures reported by The Star. At 2pm, the 24-hour PSI was in the \"unhealthy\" range in all regions: central (184), north (135), south (154), east (173) and west (185). At 2pm, hourly PM2.5 readings stood at 243 in the west, 179 in the central region, 162 in the south and 159 in the east. The figure remained in the \"elevated\" range in the north at 91.\n\nOther trackers I checked showed the same pattern at earlier times. The north had the lower PSI and PM2.5 in each of them, and the west was worse.\n\n- **Both regions are unhealthy.** The 24-hour PSI is above 100 in both. NEA's health advice for this range is to reduce prolonged or strenuous outdoor exertion, and vulnerable people should be more cautious.\n- **The west is worse on the hourly measure.** Its PM2.5 is in the \"high\" band, while the north's is still \"elevated\".\n- **The figures change hourly.** The wind is forecast to blow from the south-east, so the readings could shift. Check NEA's live PSI page, or myENV, for the latest numbers.",
+ "citations": [],
+ "claim": {
+  "value": 135.0,
+  "high": 185.0,
+  "scale": "PSI"
+ },
+ "each": [
+  {
+   "value": 135.0,
+   "label": "North"
+  },
+  {
+   "value": 185.0,
+   "label": "West"
+  }
+ ],
+ "quoting": [],
+ "window": "24h",
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T16:00+08:00",
+  "band_right": true,
+  "close": true,
+  "off_pct": null,
+  "measured_ref": [
+   132,
+   191
+  ],
+  "measured_range": [
+   132,
+   191
+  ],
+  "named_source": [
+   "NEA",
+   "The Star"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T16:45+08:00",
+  "pm25": [
+   112,
+   221
+  ],
+  "index": [
+   [
+    132,
+    "psi"
+   ],
+   [
+    191,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA West"
+  ],
+  "hour": "2026-10-17T16:00+08:00"
+ },
+ "took_s": 17.0,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7WvwvTgGn6u1M6h7mdu",
+  "container": {
+   "id": "container_01JSRitAqsr8eMG1ixnGTKy6",
+   "expires_at": "2026-10-17T09:46:08.850900Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01KTmR5n3tWqUdDFZ5qe84jF",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Singapore PSI north west regions air quality now NEA\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x['page_age'])\n    print(x['content'][:800])\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01EB8eRBL6aZZiSTg8Z2DKd4",
+    "caller": {
+     "tool_id": "srvtoolu_01KTmR5n3tWqUdDFZ5qe84jF",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Singapore PSI north west regions air quality now NEA"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01KTmR5n3tWqUdDFZ5qe84jF",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "Et8QCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDKCTjnSLU4HA3ZEeyxoM7m25ukhPKx0ptzqIIjCImo/P3+xLSBK39RG8F4NUKe3Rgke0kOdCad765FPwpyqTe97oM0xRmFy7xS8KH84q4g8u0omHpOQDDa0Mvf1dqOwuaizj08vKUUsJD4I58I3GEONoLicq10bemS461hBYITZLjgFg2g29twCx9lOrlz/zcaIJd1QMWe7xXY2ftqRfobzlTm34NlaDIV7ulHxTB3J9k6aKT+daT2XPOnmX/EO4sKvW2lfmTopiowDmxP++TauwSlr5RwNg4UGKj8tqQ9L/tLkYVrICXO6D3hf7GUWqytke+ydm4RUvCvNzkcI4XEMrU05jMfAqZumscjSHamBVUGStVt2lMwejlIu5LD4QQw3Q0m0sy3d0xvAdhF8oBq5l+h2MbClvEmHXjF3Tc2AO3sxlayQ0ISyIovv1+86hwENyhM44PTI/A54yl4c27BttnY0NusS+Zr1C7btaikWJb1yyuZ9a0cKY3lGReFYhDhgm4k2+Qm3MTlaFdZqIqaHkvFmAVTubR7V4WYyti2ZRYO30VIFYJryk0Fs1rqJcEidyctdnqhB/mpPBCZz6aspx01ZjKAmPqkNQmlNv7mEDIhYayb5iXw+RsHBdwlfg8H/t/7DIRiN0qjGXboaocoUjBufal2LFZ3efnvDEEjTfzX4/Fe5n5bjsYLp6Y9BZwXPCaYC7RCmLrndd0B+o8H+vE5F7cNJ2wDaEoeCOf/kFYvk1TPV4Cp36G5gk82ApmJL2g5J2dy56vhyPFJuclbQbqLeIV8Wf8HKTsv8d0x2ZquhojyMWXdanKNx8KUXm7gzTgsIMh615STpbgzmEaRYcS04oJ1vJDzRlBWEMBejqRiZdZ2WHELStHJgwSeQbLtFy9+ULfsxyKfZrmRPodz2y2GuI80dgaSMqOU1n90H0E2vGrtOuxmT3JXVLOcHhmv4w9w5kvwVVZWyTtn+/U+OG9+nM4uRrj9w2CFJVe+y8O6UraLPAcSrPMSW5qS0wLa9+HqG1BGPa0cJ33GT+iFRnyFxKFd5ko3PU4zH2eH15+M7xjQmIso84YRZ2B4NGg3lX7WLOyTQkjJP5aRCpyWNcbgSccZkxbGJsYm0QTWL5pHLJYSaCl5Fz0IuECi6hwpS5ADWbNY6/L8OR2zWaYTKTtEkMkFZ7rX9MpdJSGCgf6PHVY+GTdygsYmUPe78SS281LsvaHTZrg4GK4Ve+bPm+jtdF+uJPJ3aNgMJQ/XgOhHo+kJPAv5EuBogkz/pHoYgSvY3PzQM/WcAZ0CL+1e94Z/2GE2D8/1iWSIuxiM07HkadV7tOZ6rozcjUR0/frnFCt5Zf+1wOzjktefAqvESwbYTOzqxFvIdplra5KCPWDB3z9Jgj6pMDUAlVuIE6y4tXztzprNm+Y37JPyWVrSpz38H8UU4MAsjr1oynD3Dz2oYRXv9GSlzMx/MqS4Zy2WUu+8P+vCKlCRQjispOHqJVekCXiBcTkxNABCyG36uxjYxlH4a0QTb+l7pEhTI7bETZ+YS6b11oQ+zfNxY7A2O8kZCoW3QBwlEau7rL5Ye9lw/UVl/SpsnK1fRTM1z1EcH2xlVx2Cvn9MTR739ahnQ3UXEaM6aKboSM/Thmgf8T69auI3a+4m3iVlYqKAs9ZQJekkV8nGelNOhrrUT9MZdnnl7n+vRB+D6QbLtlwdor29GoQ8f+n5JK3tJkEnIpz0fJt/pL9yrq1crhwNY5E9qelsO6AsfysCsaRFLF0x4ll5yBSHJrB0tZyXX4SpN/khHPoqSrRD7MyDGVP5GsIbY0qpUqtsCdmDSr6z0nmQ9a4CIOOiwU+oCrIFFiS1QkYsPHHieQ4xHOgLW+oBr4b40byCdp+djJFlf9IFYo388ANbQUBly0tGbLwtZjg5frX5iZ2LlStgKcxFWrV9J3QFyYFZU1DwQb+YS1CPvLJxhJQ76Fkoo29pHu0HGocp2/nKPXgR1HqBxDBkK29UdClA7ns/oV2Zekd3LlwHACa9aHq8WH8U6D8t+V4/w96TSjawebkEOhoCCJFae7s8cAeVnp3mJPxMp48BNuZAuR12z3hiEhk1k625X0rNKyNh90FJX1RMuFh8YrYfiksbhOH5LeXC8GptpJJcrf9Ox6Ik1DpTGoiPt7CSeiGr1rykRZG2NLtJD4U98p8hTfcmMrxBpa6iGw3HAu7LuEiwjdgt5FBbdVCbJZGXx39yna/XwpFJzzF8c1JcSenz+PQtBWxsapJ0OypU0aeaq9XO7tIO6K7iKl2n/tDmiLkWbMfxna/AscODhDIljAlr7Q+SOz0v1cWgupFoIcnun2dFBE9XMoMP1FgCJ1ZMbus0jgjS9vrk5nmG2AyHhit5Jyak8Ha/TJmTmzRc6kFkCbIqKtHyXaItg61YJrf3PmtHCvGwH9YaHqdQaxa5wAJwm+ckGeIXDHD/optbdfQmPnKqUCwXBcJiZgSga+sLOiSZC2QuLxng1leykK1memsdIaqTgMc1oBBJDjGLZtxZyqe9WNTfXyWmwNwpOPXyGVDR0tjjU5+kYdsRahPazzKC9bxxuqZwbQ6rpWsZDpAGJANffFAqVklY6ZmJE58x6vPT0OGVY52XW1WMLoFyEupdmIVNhTcPHuCDaq2qdAvX8azMNeg3Ls86vDyPdweTTZ1pWrVVqSv6oBDgVA8S0QC650pxMikR/v+rxRp8SGwFSriWslknmiroLQIm4gFPYNLt7XHJJUzHPzbUfluhbpbu0AM/jDeEl67cURaWK4sqIG2m1d7fa45BgD",
+      "page_age": "0 days ago",
+      "title": "Singapore haze keeps air quality unhealthy across island, with PM2.5 levels high in most regions",
+      "type": "web_search_result",
+      "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/17/singapore-haze-keeps-air-quality-unhealthy-across-island-with-pm25-levels-high-in-most-regions"
+     },
+     {
+      "encrypted_content": "EvYGCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDIpHgn7KQOVfNTI/hoMVxw3fbQ21bg7r5qdIjB1+BaJ6jTEgHuOH4U9Wbi+tlKVuun95mHP1omQSeTmH1obHR7z8NYW5n0OLprxBvQq+QWWYdnm/3AvLCMPArM//kyshGurePG+w+onMAv27LSYI3ugV5ikBxV2cns07CzQwAPJV10VKGHd4qKjskAIfd0+DCEBaIfPUY5qX0UM7DiGNeaBkkBa0vr9kBTDfVWn6DcJNNC6A4516nnW/xQPOm0tHsRZTEIAufNMwB5KkPntmDG8/Sv2Uns/TaNy2C+wnbHTBvBrM60qOY6u/FhZZvYqW6jw4mmafunMruE8AFn/HxBr09aacJYhuL/v+ON81hcQOULiskwlrmxjfLGWcZb0pXb1erLkFXAfPJKaD2b1rTwClGiRrN9d2fKcq1Om87Auw4MYv0VwkLcxZG54swX14zKheQo9sfyc5FxC8V+j0JWDCDjd56EmbNimF6dNCTQ+NgKrADcNFLSzG9rJA5eNskSJxheLTfCefoM0PbXVKPIZ+X5Y8YNnWTUY4BvTkvll/6XdpBrGf8/kR/jsdXhSNVtJB+gLRA1suLWvYGP4m48Nv1aOJ5D8FJg9/MGLXLamr/p/rIxNd7vm1/I1sQHCA6Fl8xcYDVHjzc3uBFn6ixIqA/P+S2qQDu36wNGk/bvmcAeIW0L3NJJ7/pFYI5tTlxrqOPIGBiS2J4UEzKI0GSRe1JfN3LbEOLhPy/xziKtnB5SX8lRktKqYLJ7H7R7yVok+SPiYxB/bMBkHMN4XiO23ashLOr3LdIkWyVas0N7KCer5zxKDEnpTpmDnWmKnkP6ID0ArhHlci3u9rC9C3ryW1CsV870NshpsQbv+TvRHVZ3ZEq5S76nXeGUOvltZkGanNseaLa2ZDKSP/VHrrK36rvA/k+9h5CR2bMmPjrccYOo9xkbB7qwXkugp8K7jXp3ucCZY//zuUFUdNTjJM2rI+QBQuU234HXX7LUNdO8EocMxdViMWd9n3smdgLxhjVa6Lj4CBxFbtmkamFgNqGv6MCkA0oB5Vz5QxJYcawtf5nvskFuQKQCLPfvujkh3Cpxo0T/Bd6TvNQD3/nKlv/d2xh/hQcfGkhgD",
+      "page_age": "0 days ago",
+      "title": "Haze in Singapore: PSI back to ‘unhealthy’ range in all regions; PM2.5 enters ‘high’ range in the west - Yahoo News Singapore",
+      "type": "web_search_result",
+      "url": "https://sg.news.yahoo.com/haze-singapore-psi-back-unhealthy-230732779.html"
+     },
+     {
+      "encrypted_content": "Ep8ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHOgSplTxsdd7S6QzRoMV0/dMZmuXr7mY8h5IjBRj+zUONN19N5pe2SxVARrpd53zH/uOMBJ2y7k2QUDGRyfVik/URyQ9o9GRyIyBhMqoge7IgI+7TNJjv3qZxn2auq4w3BMpsCBHXozG61lztjGUzPXqcrHMU7DKLhPNpNv/QYka/FWoe3/RXFXwG1B9RSCWQKM4WEmJVsh5PI2w9/vjrlAH1G1PF9Bm4hsO2Cv05OJpAczOi0a41gyjJqwQ7uJAFbbBG97d22PEX/lqtwOfB3vXvAsQF6rDqerW4D+WdB4b7UuNaWJRicL1m15+Ckmk8AN/EFFRSLN/kVeI5XLxU7HJhlp1yZgI+N0evK16Imqggvgix3PJFZ1omYVkP1Akt3/P8M9O/RPxp2CChegmUFD3sPfQhEyc0SyZTWqJh7p7UPFqOvFqaJecHWxOpT7BZKlUR7DJyh/iu2RBRAwJFgBukdvgsskwyA0Y0VXiQspv4sfqsyIYZ8fCKFgUFpolGIiFFjL5LtkfWhVBgZmhnVITGoU1ZyemmTpQcKEOwtnD49fBKyYj3tsOO/L2x155pA7ii48W06/47+8LcbsL/DpGod0QuVAOo0CH8bGVQ5n1DqOFSD7DXxC1uRr0oipzBDFZjtGkZyqicWCKPWSPclNEOaxlSxKzVfbGXSs80ID3lOCizzebaCmT1Mz/E2HvDaV6XYt/pKKhBR/phhPsfld7lUCRV9LW1StNfgd0jB9Ev2VQ8ofNdTrAkh4IowL7OpR6BAqjaqJFBmEMaN2pgWaEP+TjNxlgBge7+AX3WxLfXgK4gB2RaT1Ff8k82cXiqA5SHWhxZ+el3G8R9aFh23pJSXNaE7Rp9lANWotpFUwqzOrljqffhHgzVwryMiCXA12S14T2Du4vzLxISJnz4XjmZOzBOXVt+Cb2MFNrX5lGU0caJQNkAJWgvQZDYUa6JBTiGcWVYMX5wvgN4Q+XAUtD3VPn10FQyDPwK4llVOFScKZdEhUIr8H/TZqIU7pRWVGYhmz8E78MxA/MnGajAeHlA3ulQzGnW1Ah8BhXWmf0LzNmDGB9gdhv4SRSPj8Y8RcRo9mVsisKaXQQz4IE+djMddNO73UThKJMcxDb70+xBY2UbpStIsfUVFAhgpKW0khEn/LjAJrsgv0axK+9LQNYU7WaLhizxp3yBoTqebKpeOUaJllsC+tDxVutWQ3tLdFaP44U+s/yECG00B4l31n7x2Yi+DtwLfRoXOPZ0kDDJw3xypxBY6mFntAoNzTBQqCZGJdnaSBW8WOzyUKHJN1YZMgLuJ3Jxj68ymt7Ykl4OX85t4metH7seRGKgbGzDkYAw==",
+      "page_age": "1 days ago",
+      "title": "Singapore Air Quality Turns 'Very Unhealthy', Seeks To Take Action On Companies Responsible For Forest Fire",
+      "type": "web_search_result",
+      "url": "https://www.businesstoday.com.my/2026/10/16/singapore-air-quality-turns-very-unhealthy-seeks-to-take-action-on-companies-responsible-for-forest-fire/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Singapore PSI Live Now: PSI & PM2.5 Today, Every 30 Min",
+      "type": "web_search_result",
+      "url": "https://sgairquality.com/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Haze Today Near Me: Live Air Quality, PSI and AQI",
+      "type": "web_search_result",
+      "url": "https://hazenow.app/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.singstat.gov.sg",
+      "type": "web_search_result",
+      "url": "https://www.singstat.gov.sg/publications/reference/ebook/society/environment"
+     },
+     {
+      "encrypted_content": "Eo0ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDNWM2Eb8Sw20STqnJxoMO57u5nuxKQrc5S7rIjDM+bKTfva58YMMFgEekarSOSEmZPLTMSJe2guqlybQp7qfLxezV7mL1G/OWXKq7kEqkAf83IMwlPN3Bzz1NC1daPKzWQG1LIzlQlZk3S1vizG6x9eT/sScXeZZ/thmniee2wfa2WxXkuhY2zG4t7KVxXqUa99V4T/3++eujkKfzzGyv6xpRolcTzpixDxjTC4UGITOockWBsMfykDageU8//OnrXSXO5NW4uB+48OyxIvleX26r6jyQGcJxwO5dpx8p8LQa+tV5TeUcC9PwkpooJEMOHgNSvIZT4pLYIW3wq5++lKWiP5E9HbFS3D1ai1Cy6aKD5Y0FZsGSyQbclbv4c6OJKu2YLLxd4611eJ/20g88/OCEKxYpYdw8osRvVPxXJbpviMNE2BAYQfUdHkpYxr10CuXTjJj9fkEP1tk49ECTEm2+MdAjfnISAYy1jvGZz3AtHdxuxBvdM/TGg3GtsCWmJ4lgu9W/q76h4AJhfgx3PkRpouWkF+Yeye/w3KVlUBjt5c3sxGzI1objaLMcFeDTCQ6qhUuOZJhIQmCbWGDDXHhYcwfWV7ojh30/SSJzJQsMseuWuXgqDTbS+O++yWyjCc+f+IUQHLfdbXmlFUEBa0W3fNbfqmPnyjG84kNFdI25Hix7VwbVLLh/s4/w1AUKILp6ol1tHsQJEKpvRaqpj9Ncfz+iDYaSzouxX9/lnpRnJA7d2tld1Z/bWodZM+BMkMmoQPw3E8Ebo8RPLMSdjkyLftJ7EKf717wcmiCzpquBWIdKr0vhZHEvDMIFyHqRjarqGq6l+dubQXRkv/URgM57kWUcldfUwGb1Qwn9km4Ju0x8z1+ohZVWpmetzkVG7vg39IPJ0QLp03cETAJlFj071fSsWX8q+cqw1i9pS6AygRVY8K3Uh7GvIxrpJwwHuyRr7Nhl402kaOsepuk0Ol0syAcxP+bND63vWd1WBtcdIpcF2iJpM4uBm6E8dHuyLAxIT6Bx/gkClRF/jsQqOsnIYXiHb+rgr4PDlORNXIXoL3lv5yw6ttWBUMfAOJQm50Qx+dUHQCfE7opTUUQzcRIYTRZfj1zQachqADLeNepi3IcvJzQdE7Ix5eApwG32bxMTY/+uaNp4CM9cGyhX4+MB43bExl/to8gOx8kJVODkmWFUaUXJ4SG1DE8Z6S91/ycSRCNi2+RANj2wtxe0xPUOlddBj3oT9qvyY0TaihX7+SL4JO/lw+yRXtqLnPrll8MlMG6UnDFEzuBoGYDTKynoBIkQ/Weo1DwB/pEqYgYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/singapore/2025/03/26/haze-returns-to-singapore-as-regional-hot-spot-activity-intensifies/170917"
+     },
+     {
+      "encrypted_content": "EvYICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDICnEQ5RICJrS5XT8xoMv9+ud9S2xWCpT7/BIjATMVJw8NqGFoy5dJ9oE5ZzGotqOyvgNsSxteN5kbLsbmJSG75nt4u0tRHbm0ZncCMq+Qc1yNncVnCmE2yctjIqArlMXty8EERlHnf7G7BJbDIwVRO2d7nzHZo3EQCE/FCcLKySHHNPEx2pIbChaTXHnB+31PX9we8g08+3Bjk2zY6hvhhojgXj6Bb58JbTqJox/qMuAjHU4ak1sfO/EFZwesF2GK1SqvOAYby3e14/bRNg7RbYxzadaCoRTW2DX1Zy6Cz2zbw3DIg9TGQKAXFoBwT3e9AxGdguIWq4b1Z7kHsX4bhw/pRebvnbIYTPLakhfErUbFCVedukw19G7vLXEb/uxewo34u8TXBY978+hPNV1JUhYmtOQmp9lzMttrxf63ibEZydfkiQg3UeXN/zLy1T/sbbKBnJKBHfauDIUi79JplMsEShyBLzjLJ+SllxSaSQLAwWmZfSQWzCdjRXmqEnFwhXBHVl7nfuRNo6/dPvakybEtLXUiamifzpoWcTPHZXIYL9nJemE3z7QSxO0la0k6LIknR/EB8vpJyGrEniB2iQxW1JXDkF97EX91HFGhNMezlM3EmQQ2rK/MHSooe4N6Ir5Gvt8yHvLSyTmjUZHQgWLQLxWJ1IY1LM+GSQtnj6Du8gHmZEhnFQgF0PQQLJcD7wRhy6Z7JIIo8aAr3qE8WX3wIQjnfcevnjCKn/4Cqtki1VoyvwtP53aS4rH3NG/vsx59mO6Pw5Q6YoQ6CdAbgfUsiSsVmDBmN5ItLg4uFrfFe8prDp7j7w4K+B74KtY9Ri4dFJ2M8NkDQHpipOj/HAeWVIJXO5ChIH8DR6IZ8TFhz5sW1gxaTfMgDLxUzyMLSPift+NdnGI9SBYtAxOWhqMNg9/fcge80M4X2X6ZJz5Z1QSH/cGfy2YvRbCviT3aASEHypI1fJVJANDJr1Q60X3lDgHnzpI21eKRuitVRUXRW8ndo8HuQ7zcAO9k67Xvj7mcGXAKWuEYkue3wWiUrydar+RNJMGMGrLlTTgEnVPTx3dVcSSsFFEMBBQ689bDuA89U7BdTZ4rcMLXjifPXYyifb9DG/rKBQBDjCMOmWW+PZwAphulPC2y4/1Vgmk4It0kXXBGc7kRMz+cE1lR993whKvhjdSmtvoAF9uP7JuhvBf3D+yvuZJm+0TDNhUm4+RPTH5BgOh+OWQW07zSzwRskk1wHefWJz34PiKSZCrgoJsadICbPG3BOKGXuBHT+lxeiZxVTesVyyk+B+F3qzA/jH2A6PkohAdnQFIa4VxaFMoij76SqqoXDi3X2ZJQXEOsEdTa9LXod/EUvEDCEhFJrK/fJh4xMJP6/SYXKaPIz7Z5k61cjXhrt3tQRBWeuaTDqbvRvp0pS3uLVT4EW8OjhMxpaeCjs4rEEdNZbUfFk1WWG5f2QYAw==",
+      "page_age": null,
+      "title": "Fewer hot spots, but haze still a concern in Singapore",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/810444/fewer-hot-spots-but-haze-still-a-concern-in-singapore/amp"
+     },
+     {
+      "encrypted_content": "Eu4ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHZPKHVDr6NKN511CRoMXsGwNBacrC2p+BCMIjDKcyXtvGuZcVFLnawp0bb0wvah0WVI3oojXVwY1FmjpCXPGmN5vcjtZngjV8k2T5Mq8QexjpUtC7QXcFl1g3+RyHaUS3UfNRa8XgVVXlxenIL43hMticSFW790ltjVj7ZVUwOM9F23AdtSzsj9y/N5bW+LYWduqBmeuoxdL3MLvr3gBoV8gx4cyN+IJW762aK0jjGPewh2O3tt/cCPeBaOopIWFYgwILM6Vr0Nb12WdIYZa2T+rv+OnfiYiOSFam3bNiz9oO3qHoJf+f5kNnvywoWnRQRvqlAlGAu+vZwiLXDnEOlAUE+XH3rUFfxkrK92s4RvfhAUgJ0VJr06kTDk2CfJKIjuO2P5jiTOVJGG4r25dY2ffqdgZY//uthHMjTzkRY4vQaXVGpu6hSpjZOY/O1RU6S3ixgaiqiNQR8zrhuXpICbR+s4kskmZwZ1Fsgw9eKmBl9mpin5XicCOp2v9xGMG41/6iRvtqXbk+QWQtVbXRRhS/qbwExxqxFwvJwa9LVEyIn/R0Qf8X/YeHG2OaImCrKsvi1+yUdtsMKo3Zec1gbHnAY08UImLOkWhenrNAwVP924C8QvetsHDGyFPyAfL2Pji6d9f8Mlyv4DJSnCffxJN9gFyC5R8A4Q/qvqJqnYZG/qbqcJaf/OkztwTFesOZU+ibbCa4BF6+TSch4+7SHrsfO0AMyNBxfXjFXz6HjuvZJt7lxf2pRhxTOhGZrI5wSHrdHTUjiK/HdX5KEy6NhOHYSPRUNNeDjww6Utv8GCapetlbF3Z96Zmq6quK8u+cauCnl7O9gwGyBIx+Z9PhHI4T/PfvSUcn8BrJgXPKF7IYDO6TMEaVt8cLUvrSlO7F9FyNF0dhQb0Go5xv+rznZFi9nO94oG94O0HeGTaR9R564DuxEm5v1IYk7j2eRpFkWcE+dutSOsPRHA1eMqLJ+/nDU8uTgStTWGjVA+IbXTNpRJWP2F+h8HkTzwEYvZLlF5QqBtxntBA418oaFgagjFi36Jc5KeO7dyisiMrC2D6HyuHJ548IcCvd9Q6XjkusxER4N8YXZdHL8uU1l6ZPPYaSpVQRK0i2hVc91tHA9KZKOW2KqDvva3GDYiwWyqb28nKOZZulBG6dItyeUwS70Zj/8sTQcljrfF7+wVhVC07dAbJhU6zyJfhXWy3mBxZ0hXohNvIg8uJK9u8QFlMKA7G9+RoyhXoaGfzjxlr/kkjtyYEcojVnkFc7gJTiUprjZKCJk7I+/fFO8Bs/Gx70Hw6fDF1SRHK5xrBlxKdyXYE3VZpiFrqsfo1iuXoh8v2I0VuFeRsC1YQnki5VLvs/xvIO+6gIv3MY6NndzQ5/AY/QRGNSPdiIEcJwJ9LcMsLuFEQOKwbS2wT7r0q51iS2Xgwksg2Ph/XmZ7SWpM0ifhGAM=",
+      "page_age": null,
+      "title": "Fewer hot spots, but haze still a concern in Singapore | Inquirer News",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/?p=810444"
+     },
+     {
+      "encrypted_content": "EpYICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCQG96cy4eGX/1zmmhoMyf2ey7gaSf9QL+RhIjC7CNs8Chh78wAX7QtCDe6w4j/dz7nb1n8goM+2TK91c7/BM6rK6YTWtc/StSDB/F8qmQdxP0UXUWj6mBUEQBSiCIU12wtWjehCTkJ8xDKCFyMI87wZbqPq6AukHh9ROJA2vt5q2XznTyr+wrHxG2CuXyY+WpmzixtMJxeD/RSS3EE5PglM4IHXRgteUbHgxHAb5H8+OXZslTU3/z8hlqo/h2xNthDvdLcuvGAoEiFUAzA6ya0jeN/ybJvjW+xG7fIJQhxKaR+p4Z/h+89dSHx9ViBwbXZw5GQWPYzuKc3OkRtLkyVqDy1fmYZ1MGkFA2wyGoOj+IpyE44FIPL+w6WGV4F31l2tJXYvXGiEM1/PUcGOLpfgzYEr3S4kE3GkgtFWOdDpNsn87Gj15Iuj3qlNK2ANlzdwFYkkto/Cxh01uTHUmDFlKYt09YJScECFvNC6bjqoo0ba1IBeDpHwR1/AU4AnKq1TISqBgxLAOiZWMtLz+JYPExb+Vwcp2KErigETKwg5qKRtz0WIzyAGaIt1JbYtvrqnJcK9QR02wai5bgnqzlULjzzWwO8y2xYH9wwWqfShTtmUonTS/Bp4zfeaNThvXJcqZjl1M/Ifp/ka+IhN5GVCZnHqKoDYK8eTuW+TbvZoTGeRFbpeoAqed8FMAckzY4nUm7kb5D4Y7kgGcFCfQ/LSVaA3/FHShtRdoqo7nq/Q5tjuWCHMyD+HwjLgBjgTjHsgssFF36d0aqVLTd1wfye59+kRok2YrHcdNCX2cMj7DpE/Nrn/ZALc+6sSUav8Umxv8gqXBrF/BKOrXDGaK8zB0zxbn0aGCQZJ1WZ8QK5a5knvlrfJBoLhYdmh1wvVUkYLi2y6ozb+Hs++IX5Wvnn/BleO0CcXF011m20+CeBL+mB9UliFQaSRTGUOqJ8HdiirvPIXLiJpCQk92gU/dJk4gH9GPlcWaYxVZnvVuqzJnAzfsxu1yR99DSlGbuNNWEb1oFwkdPAAVe3t+HQePp4OsfiEZSmmp5ga1QLzZTSpno+VS+VrLGAPzpWPFXwmq7kJKAJTBwd18VyvxaQ0J4bxKfdrWey6K6h1qWoMb/FrIIKOa9lzwOXhZTwTBGhvcJG637GMFZNFkIQUH1XGCxgQgwsasOwAbFQ8E6HgTIx1SSkuih5wDCT5pDJQPdK9EWa1ZTJvsO4QItTEBgFQWQDg/nnvs0fnNRsI5NmYBU2Oovu+N+0adIDBDait1Oj+Ag+0HKpVkxti9gz9PGefCAiQPH56JcmpAHC/dQxHvQ7KfF6Ihf+Pm5MYAw==",
+      "page_age": null,
+      "title": "Haze in Singapore enters unhealthy range across island | Inquirer News",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/1164920/haze-in-singapore-enters-unhealthy-range-across-island"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01EB8eRBL6aZZiSTg8Z2DKd4",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLn/5VyaNAWBwPlT3BoMXigSo7TXiF5JAJvtIjAzWisoLPSi2ao+KPqYeqFci029pozwK40nFxHWJyk/aMrWHwq5a3dmIwEB22GWAr8qEr/uonq2gjlFmPuU2/PlRK5wXhgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01KTmR5n3tWqUdDFZ5qe84jF/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x['page_age'])\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01KTmR5n3tWqUdDFZ5qe84jF",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_011vLJXMpzLfM4ZCyPnLp3Uy",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Singapore haze keeps air quality unhealthy across island, with PM2.5 levels high in most regions\", \"url\": \"https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/17/singapore-haze-keeps-air-quality-unhealthy-across-island-with-pm25-levels-high-in-most-regions\", \"content\": \"SINGAPORE; Hazy conditions persisted into the afternoon of Oct 17, even as the 24-hour Pollutant Standards Index (PSI) in central Singapore dipped back into the \\u201cunhealthy\\u201d band after remaining in the \\u201cvery unhealthy\\u201d range the previous day.\\n\\n# Singapore haze keeps air quality unhealthy across island, with PM2.5 levels high in most regions\\nSINGAPORE; Hazy conditions persisted into the afternoon of Oct 17, even as the 24-hour Pollutant Standards Index (PSI) in central Singapore dipped back into the \\u201cunhealthy\\u201d band after remaining in the \\u201cvery unhealthy\\u201d range the previous day.\\n\\nAt 2pm, the 24-hour PSI was in the \\u201cunhealthy\\u201d range in all regions: central (184), north (135), south (154), east (173) and west (185).\\n\\nMeanwhile, hourly PM2.5 readings entered the \\u201chigh\\u201d range in the west at 158 at 11am, followed by the central and southern regions at noon and the east at 2pm.\\n\\n\\n\\nAt 2pm, hourly PM2.5 readings stood at 243 in the west, 179 in the central region, 162 in the south and 159 in the east. The figure remained in the \\u201celevated\\u201d range in the north at 91.\\n\\nAir quality is considered\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_011vLJXMpzLfM4ZCyPnLp3Uy",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSsAUKEAgSGAI4AUIIdGhpbmtpbmcSDGYP6kSerV2NY3Ad4RoMUwXo3Q67vucm/mnmIjDv62F5/S1QuG7hvzziM6g0BCnCrhgJKTfZdB9f2tfy50E9dAKapjO8wJxV6+Nbp1QqzQRmv0InBaijOiB/wLE1glwzcPEf5/nhZo3Km7bPYHNvkcfXR2tcgKKlB2bqUOwvO0t02UzPQwofhhCRmIMsmmu6uS07UP6JeDgDQ58rlYSUaEiJX0ANmG4PPA22/7pkBg/aIZd4Co6+M3KlX6IjjTA6hozmjM8BOXU1z7XmM5gB+hzuUVMTwGKwXz+Foy7ZWTeTzMd4rytjk0pmjPm/stBmrpz4SyMfowk4c7BaoAIMiKFQxcyW/l2WFwSjkuyFWnSx50XzdcHu3Dd6kcw46O4OYu1J2/AF+XPSbr/iftZpO88Om5X9jYIwHlcxNIJt3SlW3D9x1uiwgNFsQyaqq33NnqFPKIqz+0iOuSJ9KKySEylsUjlcViWFIhuLCv7pBU/RZn8YjVZioccQx4VPPuxwZWVQWynggu+AfHIuTd6e1GIX71a7rkp8Akyfy4CqCLtUAx31rCnKEynUR7OWj6YzhxVjz4PS3j1eA+oRuUEnX8IeMsm89HY7kQX3kODQYLiHaK9EFoGvxXn1A5iXUzL8Elxa2Ud8jNRxWdoSj0IbUmD3H3ljZrmSEO7V+kaWLwuyX29Wp+iryL4byLHvaa2x29YmkZa7OyaD+F+4VBDYddR3I5HpdHYD+zzkj47rfWDPP9nDpfFAPPXnnBJl2GTZfjRhSIcySW0CBAHN1pK7zSThbpmM5KIbVzTfXqcl9E8SHurZiZFR0zyEjYLLYJydJ+6uGxAsPrQccPQT71y+W2kycnwQ09ZaR+EDhkxMUn4dgkGTejgZtfmLb/Q0GAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_012HbDEPJkYQUrQxbCEhDaYj",
+    "input": {
+     "code": "import json\nr2=json.loads(r)\nfor x in r2[:8]:\n    print(x['title'], x['url'], x['page_age'])\n    print(x['content'][:500].replace('\\n',' '))\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/tmp/srvtoolu_012HbDEPJkYQUrQxbCEhDaYj/cell.py\", line 11, in <module>\n    print(x['title'], x['url'], x['page_age'])\n                                ~^^^^^^^^^^^^\nKeyError: 'page_age'\n",
+     "stdout": "Singapore haze keeps air quality unhealthy across island, with PM2.5 levels high in most regions https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/17/singapore-haze-keeps-air-quality-unhealthy-across-island-with-pm25-levels-high-in-most-regions 0 days ago\nSINGAPORE; Hazy conditions persisted into the afternoon of Oct 17, even as the 24-hour Pollutant Standards Index (PSI) in central Singapore dipped back into the “unhealthy” band after remaining in the “very unhealthy” range the previous day.  # Singapore haze keeps air quality unhealthy across island, with PM2.5 levels high in most regions SINGAPORE; Hazy conditions persisted into the afternoon of Oct 17, even as the 24-hour Pollutant Standards Index (PSI) in central Singapore dipped back into t\n---\nHaze in Singapore: PSI back to ‘unhealthy’ range in all regions; PM2.5 enters ‘high’ range in the west - Yahoo News Singapore https://sg.news.yahoo.com/haze-singapore-psi-back-unhealthy-230732779.html 0 days ago\nAir quality is considered \"unhealthy\" when the PSI – a 24-hour rolling average of six key air pollutants – is in the range of 101 to 200, and \"very unhealthy\" when it is in the range of 201 to 300.  In its daily haze advisory on the evening of Oct 16, the National Environment Agency (NEA) said the PSI forecast for Oct 17 could be between 150 and 230, putting it in the range of \"unhealthy\" to \"very unhealthy\".  It said that the winds are expected to gradually weaken and blow from the south-east o\n---\nSingapore Air Quality Turns 'Very Unhealthy', Seeks To Take Action On Companies Responsible For Forest Fire https://www.businesstoday.com.my/2026/10/16/singapore-air-quality-turns-very-unhealthy-seeks-to-take-action-on-companies-responsible-for-forest-fire/ 1 days ago\nAir quality worsened across Singapore overnight, with the 24-hour Pollutant Standards Index (PSI) reading in three regions reaching the very unhealthy level on Friday (Oct 16). The 24-hour PSI in central Singapore entered the very unhealthy ...  # Singapore Air Quality Turns ‘Very Unhealthy’, Seeks To Take Action On Companies Responsible For Forest Fire October 16, 2026  Air quality worsened across Singapore overnight, with the 24-hour Pollutant Standards Index (PSI) reading in three regions rea\n---\nSingapore PSI Live Now: PSI & PM2.5 Today, Every 30 Min https://sgairquality.com/ 1 days ago\nLive Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy). … The Pollutant Standards Index is the air quality index used by Singapore's National Environment Agency.  Live Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy).  # Singapore PSI live PSI and PM2.5 readings now 24-hr PSI highest region  226 Very unhealthy  1-hr PM2.5 µg/m³, highest region  194 Band III High  Everyone should avoid l\n---\nHaze Today Near Me: Live Air Quality, PSI and AQI https://hazenow.app/ 0 days ago\nHow's the haze where you are? Live air quality for your area, anywhere: NEA's PSI and PM2.5 in Singapore, the US AQI from the nearest monitor elsewhere, with advice for kids and the elderly.  Live air quality for your area, anywhere: NEA's PSI and PM2.5 in Singapore, the US AQI from the nearest monitor elsewhere, with advice for kids and the elderly.  Elevated  117  PM2.5 µg/m³  # Haze now: live air quality where you are ## Is it safe to go outside in Singapore today? Reduce prolonged or strenuo\n---\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_012HbDEPJkYQUrQxbCEhDaYj",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS9gUKEAgSGAI4AUIIdGhpbmtpbmcSDMJ8MIvBYHPcZhhiAhoMmYYvbVH+U/RdyM/dIjANghztQLsN5yn5ohO7xVPNF8REFbv0HXdSpmD7pgk2Z452sGRZ8lE04upGxkJwmJEqkwWQHNW/DSv6LxMPAUJhiLS0RIvvJJbqFYUsIsht2oSLGfENaf4bCpeBn95FZRSVWReLi5vGdWchP6fEBYJIHbLivmhv87b1c4K7/L9t0BF3N44z+17wYdqVMOrvRSbI3sHqaD+H2Bhtcohd1rKDt5+FacxWdjwbjgFiq0tzxYGgnG1S+u2H2EvKMC5pZf7UfWe41LumPJ2MQA+D85GrjKXg6b3joTf36R69pkR6Wlg+G0PS+H+SUJY075VUbbVyi0kZJvOuBkZBumSZ4zUJLnZDZsEYmytI6p8S9i0jIiiUmvDdiLcLBss/2w6lSsgvtfO1LMd2I5ETrGs2DFexpeiQth44k+atQPN53+Nc4HHdUTNrtck6PhsLl9Z8aO2HkasBgCs5x2OpbV+pP5nZHEfzERlpLCoyHM6ceVvSLAqOxuVmXUetbx8s3bErQvZPo1Cexf2TEYs0HCi3mhVMxgEgnVzll40po5zObXbFQ0ArW+qLtwazepP7qogYLuYqoK76S4gjbRmk0WPepSg/akP8Fz7MRtGVINc6km7fVYQBFhTMBlSxQZYoXAO0KbeVQUKGG6pIaZoOHXH1uMrLqWNBpkJwq0HOXuExUSG97a6U/spB8MiUS23dw7TPgkVg/hpXOxtrxlxziKgmIP+CH2UobiWkF+YxE4iZpD3Kod4jplJJAXidg11XzRwFqIedNeRBngV4fFGa22++PbvyVVeXdm0NdatAutbENvKZencLCdyFh+EPJ1t9hWuvsZSqT1+FYARU4BHJw7yie16ubUAOSfJnfx5cvfGaquPlKSfgEyZvZeTFnUJGzl+n55jtD++FWQ5QC3VMHwU8by5ttFbvuEHVbp3MWLR4dg9C5e3yWvUY/RgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01HFzkpW7A2cgqo3tYLEijGR",
+    "input": {
+     "code": "for x in r2:\n    if 'sgairquality' in x['url'] or 'hazenow' in x['url']:\n        print(x['url']); print(x['content'][:1800]); print(\"----\")"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "https://sgairquality.com/\nLive Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy). … The Pollutant Standards Index is the air quality index used by Singapore's National Environment Agency.\n\nLive Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy).\n\n# Singapore PSI live PSI and PM2.5 readings now\n24-hr PSI highest region\n\n226 Very unhealthy\n\n1-hr PM2.5 µg/m³, highest region\n\n194 Band III High\n\nEveryone should avoid long or strenuous outdoor activity. Children, the elderly and pregnant women should stay indoors as much as possible, and people with heart or lung conditions should avoid going outdoors.\n\nLive Central highest. Island range 153–226. NEA reading for 16 Oct, 12pm.\n\nNorth 153 PM2.5 152\n\nWest 202 PM2.5 157\n\nCentral 226 PM2.5 177\n\nEast 205 PM2.5 168\n\nSouth 184 PM2.5 194\n\n## PSI and PM2.5 by region now\n24-hour PSI drives NEA's health advice. 1-hour PM2.5 shows what the air is like this hour. \n\nPM2.5 live page\n\n| Region | 24-hr PSI | 1-hr PM2.5 µg/m³ | 24-hr PM2.5 µg/m³ | 24-hr PM10 µg/m³ | 8-hr O₃ µg/m³ |\n| --- | --- | --- | --- | --- | --- |\n| West | 202 Very unhealthy | 157 Band III High | 151 | 183 | 14 |\n| North | 153 Unhealthy | 152 Band III High | 106 | 136 | 33 |\n\n## PSI and PM2.5 trend, last 24 hours\n### 24-hour PSI, last 24 hours\n**226** now (Very unhealthy). 24-hour high 227, low 185. Highest region, Singapore time.\n\nNEA updates the 24-hour PSI every hour. It drives the official health advice.\n\n### 1-hour PM2.5, last 24 hours\n**194** now (Band III High). 24-hour high 221, low 146. Highest region, Singapore time.\n\nHourly fine-particle concentration in µg/m³. Best for deciding what to do in the next hour.\n\n## Haze forecast\n### Wind for the next 24 hours\n**SSE** winds, 5–15 km/h.\n----\nhttps://hazenow.app/\nHow's the haze where you are? Live air quality for your area, anywhere: NEA's PSI and PM2.5 in Singapore, the US AQI from the nearest monitor elsewhere, with advice for kids and the elderly.\n\nLive air quality for your area, anywhere: NEA's PSI and PM2.5 in Singapore, the US AQI from the nearest monitor elsewhere, with advice for kids and the elderly.\n\nElevated\n\n117\n\nPM2.5 µg/m³\n\n# Haze now: live air quality where you are\n## Is it safe to go outside in Singapore today?\nReduce prolonged or strenuous outdoor physical exertion.\n\nVulnerable persons have stricter advice.\n\nBased on the 24-hr PSI (Unhealthy, 185) in Central Singapore · updated 17 Oct 2026, 10:00 am\n\nShare on WhatsApp Share\n\n## More detail\n## Where the haze is coming from\n\n### When will it clear?\n\nOfficial 24-hr PSI: 185, Unhealthy US AQI and the last 24 hours\n\nOfficial reading (24-hr PSI)\n\nUnhealthy\n\n185\n\nUS scale (AQI, from PM2.5)\n\nUnhealthy\n\n188\n\nPM2.5, last 24 hours\n\nSingapore by region\n\n## More detail\n\n\n| Region | PM2.5 1-hr | PSI 24-hr |\n| --- | --- | --- |\n| North | 69 Elevated | 140 Unhealthy |\n| West | 111 Elevated | 176 Unhealthy |\n\n| Place | US AQI now |\n| --- | --- |\n| Palangka Raya Indonesia | 500+Hazardous |\n| Jambi Indonesia | 267 Very Unhealthy |\n| Batam Indonesia | 220 Very Unhealthy |\n| Pekanbaru Indonesia | 216 Very Unhealthy |\n| Singapore Highest region: East (PM2.5 140) | 215 Very Unhealthy |\n| Palembang Indonesia | 214 Very Unhealthy |\n| Johor Bahru Malaysia | 212 Very Unhealthy |\n| Pontianak Indonesia | 196 Unhealthy |\n| Kuala Lumpur Malaysia | 175 Unhealthy |\n| Malacca Malaysia | 162 Unhealthy |\n| Jakarta Indonesia | 159 Unhealthy |\n| Banjarmasin Indonesia | 155 Unhealthy |\n| Hanoi Vietnam | 148 Unhealthy for Sensitive Groups |\n| Delhi India | 144 Unhealthy for Sensitive Groups |\n| Kuchin\n----\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01HFzkpW7A2cgqo3tYLEijGR",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "text": "The north has better air than the west right now, according to the most recent readings I found (17 Oct 2026). Singapore is under haze, so the air is unhealthy in both regions.\n\n| Region | 24-hr PSI | Hourly PM2.5 (µg/m³) |\n|---|---|---|\n| North | 135 (unhealthy) | 91 (elevated) |\n| West | 185 (unhealthy) | 243 (high) |\n\nThese are the 2pm figures reported by The Star. ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "At 2pm, the 24-hour PSI was in the \"unhealthy\" range in all regions: central (184), north (135), south (154), east (173) and west (185).",
+    "type": "text"
+   },
+   {
+    "text": " ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "At 2pm, hourly PM2.5 readings stood at 243 in the west, 179 in the central region, 162 in the south and 159 in the east. The figure remained in the \"elevated\" range in the north at 91.",
+    "type": "text"
+   },
+   {
+    "text": "\n\nOther trackers I checked showed the same pattern at earlier times. The north had the lower PSI and PM2.5 in each of them, and the west was worse.\n\n- **Both regions are unhealthy.** The 24-hour PSI is above 100 in both. NEA's health advice for this range is to reduce prolonged or strenuous outdoor exertion, and vulnerable people should be more cautious.\n- **The west is worse on the hourly measure.** Its PM2.5 is in the \"high\" band, while the north's is still \"elevated\".\n- **The figures change hourly.** The wind is forecast to blow from the south-east, so the readings could shift. Check NEA's live PSI page, or myENV, for the latest numbers.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 39369,
+   "output_tokens": 1042,
+   "output_tokens_details": {
+    "thinking_tokens": 72
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

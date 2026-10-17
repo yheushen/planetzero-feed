@@ -1,0 +1,139 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T16:45+08:00",
+ "answer": "There are a few likely reasons. They usually come down to the apps and the PSI measuring the same air in different ways.\n\n**1. Different scales and cutoffs**\n- Singapore's PSI treats 51–100 as \"Moderate\" and 101–200 as \"Unhealthy\".\n- Many apps, such as IQAir, Google and Apple, use the US AQI. Its PM2.5 cutoffs are stricter, so the same air scores higher.\n- As a rough example, a 24-hour PM2.5 of about 40–55 µg/m³ is PSI \"Moderate\" (under 100). On the US AQI it is about 110–150, which is \"Unhealthy for Sensitive Groups\". Some apps shorten that label to \"Unhealthy\".\n- The US also tightened its PM2.5 breakpoints in 2024, so apps using the new version look worse than before.\n\n**2. Different time averaging**\n- The headline PSI is a 24-hour average. It reacts slowly, so a haze spike in the last hour or two barely moves it.\n- Apps often show real-time or 1-hour readings, which jump sooner. NEA also publishes a 1-hour PM2.5 reading, which is a better match for what an app shows.\n\n**3. Different data sources**\n- Official PSI comes from a few regulatory monitoring stations and is reported by region (north, south, east, west, central).\n- Apps may use a nearer sensor, a satellite model, or low-cost sensors like PurpleAir. Those sensors can read high in humid conditions.\n\n**4. Different pollutants**\n- Both indexes report the worst pollutant's sub-index. An app might be flagging ozone or PM2.5 while the PSI headline reflects a different mix or averaging window.\n\n**What to do**\n- Check which index the app uses. It's usually in settings or under \"AQI standard\".\n- Compare the app's PM2.5 µg/m³ figure with NEA's 1-hour PM2.5 reading. Raw concentrations are directly comparable even when the index numbers aren't.\n- If you have asthma, heart or lung conditions, or are elderly or pregnant, it's reasonable to follow the more cautious reading. Consider limiting strenuous outdoor activity or wearing an N95 when the app is high.\n\nIf you tell me which app and what numbers each one shows, I can work out which of these is happening.",
+ "citations": [],
+ "claim": {
+  "value": 51.0,
+  "high": 100.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T16:00+08:00",
+  "band_right": false,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   132,
+   191
+  ],
+  "measured_range": [
+   132,
+   191
+  ],
+  "named_source": [
+   "NEA",
+   "IQAir",
+   "Google",
+   "PurpleAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T16:45+08:00",
+  "pm25": [
+   112,
+   170,
+   169,
+   221,
+   187
+  ],
+  "index": [
+   [
+    132,
+    "psi"
+   ],
+   [
+    160,
+    "psi"
+   ],
+   [
+    176,
+    "psi"
+   ],
+   [
+    191,
+    "psi"
+   ],
+   [
+    185,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T16:00+08:00"
+ },
+ "took_s": 12.1,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7WvWAA92VwdKKmbntNr",
+  "container": null,
+  "content": [
+   {
+    "signature": "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",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "There are a few likely reasons. They usually come down to the apps and the PSI measuring the same air in different ways.\n\n**1. Different scales and cutoffs**\n- Singapore's PSI treats 51–100 as \"Moderate\" and 101–200 as \"Unhealthy\".\n- Many apps, such as IQAir, Google and Apple, use the US AQI. Its PM2.5 cutoffs are stricter, so the same air scores higher.\n- As a rough example, a 24-hour PM2.5 of about 40–55 µg/m³ is PSI \"Moderate\" (under 100). On the US AQI it is about 110–150, which is \"Unhealthy for Sensitive Groups\". Some apps shorten that label to \"Unhealthy\".\n- The US also tightened its PM2.5 breakpoints in 2024, so apps using the new version look worse than before.\n\n**2. Different time averaging**\n- The headline PSI is a 24-hour average. It reacts slowly, so a haze spike in the last hour or two barely moves it.\n- Apps often show real-time or 1-hour readings, which jump sooner. NEA also publishes a 1-hour PM2.5 reading, which is a better match for what an app shows.\n\n**3. Different data sources**\n- Official PSI comes from a few regulatory monitoring stations and is reported by region (north, south, east, west, central).\n- Apps may use a nearer sensor, a satellite model, or low-cost sensors like PurpleAir. Those sensors can read high in humid conditions.\n\n**4. Different pollutants**\n- Both indexes report the worst pollutant's sub-index. An app might be flagging ozone or PM2.5 while the PSI headline reflects a different mix or averaging window.\n\n**What to do**\n- Check which index the app uses. It's usually in settings or under \"AQI standard\".\n- Compare the app's PM2.5 µg/m³ figure with NEA's 1-hour PM2.5 reading. Raw concentrations are directly comparable even when the index numbers aren't.\n- If you have asthma, heart or lung conditions, or are elderly or pregnant, it's reasonable to follow the more cautious reading. Consider limiting strenuous outdoor activity or wearing an N95 when the app is high.\n\nIf you tell me which app and what numbers each one shows, I can work out which of these is happening.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1488,
+   "output_tokens_details": {
+    "thinking_tokens": 717
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
