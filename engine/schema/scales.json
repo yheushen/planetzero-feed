@@ -77,6 +77,20 @@
       {"word": "Hazardous", "min": 301, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
     ]
   },
+  "ispu": {
+    "name": "ISPU",
+    "unit": "ISPU",
+    "window": "24h",
+    "source": "Indonesia's Indeks Standar Pencemar Udara (KLHK, Permen LHK No. 14 Tahun 2020), part 143g; its bands in its own words, English beside",
+    "marker_max": 500,
+    "bands": [
+      {"word": "Baik", "words_en": "Good", "min": 0, "max": 50, "colour": "#BFD3C6", "colour_name": "sage"},
+      {"word": "Sedang", "words_en": "Moderate", "min": 51, "max": 100, "colour": "#EAD3A8", "colour_name": "sand"},
+      {"word": "Tidak Sehat", "words_en": "Unhealthy", "min": 101, "max": 200, "colour": "#E0A25C", "colour_name": "amber"},
+      {"word": "Sangat Tidak Sehat", "words_en": "Very unhealthy", "min": 201, "max": 300, "colour": "#B8651E", "colour_name": "dark orange"},
+      {"word": "Berbahaya", "words_en": "Hazardous", "min": 301, "max": null, "colour": "#7A2E1E", "colour_name": "brown red"}
+    ]
+  },
   "conversions": {
     "note": "From a 24-hour PM2.5 average in µg/m³ to each index, and back (SPEC section 18), read by engine/convert.py (the engine and the connector) and web/src/convert.ts (the page). Each segment: from and to in µg/m³, then either the index at each end (straight lines between breakpoints) or DOE's own form, index = slope times (x minus minus) plus plus. The concentration is first rounded as each agency does; the index is rounded to a whole point, halves up. Above the last segment its line goes on. They hold when fine smoke drives the index, as in a haze.",
     "psi": {
@@ -138,6 +152,20 @@
         {"from": 150.5, "to": 250.4, "index": [201, 300]},
         {"from": 250.5, "to": 350.4, "index": [301, 400]},
         {"from": 350.5, "to": 500.4, "index": [401, 500]}
+      ]
+    },
+    "ispu": {
+      "name": "ISPU",
+      "country": "Indonesia",
+      "by": "KLHK",
+      "source": "Permen LHK No. 14 Tahun 2020 (ISPU) for PM2.5: the band edges 15.5, 55.4, 150.4 and 250.4 µg/m³ as BMKG's PM2.5 page gives them (bmkg.go.id, read 17 Oct 2026; the regulation's own hosts did not answer that day). Confidence medium. Part 143g.",
+      "concentration": "1 decimal",
+      "segments": [
+        {"from": 0.0, "to": 15.5, "index": [0, 50]},
+        {"from": 15.6, "to": 55.4, "index": [51, 100]},
+        {"from": 55.5, "to": 150.4, "index": [101, 200]},
+        {"from": 150.5, "to": 250.4, "index": [201, 300]},
+        {"from": 250.5, "to": 500.0, "index": [301, 500]}
       ]
     }
   }
