@@ -1,8 +1,10 @@
-"""The record's time-lapse (session 8e, part 143j; Amendment 3): 1 frame a day, each day's worst hour over Southeast Asia, in 2 looks,
-Real Earth and Plain (the globe), each as an MP4 and a GIF, kept in the record at timelapse/. Each frame is the globe from the day's kept
-picture (the site's own drawing of that hour), the date, the hour and the view stamped in an ink block in its corner; the credit line is
-the last frame. Made by the feed's Action once a day, when a day has ended and its 4 views are drawn (record.py calls make() every hour;
-it does nothing until the days change). ffmpeg makes the MP4 (the system's, else the one imageio-ffmpeg brings); Pillow makes the GIF.
+"""The kept time-lapse (session 8e, part 143j; Amendment 3; part 153): 1 frame a day, each day's worst hour over Southeast Asia, in 2
+looks, Real Earth and Plain (the globe), each as an MP4 and a GIF, kept in the record at timelapse/. Each frame is the day's kept picture
+of the globe (part 153: the map alone on its paper with its strip of key and times, never the site's page), the date, the hour and the
+view stamped in an ink block in its corner; the credit line is the last frame. Frames of different heights (a strip of 3 lines against 4)
+are padded with white to the tallest. Made by the feed's Action once a day, when a day has ended and its 4 views are drawn (record.py
+calls make() every hour; it does nothing until the days change). ffmpeg makes the MP4 (the system's, else the one imageio-ffmpeg brings);
+Pillow makes the GIF.
 
 Where it is kept: its manifest (timelapse.json) on the record's main branch; the 4 files, rewritten whole each day, on the record's own
 branch `timelapse`, replaced each day by 1 commit (the Action force-pushes it when timelapse/.made is there), so the old copies do not
@@ -17,7 +19,6 @@ import tempfile
 from pathlib import Path
 
 LOOKS = {"real": ("globe-real", "Real Earth"), "plain": ("globe-plain", "Plain")}
-CROP = (260, 68, 936, 744)         # the globe in a 1280 by 800 picture of Earth (Round 5 at 1280 px, 276 to 919 across, 84 to 728 down), 16 px round it
 DAY_S, CREDIT_S = 1, 4             # each day 1 second; the credit 4
 GIF_W, GIF_COLOURS = 360, 128   # about 90 KB a day (480 px and 256 colours: 190 KB), small enough to share in a chat
 TIMELAPSE_BASE = "https://raw.githubusercontent.com/yheushen/planetzero-record/timelapse/"
@@ -73,12 +74,10 @@ def stamp_words(f, look):
 
 
 def frame(record, f, look, font):
-    """1 day: the globe from the kept picture, the date, hour and view in an ink block in its top left corner."""
+    """1 day: the kept picture of the globe as it is (the map alone and its strip), the date, hour and view in an ink block in its top
+    left corner."""
     from PIL import Image, ImageDraw
     im = Image.open(Path(record) / f["pictures"][look]).convert("RGB")
-    if im.size != (1280, 800):
-        im = im.resize((1280, 800), Image.LANCZOS)
-    im = im.crop(CROP)
     top, sub = stamp_words(f, look)
     d = ImageDraw.Draw(im)
     big, small = font["700"](26), font["400"](15)
@@ -141,6 +140,23 @@ def mp4(images, out):
                         "-c:v", "libx264", "-crf", "23", "-movflags", "+faststart", str(out)], check=True)
 
 
+def same_size(images):
+    """Every frame the size of the largest, padded with white at the right and the foot; even sides (the MP4's colour format needs them)."""
+    from PIL import Image
+    w = max(im.size[0] for im in images)
+    h = max(im.size[1] for im in images)
+    w, h = w + w % 2, h + h % 2
+    out = []
+    for im in images:
+        if im.size == (w, h):
+            out.append(im)
+            continue
+        pad = Image.new("RGB", (w, h), WHITE)
+        pad.paste(im, (0, 0))
+        out.append(pad)
+    return out
+
+
 def gif(images, out):
     from PIL import Image
     small = [im.resize((GIF_W, round(im.size[1] * GIF_W / im.size[0])), Image.LANCZOS).quantize(colors=GIF_COLOURS, method=Image.Quantize.MEDIANCUT) for im in images]
@@ -162,14 +178,14 @@ def make(record, site=None, force=False, now=None):
     credit = read(record / "index.json").get("credit", "") if (record / "index.json").exists() else ""
     files = {}
     for look in LOOKS:
-        images = [frame(record, f, look, font) for f in frames]
+        images = same_size([frame(record, f, look, font) for f in frames])
         images.append(credit_frame(images[0].size, credit, frames[0]["date"], frames[-1]["date"], look, font))
         mp4(images, out / f"{look}.mp4")
         gif(images, out / f"{look}.gif")
         files[look] = {kind: {"path": f"timelapse/{look}.{kind}", "bytes": (out / f"{look}.{kind}").stat().st_size} for kind in ("mp4", "gif")}
     man = {"schema_version": "1", "made_at": (now or dt.datetime.now(dt.timezone(dt.timedelta(hours=8)))).isoformat(timespec="minutes"),
            "what": "1 frame a day, each day's worst hour over Southeast Asia, the globe in Real Earth and in Plain, the date, hour and view "
-                   "stamped in the corner; the credit line the last frame.",
+                   "stamped in the corner, each frame the map alone with its strip; the credit line the last frame.",
            "seconds_a_day": DAY_S, "credit_seconds": CREDIT_S, "frames": frames, "missing": missing, "files": files, "credit": credit}
     man_path.write_text(json.dumps(man, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (out / ".made").write_text(man["made_at"] + "\n", encoding="utf-8")   # for the Action: push the files to their own branch this run

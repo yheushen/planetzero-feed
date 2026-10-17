@@ -149,9 +149,12 @@ jobs:
           done
           echo "gave up after 3 attempts"; exit 1
 
-      # The record (session 8e, part 143i; docs/TERMS-CHECK-RECORD-2026-10-18.md in the private repo): what the site showed this hour,
-      # kept in yheushen/planetzero-record: the hour's data (what each view is drawn from), its manifest, and the pictures due, drawn
-      # by the site itself (record-site/) in a browser. After the feed is published, so a slow capture never holds the feed back.
+      # Planet Zero's record (session 8e, part 143i; docs/TERMS-CHECK-RECORD-2026-10-18.md in the private repo): what the site showed
+      # this hour, kept in yheushen/planetzero-record: the hour's data (what each view is drawn from), its manifest, and the pictures due
+      # (the map alone with its strip, part 153), drawn by the site itself (record-site/) in a browser. After the feed is published, so a
+      # slow capture never holds the feed back. Written once (part 152): a kept hour's files are added by the first build of the hour and
+      # never changed; only the indexes change. What is drawn again during a day lives on branches replaced by 1 commit: today's 4 views
+      # (the branch today, at each 3-hourly capture) and the time-lapse (the branch timelapse, once a day).
       - name: Check out the record, with the key that may write to it
         if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
         continue-on-error: true
@@ -170,10 +173,10 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-1.63.0-chromium
 
-      - name: Keep this hour in the record (its data, manifest and pictures; once a day the time-lapse; 4 minutes at most)
+      - name: Keep this hour in the record (its data, manifest and pictures; every 3 hours today's 4 views; once a day the time-lapse)
         if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
         continue-on-error: true
-        timeout-minutes: 8
+        timeout-minutes: 10
         run: |
           pip install -q -r engine/requirements-record.txt
           python -m playwright install --with-deps chromium > /dev/null
@@ -197,4 +200,15 @@ jobs:
             tl=$(git commit-tree -m "time-lapse $(TZ=Asia/Singapore date +%Y-%m-%d)" "$(git write-tree)")
             unset GIT_INDEX_FILE
             git push -q -f origin "$tl:refs/heads/timelapse" && echo "time-lapse pushed"
+          fi
+          # today's 4 views (part 153), when drawn this run (each 3-hourly capture, when the worst hour so far changed): .today/ as the
+          # branch today, 1 commit with no parent that replaces the last, so the views redrawn during a day never pile up in the history;
+          # index.json points at them on raw.githubusercontent.com until the day's final 4 land on main
+          if [ -f .today/.made ]; then
+            rm -f .today/.made
+            export GIT_INDEX_FILE="$RUNNER_TEMP/today-index"
+            (cd .today && git --git-dir=../.git --work-tree=. add -A -f .)
+            td=$(git commit-tree -m "today's views $(TZ=Asia/Singapore date +%Y-%m-%dT%H:%M)" "$(git write-tree)")
+            unset GIT_INDEX_FILE
+            git push -q -f origin "$td:refs/heads/today" && echo "today's views pushed"
           fi
