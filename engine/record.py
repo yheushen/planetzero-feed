@@ -156,7 +156,8 @@ def keep_monitors(m):
         gone.append(("monitors under CC BY-SA 4.0", len(sa), "share-alike: shown live, never kept (as in history/)"))
     if bmkg:
         gone.append(("BMKG's monitors", len(bmkg), "BMKG's terms forbid automated collection: shown live by the owner's exception (18 Oct 2026), never kept"))
-    return {**m, "rows": rows}, gone
+    credits = {k: v for k, v in (m.get("credits") or {}).items() if k not in NOT_KEPT_PROVIDERS}
+    return {**m, "rows": rows, **({"credits": credits} if "credits" in m else {})}, gone
 
 
 def history_slice(d, lo, hi):
@@ -645,7 +646,7 @@ def migrate(record):
     return changed
 
 
-def redraw(record, site, today=None):
+def redraw(record, site, today=None, fresh=True):
     """Part 153, once: every kept picture drawn again as the map alone with its strip, from the kept data. The old pictures (a screenshot
     of the whole page) are removed first; then each hour's default view (thumbnail, full every 3 hours), each ended day's worst hour in 4
     views on main, and today's worst hour so far in 4 views for the branch `today`. Returns the pictures drawn."""
@@ -653,10 +654,11 @@ def redraw(record, site, today=None):
     import record_shots
     record = Path(record)
     today = today or dt.datetime.now(TZ8).date().isoformat()
-    for p in (record / "hours").glob("*/*.webp"):
-        p.unlink()
-    shutil.rmtree(record / TODAY, ignore_errors=True)
-    (record / "today.json").unlink(missing_ok=True)
+    if fresh:   # the old pictures go; without fresh (a run stopped half way), what is drawn already stays and the rest is drawn
+        for p in (record / "hours").glob("*/*.webp"):
+            p.unlink()
+        shutil.rmtree(record / TODAY, ignore_errors=True)
+        (record / "today.json").unlink(missing_ok=True)
     due = []
     names = sorted(m.parent.name for m in (record / "hours").glob("*/manifest.json"))
     for name in names:
@@ -680,6 +682,7 @@ def main():
     ap.add_argument("--backfill", metavar="REPO", help="instead: every hour the feed repository's git history holds (a full clone of its feed branch)")
     ap.add_argument("--migrate", action="store_true", help="instead: part 152's 1 migration of the hours kept before it, then the indexes")
     ap.add_argument("--redraw", action="store_true", help="instead: part 153, every kept picture drawn again from the kept data (needs --shots)")
+    ap.add_argument("--resume", action="store_true", help="with --redraw: keep what a stopped run drew, draw the rest")
     ap.add_argument("--record", required=True, help="the record repository's folder")
     ap.add_argument("--shots", metavar="SITE", help="also draw the pictures due, with the site's build in this folder (record_shots.py)")
     ap.add_argument("--today", help="the day it is (YYYY-MM-DD, Malaysia time), for --migrate and --redraw; default today")
@@ -695,7 +698,7 @@ def main():
         if a.migrate:
             print(f"migrated {len(migrate(a.record))} hours")
         if a.redraw:
-            took = redraw(a.record, a.shots, today)
+            took = redraw(a.record, a.shots, today, fresh=not a.resume)
             print(f"drew {len(took)} pictures in {sum(x[2] for x in took):.0f} s")
         index(a.record, today=today)
         if a.redraw:

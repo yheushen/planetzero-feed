@@ -15,6 +15,8 @@ others, and Earth failing never touches now.json (the Action runs this as its ow
                           and each of the last 7 days, kept once.
   monitors    measured    OpenAQ's latest PM2.5 worldwide, only under the licences of sources.EARTH_LICENCES, never IQAir's;
                           NEA's 5 regions and DOE's 68 monitors from now.json. Late after 3 hours, dropped after 8 (invariant 4).
+                          Part 154: BMKG's hourly PM2.5 in Indonesia, by the owner's exception to its terms (bmkg.py): on the map
+                          and for the scorer only, never kept, never in the adjusted field or Highest now (open_monitors).
   satellites  from space  CelesTrak's elements for 8 satellites, fetched at most once per 2-hour update (its usage policy).
   pictures    from space  NASA GIBS (Real Earth, smoke from space, carbon monoxide): named for the browser; Real Earth also built once a
                           day as 1 finished picture, its gaps filled, poles completed and joins softened (day_picture.py, parts 114, 116).
@@ -38,6 +40,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 import bands  # noqa: E402
+import bmkg  # noqa: E402
 import credits  # noqa: E402
 import grib2  # noqa: E402
 import publish  # noqa: E402
@@ -488,6 +491,30 @@ def field_monitors(rows):
         else:
             kept.append(r)
     return kept, left
+
+
+def bmkg_status(out, state, rows, now):
+    """BMKG's line in status.json's sources (part 154), when it was asked or is stopped: ok or not, its newest reading, a stop and why."""
+    if state.get("status") == "off":
+        return
+    path = os.path.join(out, "status.json")
+    st = read_json(path)
+    if not st:
+        return
+    line = {"ok": state.get("status") == "ok", "checked_at": stamp(now)}
+    if rows:
+        line["latest"] = max(r["at"] for r in rows)
+    for k in ("why", "stopped_until", "code"):
+        if state.get(k) is not None:
+            line[k] = state[k]
+    st.setdefault("sources", {})["BMKG"] = line
+    write_json(path, st)
+
+
+def open_monitors(rows):
+    """Earth's monitors that are open data: the adjusted field and Highest now use these only. BMKG's (part 154) are shown on the map by
+    the owner's exception to its terms, and never kept: the record and the connector keep the adjusted field and Highest now."""
+    return [r for r in rows if r.get("provider") not in sources.LIVE_ONLY_PROVIDERS]
 
 
 def adjusted_file(grid_file, rows, now, source):
@@ -981,12 +1008,14 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     os.makedirs(folder, exist_ok=True)
     keep_from = hour_name(now - dt.timedelta(days=PAST_DAYS))
     prev_sats = read_json(os.path.join(folder, "satellites.json"))
+    prev_mon = next((l for l in (read_json(os.path.join(out, "earth.json")) or {}).get("layers", []) if l.get("id") == "monitors"), None)
     ads_key = os.environ.get("ADS_KEY", "").strip()
     utc_today = now.astimezone(UTC).date()
     jobs = {"wind": lambda: fetch_gfs(now, cache),
             "fires": lambda: fetch_firms_world((utc_today - dt.timedelta(days=1)).isoformat(), 2),
             "monitors": lambda: fetch_openaq_world(now, cache),
-            "satellites": lambda: fetch_satellites(now, prev_sats)}
+            "satellites": lambda: fetch_satellites(now, prev_sats),
+            "bmkg": lambda: bmkg.monitors(now, cache, prev_mon)}
     if grid_day is not None:
         jobs["smoke_regional"] = lambda: grid_day(now, os.path.dirname(cache))
     if ads_key:
@@ -1096,6 +1125,14 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     else:
         rows, left = openaq_monitors(*got["monitors"], now)
         rows, status = rows + agency, "ok"
+    # part 154: BMKG's stations, by the owner's exception to its terms (bmkg.py); a stop or a failure said in the layer and in status.json
+    b_rows, b_state = got["bmkg"] if not isinstance(got["bmkg"], Exception) else ([], {"status": "failed", "why": f"{type(got['bmkg']).__name__}: {str(got['bmkg'])[:80]}"})
+    rows = rows + b_rows
+    mon["bmkg"] = {k: v for k, v in b_state.items() if k != "asked"}
+    bmkg_status(out, b_state, b_rows, now)
+    b_path = os.path.join(out, bmkg.SERIES_FILE)
+    if b_state.get("status") != "off":   # the last 48 hours for the scorer, carried through a stop or a failed hour
+        write_json(b_path, bmkg.series(read_json(b_path), b_rows, now))
     if rows:
         hour_grid = None   # the model's hour, for the suspect rule
         sm_now = read_json(os.path.join(out, smoke["now"])) if smoke.get("status") == "ok" and smoke.get("now") else None
@@ -1105,6 +1142,8 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
             r["suspect"] = f
         mf = monitor_file(rows, now, left, status)
         mf["credits"] = credit_block(["OpenAQ-world", "NEA", "DOE"], now)
+        if b_rows:
+            mf["credits"]["BMKG"] = bmkg.CREDIT
         write_json(os.path.join(folder, "monitors.json"), mf)
         ats = sorted(r["at"] for r in rows)
         mon.update(status="ok", file="earth/monitors.json", count=len(rows), late=sum(1 for r in rows if r["late"]), suspect=sum(1 for r in rows if r["suspect"]), left_out=left,
@@ -1121,7 +1160,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     t1 = time.monotonic()
     if sm_file:
         try:
-            adj, adj_note = adjusted_file(sm_file, rows, now, smoke["source"])
+            adj, adj_note = adjusted_file(sm_file, open_monitors(rows), now, smoke["source"])
         except Exception as e:   # never stops the run: the page shows the model alone
             adj, adj_note = None, f"the adjusted field failed ({type(e).__name__}: {str(e)[:160]})"
     if adj:
@@ -1134,7 +1173,7 @@ def build_earth(out, at=None, transport_=None, cache=None, grid_day=None, quiet=
     # part 126: Highest now, from the same monitors (named at earth.json's top level: it ranks cities, and comes even from NEA alone)
     hi_path = os.path.join(folder, "highest.json")
     try:
-        hi = highest_file(rows, now)
+        hi = highest_file(open_monitors(rows), now)
         write_json(hi_path, hi)
         highest = {"file": "earth/highest.json", "rows": len(hi["rows"])}
     except Exception as e:   # never stops the run, never leaves an older ranking named

@@ -31,6 +31,10 @@ jobs:
       FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
       WAQI_TOKEN: ${{ secrets.WAQI_TOKEN }}
       RECORD_ON: ${{ secrets.RECORD_DEPLOY_KEY != '' }}   # the record (session 8e, part 143i), once its deploy key is set
+      # part 154: BMKG's hourly PM2.5 (the owner's exception of 18 Oct 2026 to its terms) is fetched here only, once an hour, with a user agent
+      # naming planetzero.ai and, when the owner sets it, a contact address (never printed, never in the feed)
+      BMKG_ON: "1"
+      CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
     steps:
       - uses: actions/checkout@v7
 

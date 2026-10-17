@@ -7,9 +7,13 @@ with credit (the owner confirmed its terms, 15 Oct 2026), but never kept: NO_HIS
 """
 ALLOW = ("NEA", "DOE", "OpenAQ", "CAMS", "Open-Meteo", "FIRMS", "aqicn",
          # Earth (session 7, part 68; docs/TERMS-CHECK-EARTH-2026-10-16.md)
-         "GIBS", "GFS", "CelesTrak", "CAMS-ADS", "NaturalEarth")
-# shown now, never archived: history.merge refuses these (docs/DATA-TERMS.md: no redistribution of aqicn's archive)
-NO_HISTORY = ("aqicn",)
+         "GIBS", "GFS", "CelesTrak", "CAMS-ADS", "NaturalEarth",
+         # part 154: by the owner's exception of 18 Oct 2026 (its terms forbid automated collection): Earth's monitors and the scorer only
+         "BMKG")
+# shown now, never archived: history.merge refuses these (docs/DATA-TERMS.md: no redistribution of aqicn's archive; BMKG's terms)
+NO_HISTORY = ("aqicn", "BMKG")
+# shown live by the owner's exception, never kept anywhere else: not in history/, the record, a download or the connector (part 154)
+LIVE_ONLY_PROVIDERS = ("BMKG",)
 
 # the row of docs/DATA-TERMS.md each source falls under
 TERMS_ROW = {
@@ -25,6 +29,7 @@ TERMS_ROW = {
     "CelesTrak": "CelesTrak",
     "CAMS-ADS": "CAMS global via the Atmosphere Data Store",
     "NaturalEarth": "Natural Earth",
+    "BMKG": "BMKG: PM2.5, Indonesia",
 }
 # Earth's worldwide monitors come from OpenAQ under its own row (the 16 Oct check); the row Earth's OpenAQ layer answers to
 EARTH_OPENAQ_ROW = "OpenAQ, worldwide"
@@ -41,6 +46,7 @@ CREDIT = {
     "CelesTrak": "CelesTrak",
     "CAMS-ADS": "Copernicus CAMS global (Atmosphere Data Store)",
     "NaturalEarth": "Natural Earth",
+    "BMKG": "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika), Indonesia",
 }
 
 
