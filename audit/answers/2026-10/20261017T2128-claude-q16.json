@@ -1,0 +1,284 @@
+{
+ "schema_version": "1",
+ "question_id": "q16",
+ "question": "What's the PSI in Tampines right now?",
+ "city": "Tampines",
+ "where": [
+  "sg-east"
+ ],
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T21:28+08:00",
+ "answer": "Tampines doesn't have its own PSI reading. NEA reports PSI by region, and Tampines is in the **East** region.\n\nThe latest East figures I found are from sgairquality.com, which was showing NEA's 12pm reading on 16 Oct:\n- **24-hour PSI: 205**, which is in the \"Very unhealthy\" range (201–300).\n- **1-hour PM2.5: 168 µg/m³**, which is Band III (High).\n\nAnother tracker, medicalwhale.com, showed a slightly different East figure of 212 on its own AQI scale. That scale isn't the official PSI, so the two numbers aren't directly comparable.\n\nThe readings are a few hours old and I can't pull live data. NEA's forecast was for the 24-hour PSI to stay in the unhealthy to low very-unhealthy range over the next 24 hours.\n\nFor the current number, check [haze.gov.sg](https://www.haze.gov.sg) or the myENV app. Both update every hour.\n\nWhen the PSI is this high, NEA advises everyone to minimise prolonged or strenuous outdoor activity. Vulnerable groups should stay indoors as much as possible.",
+ "citations": [],
+ "claim": {
+  "value": 205.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": "24h",
+ "stated_time": "12pm",
+ "rules": "4",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "said",
+  "age_hours": 33.5,
+  "stale": true,
+  "freshness": "older",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": "2026-10-16T12:00+08:00",
+  "check": "checked",
+  "checked_hour": "2026-10-16T12:00+08:00",
+  "band_right": true,
+  "close": true,
+  "off_pct": 0,
+  "measured_ref": [
+   205
+  ],
+  "measured_range": [
+   205,
+   205
+  ],
+  "named_source": [
+   "NEA"
+  ],
+  "could_not_tell": true
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T21:28+08:00",
+  "pm25": [
+   126
+  ],
+  "index": [
+   [
+    178,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA East"
+  ],
+  "hour": "2026-10-17T21:00+08:00"
+ },
+ "took_s": 16.8,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7tXc71tTnaTmaycFVWi",
+  "container": {
+   "id": "container_0116ivyWYGPKC5BMMYKQ1E73",
+   "expires_at": "2026-10-17T14:29:22.336095Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01TJhzcxrWoH26KSqDqvA7rf",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Singapore PSI Tampines east region now NEA\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:500].replace('\\n',' '))\n    print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01HCM7DnmtizR6vFYmToHWfh",
+    "caller": {
+     "tool_id": "srvtoolu_01TJhzcxrWoH26KSqDqvA7rf",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Singapore PSI Tampines east region now NEA"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01TJhzcxrWoH26KSqDqvA7rf",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "8 days ago",
+      "title": "Haze in Singapore: PSI hits 2026 high in central region - Yahoo News Singapore",
+      "type": "web_search_result",
+      "url": "https://sg.news.yahoo.com/haze-singapore-air-quality-across-221343043.html"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "East Region, Singapore",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/East_Region,_Singapore"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Tampines",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Tampines"
+     },
+     {
+      "encrypted_content": "EvkHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDAC3IFJ3yFiv1S9PIRoMw9WbvP2B5+Un6O1mIjAqhc7n5oNEImY2SJ0qZh5+WXkOkKOv+C9oECOKbEmx5GaCmiGerr6PvhOcXbJzhbUq/Ab3kcL7/MNb8kpBdRBvrs8MNy/xndF1K3hmvw+MRF15iAZKBQosP+OQcw8VlxbzIWsmm7scpiTMBpcxLpRTLkwNCX2tKVDnrKWFZmfslJgpfW+HiJAG3rZ50HgWjQSNF7kVKDDh6nu6QQ9e70yyzcbm7KIChZLLV4p/7/j/OfqE/bSGoaLJXU2RiOSjdiLuaQwYf6kw6q4DiUBPP/pFrKtXn6sFickzh9/OKsekKxJ82dFZQmCOaVdHnxyvikDdsEjDsSort6jHt20Yu07MWr3U5pREiJpJHHXxBTaN5jJ/z6YUnqe4toXtei/PGlm79wzMtJu8hZIE3naPgKVyavue9BKI5GBaSYO2dF5ygv0qoHwOUhYtfKVTfYG7cCgGRnKvluStXaqSymHiFT4V8BkZt+apr2rHjUEbRWbJrHprcqSu0olxBs4Ww8El6lY7VXSBGr0S6MkAeo6BqCZt1Sd83Hab+Mi+91jSHKfaUzsH9/GHtwCyiWu47+ElEX+5aqaRU4mo6O8Sy8gkcIMMiihvLIZslNiy9tAbb8BvxmEO/uYCBkADHZi7CRuvCdKFzS3rMxNeisOdSo8rdCAPKoGopXewLWPrT8tugZYqsdQD1LatFGoEPdzk4ZN3HSJFzixSqjp5SQk0cC5vBIZOa6jXgYs3zfg/1yXcoiAxVjEEW1boCYQnsd8kOseclkjGRM5Dwg4Mo0DxG2iVyDmV4dLXToGKAbCfLQqacOGs457iInWvFiqWFfPdpIaeWIlanIx2CFLqvZ6DVlkb0UUCNN5qsC9tM3rbiUpH3h/rQmVZK/m3YwIfdHAJoaQLVoa4fs0I6o1dI8W3LW+iWDH2oW+eY6AvkXir+1yAXnhNrOtc6Ew9430xtv80+HuruGf2mItQjqjsBHRaKyqE2vzV5a2Ndqz6sZ0sEEDUeKriE0NU7rsAtIoju5S2h3lZc8Rx34B+jnbA/pvmvQJBexX9JW7PgQx1ZHORS4dPMFODB9fQc/oShP7TbJ6WUam32sOlitcYmIvyy6g6XhU+ifPOAAPX2GPTqVPrjluyz+19PIr4oqcypRP4KELkzjLUNU5xff+KawX8upGFQ986hQQqAtcKQp4LrmEIvSrd1zm735v9fAvhsTb8Apy3HanYw6eSF6hZTasTMfcD2aSykCe04tNdRhJtQRRmlONQ08vQGAM=",
+      "page_age": null,
+      "title": "Tampines Group Representation Constituency",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Tampines_Group_Representation_Constituency"
+     },
+     {
+      "encrypted_content": "EuAQCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDGDYqoVVmBMJI3Mi2BoM0rz47XusImnGs2rLIjBtr2WnxaaWbbex1CavP2BbTrnEAqfUni5uSF5+oauj2fPM7oMPPkVffzsWvz1jl0Qq4w/TdMi8XVq3MhfO4kbmV0mNfR5HgrFm2EMaf7gQ4sjXsIHmr9kgZuhZAgb6MGViuayqLo0iFCat0J9f6QRoFeeq2DnKiiGnyOoKnOimaju9eWEarGVxK5Sx/6O0sQdzCqchXCw5cOZNDah5YQ5ZJO8pJLzTLFKhds6GWDB1gccaLwPUK43t+T5SZvnuQwDDSYVU9+OT9AHI3Ek/u5ef22MG0038HoW4owF0wR3QaIPYOpPvwM9BYNVYkgxrdq145XYzYX51JXqqdT3LSkXSA5Bm2SH3EELdWBHKjSpKyR3+T2S6GcBJB982ca/xQp19gzzu8iI9WxMiZYR6fOEsxu12O1/6sHyU2eFBM7zrfEhERLbqOHWDDxQa755uhoPaK7X7f0wJrQtRB9TFPT+8TAXGAP+d6o455FE7/P/aYxWiE0cmNjonZdnev+o3ZVKYPbFfLLjysYK5ZG3eRIlA6GnSWQs6FgcYtdv6/i9kpgDgCCCKUXa+P1e4CsWLN4rkO3+42m58CRTGJob0AstT8c9SV1HlMauC24DUfaxLOPpM65FzaZcx++eBrnr+Qb7v+0O9WXmhBujYnzTIrqwDSj8rmyqNDS+hnAJIwicyWX0I7Od3pugI0WoUgqAQykG2vvQjOnMRFI/GBfry4uBxiI62GJZhSnHteF+iXQpPGintIckM88yUZbdh3v5s0jrAPaGN4IyDpQp8NTxBYiD5Z7IuE/xLDorDfe7McD7Lq9yDbUZVqYgSSMc1oBB6ky0GVQsXileejIeY+6kBKL2CN7Uzqu4HLq3cvI0mTVA8jNZfPS/OYzwj5NG3xcy2I0NsG7KrwNpkPjRok8FYtDcZLw4ed00utJQ4/SR+ZM44ASyqSgkCTBxz0f4Y4Fmgo5VjGOt5QB2zDnJOh6TA4WyD5pgkiIOgxNNHuwYT//feXOQZ9KL5ga6fqKiYqG4DuFm+Pr4aaTvsx9rNMT27GEz/tpVlVqHN94HDB62Fv2BXKPLWPBnO5OhavucAdMINW3Tn0hNg6vKsVSoFV1Mmd8yOEXUwJXWNJr0pbE774Tw2ezfg30X2vJhbW8SJEdmOoI6OXFDm1RLUqFwEWNVR92kAiD4FAus9OB/237KHxkGLfM42oDoVMwVFCZsQnBk3XZIEQlMiOfh0GshkDngprOIEHeHZIiRlQX3G1GN0MxkrZ54nGvKgBtFgXkRzmRNfFqtqwizXKYL7GRfMb+VSNwFJen/tlmkeBYrjt8+FOYsr75mO6jCH7n8R5cIQaxJP4q6xiaBq6X8Nn+3Qo8nd1JfghEhmQNdnnj0WR4Z4/h+ItGxqjBzrAAcFYTFqp2eRMIpWkim6218HfVy/LFTeNJV/sbcAYqLnSa2rDb5tBYcRJzBzzgsWT1tstnlm6dqJ0HvHlFFOffLCkGv3tN0Na1t+f1fnmBDN7wgV2prbyDsTXTC/GKKSAPrTOuF0IefsxcULITLaoG0CqeAhpdyEUUNqhsrOvnxGvoidABCgBeORlUmOacjfOmEqL6K29Sl40JQKFAEqPYsHevSAlNvcaxASlVhbO+k2iHZD21S1qPmpo3ELQ6TsFCAO3KPmKp8CJV9vG2rlDZDAK+tS/XMm2fjMswqYiPaRnCu0wAA5uyDGDQN2EmSpuYYT4D8hEhJKfFB7CD9JsuMRdvU+ic9OrlSqBFRmSgaHP3EukhAXhMbKBh0SMeiWi+Hm/bFRBtu4Vyqxzc3tVKWLBuSYp+TyiwAwU3/kTGZvuvH11Ai47PeRez5/IPA5YA6hu9ChKZS30UqA09kf2mazvjQ0KpjAbF1oGuvTZyK05KMjE7vf7R4/63KduK/v+hLva7YdYGvmyVY9n32bi/6sVeUPxuiP44pQPyV+84D2Hpvzd02LIeEkzTADlcevH1a+/ZYm/hqpQpfrKlhvVJS13P7D8nqBxv06ixFGlBmeDfhG+vvcbzFD1YORSJbEGVIlAlAIECaVERCYKcyrSXOVyeV1E09soAybr0RHeqcReAyOY83jsaT3FYR3YcNgLI8rj+43TIbF1XioLL1Rja45ufF+7wEmAax1IVr9rdGrLXrUOtehyJjdsJ8t27dLOg8091idoGSUZ62Jj4AC7zIZoaBtC5umYfUMs7n84bARWn9MCeyOrrutFwyGNaR6uNlQ7CpJfTgfJQR2abfF2xp2Ve5mfio5cTTUHXkpUA2xXSUQiKNMP+bi1sjE05swRc+ibDCiueqCcp3dgSY/y2LdpQEnBEMUnDfXGB2sWNIasHHAs5RBc75RsiGu7UwhiThEyue5W7w4iVsmhuwQH59/CCNyGuSQ3S4MREbENfpV4L1QRK0dfnDkcWlTbrbAJsZ52YfOzvfa1yDcosY7FlzsehrtBu844FKtdup4M9Mj89UuoVnGg1TtUkEa1TiXr3d2Lxbk9j8cGQJMsWO/C7rYBdSIxVVURStZCyI4B6A+ept0KFAIjcPbt3mAWOpadEtRnEoPwpfDIPTrjSWIW9CBrnpZ1DrG+kRmph8JZW/OsoQqSIZuCKZpMjZCbAfNubQupVv9dPJuSYHvWay/7wmTTZu0BLiVmtJmH6ZvT+WJrmEAHvy+zln4D8JmWbZnP+A4I3EJ8P/t9zAgrka26thoow/xt5JJr4X/WqwjQDVvDHPpzuxmRN1zU2XtyJqyLIHaiC1QPotOwox/efzXzLcYAw==",
+      "page_age": "1 days ago",
+      "title": "Singapore PSI Live Now: PSI & PM2.5 Today, Every 30 Min",
+      "type": "web_search_result",
+      "url": "https://sgairquality.com/"
+     },
+     {
+      "encrypted_content": "Et0ICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDNjyy8+2bV0tq9UqBBoM6i+lbBKqWKuwSORbIjCHKgI4ELLRV9w1n0Kbm1iOhLOyKPbFSVM/ihiGgt4seHP9b3lXWWHMSdKTwYyt7XQq4AfeoRJ6QWbO7f4Mg+t28WcA4HRu1mlsDnsArdCo7ezZgf2pMSv5h6E/vXxYUnugtuL5r8djVuY2Ivweq6O9v/7ZxewUgsSTiqd890ltwBLM3PDo6pKkQlxZbNNVkaNRNQ0EfYtUJJ35yLdfoar2iCsYz0N+Ae+XOCP9eum2fMUSFTeyYrsjFO3082suazjpheg1tYkLK0+zxq/WkNRb24DhdIEIYujsWqUYzYjfjazCYbKKOxU8Z6tQn9UPSPERKLORMJ2TXP4eHwdVS0RRPZ+ugnfhi1hfIp/JeoT+/0iR883Bl8RElH9aNy9fM2+PQ87NEtAyJj01yKm/M71FCYyru8cpG/6IDJxrPglJBSLmBZLetqTaU6ZsFCprOMJqrAgdDlsGFowtkoA2dEjW/p696rSKOQ/hFhSA0Oh6J4eIBnWCT3qWXkICoYXBW3R0xqe2jyonQ4mimWJzJZQViWrY2DagsoW8w1sc5PIk4G+lWDVky7DQh9MTG7i5v+KPe7Je2QGLJGlx6B037ZHHOwVMQCBeQ/LXUoWmrj20O8xwVVTmCtvDNbQq/znJVbDcC5e0+x9sklWjt32W0Kjcx9hXXDdPTKRcgjL1C6pBM0TajwTr/CP+GKuArKjzuL38UwGHqfU14YTpbQjfx7Wd03da1dAXL1pyW/URA2/ezSCVQkkCKwtrt07VCgr2hto6AZWrkkEUh9SnUA1NYj+g28ONp2ynWzsNM0Mn0/VJXQU4toG9aA4ki9iiWgvePTh3DUig2ytcJWr3r0Q6EV4Hqg3m6gkoTl6nP45GYDv7WnLPdFUIcZ4MEBdKf+a/ROfclZwG4/CC1ew7hlxWaL7zKAL8+20VsrlIv5+PlsIb4mX8XpE8LyMXW7Ifkhn9B5JUh0Sf3uYqv4QrWUFyPy7AsEJoyCKbH2QayachK7bMLM68pahdpdSqTSIkRr3ATRHNYHVM9OFOUqyRrKp3Xz8S162P/zlo+MykG4/8QTEAetfXZN//lZxR73KXgOU+XkJSRVOXIcTe/TZYWdtpvpjFQS0Moxp35Ado5tyZN3/EztQUbAZ007p5Q6nnpb4jYNOP8/PcDiUpKPX2ahYOm9Wzeo+wD43+2xIY8KSRyd8voXL5U5btDVNxivIhNBcYRI2hfORJkCfauXFIkLpC4Z2reAonU8rqTPvKa+lKZYRRL3/5jJaFVfxHjpl3M4es7FDQuK561k7aRy8w6md9QkznTuxfknu7O93/jFigI6KgpIypcyyZOlUSZer3ltFS4IjAclkhiC++bgYhZXkZd8Ls8rn18BLhmHhbKDRryi/t09sKYhgD",
+      "page_age": "1 days ago",
+      "title": "Air Quality & Haze Monitor (Central, Singapore)",
+      "type": "web_search_result",
+      "url": "https://medicalwhale.com/sg/haze"
+     },
+     {
+      "encrypted_content": "EtkOCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFZVrMjZlMxyaDOxEBoMafrhlxSXZevmbsadIjDjtwhxi9WsknwKZOGPBWgPa33d5w7EmSJ2TdDcpzdMWMocJ6aWK7lAAiIqhuy1Jukq3A04tYw7CK3JKv2FP5Dhu9CtOQyzKmHYW+ZEb9dAQrEivDN+ljoXzfst2HSNBx+DtlJmXAycSTCWWvQaLTJSn3ukNNxTxrm5CMpDoJKoTbMFrYqK/fy7cG35gSF/1E84ydu6REMU+9qFhdcjQQOJtgP+GP14eCUp97c/2q4QtGUCvfXPHYLbj4TOItnU6r2us6e0AyYDMQJTNSTa//nV5YdsclhsOzzfC9otgEePsDyPwgRAO6YTM4ddJsRoRX56RmjkpjNZMYk4LuSgHWffBWU+cWbIApBvi9HO/MsJq7/d031hCi6eLzqPsneXawPMrebt194vPelV+wX/ZCgEHdDesBTNFf0f1ls11Nb/YagIbxHO6edXFi2bx0lO6IJ0unXEC0wV363TYtGWb8coftzsYnUYQgEGcF5R3moEdxEgInDtjr/iwUblPF9qbVRwVA2KVzZWPi07B9euj6ZzpM7MCC+8X640Kep4PfYSOx1ija9N1G+F82oezvB++7MWUpWgO0Y3A/riBT66NXxKj3MsLX/6TgkzKl8QbUx8C5VipVmfpgXgkcsZ7B4IuAF0LvFvZ1UoWgfj+YD18tfmGQ/lI6hg1uGt8XuIvTz5rg9T2xce1hXWdgwx1XLAFGD3/vl7JKAmJ/kyEAEBX6iQNm8d0+ZRkax8X61k2u50il4iP6beqFOoLmi0DUHjVH1DMZfoU+XtauTyHnJ5dUzKHRiwoGHPM2yZSqtr5e/fU9wpYHiKg2AO4kHZgjMEalIt9/oVGRKsK2fUEiJA412ofQelP/I2rJI+33F1nUNRLTniJqzEpFfINnyMDtHT7H9hQrTlmrP3wBm+827MOTYoA2b2bsJnhVMKKtBoJMjlZsMUB9VpkJQ0iiGWHzl/T2Hz9UyARmwZQHmDUGS1k8CnqAMmHsBu0cXsDDXp6XilOWJq+98J9kAVVJuoGA/f9g672xBW4i9XTj/x8jNAkvxy+ckBmayxlDaJFVBM5Zfq+hQnkojjbDJWhZSd7G6F/8+DkYeqXyVjj02cv8xfTIM7QPmhVYdXWD4cMpjLwofoGiZh3ZiFMYgzKwVvHyzH8u0zuEyRWJ+u5ZxAMP5OapG/0Tk5oNsXHfSCkMp6vGdUGIbICvxHJ6fTmx0uwcNTrQ9TpH6tnJnaOJH4dd6qMnM9KoBL7F5LcUwTPcZJnshXYiZ/bBvu/L9kHq2qdraVcDyQROHT5DQSKeQgQFt/rFRdQSMh5SITGP1CFGLyk0VCa5iaOgZjX9xbEPdhChjk5Kvp1CP1GQrXW8d9ZRS0COqunNwai5CTo7xM0xbbLcqUT5VWg0mCka+EalSYhm2EI+vWN2qbBTyJSQOPYveBWSoG4GmH9m4hSdHxDiauEOSeCsroKev7Ncof7MQ5g2R57J00bB+1E6DQTmbMFM3cfCgJuXX777IiRB2DJ3dGvGPcXqYu+1noZ33SHgBdR1Il6yDbUMKeQdqSoQUgI/enTBmJw3CtvlNA4wDBbBJZkw0zguopApPB95Nb6JsGeXtYNhiLD5KAMejRkrLcRCTQ7pDEjhyEZbX41l7CCUOe1VgoT5EJwWiFkTM+XCSJIP2+ltgaddh13yTKMLDCS8RFiqM85MTRm+rH9oFHlHqhSP/ZXmL5d8+kttld78r+XSCVjqkAUqO54K+JkRr0RslygGUtKO11fJU0FAQakVZ1BiV4oGXc3vHTEEgs4D1tuOVRFmEYbVLwwlawOiyKJQAw4yuAkiCYJs1W6v8Q1PKPHjUYEyjlI/3c2G+/bMVu7Nwf0ljaNMpfToHGdgGgtM3DLnCxZMabkFWr95/HwB7QVfvK2h2imm6VQtei/fUCDUboflF1ZxF/jajEG/H8D4nFGtawzAfyGQYIn4jnuLuFU6aBvmOqtuyrKFe2pGAtq5dhfAJ0ix7RkfClsE6GNGJIve08MKvm1/vuHMMDjxEi5jJhCzy+S40XeMigxAE3J8Y4IF6JmPHqLERm2jLeyRLUVNv9CbEnuyuQUT8kfB3G26lVSWsXKxmixjmybHkXgUT1JYGTmp2s54ELlh+b6ppmd1DcgSwPt2eAKUxithPkFA6ruX4bdvo2MwRW9j9tyzSR7IdB1BzpENexCfEVIDZIQc0fc2CNYCUBlhc6QrRi7oYQNgNoKbKVgJg6y6R0TyhqdGOJWG4KdIF49nVPhD8xR3uHQPy1einmW4EURez+NkjzWZTh6z0ohTc4OLpIMv4LJOqt3obQ39AEqOSyIE9oQVyN/x5U6V6JWVhDXolmXNGiigDbtvyQphgDTF5+CkPliHr/3tFOgo8SitYO6KwUfuOX1p3+pcYTM9NwLxmqi8reGAM=",
+      "page_age": null,
+      "title": "Tampines East MRT station",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Tampines_East_MRT_station"
+     },
+     {
+      "encrypted_content": "EucICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHcGlh+caObqvTDj8xoM2N4Wo53np9lqsDQkIjCIV+K7Qo06zMs+IyWQi6cQWZH+lCR9A5kjcryUcBY4DzIJCDpS8YRZLW308nQox4gq6geSs143ZBLGwdzJ7vN7hcSGPgFNuolQmOf2dEDWo9Yx2R7toHhu8YH3njOTOOlPlJ1WbCFYQb0vhvCaXYHDB7ekXayN2tYCTVWRNljs/DZesalLy2Ei4LS+QzRn21957YoLTReojp0nsxDktvZ0Tdg2r+xooBTVnjqQvwYKmdJROiBnTzHBWsAdWKMruZdWQMNGdRg1q+3bZEh8jNVGYpHzGF3Ysx80yJGLRwa0MdOyqEXQWY8rUkKTezZiXaxKJ1qPWytxH/XCJ9m4+vZ6zJ4uthS67zKAL/imCnm/5abqakY03+fApEqagajMMxzokjR8PC8KfQ2xFRny7gp2rKk5kPGocdUhxAiK1xvislV2iZbIMHP7n1pduETfIvT2AOJRjmWPoWRSrXPTEC5zh+hyYJ1ObOYaQ2QqBNt5WbOH6w/g/OVv92piU/I87wqSsn/LKDs2jFl8dk4CR7hVJ00T/Q93YgOHWlJmQaeAcenQ96T9Wzh+nHCtv2Q2vDulmMXNlgSs+zbvgy8aU96La7WkPPLdPZjP5XLa+eNPnCDO3fvPL8CN6B5HeWXLU6+vr3Zj+Mq8stBgf8P6zYOs0eUQ0M7VLWHIRGdkCSrhmDo6H7gFPx/vd5MBFdb7E3p/KOh7FutqXKBQKIPNOBdt128DMHXB9sYehz2tI608fOF85Ndl5gOGVtlUwl7P9E/JmbJRjXINRF4OlJGWN7u0IdoCyTWe4nK7DPIH9RHIKsdS8qmhnaJmBMILRyYQtfFk+hscr4j3FfaJNElC/LoD2V455c6c4DLm+jV1u4y3sKnnSPkK8SwfACIJVOcjfy9IWkXFvVEiHNKW3lMKmAbHeY0BCGkgps+LdIq3qtGBWKVNX1t4oel1hg6qRwBlhD59t3CkG7kj4Ml1s0RY5/zOPXxZDV2yppJj42BuTmobRG6C8Zyy0vd6Nrkavq223xRas+eTxxLRKgfJ516kCqSyCA8b7iUFvOeFYWg4iFANbmmq1Z7vCWEw3CBrd/Z4fHswURbHwDs5v0p35PgPnXh+30c0o1DVvVBKwealZ5KpV17+sWnXN+aDgbQoufPaCji/fbZO21Rum2g12YQKDrQ1umEe9I0zTEIDQgdV8DfGe+P8tl/DHVLNtKN2rF2fSJ4/5g5eej9rbFvMnmcVzD4iFoEWCs4/oaCdvgw1hJ1M3pwRzK4CQmj+nr4QuKcCiSbLMSXo3knh9+ElMi3NSeCsvFzD2soVQthLY3IltBX9rlbMjGJZ2GvP/pxk9u90zdOm26tw3Iyars4COgTPk+XyV+3k2KXWsxLnEL2jSYl3dTd9wN/5vGunKlcIIBcYAw==",
+      "page_age": null,
+      "title": "Subzones of Singapore",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Subzones_of_Singapore"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Singapore PSI & Haze Today — Live Air Quality by Region",
+      "type": "web_search_result",
+      "url": "https://www.checkpointsg.com/haze"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01HCM7DnmtizR6vFYmToHWfh",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDN7ZZ78rAGqiLfzCsxoMCm4rLHiC/7eniLClIjD6VTcwNWsfGdvtnpH4Op/clBy6qWQmE1b1vNhsHipcYZK0rlapGpuZqqX++DxPthUqEhssYMFkM93Vm3zWG3V3LC/rgRgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01TJhzcxrWoH26KSqDqvA7rf/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01TJhzcxrWoH26KSqDqvA7rf",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01X1B9USkD4CAVfN1ZJjqeQu",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Haze in Singapore: PSI hits 2026 high in central region - Yahoo News Singapore\", \"url\": \"https://sg.news.yahoo.com/haze-singapore-air-quality-across-221343043.html\", \"content\": \"Commuters wearing masks alighting at Tampines Bus Interchange at 8.34am on Oct 9. Hazy conditions seen in Teban Gardens Road on Oct 9. At 9am, the 24-hour PSI readings in the other parts of the island stood at 115 in the north, 150 in the south, ...\\n\\n# Haze in Singapore: PSI hits 2026 high in central region\\nPSI readings across all five regions in Singapore have remained largely in the unhealthy range over the past 24 hours.\\n\\nMeanwhile, PSI readings in the other parts of the island stood at 130 in the north, 164 in the south, 159 in the east, and 177 in the west.\\n\\nOne-hour PM2.5 readings, measured in micrograms per cubic m, were also elevated in the other parts of Singapore at 2pm \\u2013 east (116), west (144), south (120) and north (92).\\n\\n## Reduce outdoor activities\\nWhen the 24-hour PSI readings are in the unhealthy range, those who are healthy should reduce prolonged or strenuous outdoor physical activities, according to the National Environment Agency's (NEA) haze advisory.\\n\\n\\n\\nWhen PM2.5 readings are high \\u2013 between 151 and 250 \\u2013 people should avoid strenuous outdoor activities for the next hour. Vulnerable people should avoid all outdoor activities.\\n\\nThese are outlined in the personal guide published on NEA's website.\\n\\nIn its dail\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01X1B9USkD4CAVfN1ZJjqeQu",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01TBPoCCBGmuP23LgurTjgkG",
+    "input": {
+     "code": "import json\nr=json.loads(r)\nfor i,x in enumerate(r[:8]):\n    print(i,x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:300].replace('\\n',' '))\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "0 Haze in Singapore: PSI hits 2026 high in central region - Yahoo News Singapore https://sg.news.yahoo.com/haze-singapore-air-quality-across-221343043.html 8 days ago\nCommuters wearing masks alighting at Tampines Bus Interchange at 8.34am on Oct 9. Hazy conditions seen in Teban Gardens Road on Oct 9. At 9am, the 24-hour PSI readings in the other parts of the island stood at 115 in the north, 150 in the south, ...  # Haze in Singapore: PSI hits 2026 high in centra\n1 East Region, Singapore https://en.wikipedia.org/wiki/East_Region,_Singapore None\nOther transcription(s) - • Malay: Wilayah Timur (Singapura) - • Chinese: 东区 (新加坡) - • Tamil: கிழக்குப் பிராந்தியம் (சிங்கப்பூர்) - From top left to right: Jewel Changi Airport Rain Fortex, Bedok Reservoir, Singapore Changi Airport, Pasir Ris Park, IKEA in Tampines, Singapore University of Technology\n2 Tampines https://en.wikipedia.org/wiki/Tampines None\nOther transcription(s) - • Chinese: 淡滨尼 (Simplified) 淡濱尼 (Traditional) Dànbīnní (Pinyin) (pronounced [tân.pín.nǐ]) Tām-pin-nî (Hokkien POJ) Tăm-ping-nî (Teochew PUJ) Taam^{5} Ban^{1} Nei^{4} (Cantonese Jyutping) - • Malay: Tampines / Tempinis (Rumi) تمڤينيس (Jawi) - • Tamil: தெம்பினிஸ் / தெம்பனிஸ\n3 Tampines Group Representation Constituency https://en.wikipedia.org/wiki/Tampines_Group_Representation_Constituency None\n- Region: East Region, Singapore - Electorate: 148,119  Current constituency - Created: 1988; 38 years ago - Seats: 5 - Party: People's Action Party - Members: Baey Yam Keng Charlene Chen David Neo Masagos Zulkifli Koh Poh Koon - Town Council: Tampines - Created from: Changkat Constituency; Tampines\n4 Singapore PSI Live Now: PSI & PM2.5 Today, Every 30 Min https://sgairquality.com/ 1 days ago\nPSI and PM2.5 by region now. Region: East. 24-hr PSI: 205 Very unhealthy. 1-hr PM2.5 μg/m3: 168 Band III High. … NEA forecast for 12 PM 16 Oct to 12 PM 17 Oct. NEA's official outlook.  Live Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy).  # S\n5 Air Quality & Haze Monitor (Central, Singapore) https://medicalwhale.com/sg/haze 1 days ago\nSerangoon Hougang Tampines Pasir Ris Loyang Simei Kallang Katong East Coast MacPherson Bedok. … Real-Time Data Sources. Environmental readings including PM2.5 and 24-hr PSI are retrieved directly from Singapore's official government data portal.  # Air Quality Monitor (Central - Singapore) ## Unheal\n6 Tampines East MRT station https://en.wikipedia.org/wiki/Tampines_East_MRT_station None\n[Mass Rapid Transit](https://en.wikipedia.org/wiki/Mass_Rapid_Transit_(Singapore)) (MRT) station on the [Downtown Line](https://en.wikipedia.org/wiki/Downtown_Line) in [Tampines](https://en.wikipedia.org/wiki/Tampines), Singapore. It is located along Tampines Avenue 7, near the junction with Tampine\n7 Subzones of Singapore https://en.wikipedia.org/wiki/Subzones_of_Singapore None\n| Southern Group | 0 |  | | Straits View | Straits View | 0 |  | | Tanglin | Chatsworth | 6,490 |  | | Nassim | 9,440 |  | | Ridout | 1,390 |  | | Tyersall | 3,650 |  | | Toa Payoh | Bidadari | 0 |  | | Boon Teck | 13,600 |  | | Braddell | 10,040 |  | | Joo Seng | 7,980 | Formerly called Paya Lebar.\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01TBPoCCBGmuP23LgurTjgkG",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01Bk5j7K1SHs7QGuy6uNKuLc",
+    "input": {
+     "code": "print(r[4]['content'][:1500]); print(r[5]['content'][:1200])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "PSI and PM2.5 by region now. Region: East. 24-hr PSI: 205 Very unhealthy. 1-hr PM2.5 μg/m3: 168 Band III High. … NEA forecast for 12 PM 16 Oct to 12 PM 17 Oct. NEA's official outlook.\n\nLive Singapore PSI and PM2.5 now for North, South, East, West and Central (24-hr PSI 153–226, very unhealthy).\n\n# Singapore PSI live PSI and PM2.5 readings now\nLive Central highest. Island range 153–226. NEA reading for 16 Oct, 12pm.\n\nEast 205 PM2.5 168\n\n## PSI and PM2.5 by region now\n| Region | 24-hr PSI | 1-hr PM2.5 µg/m³ | 24-hr PM2.5 µg/m³ | 24-hr PM10 µg/m³ | 8-hr O₃ µg/m³ |\n| --- | --- | --- | --- | --- | --- |\n| East | 205 Very unhealthy | 168 Band III High | 154 | 198 | 27 |\n\n## PSI and PM2.5 trend, last 24 hours\n### 24-hour PSI, last 24 hours\n**226** now (Very unhealthy). 24-hour high 227, low 185. Highest region, Singapore time.\n\nNEA updates the 24-hour PSI every hour. It drives the official health advice.\n\n### 1-hour PM2.5, last 24 hours\n**194** now (Band III High). \n\n24-hour high 221, low 146. Highest region, Singapore time.\n\n## NEA's official outlook\nAs at 6pm, the 1-hr PM2.5 concentration readings were 95 – 208 µg/m3, in (Band 2, Elevated / Band 3, High), and the 24-hr PSI was 121 – 186, in the Unhealthy range.\n\n## The haze situation now\nThe 1-hour PM2.5 reading was 152–194 µg/m³ at 16 Oct, 12pm SGT, highest in the South (Band III High). NEA forecasts the 24-hour PSI to be unhealthy to low very unhealthy over the next 24 hours.\n\nNEA's latest satellite pass found 839 hotspots in th\nSerangoon Hougang Tampines Pasir Ris Loyang Simei Kallang Katong East Coast MacPherson Bedok. … Real-Time Data Sources. Environmental readings including PM2.5 and 24-hr PSI are retrieved directly from Singapore's official government data portal.\n\n# Air Quality Monitor (Central - Singapore)\n## Unhealthy\n\n188\n\n108 µg/m³\n\nFine Dust Level\n\n24-Hr PSI\n\n187\n\nNEA Official Index\n\n### 🇸🇬 Singapore AQI Map\nReal-time haze levels across Singapore now.\n\nEast\n\n212\n\n### Regional Readings Across Singapore\n212 AQI\n\nPM_2.5: 137 µg/m³\n\nAreas\n\nSerangoon Hougang Tampines Pasir Ris Loyang Simei Kallang Katong East Coast MacPherson Bedok\n\nwest\n\n### 💡 Understanding The Metrics: AQI vs PM2.5 vs PSI\n#### 24-Hours PSI\n- • Singapore's official index managed by NEA.\n\n### ℹ️ Data Sources & Health Advisory Methodology\n#### Real-Time Data Sources\nEnvironmental readings including PM_2.5 and 24-hr PSI are retrieved directly from Singapore's official government data portal.\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01Bk5j7K1SHs7QGuy6uNKuLc",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSkwcKEAgSGAI4AUIIdGhpbmtpbmcSDB+ELKiQIOvyqiuvqxoM7MmU+cwrwzOzYTilIjAyb+YM1HxaegPBiuk3/6KSBy3gbiIyTKr07eKZX7TxSA42/n4E6MEMOre3Z/lmVDAqsAa5X0eufiH+n+HMyKHYCTpb3oAst06a8+GT/qm1SdjJUzr75U25hYPG0sAfeF2nyFGCedV+LBrQS9/vkwv0M91BwCJWHqqsSGN0qgyjXq8frtyD7ywA6T3GcPGgQUwUccxULsi9QaUtVUyWuNmAsBhuVX14PVaoxDSfI2lHSpJ775Bml6qqZ69D7TdNNIU7zQ9Y5d/FiwwDi9lpteDhW8ddlYolYJK/pC5roHdwjdSdh1T4HqDxlftE4hRpOgAvNfQAwPhFzGZlcsxD79pX6oj20D23if7LRlL0TfKQ0XfO4L1wo3igqpZfehwAfJ+Xuxf02Zaq85CRk4o0ft2RRg6/S0lgU+44hgFLpOo2L2g73OmRuKmwxgDgwTw4IlTIhssQBtsdUAGx5yzYROflJxVLH4r2AUjsSQxZzQsDrcwI0XD5lfldj/hqTcQ0+kAF6qpPVvCUzBgsUkYHgHuNJEm1wO1H00a7dcarLKZK8SkQxq570F4IzdHAnC2fuCV5i/ARew0tN/+NjAwgZRUczD4y0MXbbELWNclhH8lxqDYwQ7ue04cfeP21RvHllEjc8nyDDvEM4oOJUP9N0PYk1T8g1MgE8PnzUbFgmWfhGBlY6w15CJrt3uwLJPGCbPdV4VUp/uOgg5mhIb/MljZgwtctTbU456aTP7dD2FHMpGs1CNWFP2M/Nr91RAgza6lGnmq3viZ0t5nzBNvbv+mWGLcxkRpNGbTIBmrldohTkHvWWEm8q6tOznlzEoycHY18OoDVgSZ+TQUjrne4Lue33fw2dceHH0iHfTQnvFnWWANqpFM7ryBouG9xJ/JrDkkxB17hLxcSaFmEOowy5Q2JBw/ehx7OmmeKI/kip2ItSbgUeQ//oMi1DbnR93zYW68yOOEhbennuhDjAGujz9YeQo+XotQAkl40KeCR/AeIMd1LXi/5xp7y5M21bYiM9QqX8Mx3c+Xh7SLxLyt4l3EN/zHCAJ/7tMpL3Wa2UcH5mbtVyY6kyi5e210GuaX3ZR3Mq8v21lbsEXab5IBe41QMnigTqO2DKoopj+Q+5zCC5yU8SA5Yf/3ZNt5eA4pUgOrLmwUYAQ==",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "Tampines doesn't have its own PSI reading. NEA reports PSI by region, and Tampines is in the **East** region.\n\nThe latest East figures I found are from sgairquality.com, which was showing NEA's 12pm reading on 16 Oct:\n- **24-hour PSI: 205**, which is in the \"Very unhealthy\" range (201–300).\n- **1-hour PM2.5: 168 µg/m³**, which is Band III (High).\n\nAnother tracker, medicalwhale.com, showed a slightly different East figure of 212 on its own AQI scale. That scale isn't the official PSI, so the two numbers aren't directly comparable.\n\nThe readings are a few hours old and I can't pull live data. NEA's forecast was for the 24-hour PSI to stay in the unhealthy to low very-unhealthy range over the next 24 hours.\n\nFor the current number, check [haze.gov.sg](https://www.haze.gov.sg) or the myENV app. Both update every hour.\n\nWhen the PSI is this high, NEA advises everyone to minimise prolonged or strenuous outdoor activity. Vulnerable groups should stay indoors as much as possible.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 38705,
+   "output_tokens": 886,
+   "output_tokens_details": {
+    "thinking_tokens": 105
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

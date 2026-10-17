@@ -1,0 +1,276 @@
+{
+ "schema_version": "1",
+ "question_id": "q5",
+ "question": "Teruk ke jerebu di Kuala Lumpur hari ini?",
+ "city": "Kuala Lumpur",
+ "where": "kl",
+ "lang": "ms",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T21:28+08:00",
+ "answer": "**Ya, jerebu agak teruk di Kuala Lumpur, tetapi bacaan terbaru yang saya jumpa mungkin bukan untuk hari ini.**\n\nLaporan Sinar Harian yang ditandakan \"0 hari lalu\" menyebut bacaan Indeks Pencemar Udara (IPU) setakat 9.30 pagi:\n- Cheras mencatat 162 dan Batu Muda 159. Kedua-duanya di Kuala Lumpur dan pada tahap **tidak sihat**.\n- Putrajaya mencatat 162.\n- Seluruh negara ada 24 kawasan yang tidak sihat. Pasir Gudang, Johor paling tinggi dengan 196.\n\nLaporan RTM bertarikh 14 Oktober menunjukkan keadaan serupa. Ketika itu 26 kawasan di seluruh negara tidak sihat, dan gambar Kuala Lumpur yang diselubungi jerebu diambil pada 13 Oktober. Jadi jerebu ini sudah berlarutan beberapa hari.\n\nSaya tidak dapat pastikan tarikh tepat laporan Sinar Harian, dan bacaan IPU berubah setiap jam.\n\nSkala IPU:\n- 0–50: baik\n- 51–100: sederhana\n- 101–200: tidak sihat\n- 201–300: sangat tidak sihat\n- Melebihi 300: berbahaya\n\nUntuk bacaan semasa, semak portal APIMS Jabatan Alam Sekitar (apims.doe.gov.my) atau aplikasi MyIPU.\n\nPada tahap tidak sihat, kumpulan berisiko seperti kanak-kanak, warga emas dan pesakit asma atau jantung sebaiknya kurangkan aktiviti luar. Pakai pelitup muka N95 jika perlu keluar.",
+ "citations": [],
+ "claim": null,
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "4",
+ "scores": {
+  "gave_number": false,
+  "said_unit": false,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": null,
+  "checked_hour": null,
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "DOE"
+  ]
+ },
+ "not_read": true,
+ "measured": {
+  "at": "2026-10-17T21:28+08:00",
+  "pm25": [
+   60.7,
+   52.6,
+   70.8,
+   80.0,
+   72.9,
+   58.8
+  ],
+  "index": [
+   [
+    160,
+    "api"
+   ],
+   [
+    163,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Batu Muda",
+   "DOE Cheras",
+   "sensor Taman Tun Dr. Ismail",
+   "sensor ENVIRO EXCELTECH SDN BHD",
+   "sensor Mont Kiara",
+   "sensor Setapak",
+   "sensor KLCC",
+   "sensor Zenia"
+  ],
+  "hour": "2026-10-17T21:00+08:00"
+ },
+ "took_s": 19.6,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7tX3gNvw7ghkgZGbdbK",
+  "container": {
+   "id": "container_01KNkukZroHph2HwdH5VZtZY",
+   "expires_at": "2026-10-17T14:29:12.639357Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_017x41RTTgQbzYVDxBw6Lf6E",
+    "input": {
+     "code": "r = await web_search({\"query\": \"IPU jerebu Kuala Lumpur hari ini\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:500].replace('\\n',' '))\n    print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01QhU3J2ge4pzGQRN8Lo4yGW",
+    "caller": {
+     "tool_id": "srvtoolu_017x41RTTgQbzYVDxBw6Lf6E",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "IPU jerebu Kuala Lumpur hari ini"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_017x41RTTgQbzYVDxBw6Lf6E",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "EoQKCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFpj8lYzkAmqHr7wMhoM8wXc/QyONDd+9FFiIjDxNNfJDY7yAmnQY6GytvVbIrvCv3Hw/HXX9sVMyG+o8LqAr+dNAj4SmmGQSrF1oxEqhwmAbuXvGdoM1W6wYOwAc2nmITx3bpBBaGYMJ6Su3KXXupIv3HVlIjomZmklqc9oe4JxlS2Rv+/cQF5Jry8aqx4d02zSzAEFuWlIe19qZ9SQSlWqlLCqS0mjALcKU8+7wdno8FnYYmAB4Y30vVDb8aQuBPpRzujdcYXM1C5j4t0yTEBpBoZfcomrdGwAzaAmKis9ANQiA2n3Nd1e2zdTB0RFyiCCCAwliLYBUSAW9xpX2qY0AV7M5diqpYxIesqbBZdav8yVEVsDbs59TUVTxEjq0UXC2zJP9z8BlW+toNWhavDafydlH8BP0PSK08tXgwEHkXwwSiXhLfbG1o0ITxBGiCNOTYaloi3jsFsT9xIWpEgmvMAdHk5I++bWJHBCVNh0CQ54HDO0w1N+CoVJuSY5vj6Aee7hgLsXxvXzDjrxtXjQoWuX3YrFehNLThX6S4fMHCUroXrSt0EzLxmdtrl4kBePQHl+gIRlV61rgW94m92Qn2tP6tRcbZQ8rUPBGzzCEzUa6Gz7oY+BSJq3RpenDxbWODPHP6eUhzDnM6jCF+soHlaorO76JpUfs1mEB/L1oK/tOaPpN6yT6NhJKrAxXtJixPQUwu66Cbb36x1SrQTfFcNLR207bnRbvEMLQVk4MdG6KH4juIw8YTLpt56jtbav2ga0Yt6TNOSEYJwoYYeZc8bNlS9uu008wrmtMhOSbi6YJZPTRtRRFHKzhoCJEVIueN1sNPX57oZ0Cw/EgOxKrlKjIcgpjneQHkARbh/pKQ1CnWioGZRyVMp94yra2jp0sktLNvKZWUGBeGxw5wQ/SqnJgdaT8TQMbTStxbBTMSRpgRYnXW1bA106Xd/8mO1wW+io9OIF8m2KUhEub3wHKuNgDwPHhWaVcEM1evtlUk5fPX5X7ecrkGaCp9yrhwzpUbENuykeD6dn1iAh1waY2xgIvalNTl0kY16k1OTBLmWLnSkMWxZz2CvjRVQuLOEIcdqxUF+jrLMGF21x/39WgP9+ySaf6UpRFS4OFH+gqIZeHAmhLtMJIOs6ExGTAfzxIRgnzuLfjSb01W07sqx+UBxoOAx7FRF5MlmRAS393j+G6ZgZIEw2t/JZOZs27KuekQPPP3RY3g6gCXcwffZdp/5YytXyFl6+sNjrCS7U53774oAqr7qNLUCCdYqV7guHIeacK8v8p5HKer8RyF6IKz4f8YhiEILfzEXfwInFYurT4uhtAWkeP7k/P4FsagY+08Gnwyml0iE9ag63IhWmTIS664YQQZ7E890oCUySzrGDC36pPng1GPZABQx0ifcScBkDVAzVEa/Qy/7+RpkY1cUt30/1jN5DHNDjwlqfW9T9SiXtqrxYSZ5mInV75q55Zy/bvo5OHqR3pcJoeBnN1Okiy6ZOY9XoIvtVvpNmQS9O5u0mO9CbjBnBMZgxczNEKkveeNnnJno5jApKvkeDKD7zlMEBFIxvfp+YqARI+nTz0EqTEB6pxW6Ec6QAOA5mdPVoIGVWNjkWRyUI5HLtcneCbwuS5hH9WfDw6Bb3JYA81xrpGAM=",
+      "page_age": "0 days ago",
+      "title": "Jerebu: 24 kawasan catat IPU tidak sihat setakat 9.30 pagi - Sinar Harian",
+      "type": "web_search_result",
+      "url": "https://www.sinarharian.com.my/article/800796/berita/semasa/jerebu-24-kawasan-catat-ipu-tidak-sihat-setakat-930-pagi"
+     },
+     {
+      "encrypted_content": "EoQHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCriIqGw2uYYGFkrahoM43Wq5HPyxYnBRzUVIjDUXqRcmjFgX40QPvenq+gB6Ayis7QP3ZdETRDmTNeahhpMJNgxZdJAHF+Rx9t12FQqhwYPowFSuxDpb1ymqNEJzuzWXjegtHMHF5GdoIBv8PZeAr0dvaJtF/VCAVBnL8HQJlvH7vsEzvCwgQAjXGuiocuMCKZKfuYD74BYQUqnHskZNWSIZ9rqNmtgIeSNdIQFjpR7X0UEQh6j1BQQKf3bzdeQhzTlpUNBBq6aH5KCunMFPmiqVobdkY035S2MWRiiee492lk7qpfOfZRs8WOiico1pcm79Ntxrh8oNkGfojSz5NurrnqpcQqERoPXsMoK2rozVLW4g8MFPqi2krTyTxQmQ4T/CZR/hLDf5ravodFcl6rgUS4qeuhsyT59FE3zb6c17UkW02nQjVAuQ+d8j/8U0vinZOm5LlrXqT+yfNxmxrk+DIC490jdEkITw+44slkKgy+RBjr8nUy6weuQn6Sl7N+zqiMZICgaoGAodQhr+AkT6HItN+opwD6VgRbGFbmKntVU3CXYl6gdYxIsTtjeO15xwPf4CCyoQ8cK9SbHngf5EU2qvu4OzHuLcSgvvKeacvCkmcEdo+1Mz6NjJkC5wVW7xcAuxyBOIitoPhHLhU8x3rNfodoZ1vQqwWfRpIZjfF5C+9qc+glpsD3R5yKs2w+4/cgZhzBEd/yQG4m+R01k2WCVtShu0GvizWwoW664sun4a+6km43GcaVQ3aS7s8ahSMDmXm2nuI3EJyFTF/rVneROnAasP0cs0TrL9M6APV6T/AUeiuKApN/GZ7v0wsdzotfS8XdFw7LPmqIN1+rKv4h7TRbpO0N3DMokFXanksz7IBPaWBfsazq/PudvCbxRdNHtKomKfOl4yFwWBLcclocoH4+bXMn4hn5NOSgaeeDAD3MPMdjzUPkUE+BdqZyYSNef1BtROps/a1sL3E2DEqHZgXNpVM2P0mpNfhJjwPGLMMaTeQEQW5hDptzSr6JnVHU/BEIl6pk6lQPm/Ordje5q7X3HXZ12gDNhzsAqJ0YrQeTz4n9PqrhIa4piwWLdnp2E1Mt+jjCCAWxfrTQg92NTPt+Ow374lLnHBwa8SnNGzsB3GAM=",
+      "page_age": "0 days ago",
+      "title": "BERNAMA - Jerebu: 23 Kawasan Catat IPU Tidak Sihat Setakat 10 Pagi",
+      "type": "web_search_result",
+      "url": "https://bernama.com/bm/am/news.php?id=2618826"
+     },
+     {
+      "encrypted_content": "Eo4LCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDMwMZ6F569Z1KioH7BoMMnSSmNSHgHYcv3ZlIjAERmic+O/BO4SSq6MbvB4aQK8cKdMXcVOzuueKEcSGNUuBIQPi6h7a9XiNj2zHRJkqkQoEbGzF4LwgmmGoR6Py4Z+cMJs7g5UcZxVxwdpyRWZTGfpJ0Nwm/+o758URrjAe8rbY4MbLGD5UVtxFnAmKDSMPHffk7mFhh+jMS4pB2nAnxWfffNfyC8pLnV7izJgXlyVWK2mJJXkSvqYfo9zNWphSRgDzw6Z0xY9vyHdMRN31ipbzhrDeFposM+yyjIKaI4Scu0mTm6gYS1cywAALMbc9DnoKuToMrj5Q1GiqoJFzTtrOiNNcQ6aSfYLDE8IrlMbyl6BpifsjNuyOEGNSMLe4dAOm721MU0EqQrHS4rS4Rrtxr1FDQl9SEk6W8Tq6tswW3iYmtN1lMUhq6fFSrdnX0jCdXbcdZ0XSlhVIgtQYUAltrEq07xpNcltKR4hT1xFhPhieQVEDU/2k76qnPUjhY7Bw08XSTzjLE3YzxYS4Ndlfnxtf1ofJmjEYf1Ak7KXRDABb2hz+VbU/TCQUa1E7K+dUR9lXYhzlTwR01yj4T6qwlISLKimmqsdOGeYoAFr4/AorUIkBs/PjJXIwA4Y1OI/MW64V/bfYeYD86FKLvfP7Q665a8TgOHmFYBxDx+p85lTOTg+apJ4IqU5Dj9VoM9AFv/cgKLuFY+amuIQ7zXFw4zc++cI+FJZ0wiBD5TLJwSpnzZxoYQErIahzTTOFBRWae9c1Py4O9WwYOGGJRFbjU0M2UaPslWbXHBbIcxKZt0YV/uwexpb0Nitqu7569jxJSQbbaIZ5+YrKXyFZqu/9aTa8Z2kiaB+6PSOS3An6ubOUJ8dkJX+JXkflS/QqvqbLYQNNdXvIsYv6ZyZzpruqdPpJxO8kO5cqhdDkOHs/2B6f4BvEibfn6HIG+/od9v2qOxZOPv/6RAwFrQAHkha3SeP5h8ZVqklS2YFnrzmcMYJ4pTZIqyR6hYImBUxHHVrLNNYk7/ITVyMDSROzmlg3YCQ3yF0ex+JAk0L76WqndtPMsx+nDfDezRD8ma+J2x9R5t8tICJhBmT/pyxy7PjaRFgLB+GL4yXL0H4mdBIp2ylwsRHoVwgiCooe1ysMNUAx9oDfg5SqH1EHOsQlhxZltUTz2egB1wfR4c2Mw8ZQk3tJwFxGFCg/aW0uumyxnVY+oMiHo6uuvj+RypB42lvln46SY4dFY9n5YdkgatMpmA+CgNUn3Z5mcN84uarz5oqCPXFyxudBCxmDdEYjYpMvHXcw4cizDEtMcV4B+QwGx+IBf8DahKB8YyBFGSUN5bkZe+q9+7srmF+6jimRMJKvJj1KV2De/95LO/EjXNI91vIeTKjrHi37wW8CuwkJ9oRiGB2RyH3/ojdqF14RwWm39O2Um5MMznb9x3+m9VUN7lklpR69gnaF47h22VkIT2x2mNASibWvDongTT22uHV1mP/EHUOao2krd9loPOU2q+SQOnP0UBw6Rg93if44W+l8T7B3Dzh+iZK4wcpfK/+u5dlIFd5dsk0H5AaxKYUbsOiWH4+JSX1HxmS+NWWp2+Uuft5rUNQz2WODR9dz/UWHG8U0+cST6tmoB+TaBqy0oIECJgAr0qC7/xSgO2GKZKCc32FIOFlMmejvJssjEqaC6wROKuZWo+lQ6HLlJy68zmQV5F1AI96HD5Sraqo6ZvHysZlf6GvHsiw+qqbNLCaClJ+sW0usEpTQ3q6fkoBNVfS5ruRdE7JwWSR46CFLiPLD/S6d6SN6wBc4tIuv0OXy2iO4fYVUhQE8p7oy6EX6GAM=",
+      "page_age": "3 days ago",
+      "title": "Jerebu rentas sempadan: IPU 26 kawasan tidak sihat - Portal Berita RTM",
+      "type": "web_search_result",
+      "url": "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jerebu-rentas-sempadan-ipu-26-kawasan-tidak-sihat/"
+     },
+     {
+      "encrypted_content": "EqcKCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDPt5FGjaeCMYhR3uNhoM9OKRaTdn1zKUxh61IjCJh2IjvHuQPaNyu0hdJG2s3PRDFVBwABfE/OEoKL4XNeBtJDSNhPvfgcAEe1sV4a8qqgkfxjwo3a2oUTVbcTfFPMWnjEIBU0WoIadWZHiYeX7aXvr5p++2imV4Yy+w7mXdQhXmpXn+k7CvM2OdtqJvZjMV7aVcQBMTfm2f0mgqJP0uz+42kIfNruZDPFWRVIox+4BYbNqNtQF6/VzNlNkdfzs+qRoFdK6btXQsKDQXwDVHpf5FSlI5xIO4EtyPbwf/nrj9+vFQYq15g2zSKfJRKE1qIObd5MgpBm6KSQt5FKWj2lBfWr26A4dXA8t8UWzZ960uhPij6zn2U8w0YYopwqWUe+oau4g6L5bkc5V6C1VRKfdEtPNENaf8sCSO4Ib2Vo7/iy3ZfTJIrn8vmXf43qdjIg9FhcRPK/j5xZev0/XgpaJALAQHvCIg8MxWqiowyo6/4q47uhg0YLA0nj+ylo7h+PklkIVuoEe6X16oZEeRkhmf5hezshW5eFGLBezXUSDh0bVLwnceA4JOmZM1kyC8YPXhclK7qPfYP6QNWsGiiO7I6DNK3AEsa8Sy8ejNmMvSWUOxV6vUcxySoXGeY7oGh5OX2+eDUycrtbOZ4zAeGvfZjp3HXvrgO1ZEnYi6yRb8gSP2yI6xAcXrlSgZ7/UMnMPFn+bCFz/+oq6pb1+zJTmLkVlr2h+tPsCsaSAjkEp7/R3FoXUbnFs+196lwlSvyamkN/sff0SwraL85W0g+oFqRRXIi0pZHiYWQxwJDWhEH1mFXMSHiZC60WFhCX+iOO7FxbJm/8UOO0Iwfazqm/fVU/1tkLdkbLDwkuboCK02wf4v2NkaK0M5JC3ubUw/DfLMhwC0eGJVZc6fb92SBUQLLbTU37Fa+RkrwRU6d0YVcbPTOV6IjurwiImjJr6Gz3fcW6Rvu1bFXnHVi55t69Yp2S77yqKHneq+rNZwMN5JoJU7WoUitVbiuDimzH7jnJqA/AcWivFqFR4tNg7RlIajHbcTIPeHboVLe6LzV+vUhQTlwFPazCqHhuLONEKUde/0wwSczy9LFUHoWHPWI0mafD1v1l9qAHt8xX4tl4Kdmy4ylOW9GL0Cfg2iRs7o/Xm2q94QSyHpnv2wo2ZmcSoHhKoFVGFydo7VFKA47NRGfVNZ+/x1qIzNZBYpsTBAXQTVzKcFrsLnAYRKEehmzcEMOZa4SF16MdK3hmKW0TRzIe0QDMK2sryRDe82ZMXwY/ZSHGIu+9epE2GA1DfoXM6ftB7fH1Taa7XfRT5Ca4oYYb3bZsqr1GfTfY8Qc4QA/SJriB3CIsUZNGMvckzpgvSMslxURxL0jwbuNHxvjgHUJe2wLh9HrqFvh52EXPUclROjGPxH4O0kpMCPkhtw7W8K8MwM/phcDP5JcnekcJYG+sjAA1bcMFwpyJwZBO3PNXPpAj1RvKzpqYVJgXcIgdflbVW+Tpg2x0x2LC9w9RYe3dlvo1JfQKKjZ+baunIa/XlJSIGts5r+prJcJ5ekJEGv/1FB8ty2wVNpqnwueeknHBCX+8mcdBcKjoqP9LYQerXxqHZZ8TqaR+53DTFVm3uJ3wOMAO9bbDW1Bha/NsZfFvCD5t54dtCSTatSvsKzcPyHfZzI5YSUb8izTd1VZ9Kkc3vJDcvO6KYYAw==",
+      "page_age": "6 days ago",
+      "title": "Jerebu: 15 kawasan catat IPU tidak sihat pagi ini",
+      "type": "web_search_result",
+      "url": "https://www.buletintv3.my/nasional/jerebu-15-kawasan-catat-ipu-tidak-sihat-pagi-ini/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Ipoh%E2%80%93Lumut Highway",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Ipoh%E2%80%93Lumut_Highway"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Ipoh",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Jalan Ipoh",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Jalan_Ipoh"
+     },
+     {
+      "encrypted_content": "EpYGCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDM3JtbLh4dTdqrNWfxoMS3Tv1j8uuiTgqmarIjCWtkOj1uC3I2v7DujeTyqtLaW1bVF3/sqdnw31Gj+qQhZjTPnMTydBmAittFPq3R8qmQU44JeRuxwMGfac1QKo6oXi2Yx1dLbQMH4DI3pYQpxvsLj/WMb8vXBcg3FzHDLLofxUjhP34w2DNXxWWn3SU2G59rRpmy559zUU76AMWW3jyIWXlz+1QpA2tZZ7lsAGnhW2ltHv0TPwDmZY9mNZOqxwveSOFBUCI60QxJ7ipMBvb230hocLQtEZ/IN3Es8oaRzV4Qkp8HTJ9cmGc0H9NMj1DWlhQuh+hDg9mpRTER0PogaRMATjvvA7AhFfCWEGUBcFRo+GoSaUgCjatPsQYdxR70fl/e0SSKjfkhZefdIt+hGVU5fqwtr4Zk7ai2M3ag6i1Wz2FYxtD5VHGvp0Nd5yDwA/sUTwjYhFkQsMNbrQrTTlCDw6av5jNQWQ0rM+E3VH5R3TJtNAbMiAjHFPscPG3nGCZ7IseqI1qsamp3GtejJbzgs7QAALPrVwIBjW0lsi62KIm6ft4D57VZNUR7Ak9Mt3N9Ay6PqdBqLqOHhShDQaMPjC9yLfKHrwn7iZGpDd0ir3QHxq2gCFkJXFYyloDqs3MLdIgdTvbp3ArShzwv/5PZvtSQGq47UYryLqeXRNAV6mVEBuHVbqrbt19ymTr1PmN4RAWWR2Bq+w/835N/p44pSpAnzWvPfjGEvcMX3jmZLJXu0VOmuH45ss0aYDngxLuy7UzZsfXaDEePqfA8LwH3wKVk1q9kpP2PBHY6JW8FDkdMkczcjvilEn1Elb+uH+KkSKcc3MTK6le6G6GogiJAXrZ3ANP/v8VuQu6ffpd9ORViY2fDubpfWyDu2kRss1XZriazjludibVh46rxs4O8UhSSeNKXB66OAnjvBf+hxJ8jB2PQLZQ39DcUOyuDTeyB6JVxkN0KJFtGSeF4KXJb6mjx+zlhgD",
+      "page_age": null,
+      "title": "Embassy of Indonesia, Kuala Lumpur",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Embassy_of_Indonesia,_Kuala_Lumpur"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Kuala Lumpur University of Science %26 Technology",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Kuala_Lumpur_University_of_Science_%26_Technology"
+     },
+     {
+      "encrypted_content": "EtMHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDMzBrmwLOn5c0Th+aRoMLXLAiQBqSYTOL3gTIjBREkd82jFNuEEKuFaqlRtddGtRrQrpUwceb6qXih0hzPsOxcmXPlfnYJGuZrI3UiYq1gZmTxysAbJqdvJqexq8MekuE/QxJb91S1XQolnvwsT3LaiJjRJHYgJJdRjlvefnWMJwP9+UKuEOr9rcLfWHvjM4ENT5PbBTIRLDwhTaYNIxNYtpfDBNQZJR5LiZEK6sUMW8Wnc/JrmkUyRQBJwhMo2a/KWpXnEAgkajjOf3XGHK7d4LbC1JKtf4tDa32Dmb/vGV8p/LlhvKQ851MHFefvjnfz302Fux2zRNCS73CM3OpycQhSiaEHrzQX9Bk2W7VPUnWCe92IO1Ec9fPNKDV9rYEzJt2iMio7Ee98xc2zgB9vbmK3ABX+ppIO5gMYd7YM7JKNrnU6Kb36SUO5mzwPQzwurYxCpUP4h0dqwp/QiuMK5LZ2BoANBR2d18D5MsCoEkr66e60lF759C7fEbwDQ+9kBmHXWVUmzZmCqWiLAEmgkHl3vk3H9mL0PWXJ4hozF5vTaoS+IH5mwVq/P9Kat10xs+92nBNjxhF5SPnfTj9Jqrcour/0zlANQeg2nkdo+YObMyfoq8sr89m5kfZDNDEtGpM0Oeear7DLcbuaebfdeRY3ortWTNRy7k+JxJwuImaZopi0jIM97HBoSiREzoWXYQTjJdOkNWEMa7IfjECL2RtYeSd/d6oEmNPThG0yglHXOMt2aXQrNwi+GPTH26tMm9gE+kO/YAdfkPr1bdMpegOF3+esG9E1ybbc0UjGLgNX9mMcKFf/MjRFQAiNs8n9AB66rWN6Bdl43Fx0PN3CNetKDA/SHj8rs1B5YB7g6u54f+uU45iqZD+wWEBYSlFgmJnloYPE7nJ/BiDQpVZJCqgfT97uF+k9da1fe9ax9DNIfX8wcHP4hoFjqyYYDvpzPUdkV8G0OPPnG/LZFLu1izur4RbBOIkb1fKrOPN6O+vyaJWT0SY9u/b4TrJNPvXvrtC3Vtz53rbnThuGJ2KbhNt8NdfDWg45qSGSqfutAq2MpI3qAEKRkoscUeIgzzIKicJSkQs7YJwyZhRYss3yxySpdOk1oMEruDbxFTdbtzOzdVcDVuZsL1AxCAV9sPk1t1OhWVupBiYKbwOZeoA0YwzaMo7IXGtC9N6K/o9CQ5hCYLeM0QC67VPYUjAp1GWIK9g5RWwU8KNrlhR40Dn3AnGUgegBgD",
+      "page_age": null,
+      "title": "Kamarulzaman Mat Salleh",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Kamarulzaman_Mat_Salleh"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01QhU3J2ge4pzGQRN8Lo4yGW",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDEvitbDrE0K1g+5LexoMwsAcsB0O1ohJ91UFIjBeO6q7xeEGd80XJ8X1ZdnuFC8veH77t/t/EucSh5lMksszMPpoZFVVkUb2LkP9DikqEp3zCLWfYwH0O6cT+3IW3FKxVhgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_017x41RTTgQbzYVDxBw6Lf6E/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_017x41RTTgQbzYVDxBw6Lf6E",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01GTVdBt1UWnYSz3nav5Ckqh",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Jerebu: 24 kawasan catat IPU tidak sihat setakat 9.30 pagi - Sinar Harian\", \"url\": \"https://www.sinarharian.com.my/article/800796/berita/semasa/jerebu-24-kawasan-catat-ipu-tidak-sihat-setakat-930-pagi\", \"content\": \"KUALA LUMPUR - Sebanyak 24 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat jam 9.30 pagi ini, dengan Pasir Gudang, Johor merekodkan bacaan tertinggi, iaitu 196.\\n\\n# Jerebu: 24 kawasan catat IPU tidak sihat setakat 9.30 pagi\\nSebanyak 24 kawasan di seluruh negara mencatat bacaan IPU pada tahap tidak sihat.\\n\\nSebanyak 24 kawasan di seluruh negara mencatat bacaan IPU pada tahap tidak sihat.\\n\\nKUALA LUMPUR - Sebanyak 24 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat jam 9.30 pagi ini, dengan Pasir Gudang, Johor merekodkan bacaan tertinggi, iaitu 196.\\n\\nBacaan IPU tidak sihat turut dilaporkan di tiga kawasan di Melaka, iaitu Bandaraya Melaka (169), Bukit Rambai (166) dan Alor Gajah (165) serta Wilayah Persekutuan Kuala Lumpur melibatkan kawasan Cheras (162) dan Batu Muda (159), manakala Putrajaya mencatat bacaan 162.\\n\\n\\n\\nBacaan IPU antara sifar hingga 50 menunjukkan kualiti udara baik, 51 hingga 100 sederhana, 101 hingga 200 tidak sihat, 201 hingga 300 sangat tidak sihat, manakala bacaan melebihi 300 berada pada tahap berbahaya.\", \"page_age\": \"0 days ago\"}, {\"type\": \"web_search_result\", \"title\": \"BERNAMA - Jerebu: 23 \n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01GTVdBt1UWnYSz3nav5Ckqh",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01EE6qU4ouDBVSvkj1teZqo5",
+    "input": {
+     "code": "import json\nr=json.loads(r)\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:600].replace('\\n',' '))\n    print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "Jerebu: 24 kawasan catat IPU tidak sihat setakat 9.30 pagi - Sinar Harian https://www.sinarharian.com.my/article/800796/berita/semasa/jerebu-24-kawasan-catat-ipu-tidak-sihat-setakat-930-pagi 0 days ago\nKUALA LUMPUR - Sebanyak 24 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat jam 9.30 pagi ini, dengan Pasir Gudang, Johor merekodkan bacaan tertinggi, iaitu 196.  # Jerebu: 24 kawasan catat IPU tidak sihat setakat 9.30 pagi Sebanyak 24 kawasan di seluruh negara mencatat bacaan IPU pada tahap tidak sihat.  Sebanyak 24 kawasan di seluruh negara mencatat bacaan IPU pada tahap tidak sihat.  KUALA LUMPUR - Sebanyak 24 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat jam 9.30 pagi ini, dengan Pasi\n--\nBERNAMA - Jerebu: 23 Kawasan Catat IPU Tidak Sihat Setakat 10 Pagi https://bernama.com/bm/am/news.php?id=2618826 0 days ago\nKUALA LUMPUR, 12 Okt (Bernama) -- Sebanyak 23 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat 10 pagi ini, dengan Kota Tinggi, Johor merekodkan bacaan tertinggi 170.  # Jerebu: 23 Kawasan Catat IPU Tidak Sihat Setakat 10 Pagi KUALA LUMPUR, 12 Okt (Bernama) -- Sebanyak 23 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat 10 pagi ini, dengan Kota Tinggi, Johor merekodkan bacaan tertinggi 170.  Di Pahang, Balok Baru Kuantan merekodkan bacaan IPU 162, Rompin 157, Indera Mahkota 130 dan Cheras di\n--\nJerebu rentas sempadan: IPU 26 kawasan tidak sihat - Portal Berita RTM https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/jerebu-rentas-sempadan-ipu-26-kawasan-tidak-sihat/ 3 days ago\nPemandangan Kuala Lumpur yang diselubungi jerebu pada semalam, 13 Oktober/ AFP. KUALA LUMPUR, 14 Oktober- Sebanyak 26 kawasan di seluruh negara merekodkan bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat 9.00 pagi ini, dengan ...  # Jerebu rentas sempadan: IPU 26 kawasan tidak sihat - 14/10/2026 \\| 9:26 am - Nasional  Pemandangan Kuala Lumpur yang diselubungi jerebu pada semalam, 13 Oktober/ AFP  ***KUALA LUMPUR, 14 Oktober-*** Sebanyak 26 kawasan di seluruh negara merekodkan bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat 9.00 pagi ini, dengan Pasir Gudang, \n--\nJerebu: 15 kawasan catat IPU tidak sihat pagi ini https://www.buletintv3.my/nasional/jerebu-15-kawasan-catat-ipu-tidak-sihat-pagi-ini/ 6 days ago\nMenurut portal Sistem Pengurusan Indeks Pencemar Udara Malaysia (APIMS) Jabatan Alam Sekitar (JAS), tujuh kawasan di Johor turut mencatat IPU tidak sihat, iaitu Larkin (178), Kota Tinggi (166), Tangkak (164), Segamat (162), Pengerang (160), ...  # Jerebu: 15 kawasan catat IPU tidak sihat pagi ini **KUALA LUMPUR:** Sebanyak 15 kawasan di seluruh negara mencatat bacaan Indeks Pencemar Udara (IPU) pada tahap tidak sihat setakat jam 9 pagi ini, dengan Pasir Gudang, Johor merekodkan bacaan tertinggi, iaitu 180.  Di Pahang, Balok Baru Kuantan merekodkan bacaan IPU 159, makala Rompin 53 dan Cheras di\n--\nIpoh%E2%80%93Lumut Highway https://en.wikipedia.org/wiki/Ipoh%E2%80%93Lumut_Highway None\nRoute information - Maintained by Malaysian Public Works Department - Length: 70.7 km (43.9 mi) - Existed: 2004–present - History: Completed in 2008  Major junctions - Northeast end: Jelapang, Ipoh - A1 Jalan Jelapang FT 317 Jalan Kledang A8 Batu Gajah Highway FT 73 Federal Route 73 FT 3152 Federal Route 3152 FT 109 Federal Route 109 FT 72 Federal Route 72 FT 71 Federal Route 71 West Coast Expressway FT 100 Lumut Bypass FT 5 Federal Route 5 - Southwest end: Sitiawan (East)  Location - Country: Malaysia - Primary destinations: Ipoh, Jelapang, Menglembu, Seri Iskandar, Bota, Ayer Tawar, Sitiawan\n--\nIpoh https://en.wikipedia.org/wiki/Ipoh None\n- • Total: 759,952 - • Density: 1,180/km^{2} (3,060/sq mi) - Demonym: Ipohian / Ipohite - Time zone: UTC+8 (MST) - • Summer (DST): Not observed - Postcode: 30xxx, 31xxx - Area code: 05 - Website: mbi.gov.my  Ipoh ( [/ˈiːpoʊ/](https://en.wikipedia.org/wiki/Help:IPA/English), Malay pronunciation: [[ipoh]](./Help:IPA/Malay) [ⓘ](/wiki/File:LL-Q9237_(msa)-Noaius_Paticus-Ipoh.wav)) is the capital city of the [Malaysian](https://en.wikipedia.org/wiki/Malaysia) [state](https://en.wikipedia.org/wiki/States_and_federal_territories_of_Malaysia) of [Perak](https://en.wikipedia.org/wiki/Perak). Located on \n--\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01EE6qU4ouDBVSvkj1teZqo5",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSrggKEAgSGAI4AUIIdGhpbmtpbmcSDIQrINBmH6V3xcrJFBoMrP9hiDEq73A3WvTSIjC4zrDVCllbB17eOsY4fq8IZ0CKhxRDPTWx7nY4bNVaA3CQSE/+3ZeQjDeEboJONbgqywd3qRys3tTcSM8/t16MauELvBnM+i+Bi/jUqR7gg0FduguLEIsWcyV/DNAOvbrnqbEalKIo4Lt1t8LoOknvc9NLkGAXmzl4nKEyakyGC6nyChq90jILmzMAcNM1rydvKl4WTCG9SHnUn2ESS5jqNawB3Qzr53exSDSsMTWyq7wF+W0j89ki3PojOuBYXZPs3R/A8KBBWBi2DGGsJGcZIUlqqujiWAlRlp1HRZLwa63PgCSc/MFqOaykDq+ZmqIvCE/SG7seUvOHUhyHqjtmUTq2map4iI68pt/L3wW/2fxkGudtjbqDfAcuX4WOmio24RIA6RBaPHiDazaoFP7doui5ViO5YeTTPra41iltF63CzoVjAphIy7Lc6BbBoykEjo00jIxRKYbYgmXsdv3PeiVT22F1dMLDsPDENf1fMRdhY/EBwXfUXF22KG6GvxiOl0aakPwFc2BiBvhmpb3wV8BNdhD03jjApOp7O2sM230iZzIIpw6B5nN0t9UB5oXqJnji/AcZHYjGez90iSVrX5iVmVwOqdFJZ9bI/feQZNIYv3xOzdJZVnTjP5eiLXQGgdeGnnDH1gpCwOMYgl3IChn8n7QReTJ4xVj8Znw/dUM5r31eL4Bx9X8Ay87mfdbByxsiubjQIlOcrYpnpVJH6xTWfB/2FUfNM9Grt03rwhYiLviZoCTkvXx25EjLxqaFth1WVBhtYcwioSUk0CJGzEYDlsLcESz683OkaLdg7UJErnE0bvqxkVp1l9ZIS2Swbo0kPMiVz7iVsvnFfQ+OOBL/Ps6JBddteWgQN6lkyIEVOIMoU9rh+GHVij7EtFOJ9FWeT10upwlN16BX5p2axPTF7VszDYdNrNxut3Y4gG3b+7VbTnaxtpQhSGMVmtTOWyi3+9O1UtOVBFUfvSbE0r1vmXh5wD23euHODfXlkM/xjE9wD1QjE6jwBXPECUVu5NPUgdbAdJ0Lx9Bmx1BfxBlWC2nVecUWTxtdkNVZmgynC5H1lRX6S1SGNRYsrXx40HurJKy8cSvI4PR3QOsBwdN09GOcJc/9LFZkMPI1K3kGrU0EcltIgS/cKV7EwyilpO0lwV9YaMgQ6ZafYXUSY0gJWT1faI2uvp65xdCfzgOazOL7wYX1UhWBV2DFnSUfOrFvl5ej3KQZtT3f9fz/nYPU/yo9lsToV0liU97PHTnWIl2tuSGA1H2XAGBpDN7BOrMXP11QsTm/PCOw02dlcfM+wOUV208tOlYHPAsCQ0WKz6VSbj5NgwHKuu/RpR67/yY4duhhNqkPdGG5nBgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "**Ya, jerebu agak teruk di Kuala Lumpur, tetapi bacaan terbaru yang saya jumpa mungkin bukan untuk hari ini.**\n\nLaporan Sinar Harian yang ditandakan \"0 hari lalu\" menyebut bacaan Indeks Pencemar Udara (IPU) setakat 9.30 pagi:\n- Cheras mencatat 162 dan Batu Muda 159. Kedua-duanya di Kuala Lumpur dan pada tahap **tidak sihat**.\n- Putrajaya mencatat 162.\n- Seluruh negara ada 24 kawasan yang tidak sihat. Pasir Gudang, Johor paling tinggi dengan 196.\n\nLaporan RTM bertarikh 14 Oktober menunjukkan keadaan serupa. Ketika itu 26 kawasan di seluruh negara tidak sihat, dan gambar Kuala Lumpur yang diselubungi jerebu diambil pada 13 Oktober. Jadi jerebu ini sudah berlarutan beberapa hari.\n\nSaya tidak dapat pastikan tarikh tepat laporan Sinar Harian, dan bacaan IPU berubah setiap jam.\n\nSkala IPU:\n- 0–50: baik\n- 51–100: sederhana\n- 101–200: tidak sihat\n- 201–300: sangat tidak sihat\n- Melebihi 300: berbahaya\n\nUntuk bacaan semasa, semak portal APIMS Jabatan Alam Sekitar (apims.doe.gov.my) atau aplikasi MyIPU.\n\nPada tahap tidak sihat, kumpulan berisiko seperti kanak-kanak, warga emas dan pesakit asma atau jantung sebaiknya kurangkan aktiviti luar. Pakai pelitup muka N95 jika perlu keluar.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 29906,
+   "output_tokens": 1167,
+   "output_tokens_details": {
+    "thinking_tokens": 196
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

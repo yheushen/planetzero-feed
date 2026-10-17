@@ -1,0 +1,344 @@
+{
+ "schema_version": "1",
+ "question_id": "q20",
+ "question": "Will the haze in Singapore be better tomorrow?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "later": "Its number for today is checked as every answer's is; its forecast for tomorrow is kept with it, to check against tomorrow's measurements.",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T21:28+08:00",
+ "answer": "Probably not by much. The latest forecast I found says tomorrow will still be bad, though it may improve a little.\n\n- **PSI forecast:** NEA's 24-hour PSI forecast for tomorrow is 150 to 220, which is unhealthy to very unhealthy. That's about the same as the latest readings. The 24-hour PSI was 159–222 as of 8pm in NEA's 16 October update.\n- **Why it might ease:** Showers are expected over Singapore and the surrounding region. Winds are forecast to shift to blow from the south-southeast or south, which could reduce the smoke coming from Kalimantan.\n- **Why it might not:** Some smoke from Sumatra may still drift over, and the fires are still burning.\n- **Hourly readings:** These can change quickly. Afternoon showers helped keep PM2.5 from reaching the \"very high\" band today, but readings were still high in the south, central and west.\n\n**What to do**\n- Plan on minimal strenuous outdoor activity tomorrow.\n- Elderly people, pregnant women and children should minimise time outdoors. People with chronic heart or lung conditions should avoid outdoor activity.\n- Before you go out, check the 1-hour PM2.5 reading on the NEA website or the myENV app. NEA says to use that for immediate plans and the 24-hour PSI for planning ahead.\n- If PM2.5 is in the \"high\" band, avoid all outdoor activity for the next hour and consider wearing a mask.\n\nThe news sources I found were dated 16–17 October 2026. If today is a later date, check NEA's latest haze update for the current forecast.\n\nSources: NEA Haze Situation Update (16 Oct 2026) and Malay Mail (17 Oct 2026).",
+ "citations": [],
+ "claim": {
+  "value": 150.0,
+  "high": 220.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [
+  "NEA"
+ ],
+ "window": null,
+ "stated_time": "8pm",
+ "rules": "4",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": 25.5,
+  "stale": true,
+  "freshness": "older",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": "2026-10-16T20:00+08:00",
+  "check": "checked",
+  "checked_hour": "2026-10-16T20:00+08:00",
+  "band_right": true,
+  "close": true,
+  "off_pct": null,
+  "measured_ref": [
+   159,
+   222
+  ],
+  "measured_range": [
+   159,
+   222
+  ],
+  "named_source": [
+   "NEA"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T21:28+08:00",
+  "pm25": [
+   56,
+   129,
+   126,
+   203,
+   130
+  ],
+  "index": [
+   [
+    131,
+    "psi"
+   ],
+   [
+    161,
+    "psi"
+   ],
+   [
+    178,
+    "psi"
+   ],
+   [
+    206,
+    "psi"
+   ],
+   [
+    185,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T21:00+08:00"
+ },
+ "took_s": 121.0,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7tfRTXovF3iNZyoa6RM",
+  "container": {
+   "id": "container_011jqJKYBHLrGTP9aDoAyHKM",
+   "expires_at": "2026-10-17T14:31:11.644842Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01EqaYUKwYJv2hgn9g4u6xdt",
+    "input": {
+     "code": "r = await web_search({\"query\": \"Singapore haze forecast tomorrow PSI NEA\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x['page_age'])\n    print(x['content'][:800].replace(\"\\n\",\" \"))\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01H51FJ7g7FoKGn9YY28drPr",
+    "caller": {
+     "tool_id": "srvtoolu_01EqaYUKwYJv2hgn9g4u6xdt",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Singapore haze forecast tomorrow PSI NEA"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01EqaYUKwYJv2hgn9g4u6xdt",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Singapore haze remains unhealthy despite showers, with PSI forecast to hit 220",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/singapore/2026/10/17/singapore-haze-remains-unhealthy-despite-showers-with-psi-forecast-to-hit-220/239508"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Haze Situation Update (16 October 2026)",
+      "type": "web_search_result",
+      "url": "https://www.nea.gov.sg/media/news/advisories/index/haze-situation-update-16-october-2026"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "2 days ago",
+      "title": "Haze Situation Update (14 October 2026)",
+      "type": "web_search_result",
+      "url": "https://www.nea.gov.sg/media/news/advisories/index/haze-situation-update-14-october-2026"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Singapore weather: live radar and nowcast",
+      "type": "web_search_result",
+      "url": "https://neaweather.com/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Haze in Singapore at mercy of wind direction",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/1165539/haze-in-singapore-at-mercy-of-wind-direction/amp"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Fewer hot spots, but haze still a concern in Singapore",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/810444/fewer-hot-spots-but-haze-still-a-concern-in-singapore/amp"
+     },
+     {
+      "encrypted_content": "EocHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDF/Tmzik3HMs/itnYhoMhPhaw6VNxzZFPcgEIjAZgthlhy3silo7J5zq5tfRF/tC4BHHWmxrJdD9UiArzwX1FwTx6VdqK72qdAzIPIYqigbAxG1fW14NNKzk6Yai5ENmyxFZxP5u/1/Z2oiNKi3sbVmNei5LJueqUMfPyZlxKNomoHpxzMwmDty3TkMNoq4gY8V10f8eIrZgG67GQ3I5stjBPVZZyj+2MZG3dlFTF22Y38TgZI8IZSRzkKfAmQobW+mwz4u+cCWdrSNKglZKf0Pvf+MH1967s3QIx/oM+iuvRbK+CKpR+UBLafPzfckv+dQhbIucB0exXOeU66kLWMaztvPugFLbEPd+VwGVMjZmQCfieJX2aUJAy8v007q6YYV+B2Np+M2mPPgy0A0/zAYaU3PY9+Bkh+7koG0+GyGeqe29qQ+sUXTU0cCzF1SpYjOpi5hD0gU5tHivWOX4cfIiWmm+sbG50cHxe2nKa0utR9iaTGwiYe0FliMnDcQnl/E6UOIJP8mkuidVvWInQpxQwUuC1y9g2ggo7gush7PSaGrY/n+XjxH6sadjMYFyQd6ql+xNofBcZ9w3yw20cv16lxvko4g3I188dUXqAjWpYmdEzbTWb2FYwbWEy48Qz1R6dsT8bSWlrR8oY9kSv11fQKxG0fXV9fg4MZ5ca4fQFndiFZXwj5p+w3w6ePh0wTLTrvJmbPvJaEJjuMdv2xhLvhhcjjyHFdjNQUfTWcRbMtmMP825r/vjHnilACyn+Ept/qgC5kTSp8fwjs90YzxDjgcOvojHQFluWyuJM5J8okABaFeiW87A0t4fpVEp2HsJo/e9scbF8ek/NTDTdNABFlAonX7gHu/0DszqcLCiqTBlPuLQY7iGDcPL1mRpRe32PXbaO1yBU8URKXdHpv8YdpEyhO82TFItEr+FRigzyQn5D7S+Q3PF5KHsh85fNLprTRBZ/61vbRvg8Zvuut0lutiCEUo1SesTuf3kOwL6wNxbqw3rCCUFKrzr7pKb35aR0VxcJ3v46cdhE2H54xCi0OqKWRHYUgrOBDFuPOVZjYAJC/UnPHzuNF7JGa+LYEeaH7NSsJYBNGaZMuwEEorxEhVhD9luzVnY5M75Os3h+MhQ9yXkE5ITGAM=",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/world/2015/09/15/singapore-air-quality-remains-at-unhealthy-level/970085"
+     },
+     {
+      "encrypted_content": "EswQCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHt5qFs2cIbtuY7v3BoMPsOqp1q/e6T6u+0PIjA30lpIw1szEkRK6/aNvwM+KIlp13yZ/87VQICRhSr0zxPUF3a+jPdUmyl5nHiMDT0qzw+nKLqz7vlDSxL8Rdd7EapNbZrC/gji7uDkD6cauJ9L163Z5XqLdT8q2QqH3hHD8IR5hkd0ZcV9jXX8b5mdeJdxjOQlrMVYMwRbGtLjaiwzMcPQzPF5Ve+hN/dioLWqJTSC/l2NdKuigsbjEEtq/SaHWtb2pWj6I7HZEKQNkb+IKudNoaDcrVuM5INc3Xj1TsCT5hD/aBIHD5U8+nrY7iD6+GXs6puhrVGSeWT5wHR4PexXW2yGx9VeuVvuBXDZnhBwkAMfMBeFlpPa9M94rN7WzmZa2JJICUzeWbeCf2nWa+AgtcBUtBmwjWYIWc+dYX2im2Zr0jr15Q/nvYwtQe/znCPveH4T7EgzDfEkdzpBEyTweffRU7lcxsmlG432fSJuPUQTTXdS2ZbzPlg1TejNB/cMq3z4sOEb/gnLLWBhWhzP9I1u9eCbYU3qbsfweLp4rR9b2sIf8REaPuiTt6r/9BORS/9PipLagkKSfaYQNGy3N/s0OKMAODWyys1z7d7cPu0y7V/9j/ZRfrADxxTGzAHApxr1w8lySSZGe3zXi1c9/D772WcgxhDIO1OaFVAbJgG4ZcPirCciIXRZOwbNPL9H9QdzpuG7l9x/bcnh92Qt9gc0DCjGipZzhOL3P5qgjVr2moYfwenCqUcjgbCGtdjUvBA0Eslr4XKjIZIgX38H577iUfa6q7p8IyUyAFPptA+MMrXwOD3wA3awQKoorD1vXYwRXpzBHNCGjTn6ublYx8WW+EWT/jgf41gk8KFI8TuMxSTpirMsMyYQJo8ET3LBAyr7lU20yyCdtf2LpYlN31CCXRzYgIwpVlDbyga6Wt1GkViRtrQ2Nz95/vN9FNp7Z3ZgPmOKwr79c2SRVH42O5w21djrO8ASz25vkQgvqdqJSDbduzzG3XWTIo8Bpl06YhzCdjI2JQQ/k+rfcR8yQ4JxXhxUS/iq6V36tioJivNYcl9WsYCOrah9y+ITC4qaFa6M7k78TRGs+JQD3SGH4tzHgiulCAbtgc6I+bjDQGJPLtaKb+qG10gxO/OyZ5M5vHX2g2DgSOFxxN+H9DtRECR4b/Fw3IfqiREw3Sh7jIFvv/HTHEILZlR2NULcBydVpgkQI2yeS43M+PEkineYJnRpKigzLHMO45vefWb3pysED6Do0DZL6aM+NL2nmMWrVIVIcILEwKAw32MCkIfWVQKpu4/TWVF09clDvxuijjkuiqjntM9LgotBBIAJQHAkCLgkPwNKcDhHPV0AbeyVp3g0rDEEH8OI7iYhc2ZQEBEDseypTXrks7qyOzEZ1glLYZTRmK2E7CnG67B5ZNG7IZa+l768++Ot21NH2UPdzmICTu9TQSgpyvh7526TeVY8dU6IQu0AxFxoItyqM1KAjazKUZbebphQAVyxOp2Ul13smWA4rZZM6RF6uIQIKGqKRKQzGp+hLTjLguGOyheJPiEpN3YzmyEltwzNmKhEmIWTvBCODglm5ZDD4z8rC9oSrBEfK9GNEdI7FmQ6jOgvghgADg3QUQdBjxrJhL+nfo9Dinlic7jYOl3t4I5ag0VoY7ntNGx6mZq5OMqqop9DvITt2daHHJi5JQ3PBjieZImtA/Rv070SaPOBYKA8tHAReFKQ5qfvm4UkJ86LU4wR+GZsVd88UZ65NcKNmu3EwhglMAkmFPziR3Ybxyl06MZJnfAgBKSxLpqhqeUKE965bfKeCkg8/7PRqeN60HBVr1/UMVn1YLBinCGjhOFxrk7dJPoVpxg1I6ZiUThDjzL8y5kzEhExxnGLInCFfRn+pnJ71izp0pYcfUXh/n5MuwepaGHtBdS40OEW728bGG/88qYTKkiubWiDLTsRaKG2Vx8UCMKl1KYrN5iwoWxXPzSvKpZGpXpmsDwZBaUWvy+ge22QForeWs9g6ANL4TQW8hXQmvLJfu5ImSMfM3Q0MCu3uY+SSTTQgM0fddOFP9sMqSKy80oh59Z5ktRxY+G2LxwjpabG035sQ5xUhZIUxZhSi7AOTOnnMxJNzN0HD+KpkahFN5D0Bf7GNaMPFMFaaBvtnwTpLnhvUsHcGxpuaVR0H0iZEboEon9HJ7TDnEztgSVfhaGAJ9V6dPWwLFQ7TkcE2Drj97mfOugaKPRaXCjI3lgt+7DqPqFQ5n0bH3FCMFKoKD5vT2w6MJxLltOVlpB0JSvB0Mn9dLA2thjR890/Kf9Z3w+MWowWEx9JTCFgsO0P9cfpf8QENFbdw8ON5gfozLoaaNgLC/WNw0KX1OGCtRacmnj76+tmuXFa8r9twaAoYLetZa7xiIyvl39CcEaIFEe7AUyVuENW7OBpyfajxhIHm9YromR/acBcayK72bUDdwL+ErdJx2eCViGiC2Kmt9OsYn8kEJNaLP2exj1SbprMIgLI41WpJiAdUC+I+YCHEbNVAcZIJmK3aTa5baclSqdjve6JnJj/tbFXYLFWkcwnXmUehEakTnWujPWL2D7ufRJqB110ersrlPyxtMpu73BwVW6J9BdpZ9mcMsOLEjY6PBGZJQL7PMJWszY2lnfur8P0vBoAfthzMDnlgeS9H0EPQESVUsU+CDKIgonuo6yjrT37W0Se+kYQBjCr0Dle5EE0H9JaJKgqYNSbGqqUzWftuhTgCV+olAQ3UKXXRDA+ltVwFPNbj4T7GAM=",
+      "page_age": null,
+      "title": "Fewer hot spots, but haze still a concern in Singapore | Inquirer News",
+      "type": "web_search_result",
+      "url": "https://newsinfo.inquirer.net/?p=810444"
+     },
+     {
+      "encrypted_content": "EtMICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDILJRe2tqqQCMpRkDRoMB9VuA8rFCRD58vnUIjDLRM55LAqXrN8vFxL6W3kdTR+fh1C73u+CUgIUr11WRkDO/5k9XCDiZa3nPrvjIYIq1gc1REn3/D+nU3TykxJzwk4oH3GYUp1qjHRnmyTtZ3H9vmJHatGG9N7HC+1daWwcYvBaMckrvoMIR/Wz0nH2de7cmTJmHHLmam1oCbUfSqV24LF9YDlGRrgzqueOKrdshfq2ATbvaUlz1bfyCinwRM+6RObV2zZo93MVTVNpV7C3qTUB/BB6XY0kAqI76qd2LltIwaxgb460QMVp5sHPmNJ1Vx7jieNIPG6Cxg2T+u+CWiytVeea0uNsckcf8EuXUe1wC+FMutyLuuCwL4aWcAOk47t38hdemtHHc9EwsVu6f1PuwwIWq1QvS4BkD7yaPPzHTyuOXrjb6t5rJxh/r2Dda2djieF1deTXjXF2Z+k1CI0RtTe7Px408JnZcjsUPqcza5RLoOAOx2Idh/1n74zAFmKNqyJYzr5KpzaGdiwQT7psEdSy8gmyGXSbeOd6vfA9vRxh/o02uDE8rd2FP+yNrBRLC/NtH6kNM3ND76+yjscIKq4CaHETi/0KVZ2cLlwg3q8xDXWc2/Ekj0HOM5cjQcJw3RlLTaeNeyUEl1XEKs5/4eELqpaE0ew53WEzAsBakVGznHWC41Mtk/659LRepCVCYOIjLmRvfdBGV293S5ZOQ1/ndbtKMrxo+YkkoqluyGZFiftGX6GI3NXNcYMxZpQYrI+Ik4a2WfOH0pgpVIaHJlwkhdNEwUgR6+vgJvoAvx1q+ZrHLrXOqm6MqqlIX8hfNP7KTg/6jnkn5mHi2BPmNaFzQvXMR6zsCrRuu9woXgkFwsluyKIJXS6D+AzYO2m02D2k61Qd/EbdUTrfRYkbUDLUYsR9/p9Qz5XDAr3mNraKwTGnsItQ5xZ67XWuv3RjrNkUNULXTA4G9Hpbutsz6aaUMLwHlfMRgljrqPg9UPc5dnR7pmL2/PRF4uN7Td6ij2KvFKcma4oDp5YaSK/oY+Z83VsuzebEZp4R8wH3Eq/9njrc+XJ2OIToXXwGFiaCOGpgGkXT55lHX64DQhvLKzOQZ7RhZGjpehL7j8iyKvmjY+cqQByGN1L+DnnFWaQ0WCjYshKRCeq1IMJZk6H148IRGumy3WV4XNlXsh+YKMSRWUu/nqSo1YEHbLbq1QmKLK5yQ07UOpjNylKTxXFycCLJav7nICjW8Z6YnVj1XPEPVBhnmYhupzyavIEVi0N/UORvPEsMplAnZTfzJ3IEtleeDtzcXqaDb+6dIE/5a8SE89gMeeoV7thCaSCN9+vHhDVAVLi+W4QLiVB59QhQiRsYUEZPOm41dc7Yff7vFZ6MUH4zP1DN/841B0IAGXy9KN2hGAM=",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2018/04/11/hazy-conditions-expected-over-parts-of-singapore-due-to-hotspot-in-johor/1618820"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01H51FJ7g7FoKGn9YY28drPr",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFj93eqcszw6ma1lCRoMD0OrVRVl2MUwOUr/IjDZFlM2UTU82oUZ4UXAqZBBdKxOfC85lPAel0sT+WexqBo6Juc2Wp41xosHJR3ksqwqEhcpVaRBf+iI6uttPcsrshXRkhgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01EqaYUKwYJv2hgn9g4u6xdt/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x['page_age'])\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01EqaYUKwYJv2hgn9g4u6xdt",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01Dtp5xECmwHu7A82YbAfEay",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Singapore haze remains unhealthy despite showers, with PSI forecast to hit 220\", \"url\": \"https://www.malaymail.com/news/singapore/2026/10/17/singapore-haze-remains-unhealthy-despite-showers-with-psi-forecast-to-hit-220/239508\", \"content\": \"Turning to tomorrow, the agency said in its daily haze situation update this evening that the 24-hour PSI forecast is between 150 and 220 \\u2014 in the unhealthy to very unhealthy range.\\n\\n# Singapore haze remains unhealthy despite showers, with PSI forecast to hit 220\\n- Afternoon showers in Singapore helped prevent hourly PM2.5 levels from reaching the very high band, with concentrations peaking at 243\\u00b5g/m3.\\n- The 24-hour Pollutant Standards Index (PSI) remains in the unhealthy range due to smoke haze drifting from fires in Kalimantan and Sumatra.\\n- The National Environment Agency (NEA) forecasts that upcoming showers and a shift in wind direction may reduce the haze from Kalimantan, although some may continue to come from Sumatra.\\n\\n## Subscribe to Newsletter\\nIt then hit a high of 243\\u00b5g/m3 at 2pm, before thundery showers possibly kept it from crossing into very high band (>251\\u00b5g/m3).\\n\\n\\n\\nAt 7pm, the hourly concentration reading is in the high band in the southern (156\\u00b5g/m3), central (182\\u00b5g/m3), and western (198\\u00b5g/m3) regions.\\n\\nElsewhere, PM2.5 is in the elevated band in the eastern (139\\u00b5g/m3) and northern (106\\u00b5g/m3) regions.\\n\\nThe 24-hour Pollutan\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01Dtp5xECmwHu7A82YbAfEay",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSwQUKEAgSGAI4AUIIdGhpbmtpbmcSDJ4o3+QkRXynAe23/RoM38ysirTwbNtuztCaIjCL0Y11pmQzE96hOXRv4F8rSwR53U/zNvkereQOHxLP9lqXCHxYlaXGXZBfC9DFbYYq3gTLCd82jCctgZYsBjamoYY/qDm14R9Y6P4B4lRuUCGFy1cYScLl9Rf6NJQcUtKOYf+QkGvsSaO/8vujF4n0YRZBjRdHqNMyEKkkhn+Fk022DquQkpmgSqzCMTtlaO4ht11mEV4W/Uw0chBdEpkvwNCeN3jMlvPRd3lHSvOyx62UEoy5sGV9squGQK0wWk8uJ1TzHmAXFkCncvJtZL8NAXQ8D9+PCaG9OlQqx2jxAldOMez5vr1Cdzu41czYQnfSE0+fxiealkOIEC1BwIe7kWQHhZgW89C1koTk98WgvIog/2SEhfkts8QlBJELaWcQ0YrNB7TkI2nOYs12UVuLG4kOnH7gaIOKUKeEvZLwJI5f7DjdHb7SVim2Zx9P7Rns3+fRP5t6i52BSt1K+XTpaOp/H5zrK2CgYXvYuPUnMOAcY+2G0isdo/mPu6z8SCcdQtxLZ6iWttHpnSRwwKN70V7px+jMrNOK2wCyY4cweFzU0VScaavUpHseaCr74mVHg/3Uio15WcjXcGXy0JJgO3mwG4XHoZbccFiI/5y0eZcqvANrj8EQL73LJHsGXOKAzTU/qcmbyaKJ6pdnHSu1Q0pZ0qX9fiN1iiWxVKkZth4ZnEa/7uYwzgq4YKx2aoqA7oS4C128B9RAROecafa74IvNvIAZbIa+eMjgBIMdF6SgW8zXVP2H0x5+CTC8UbEgzHnS0Bwg4rpCv2KqL4aoUqoyu/Kf53b34OcRCFUYY4Aj6jtguUoA/5Npl7h7rGT10DK4/YKQyHH5Vv8W1gdjphVHbumG3gxQei0LQTOJik0YAQ==",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_016LAXjWsAv5LhweptGgF9Nu",
+    "input": {
+     "code": "import json\nr=json.loads(r)\nfor x in r[:6]:\n    print(x['title'], x['url'], x['page_age'])\n    print(x['content'][:1800].replace(\"\\n\",\" \"))\n    print('---')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/tmp/srvtoolu_016LAXjWsAv5LhweptGgF9Nu/cell.py\", line 11, in <module>\n    print(x['title'], x['url'], x['page_age'])\n                                ~^^^^^^^^^^^^\nKeyError: 'page_age'\n",
+     "stdout": "Singapore haze remains unhealthy despite showers, with PSI forecast to hit 220 https://www.malaymail.com/news/singapore/2026/10/17/singapore-haze-remains-unhealthy-despite-showers-with-psi-forecast-to-hit-220/239508 0 days ago\nTurning to tomorrow, the agency said in its daily haze situation update this evening that the 24-hour PSI forecast is between 150 and 220 — in the unhealthy to very unhealthy range.  # Singapore haze remains unhealthy despite showers, with PSI forecast to hit 220 - Afternoon showers in Singapore helped prevent hourly PM2.5 levels from reaching the very high band, with concentrations peaking at 243µg/m3. - The 24-hour Pollutant Standards Index (PSI) remains in the unhealthy range due to smoke haze drifting from fires in Kalimantan and Sumatra. - The National Environment Agency (NEA) forecasts that upcoming showers and a shift in wind direction may reduce the haze from Kalimantan, although some may continue to come from Sumatra.  ## Subscribe to Newsletter It then hit a high of 243µg/m3 at 2pm, before thundery showers possibly kept it from crossing into very high band (>251µg/m3).    At 7pm, the hourly concentration reading is in the high band in the southern (156µg/m3), central (182µg/m3), and western (198µg/m3) regions.  Elsewhere, PM2.5 is in the elevated band in the eastern (139µg/m3) and northern (106µg/m3) regions.  The 24-hour Pollutant Standards Index (PSI) is in the unhealthy range, with readings ranging from 130 in northern Singapore to 199 in the western region.  According to the National Environment Agency (NEA), smoke hazes from fires in Kalimantan had continued to drift towards Singapore under the influence of south-easterly winds, while smoke haze was also observed over Sumatra.  Turning to tomorrow, the agency said in its daily haze situation update this evening that the 24-hour PSI forecast is between 150 and 220 — in the unhealthy to very unhealthy range.    Showers are also expected over Singapore and the surrounding region tomorrow, and with winds fore\n---\nHaze Situation Update (16 October 2026) https://www.nea.gov.sg/media/news/advisories/index/haze-situation-update-16-october-2026 0 days ago\nSingapore, 16 October 2026 – The PSI forecast for 17 Oct 2026 is 150 – 230 (Unhealthy to Very Unhealthy). 2.  ## Haze Situation Update (16 October 2026) 16 Oct 2026  #### Air Quality Forecast  PSI Forecast: 150 - 230 Unhealthy to Very Unhealthy  #### Health Advisory **Healthy persons:** PSI Forecast-Unhealthy to Very Unhealthy. To plan for 17 Oct, avoid prolonged or strenuous outdoor physical exertion. For immediate outdoor activities, use 1h PM2.5. If Elevated PM2.5, reduce strenuous outdoor activity. If High PM2.5, avoid strenuous outdoor activity. **Elderly, pregnant women & children:** PSI Forecast-Unhealthy to Very Unhealthy. To plan for 17 Oct, minimise outdoor activity.  For immediate outdoor activities, use 1h PM2.5. If Elevated PM2.5, avoid strenuous outdoor activity for the next hour. If High PM2.5, avoid all outdoor activity for next hour, may wear a mask to reduce exposure. **Persons with chronic lung/heart disease:** PSI Forecast-Unhealthy to Very Unhealthy.   To plan for 17 Oct, avoid outdoor activity. For immediate outdoor activities, use 1h PM2.5.  ***Refer to the 1-hr PM2.5 for immediate activities, and the 24-hr PSI forecast to plan ahead.***  **Singapore, 16 October 2026 – The PSI forecast for 17 Oct 2026 is 150 – 230 (Unhealthy to Very Unhealthy)**.  2.           The PSI forecast and corresponding health advisories should be used for planning next day outdoor activities.  4.          Showers fell over a few parts of Singapore this afternoon. As at 8pm, the 1-hr PM2.5 concentration readings were 44 – 148 µg/m3, in (Band 1, Normal / Band 2, Elevated), and the 24-hr PSI was 159 – 222, in the Unhealthy to Very Unhealthy range.  5.          For tomorrow, some showers are expected over Singapore and the surrounding region, including over parts of Kalimanta\n---\nHaze Situation Update (14 October 2026) https://www.nea.gov.sg/media/news/advisories/index/haze-situation-update-14-october-2026 2 days ago\nSingapore, 14 October 2026 – Dry conditions were observed over Singapore today.  ## Haze Situation Update (14 October 2026) 14 Oct 2026  #### Air Quality Forecast  24-hr PSI Forecast: Unhealthy to Very Unhealthy  #### Health Advisory **Healthy persons:** If 24-hr PSI is Very Unhealthy, avoid prolonged or strenuous outdoor physical exertion. If 1-hr PM2.5 is High (Band 3), avoid strenuous outdoor activity for the next hour. **Elderly, pregnant women & children:** If 24-hr PSI is Very Unhealthy, minimise outdoor activity.  If 1-hr PM2.5 is High (Band 3), avoid all outdoor activity for the next hour. **Persons with chronic lung/heart disease:** If 24-hr PSI is Very Unhealthy, avoid outdoor activity.  **Singapore, 14 October 2026** – Dry conditions were observed over Singapore today. As at 4pm, the 1-hr PM2.5 concentration readings were 139 – 251 µg/m3, in (Band 2, Elevated / Band 4, Very High), and the 24-hr PSI was 118 – 168, in the Unhealthy range.  3.            With prevailing southeasterly winds, the dense smoke haze is expected to continue drifting towards Singapore overnight and tomorrow. While some showers are forecast over Singapore and parts of the surrounding region tomorrow, dry conditions are expected to persist over parts of southern Sumatra and Kalimantan. The 24-hr PSI for Singapore is forecast to be in the Unhealthy to Very Unhealthy range.  4.         The health impact of haze is dependent on one’s health status, the PSI level, and the length and intensity of outdoor activity. For immediate outdoor activities, please check the 1-hr PM2.5 concentration readings and personal guide. Use the 24-hr PSI forecast and corresponding health advisories for planning next day outdoor activities.  12.       Reducing outdoor activities and physical exertion can help lim\n---\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_016LAXjWsAv5LhweptGgF9Nu",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSsQcKEAgSGAI4AUIIdGhpbmtpbmcSDM82oJBXdaUwmsU7QRoMQSYK1PMXeMGmYp+QIjCM4U7vnCGk8N65hpDLpWTDZfuj7/XapwLehtXXm1bRVsMx3xAnd9oqsGgKDGvO3j8qzgZd0BGSUZuVZsglrQAd36O9quY0qXNS1gnvABn/k3C5Gxj6oIU0o/ZDqTu+jbj0kxTHuVxVv/3l9P4SvSsfp8VVchJFeodFl3an34v8sbtbTUiIpvITkWrC0jLDj0y5YumyfphkzG21h2ACffZK6d10lZhT+DzCs2qDJeOSF0bqzFf/szp5v02mhNt9Fuo3xAfGha6n61AzkSZeIh8VxE2HiASuWcilg+cKTfRGiK/HZJPunMMV8wfdgQ2nheqSPvXZ40L3c9cCk7PtUyDdbN9d1VrMH5oGMoMgKqH48X0rEINbmmgb2Xw4mteQCLPn92RhYvSkyWsIqSaTd/MEBWefaZJaCn+gbytFedaKsxa03VurFuGBvJnRuDT46IvQbiPRckls3sYwYaTPp7R2G1sFU9UsYJvBMCs+uGYlLX4bVIhnOmGLD2Cv1rhnckW7nS4btXcml5Gk+9jRHNGGUaUFjP7Ve1SiLCNwJZQbWr45Z1ePXf4M28Rrj+PkbCEmvE7VHMUh1EHf+lHz6gtFgCOcbHknZIHvqvs9HfXwuOWoQn9IpGR2GrBowceHMjkhrTBMW301QzmbZAR4oHhJQuQI7vG/EAYrpPkSx2EAIP7Hv/yktJkTGwHQxY9Rw+nl4VqK8Tf9n6OZbMcHPuN0kj+YT83P9nI0yKiSUePLvVfOLqNLIzBEpKqsJCMtTzmQPbnGp9hYhQEe4Ba1Q4bUpwFCafI05QZh9vVHG4PweYn2pVN9YskvFAzV0eolTkISJSJNSBxFP9cHw4wUkFL8MgpZIUrpeYRNczZ7jimJmqUQGyq15MzRYArqB11Aieu2KG+LtR/Fawf+MY3k052i87vQL8f8PodhV9U/GE5bTQpO6aZH6Iy6h6zHPGp7X+DimE9OgP8Tad8wzmoxowH5DwrGC6pHBqwOLla8wLW4WdHYTP0D3MkhSk2Aei6XRjoeEc+oBEGp94zQUG054ph7e26k5PMz58LY43jFLQEDBaTxNMr1PbtdSnEopxyzfwgaAOowSfxgKjsbTfzBZp58Im6fDVSXFA6vmg0Dp+28mf9D0P+x3hgBqLK0P56cgYpcLUm2EaLBSilMdx9GQVXW6npbGsKa7YefXzpseEz1r08YAQ==",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01D44iaubH97ByabdYMjYemS",
+    "input": {
+     "code": "print(r[0]['content'][1700:3200]); print('====='); c=r[1]['content']; i=c.find('5.          For tomorrow'); print(c[i:i+900])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "\n\n\nShowers are also expected over Singapore and the surrounding region tomorrow, and with winds forecast to shift to blow from the south-southeast or south, NEA said that there could be a reduction in smoke haze from Kalimantan to Singapore.\n\nHowever, some smoke haze from Sumatra may dri\n=====\n\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01D44iaubH97ByabdYMjYemS",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01QazSs2nDN8kT766mgXNygM",
+    "input": {
+     "code": "print(r[0]['content'][1500:2400]); print('====='); i=c.find('For tomorrow, some'); print(c[i:i+900])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "ed over Sumatra.\n\nTurning to tomorrow, the agency said in its daily haze situation update this evening that the 24-hour PSI forecast is between 150 and 220 — in the unhealthy to very unhealthy range.\n\n\n\nShowers are also expected over Singapore and the surrounding region tomorrow, and with winds forecast to shift to blow from the south-southeast or south, NEA said that there could be a reduction in smoke haze from Kalimantan to Singapore.\n\nHowever, some smoke haze from Sumatra may dri\n=====\nFor tomorrow, some showers are expected over Singapore and the surrounding region, including over parts of Kalimantan. With the winds forecast to shift to blow from the southeast or south-southeast, the transport of smoke haze from Kalimantan to Singapore may be reduced. \n\nHowever,\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01QazSs2nDN8kT766mgXNygM",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "text": "Probably not by much. The latest forecast I found says tomorrow will still be bad, though it may improve a little.\n\n- **PSI forecast:** ",
+    "type": "text"
+   },
+   {
+    "citations": [],
+    "text": "NEA's 24-hour PSI forecast for tomorrow is 150 to 220, which is unhealthy to very unhealthy.",
+    "type": "text"
+   },
+   {
+    "text": " That's about the same as the latest readings. The 24-hour PSI was 159–222 as of 8pm in NEA's 16 October update.\n- **Why it might ease:** Showers are expected over Singapore and the surrounding region. Winds are forecast to shift to blow from the south-southeast or south, which could reduce the smoke coming from Kalimantan.\n- **Why it might not:** Some smoke from Sumatra may still drift over, and the fires are still burning.\n- **Hourly readings:** These can change quickly. Afternoon showers helped keep PM2.5 from reaching the \"very high\" band today, but readings were still high in the south, central and west.\n\n**What to do**\n- Plan on minimal strenuous outdoor activity tomorrow.\n- Elderly people, pregnant women and children should minimise time outdoors. People with chronic heart or lung conditions should avoid outdoor activity.\n- Before you go out, check the 1-hour PM2.5 reading on the NEA website or the myENV app. NEA says to use that for immediate plans and the 24-hour PSI for planning ahead.\n- If PM2.5 is in the \"high\" band, avoid all outdoor activity for the next hour and consider wearing a mask.\n\nThe news sources I found were dated 16–17 October 2026. If today is a later date, check NEA's latest haze update for the current forecast.\n\nSources: NEA Haze Situation Update (16 Oct 2026) and Malay Mail (17 Oct 2026).",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 50549,
+   "output_tokens": 1259,
+   "output_tokens_details": {
+    "thinking_tokens": 139
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
