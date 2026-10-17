@@ -1,0 +1,127 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T08:45+08:00",
+ "answer": "The two numbers are probably measuring different things, even though both are called air quality.\n\n**Likely reasons**\n\n1. **They use different scales.** Singapore's PSI and the US AQI, which many apps use, have different formulas and cut-offs. For PM2.5, the US AQI turns \"unhealthy for sensitive groups\" at a lower concentration than the PSI turns \"unhealthy\". The same air can be \"moderate\" on one and \"unhealthy\" on the other.\n\n2. **They average over different time periods.** The headline PSI is a 24-hour reading, so it reacts slowly. Many apps show a real-time or hourly reading, which jumps quickly during a haze spike or a traffic or smoke event. The PSI can still say \"moderate\" while the current air is bad. Singapore's NEA also publishes an hourly PM2.5 reading that is closer to real time.\n\n3. **They use different sensors or locations.** The PSI comes from regional government monitoring stations. Your app may use the nearest sensor, a satellite model, or low-cost community sensors such as PurpleAir. Those can read high in humid or hazy conditions.\n\n4. **The app's wording may be looser.** \"Unhealthy\" in an app can mean \"unhealthy for sensitive groups\", which is a milder category. Some apps also colour-code more aggressively.\n\n5. **They may be reporting different pollutants.** An index usually reports the worst pollutant. One source might be showing PM2.5 and another a combined or different pollutant, such as ozone.\n\n**What to do**\n- Open the app's details and check which standard it uses (US AQI, EU, or local) and which pollutant it is reporting.\n- Compare the raw PM2.5 values (µg/m³) instead of the labels. That's the most direct comparison.\n- If the app's reading is real-time and the PSI is a 24-hour average, treat the app as the better guide to what you're breathing right now. If you have asthma, heart or lung conditions, or are elderly or pregnant, go by the more cautious reading.\n\nIf you tell me which app you use, the PSI value and the app's number, I can work out which factor is causing the gap.",
+ "citations": [],
+ "claim": null,
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": false,
+  "said_unit": false,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": null,
+  "checked_hour": null,
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "NEA",
+   "PurpleAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T08:45+08:00",
+  "pm25": [
+   75,
+   76,
+   127,
+   109,
+   110
+  ],
+  "index": [
+   [
+    143,
+    "psi"
+   ],
+   [
+    158,
+    "psi"
+   ],
+   [
+    174,
+    "psi"
+   ],
+   [
+    179,
+    "psi"
+   ],
+   [
+    189,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T08:00+08:00"
+ },
+ "took_s": 10.2,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6tKESgQoG7X9VFkP7R5",
+  "container": null,
+  "content": [
+   {
+    "signature": "CAQS+wsKEAgSGAI4AUIIdGhpbmtpbmcSDOBBZhZlfZGdmtrCgBoMTkkLQzk86arPfpPNIjAfLOHnQe8MX8yrQFIS3moD07N1eDuIl1IvNVayh5qa2IydF3ieX/ePC3o/L9RtfDAqmAt3Da7JaVuRm7PHbyLGufwEbVTacebfcJ/jf3cjBxXR9JgLvgXrvi2yCpM4zyEvHe6YWaQr6vAa9X1XVwf4tGTpjW3R55W5rcO9ExFKXzxXyu31dmWo7wXqtAShlpmt3ODebG++0thkLSFI+GJyKAkYl0KC3E/j9D5AXVa3BSV9hpxPik2GKTi9NzN/f/xfr7HXJc4hBFOxzPR4+/2lliTLenUwzkliWGOPqZGqlQE5+YRn6JsSK7Ky+JtFwSg96SvJn+jG/10L1XZuhWXpr47hkXNIZFrB4ffQ4kSFU9JRKbOONin31B1Wnl7wXPh5StZczk9JgKLVGRx/TNZyj8xEIGWIE4BYeL7JGScTlgTDwd+8mzlJMmCTHCDH8gl23erbYaB1SHojSMc2wr4mTmjeXyPVyJRZRoDxXJyn69osD5ObrcYBey92+PrdlWjypumPHTF0KQfuWiW+WulaYidinlY28apK+KKTOM2HOOW+bZigGKTjR9Tl6OqVPqVT76+Pao6SrXuDBGy0DA/sOxCY6VGMi2/2FdeXqN0k0FvPAKSKvOBccckCUxWUtK2X8hG7E3J44TCo3Op6I0u3C+EOpbJ0XbGD2NV0NY3qYAPnGhYzPMjP0l7pJ+JpD/RFReNRrvgzTSAc3u/N+3V1+vD9hlALYjBUZY9WKj8iUrnoY6a1bhw/MzzIxFXguGl7Lmt4pVhqZQvDywMc+xUBThrr6xrELcnoKTYU3SeqXFxaQO5X7m7neLr+OQpEoc0dk+0hgUz8j7qx5jy8Ce7peOZoMjNt06FgCciyJeaqfHTv/UJ2T7ZEL62JMJz08pijw9l88bRGgB1MP0mxNhjHE7OCyJhp6303J/zGv5ocHbiiEM2IUglfPgdJExEb0LSgEpaHWfO3y46zd73Ci6TrpvanOcMru9dm959tMb3Jzbwha9vHsR7a1/0yCY/qm8nEFmbMianAJQO3HEX1MzCxp3OWPgOR1VTVIb3CiGIaBWC3PQF7CfcwIim04noTCTqbnguZceu0ROcDpazN2NEJfaHd2T3yAZqPzVkXSyms8balqAnY4A4+u1AXiidMLS+Jzi/PTXnxHPdDQSMDeOOZ/rqVRoIiW8IEJRpa+mIx1qR/pbI6TkHpjf1OhrMRueXce8h1BN76AMaqZyJ5lkwF+2IgQv5jXN4UxKbHPJ5kvnUaiYkpTS5zs9NrP5rAc08R6icYDCe1+cvNasPmhtzM+Ut0vqRaRfClGxfvFlrALGmqTaK9oxQQ/N/EBIaRzWI2r76XhuSqQOmIYbKGCCMBPxgWqaX950CMMXLxiVQE4xlSwlzIJ8a+8s6nkHC/v1J9rwk8YygAR5Yw2/pzb1ms9Vr/CpZS6hmEDMcZbmypb69dhO2zr+NKxNhWIcY1wCHLypjMcX4pS1p3FSLD5ztvtZ2Sv04vbbyX9qp+XUg8r0JfWANF+qJVAcGXX9HF5s8rcLS4VwDlU1uUVGhTvvO5Txhp2vKb12WKE4SGt83qk/2PdKBMvsMMaS+7wGZMnRNZjhQmOWYmXyFl6HlJyPo3TY2tcb8W67myKxyPC1DgsB3RmXv1r1YKAErKm8deZJn/mQytxc+ikV8PQhr2NPA2xs8mhiuj32cKRS6H0cG1EKiNXFRxX/SiwdiaQrNazaKfY9fC9j2WATM66BClLVYvxAyjeviS2CZr31VJ5XMRk/uSi20D+zAbrtSJWvm24XZnA8qRkkF8G+RSqrlk6ud9f07xyByDoC+o11j6/UzWiAhLP7mkc6kqTyjRBiQWFRh9WVgYgVdDe1sZOaE/xDojBwKD0Q630XEKdTv/7SJ+lur2sv5QpiYO4t6QMH+UguVqVM0PToS/q68FPhZ8t9+kCGxi00ouaVx0V+z3TeszBiyIMOJMsFV7WqNuGAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "The two numbers are probably measuring different things, even though both are called air quality.\n\n**Likely reasons**\n\n1. **They use different scales.** Singapore's PSI and the US AQI, which many apps use, have different formulas and cut-offs. For PM2.5, the US AQI turns \"unhealthy for sensitive groups\" at a lower concentration than the PSI turns \"unhealthy\". The same air can be \"moderate\" on one and \"unhealthy\" on the other.\n\n2. **They average over different time periods.** The headline PSI is a 24-hour reading, so it reacts slowly. Many apps show a real-time or hourly reading, which jumps quickly during a haze spike or a traffic or smoke event. The PSI can still say \"moderate\" while the current air is bad. Singapore's NEA also publishes an hourly PM2.5 reading that is closer to real time.\n\n3. **They use different sensors or locations.** The PSI comes from regional government monitoring stations. Your app may use the nearest sensor, a satellite model, or low-cost community sensors such as PurpleAir. Those can read high in humid or hazy conditions.\n\n4. **The app's wording may be looser.** \"Unhealthy\" in an app can mean \"unhealthy for sensitive groups\", which is a milder category. Some apps also colour-code more aggressively.\n\n5. **They may be reporting different pollutants.** An index usually reports the worst pollutant. One source might be showing PM2.5 and another a combined or different pollutant, such as ozone.\n\n**What to do**\n- Open the app's details and check which standard it uses (US AQI, EU, or local) and which pollutant it is reporting.\n- Compare the raw PM2.5 values (µg/m³) instead of the labels. That's the most direct comparison.\n- If the app's reading is real-time and the PSI is a 24-hour average, treat the app as the better guide to what you're breathing right now. If you have asthma, heart or lung conditions, or are elderly or pregnant, go by the more cautious reading.\n\nIf you tell me which app you use, the PSI value and the app's number, I can work out which factor is causing the gap.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1138,
+   "output_tokens_details": {
+    "thinking_tokens": 443
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

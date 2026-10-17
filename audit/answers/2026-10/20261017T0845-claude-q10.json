@@ -1,0 +1,557 @@
+{
+ "schema_version": "1",
+ "question_id": "q10",
+ "question": "Is the air in Ipoh better than KL right now?",
+ "city": "Ipoh",
+ "where": [
+  "my-ca12a",
+  "my-ca11a"
+ ],
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T08:45+08:00",
+ "answer": "Probably yes, but I couldn't get a clean, same-time comparison. The readings I found were taken at different times.\n\n| City | Reading | Source and timing |\n|---|---|---|\n| Kuala Lumpur | US AQI 207 (Very Unhealthy) | IQAir, 12:00 on Oct 16 |\n| Ipoh | US AQI about 124–133 (Poor / Unhealthy for Sensitive Groups) | aqi.in, about a day old |\n| Ipoh | US AQI 56 (Moderate) | IQAir, but this page was a stale snapshot from Oct 13 |\n\n- **Haze:** Malaysian news reports from Oct 15–16 say about 34 areas nationwide have unhealthy air. Most of them are in Selangor and Johor, such as Klang, Johan Setia and Pasir Gudang. That fits KL being worse than Ipoh.\n- **Ipoh isn't clean either:** Even the more recent Ipoh figures are in the unhealthy-for-sensitive-groups range. Ipoh is likely better than KL, but not good.\n- **Different scales:** US AQI and Malaysia's API (the official DOE index) don't use the same scale. Compare numbers from the same scale.\n\nFor a live check, use the DOE's APIMS site (apims.doe.gov.my), the MyIPU app, or IQAir. Compare the Ipoh stations (Tasek and Tenby) with the KL stations (Batu Muda and Cheras).\n\nIf you're sensitive to air pollution or have asthma, wear an N95 mask outdoors in either city and limit strenuous outdoor activity.",
+ "citations": [],
+ "claim": {
+  "value": 56.0,
+  "high": 207.0,
+  "scale": "US AQI"
+ },
+ "each": [
+  {
+   "value": 207.0,
+   "label": "Kuala Lumpur",
+   "time": "12:00"
+  },
+  {
+   "value": 124.0,
+   "label": "Ipoh"
+  },
+  {
+   "value": 56.0,
+   "label": "Ipoh",
+   "time": "Oct 13"
+  }
+ ],
+ "quoting": [
+  "IQAir"
+ ],
+ "window": null,
+ "stated_time": "12:00",
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": 20.8,
+  "stale": true,
+  "freshness": "older",
+  "time_for": [
+   2,
+   3
+  ],
+  "oldest_hours": 92.8,
+  "number_hour": "2026-10-16T12:00+08:00",
+  "check": "not measured",
+  "checked_hour": "2026-10-17T08:00+08:00",
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "DOE",
+   "IQAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T08:45+08:00",
+  "pm25": [],
+  "index": [
+   [
+    76,
+    "api"
+   ],
+   [
+    82,
+    "api"
+   ]
+  ],
+  "where": [
+   "DOE Ipoh (Pegoh)",
+   "DOE Ipoh (Tasek)"
+  ],
+  "hour": "2026-10-17T08:00+08:00"
+ },
+ "took_s": 23.9,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6tK21psNKyTKQCL1Y2J",
+  "container": {
+   "id": "container_01VS7Ur1x63pobQYSxMssdVA",
+   "expires_at": "2026-10-17T01:45:58.613005Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+    "input": {
+     "code": "r1 = await web_search({\"query\": \"Ipoh air quality index AQI now\"})\nr2 = await web_search({\"query\": \"Kuala Lumpur air quality index AQI now\"})\nfor r in (r1, r2):\n    for x in r[:5]:\n        print(x.get('title'), x.get('url'), x.get('page_age'))\n        print(x.get('content','')[:400].replace('\\n',' '))\n        print('--')\n    print(\"==========\")"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01VZj386e9TdPXNKYZwhjeMG",
+    "caller": {
+     "tool_id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Ipoh air quality index AQI now"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Ipoh Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/in-en/air-quality/malaysia/perak/ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "Ipoh Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/sg/air-quality/malaysia/perak/ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "8 days ago",
+      "title": "Ipoh Air Pollution: Real-time Air Quality Index (AQI)",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/city/ipoh/"
+     },
+     {
+      "encrypted_content": "Eu4FCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFevMZw+PLRLrBNNaxoMJqfoxw3ipguY3FvRIjBtfh0UCrBb1h14feRbDT+CVWFeqvZMG8RnSQqpvO3H08zKcV/PFvsrG8vrbynJP7Uq8QROSYc0D26u/ImDw5pogyKsaI3jztMWNSWz7aoxuXxPItdTEmBBve9WOf0fhECaSdN7LtVxr4tY0tMUudeX8FyTe8q1TTzGotbEwxYFQHFEYYOcOYR/IePXs92LmpodeT5bKTv9aUe3nZkP6H2VUv5lZQymCb/tBMoZ8LvPjlekhWy5fJFpU872vZAKIKPnfbEoV08nQc4+tTgn25SH3+Rt6m/DXWhOYIbrAiGlaLtdyJZlbY4I/nS6zqLE/x5SJn3K2rk4xqpNrLIoAol5U1HjZYjEJAlevYgP+5bljPJ0nICOqpD16LeVii3yVfW15+NxlsID3ivmjcIU6fBaeGVGVa/dYG2V0wxa3/t9N3OU7C0LqUUVj4d/HetEtZWQZotQWWAbpbUSBKm5QUh98wF4oSZsLeIhCdVWXYqjYxjrr4xuX76uCWc6vnTP4vV8i5qB75VOLPjRjYJ1M7DT5zl4vl4NdW6PS3UJyyOW+welJpdt+9t83eL1vgY3/QU+OL7U3r+mq8I52Qt4hzL09yYrKmZ1bZxAzM1S9Jz1HMobIdlrn6/WEf0EJenYrIh4M13yMfw6S5iO0IEYMCGdTgmoSwOqrCshn9RGH9EomPo+iOW1fzvG8DK5p9KgjDMHbgGOnuTMQdwCd0Wqe0XE/87ekiktnuikAHVD+KJ4PUNdCFtpvRxWlukXnzZ1Qfa6Pe3DFQ1y2D298KXrxixGZ+GYbAWURSbu7T/oCDqY7ddmvLDjuHiNIZv26THXEsX/t4eegQO+Rz9qasblYm1D1oTpMhTdKf7KR8AtC+rC6DGduys5TGWpOnvClOFnNDcwZg7hGAM=",
+      "page_age": "3276 days ago",
+      "title": "Ipoh, Malaysia Air Quality & Pollen",
+      "type": "web_search_result",
+      "url": "https://www.wunderground.com/health/my/ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Ipoh Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/perak/ipoh/ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "8 days ago",
+      "title": "Jalan Ipoh Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/wilayah-persekutuan-kuala-lumpur/kuala-lumpur/jalan-ipoh"
+     },
+     {
+      "encrypted_content": "EvcECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDIjYDvlIPi7n1LXQvxoMof2bnWimIvY3st9ZIjAgr2COTSqpTAb78pbooIYXumyDzG+njEsb8+dtH4uYznbTCwxCGFl8x357KL6xu+0q+gOofISBz3S6EVu9+WyLpSeZmtnqiL2qrbQw6+kVHP1PS5xKN+Fq/PLHdONtZy5t3tvYWk2n4tJLFfDmbrcOGwhazL2tbzpcknzyOE9JUXgxf6Ry1VfXNZFHpHqaL7otAPj4GXMcn0T/tyTlEuPBeV/9Qu9CtS0dInAZBuAsN9uqgB8cYi8cdkVuWRoPeoNBHljS1o6R9AT5pTaGQNIi62D+/NxFsJdkDvgT13RDsHTihg2v3zPQWBhFGZ4ifi5Ce7MS4Ug9hKaNVjvMg4pX8/pfKy+BgY8UrdUKyQoYvnIILcO/mnlZDpNBbPEN0hn+K/ecykZFpRoNnkA4XDSM61fOimpD7RjUsfxQqPLRns0zf7nRYMxMfU4RrIboPc6Nds87jkXknPFVC3MWJYuJmHKhjblMKC7ZCn3HufY8zJFEikvUuAQX46i89+Up09qK+18zfqf5mY8Dxt6jzxVdVafk7Vr/bZ18uxQiV9FqyvBJTJUev5Dd3tQwJFDRY7LTte2BmRAIqsHE2JkYNCr8cUZaL83JU3oxYwaYlqS2ASS46sXZ8ObzTO2yRU2uB417lio/UB4WjBJ88oBWiIhjySc5J+MRMX5nIFBYYyOp15bNx1qqhWBO8cDorsyW9YN5vtxlF7KBNQ/M9WVbl1Rj2FMnknr0aA6tV2MPLhgD",
+      "page_age": null,
+      "title": "Jalan Tasek, Ipoh, Perak, Malaysia Air Pollution: Real-time Air Quality Index",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/city/malaysia/perak/jalan-tasek--ipoh/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Ipoh Air Quality Index (AQI) : Real-Time Air Pollution, Graph, Historical Data| AQI USA",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/us/dashboard/malaysia/perak/ipoh"
+     },
+     {
+      "encrypted_content": "EtkICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCHQEEzGzhyEY3ltEBoMvErIuHqm9VF9VhCdIjDT4sOj+eaUVCDI3/X3wl6wa2GnJ1iqNN4OjINeR4vv0FRRdr+DV3fsHBiKWUpHn5kq3Ack3ECywqFMNLaSfOqPHkk+Nb/Q7jL0QoyICg4pJQEK/D9RTojEM4ERyQ7VuWbvJOmbzUEZQwiSMwnwgnG5BcTT/dxXdhgrxHMbo0KQ4TfLb5OLeMXtEL1dz4racsjgqSk/Y0+PeT9jl9Uk6TDwn6JMhuO6Do0Y5KUL95ET9RJtzRdsRNJA7XK4zw90XXz+w/AWew9y4ubZgEJxVNkGAo7VPmfoig8p5KQwSzGmfSiY5NwtQD1wPhcrQqKvrU/ykiwVTakwEfmdqEx1VlGdfZBHeBnS5FMNsKsb5jFtwp6/Or0f5uHDnPW6kK2WRrysltA7sIRoD3XrtMobbW2rY9xkFoOTTWekA6FNBMfivDVlyVaHkI95CP3Xn2kp3fezmGlHP7DV0fgQo63beIdug1x6oE16mE4n31kpxwA1Ovn+LhNSj1Aa5jMJrR7AwRiPR2dG7b7RJ+BKqdGo1CdAz8rkwVvjErzk/r/gKi6pY4WaQCMfQPWXM79g1ApLLBZt+GBtfMUXqc2ODu6BXqR9f0HggzaElYz13OdRGUk9OCGr+PpVNJf248G7o/VDO//m7pWrTgSFwmu/2rce3qC38ASM/DTBwx3M8ikUezb8A6hkBiMpxzzIEVe2QWFA6wAl0oma2/lmgfSUYtWpBT4NDy/PPYQ1xo4+hAPhd61ekyNgZSx9/z4ryy8GLaqgD2DOFiqgg6ywS1HK+dbMFCrBNB/Vntb9lS39fnWSaN27Ab/K9IBfvTqn8e7vBYgAjEwNiwRwoC/3URQoM7r2BCoR7PpvisOGshMvCegw6i6KRX5SEPwgrSLoAohuntqKJ5jtZGI0XijNdeM6DZXhcxS5Wd1M0E19YMEJiUzOhiVaDlaJfm0+e3WyEVI+LKLO7IbbtD95m4W2NhxbpXjmqC6oaG+yhJzRsoME63PEz8yRynoTwmHtoOlHSPs/6qCQQWPRJ0iwnZq6K7LgpcLn8Q0wDBAi8oZpkgd/Fp5cVzub9KRvWBYcBECqg9YUPTNWvDMq9wibcl01h7n12zSpkqUG6ObsKBU6k3FD5x0oJD/OdOu49rCd95drrzM1mv/jqgLrDptVq1EIRxgTQVcidWM1CiNyBu0Q7lrnz8s6yxbpRaftZfJjUlX2lZ0xLyL7K2Mn4WCYJDIW465B0iyU/3aNE4nhDcqWJ2sy/4KP0dam+euO2GxSErK7Cy+y3RcUJDj3OZiWVlYeIobDMpGllZzrBgWa+rA1EVfDup9fSrvv0WPQlkk6Pp5WoxdY3gynhqM2jgmMvWMqWF74PKizS0AgFWXnqFblc6n5YLkVPZcuGAM=",
+      "page_age": "3 days ago",
+      "title": "Ipoh Air Quality Forecast - Today, Tomorrow",
+      "type": "web_search_result",
+      "url": "https://airmine.ai/air-quality/malaysia/ipoh/"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01VZj386e9TdPXNKYZwhjeMG",
+    "type": "web_search_tool_result"
+   },
+   {
+    "id": "srvtoolu_01VXgtGjydChLnVwbvDE89ja",
+    "caller": {
+     "tool_id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Kuala Lumpur air quality index AQI now"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "6 days ago",
+      "title": "Kuala Lumpur Air Quality Index (AQI) and Malaysia Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/air-quality/malaysia/kuala-lumpur/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "2 days ago",
+      "title": "Kuala Lumpur Air Pollution: Real-time Air Quality Index (AQI)",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/city/kuala-lumpur/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Kuala Lumpur Air Quality Index (AQI) : Real-Time Air Pollution, Graph, Historical Data| AQI USA",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/us/dashboard/malaysia/kuala-lumpur/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "EtcFCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDBqudqemts3rmEIoNBoM3Nw9Y1Dtn1celWObIjDy5TwXSzIkVXPT2zvxkgFKDyIp8wqsCZm/uz6gJS1wgI42tFOs8LjOs8XQ1isTVtwq2gQMkFA8dAbbeQGFHaiMVy85W5LygPmzteLNbtgnvBMp0oFis1F2nfVdjgyM9lJC4vpTTqEWNcGJH2e/pfXUN6iZL3hs/l118Lss5Tic9BGYaPsFRCqpNiMKlLJsWShylJ7YQQzY0vptALo7CuvYanO6zaSrelrAQ3n+NXbTQwgKxgV+gcvhQzkD5WFHv6NMegK331A4IABlQ8QCMipDCQeZixj1dJMO92/wZu+exwj//rs+S/0HI5qH96Unf6B3IDmzCQh/S35A07prRlu+SerTzP+FnGxH3HM/eHqfLAvreGISr0FijmlJ+a54YVfXH0lNK/f8aXGlg0S2ztELRtpuWoMcH6nwfdG9SqThX3GR6DY86EFpNngOtCfuDeSUSGdOSxrmW8QTdlamFizD30Vwnw+1ME9jMPpFJHIZLrakSGPwv5p/j0mj2h9rRXrBejYP9UNMIxla23zWIHjGj0C/WjL6P5vtRIgB4N7f3/3i2Ci4DZuFDKnbPj+zDt6rr8TqtiAu0SngBx4tuLnKfDKfqQ1tRX+MSF/IQ6nRv+Q76fS4KAB43x48maits63WT/AHlYtnT9shz6PuJTAQYx5ZOOBi6doJoqwJA4QSL7XtBlY7pSZBS9x5D/BEkcPq4XfjQeY8g22F1G/5LXnTk8lc24JTyU8pg7iZaqlj1gKAm3/FDzvvWBfBF/zmv+852+19zl3lQM2AFT8nnM8gEx92wnyyUvGErXK3YkZrp+Jl3lWlBXKeiAn2tj2GF9Kl0QVW6xT2cWnzKpha8irNah0Y+RquR61PdwAtBBgD",
+      "page_age": null,
+      "title": "Kuala Lumpur, Malaysia Air Quality & Pollen",
+      "type": "web_search_result",
+      "url": "https://www.wunderground.com/health/my/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "Er8OCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLHI/7DCGWje91GECBoMdlJZzz31M6BvwfkeIjDYTuyLgbqht5a2oRft/hbxnm2+UgqTw63guo4w5Ym22GUlQKW9/cmWWO8WudQZBtYqwg0JWRQ/nGhgDnvZDOwgqmytIA2/SDWsaHrGpqiSzf6wID9t0JkJZjEoCwICxXf03zRuIZz87/Vw/ZiUfeps6n0AB151SZpYS+zOPUn2Bey8SaosiXe90x7Utgq2UFBr/9ylkp0Qd/+bGNagdlRdbRgUxodQZF8ZfY3FlBviicis0RBMgW8AC6Lzlp1HFWoNBn5oIfuLpFQShv8ax8kvLELwPx2CDgeb+rK+w/1+hId5/ydVb4DK0or0wKBxw6VjiKtaUj/EGvbmtK7QnvELIlN4Uz47iyKqlNkzxLwuryAGWBEDYde9d46Zu6gsFtlF+BAp+sJlIVvyivAuaJjBLbY0WExksEAbeydTgn7BuzjI34ZXv6nUjcRuGEBM6QzTkx9VYxUUllYWXaNhsq7E2ioI/sy/zUm9QoRCnHKoW9k3Mz9+/ListQF7frfksV4pCLTZqbiUeN1ZdBvImpirar/kFjpF96K0F70GSIVHpqA8+37ev5MxOASD/IltKEjbCGsr1rkBDxMiMQ2L+HXaJGxJrIFizv4VGRPLo8a8Is9OHbrR6QgO7xb2S5w87Y6oGMmhPu3TS7tqQh0clTNDb1lPihI5E7jDanjvTwlf4mOP7UjfwpTOeKmvr8/r02/HMKq+iomJLxTaEMPai0TB16+vpSy+WH3hEiNACJa5lJqg1pJ8mUgC3FWGlq3Hrh5lRMHQKJV4lOioBOGw+Nh72IIX2ZP70uM+gfKNC/mXwvqiWwYiPdQRChExwrHPhl/iL07TVSoxNIQ2giBxT6uLLHY6iJAXJNAXL791IpcuMsywShentlvZmLW6ougxT/6+WWTnWjiCGv+5DSPfPMwYDsdZbFiXBo2UhQUwtqEQdfS4nrR3gQzdhi4cYZERYfUYeo77Pjg5ks2J7iY7kUzHJrNR18CVW0uJQiekKcYlhwAQJysnsBPPslOGrTNAHLvWt3QjY/cHWn574AYP6fa41Pz1pLFFvIf0JFlqiiIo9NK1Eb/jMu8BHRZ+vuzeibci1XEGU8p0ulfdvyWRkKNxwbs5u1A1ANiHMfAcxfF8D4QrJqfH+CKIlukk0d7C48qK3XqDSoa3TFSONejSLGWujCgfSUhfPi8+ttD3npgrdUXaQLKXWbzHZVJ25oJOHA7WJ+QVjulQ6/wOgt6N9SsatGPExd0mgYjAVVijicEkXSxXRY+lHrKsUY6cUBKqIIlAfimFfRitRV6SfXLrmgx4QyA34yGvkOS4Q3f9A4bIZmQBYHh85kZ7SZxsBzthtF/hXuUPJMQxknUyMfD9tUESOjDL2+WBXKmqU3M7AQs1aFxwO1WnfhW+gMf650KeVaCmFNuSn3jtiBvhGmE0emnkT8uQzCJg/xQlbw37Ll18slPzZEboJPU5SqCaeLoH8MJzrG3UH/Q5e6w8IvJ4cPw7EQX4nk3177aCK7nWgFYfoYbOIK+IjjAVb+O06C59lKX5WPZDoJpOIua/cjc61i63iJkwID0hWSC8Xjtco3PEEhvtGXeJkyAr8OjcGQnxVaj++/gq5j8pdqycwDIjIoof0OeIWPYDtKo4X71TM4rvpYypklBEWy3vkUZnDoSJOGLJ0BaC4w/wWHtNNpN1CnjUQueYDqi9y9+pfFowYvQ6AjT4iHI9Vku2NVM0rVyCImuJnSTC387mnqg3etsTa43HqR5Pyq3xPW9ZnDRRoSGRN+mFlfVe7sylsHIYyBjIetP1XR1eYGgRBEyK79iRQsktDwy/eO+af7VrS5GWFOEXXq0KPgFW5uA5HZJUy/X6mUapRGHSV3/YAEYwvo+cTI9POJ1MbBrY07axVyKcoTTlkJ3Kn/7+zm+JwfMVk2uCNuyWgLvws/IeXR02Wg78DjyYcd2nGzn1DzxF/EXifrXxOeOMhBTNOaKELo/YEc2SwRS2Gn0iZ/sUNFIHYvhsMXCLdLr7P7Jon84I6vmX7+XAC0r4nG+yih0pPrlCVLUgGVTTDbfQ6LbJHvIOTARqEyz51eJGtOdAoBwU8N1cixjvZtG4q0La1Kx1SjQPDXVnwgDMGrqGL3lEcS45hWegicQ8Z5u/c35W2cEgNlblk0WBxqLQkWznYWeAzICqDgGeoO6svEZiS/07hTJMdhoFIGG6rkhb0KhvYwOYRHmiNc9AlAiP8l3wHHbEaFzpRGvXMPbdIGv3PSJTqqC5AnTNzXS/0I2Yo5kwn+0O6kTRaCEySD3Nu49s1FiMdvcSktou2RDkYbCXpa8tBc7EeUxd0jM0iD6KEd1WYkrmvLKWmsrlWL2OlbfKpC5UQsbi1JJzL5/YzKCv3xgD",
+      "page_age": null,
+      "title": "AQI in Kuala Lumpur: 142 (Unhealthy (Sensitive)) - Time.now",
+      "type": "web_search_result",
+      "url": "https://time.now/kuala-lumpur/aqi/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Kuala Lumpur AQI Today — Air Quality Index & PM2.5",
+      "type": "web_search_result",
+      "url": "https://dailyaqi.com/world/kuala-lumpur/"
+     },
+     {
+      "encrypted_content": "Et8QCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDKFJ9HcNgwQ6e9C/lxoMGwkZfXLFt+IeW7QZIjBTHY5rNrBRZUrWBznUMIZizygxYNe0zDCVVecGWTD7Id7attRnr++gfmxybW35YA0q4g+cPUc6d+RIsEIIZWCNwcwEMysxjNWvJhddKWXKYFyu3SDnwl0lLlENghapHTSt2pbcRE7nSi+ScGZaZmQaad5hyv1c19Yg5oOLuAPMT5T90dqDmVwCI0JxoQJl/3jJ3jmsF+ujCJpZnVFewey7KAZ8MMrY9pMLhtVby5m0s+bIanElfuIMprhbaGCmecGm3jyH+sSot625NKAw5lJeM7ic2JgxCdDSVRZ3hZ5fVnYV2f6zeqc1oD/cQ1DnZT64xq/imI3Xzmb2WnoiqL1NPyNX2Z6wsCHfpd6Yeup1Y8nEJeRn5H4PQ+5nhYgvMZziVdjQz2sU6iFhgisOD5XgTDQXgiEwXulq8CnyjOP5qpqTXek0HepaWzExaRXifpOmlIV8eFmDK6a//t3KmRyjs0tf7CEmKggrIXRjDKQQZZBi86omNk1arbC3yyK9nF9l3SAQWlfMZ7b0qKsOuckzTntTHaIsL4I+sRZv0dpb6PTu+MiPY0fS8kuMVDQZqoTWGA7IMUPR5sGw0lq4N15L/exXwB83b+yMo+zY65bbMVf13hacGXL48xXjJvAhjTV3VyjHqaJr0+xgNe1HmwgZacR/pJhz2OdV5F3vpgcpJoyE8WJ6U3u9grP6Tkfp3Pgm8fgWrKh1q8QpDqAM0vcXh9gNIgXwmcaiEqM35MYj2pYo4N56hPbcOR7eqdByNB+/QtN0CxDYAwgIp3bC1B6V42nnfE3Dp9SP1T3biu3uvep4jsLh6LKJ3frdkDFfZFvkxEpOVtRIVdZfmm67wvliqVXpDth6fUiI4P6xOLRLepBE+AQihYeJc9n5Y17DjvHfgzopKIew5CByIZ1xY8sEOMsXoMLJg7ZCe1VvFryN5oMIl8vJPe5zjbKPJizrMde2JjTu3TaOY00oJN512aCmA2OdzefpcdY3OesPDIhBzRAhWMT8hu34gfiykHTMWSrrgG8fFiNlXILBjIsSWGhZ0LE/VvqJ2alQiEEavDh3e3vguzzbPawaJGFP/i9GMcLAxiZCg+7hhyBhhNyONuRV6WGY49sVM9HipiOOVcs2PFPsO5iwxzoVsqED2WUyjQQRQ1sNDCUpUugU2gTJmJWVWf1x8LoO1BnOAvZXL8JMkIRh6dPzRIXxSnOM2y4oWfQZf3ZB1Gr7UoTiJ4F1gWnajGmiZ3h0iImXE25ve/XPPf1jriclr6eODs64JJBKDfRKKDEQDU0f8kFLV2j4GUa/JrlP1hKz5E5gJP4BfJgZhhDC390gyHbJb0c4eB9xhAFvzAwqnbnIcq0PwNgHXEbB05OtmbwB48mMYhV15hZgH/KeP9ty1TWX+7HQX2/cikJlRGKlithDQf9ECT2EA5WjTxjFg+S6qkOCoe4Xghu1lhg7QxeIT/ECs590JCnEiuLLh+/kc/UU9jWNa5sgtWZWw8zSnMXFJZu8Qw3Scd2OR9Kto1HLNw7NctmZ06ZCv+rntjQI88kXoRmefWUzmJk+RQFiaJMWCSzwzf/BW8w2WSX2zG39dJTvikE7DTCw4TG1iyOixvVb8o92IPDrmRAq6f7zIdToLl33vMBy15LykZsYXWjc76EavTMTHBhfH2MVBkfD6A+R59AZMy1MXNTL48VJSd3n43Kqcck7QuPEFvi/H4gZUwwiccJ9Lk6RjhktTiFSPxiN03Pjdrgt1ic/B/qfOv3J4oRM5gCDj6KnI6X7BuB7EPh/yR585pLknZEEtI/vU60OHLnhvog9fyAFQPHaJ6Ukx96c1ltI2CDZpD5zl5adcTxEmlFDGuYlF8ueEcxFZZh62n04gfxYxC8QtMG31tDGTI/275zj3puymV6swM8UMEvilbtWis0/n5mOv2KPuq96Jtj8KGOWEw8NeVidUMsJK13jVwgG7IBGCIo7IZasuGNfbzMnvvm9GSeR2oCiO3JaDU+UwO+PE1Hmhsf6uA7pXqc/kCvQigld2N4Uzong2Wz3Dking8ntUTHVh6RPl995vaM98kHrdWdhkFbG6Q4wivEVHJLH0cxjMoahXhWZmbJVNSfS0SAc+dsy+wbz/fd9jMKnaLJChHrRYGLrJ1sgQORHk1KaakU4ht7R8QmvyW7DYx2DlTXDfJnQKjCbJldWUZSm1rkYcbOYOdVTvKkTfLxFYzoVfuQRBvjGXrREfQxrIFHYriTYPO83yo0skznOsCGwidB7CKU6S6OWl+2ZNmCSGLeGnl2cUjq+d22N9s8pJYGYWSW+PUxscWQEsgxVn9d+x6qC3zk/FAfc+5q9rqwgVOTb7m/lCsS/vC+ZLScnenfnjDBPWC+Gyw4K0uFmJj/xZqta445b7JDik0Sx3ShltjlxOA27RDirtWGUhXzsUoYaoFkABXIjXoBHNGGPRG+Eab4HE4nsoj/N2wcrb8ZRM5JBga5SSVSB79bbdKVDFVaxsR/5pmk5qs5uBVf8Bg537M5MfxDUu+XcDIoFe62UlETv1ima5LyR9XMALgMcApFVBlt+wIbFYSKupEyRamCqvDH3napWLn5Tp2oX6khK/ZuBmRDEqPWQOcCQTehtt/Dq+vX/AiAbcmmWa4fsrP72lGkvhFT8UQMyJ8jNALs7vfIOkRcZW2dKfXZ5FJmi2ClHSm60vbNN+iFmi5EBghSpA5Iyny4LAnr6GAvQd9sxWLIP5JUbejF2T4YNsTKLjbDqYgw8llyiZCvYvhgD",
+      "page_age": null,
+      "title": "Air Quality in Kuala Lumpur — AQI Forecast & Pollutant Levels",
+      "type": "web_search_result",
+      "url": "https://airindex.today/en/air-quality-index-kuala-lumpur-1735161"
+     },
+     {
+      "encrypted_content": "EpAECioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDH4kQMyOKngyFoZ+vRoMVI0P+H9YHNQtF3MSIjBATcwzNoYzz3QhPgKZS4EaS3UsODpdNMJywSxiUr3IxE5bulmulmpv8+L8dL78btAqkwMvjc1TJTPectsmhPyUl2i80RD4XTU5vW82S25DsN4ThuMKvOh0QQAhIFt6uvZ/JQZq7CHreKYstsfRYhDdo/ige3itWUCTeYzogeoNU1VaO9cqwP1yYKmayASA8Kcl9zrbVaOTXAFOBuV58IyyS0mR8pLDQF0Rhea2JnOJ7iQqTdE9BQ2stSFACsj+VRIJ1aS99OzPoPwjiKKMMeiwBuDP+t4GZUZpo2QHSYSKGUpZUbwdo8rEN6n34RX9ReVpoHvQvx4rzMsOOVW9dsVIV9OOJ656X5Xj9I9F/exQnKRTMnMPC5JcgS8yC7MhMWFpDNdAAXM9lhqUyLNLfbee1adZtRH1iA/DNS3aAZVeh8vx1h4xeP6Ewrta2lX9EcoGKqjWlyXrSI+FAFx2Vvb5E7fOPLA18BtPibpm1uzXohHbh8gfTa1gDR8+QnLqHRVg13n3d/NjDnHuYNvgBjEvfvg6XN6f7MvjtuqUhrYWO0cuckZ+uNyfB0wcLo6SUi59PGnCzR2ESdcbdP9jVsoZuopHiVvMGAM=",
+      "page_age": null,
+      "title": "Federal Territory of Kuala Lumpur Real-time Air Quality Index (AQI) & Pollution Report - Air Matters",
+      "type": "web_search_result",
+      "url": "https://air-quality.com/place/malaysia/federal-territory-of-kuala-lumpur/a772f0ab?lang=en&standard=aqi_us"
+     },
+     {
+      "encrypted_content": "ErkDCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDDalR8MQvcyhjI4KhoMb/jzvoo0Q55ByEIKIjDqFJwLyujDX017ijWE+72IBaexZ1q0pRqD9LbnRm9yZZGuBRwS5I8yuRXpPvPAOrcqvAJPSrS1BDkBm9q0EiaoarcDfD5u9haGXaVhTLoxXWy+fc8DgTepFrDTg4dnYXnwY5mWCQCkafBng14yTEC1R+98rRHaucO90FogpunTki/xCKm8L2rnTWTL7ffHJeSVurpShP4RFbXNG4Bw/I3AjHJvujOSA1OhbQY9MRmdiiILe+5f9SGrsbDeGaZsvehplgIUXktRNLYTmFNjE4wfkius6gqBAR0GHn5U6E9z2GlRr0OMg5/+mw2SML5Ui/GsZ7gxKcJrbZLx6OiXXI+mYZEobEtMWjQUeP6Lb+pJx20ujBctS46h3fp9QCallTJX9R+q1B4uVaf0Lvp/YTXAkHax3lk1sQfskVeNHpriLrTAjNdFAo8KchBHp7PwuD89i2RfUs31efy4QR+u423BmhCoMwA7G+9u4k7TR7QXGAM=",
+      "page_age": null,
+      "title": "Kuala Lumpur Air Quality is Moderate",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/snapshot/kuala-lumpur/20250808-13"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01VXgtGjydChLnVwbvDE89ja",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDBEWaNsRHBfpeWKw+RoMxZVmPy+bKR+lJ2WCIjAnZxEcePgxJolzJT0UmpJ9QkWmLaaAxNSkQc++WyRWOM3KQPKGOFmaJr1Jic5qp+AqEqrVmxAw2PyCrjClhQmBmPPz7xgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01BwAGzGgQLKdAUWWocvhrbi/cell.py\", line 12, in <module>\n    print(x.get('title'), x.get('url'), x.get('page_age'))\n          ^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01BwAGzGgQLKdAUWWocvhrbi",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01Yb1nw7aKWHynwPX6YchuFP",
+    "input": {
+     "code": "print(type(r1), str(r1)[:1500])\nprint(str(r2)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"Ipoh Air Quality Index (AQI) and Malaysia Air Pollution\", \"url\": \"https://www.iqair.com/in-en/air-quality/malaysia/perak/ipoh\", \"content\": \"Ipoh air quality index (AQI+) forecast. Air pollutants. What is the current air quality in Ipoh? PM2.5 concentration is currently 2.4 times the World Health Organization annual PM2.5 guideline value.\\n\\nIpoh Air Quality Index (AQI) is now Moderate.\\n\\n# Air quality in Ipoh\\n## Air quality index (AQI\\u207a) and PM2.5 air pollution in Ipoh \\u2022 44.3K Followers \\u2022 10:00, Oct 13 Local time\\nDepartment of Environment of Malaysia Tenby Ipoh\\n\\n56\\n\\nUS AQI\\u207a\\n\\nModerate\\n\\nface expression based on aqi value\\n\\nMain pollutant:\\n\\nPM2.5\\n\\n## Hourly forecast\\nNow 56 Weather icon 26\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 31 degree 3 km/h Humidity icon 88% \\u00b7 11:00 56 Weather icon 26\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 43 degree 3 km/h Humidity icon 88% \\u00b7 12:00 57 Weather icon 27\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 11 degree 5 km/h Humidity icon 84% \\u00b7\\n\\n\\n\\n84% \\u00b7 06:00 92 Weather icon 24\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 64 degree 5 km/h Humidity icon 83% \\u00b7 07:00 92 Weather icon 24\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 65 degree 5 km/h Humidity icon 83% \\u00b7 08:00 92 Weather icon 25\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 57 degree 5 km/h\\n\\nicon 83% \\u00b7 07:00 123 Weather icon 24\\u\n[{\"type\": \"web_search_result\", \"title\": \"Kuala Lumpur Air Quality Index (AQI) and Malaysia Air Pollution\", \"url\": \"https://www.iqair.com/air-quality/malaysia/kuala-lumpur/kuala-lumpur\", \"content\": \"neighboring south east Asian countries such as Thailand), it seems to be peninsular Malaysia that suffers the most from this, with state of emergency\\u2019s having to be declared, bringing many non-essential services to be closed, as well as other ...\\n\\nKuala Lumpur Air Quality Index (AQI) is now Very unhealthy.\\n\\n# Air quality in Kuala Lumpur\\n## Air quality index (AQI\\u207a) and PM2.5 air pollution in Kuala Lumpur \\u2022 1.2M Followers \\u2022 12:00, Oct 16 Local time\\n207\\n\\nUS AQI\\u207a\\n\\n## Hourly forecast\\nNow 207 Weather icon 32\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 207 degree 2 km/h Humidity icon 54% \\u00b7 13:00 200 Weather icon 34\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 185 degree 5 km/h Humidity icon 46% \\u00b7 14:00 193 Weather icon 35\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 176 degree 5 km/h Humidity icon\\n\\n\\n\\nIQAir AirVisual Air Quality Map Wind rotating 223 degree 3 km/h Humidity icon 73% \\u00b7 19:00 107 Weather icon 28\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 246 degree 4 km/h Humidity icon 81% \\u00b7 20:00 104 Weather icon 28\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 282 degree 5 km/h Humidity icon 84% \\u00b7 21:00\\n\\n105 Weather icon 27\\u00b0 IQAir AirVisual Air Quality Map Wind rotating 299 degree 3 \n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01Yb1nw7aKWHynwPX6YchuFP",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSwQYKEAgSGAI4AUIIdGhpbmtpbmcSDOI5WdYBw0IcyDul5hoMGddUTSWU3FdMCHzYIjAbI7OsegrXiwt7cpPYr9OUTruXB6RXSZtcM20AG8ZbCRwAezMFzvrG8+Vxg+yZIg0q3gU2Zp5V3ztNuMoTFUmgncRVohgyYUhHWBMURqGGwGc8uZoEg5vADFXQsOVao4DdXNVSHLDoaRl4bA46uyUnnJANHPrQJDBoQNFbf0Nxa61IXT975YQ/9R4lhb2IlhqCcszaQoZ1RZEVIbCohQoi+ea0Z0FRM4stsOMsa7yVVzFiEpu+nYJGTEyQLueSgu72DlpBwJ8VxzyyRxqFh9z2OIZK6QJdjWmBxRKamLQu1YtJ7p02n4HC9Bz8b5uOZVz5O7ENSSivUYuxxgT5+DeaLCLBADJGNruquRem3G2IVNbbSeLWHzsaizdZiySTDYnx63UmqxGkWeOLZTm8O3cove3ACe3SFmrb+nYqLDIHtkfMMHdqjZNLrL8YLz5yQZg12Ydp0mXaQD94oM8EzBTEtN4WW3EueWzQ/EtBxzaaj7DVOEzvnSc+XMT0/CAgTgf2jJJ9AkYN4Oi0AB/9Ps2oUOC+m5DgDrmUvxuF3c1u1eU/QoTYWUYm17dLwYQ1UdKwqABs1TkFbmkLnFK3iHLvnFckeQu0rGyoz6xWMezyes8o4lAsovkaM/AkpsuxFRT8RkVoNZSeJLSk6rLeKW54b/6jqwP0PWQdMRsJveZ3a/NI4kr831ylkkMnU4rHKI447DgCgN9i3JyuKuXE+PsFNoH6vyReskTH0r5vJ29wazGz1dEGdzKLaZJmAV0erEtPeK+4KLqg5WamBE4H6kZBK2qayfBkBv7rAJCR2cfq0AVoVcfftzSNyIjmnnDtrfeJTvQMTloWcZhUNTOYwKgj6TXayfyycGKicROFIH7F6CjIIfylwokpTFQFRktC2/reTjuGYuMpWrWY2U7gVQI5aWu21NYTokXWpJ4UbsGKTfoWuojCyLk8DrSZmK858LVA2ApcGT5CgHMOa7iVeYzpjmB9cN9n+1/x8xtcNeQYPuo0CEc4nRC9MUx72lpWlRQ8hM50lqIOUGZ0VGocWF2JwhgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+    "input": {
+     "code": "import json\nfor q in [\"Ipoh API air pollutant index today Perak\", \"Kuala Lumpur API indeks pencemar udara hari ini\"]:\n    r = json.loads(await web_search({\"query\": q}))\n    for x in r[:5]:\n        print(x['title'], x['url'], x.get('page_age'))\n        print(x['content'][:300].replace('\\n',' '))\n        print('--')\n    print('=====')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_018XcS9PyvBiSapnPi1Wqk9q",
+    "caller": {
+     "tool_id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Ipoh API air pollutant index today Perak"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "29 days ago",
+      "title": "Unhealthy Air Quality Recorded in 28 Areas Nationwide",
+      "type": "web_search_result",
+      "url": "https://ground.news/article/tasek-ipoh-among-28-areas-recording-api-over-100"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Klang records Malaysia’s highest API reading; 34 areas face unhealthy air quality",
+      "type": "web_search_result",
+      "url": "https://focusmalaysia.my/klang-records-malaysias-highest-api-reading-34-areas-face-unhealthy-air-quality"
+     },
+     {
+      "encrypted_content": "EuoHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDIq/pvvxyJ0Ee3RMZxoMKmSO0/DsZQ0M4/fcIjBp5BtyOJ3Y8o0ntS6fYEpVCCMzglLOMW+97/U2mo9WN1rZ3Q7l9Vc5nlz4dQqYJkIq7QbiwQJjFIhdDgHPzhEwqAMv/LWkNlk8KKFpCYYBstN0LMKonu9Fb2XVKjYzpcQahvMQrFLWUpsb5pUCuIA+1KuLMAKerLK1KVVNDGp0H5I3UHqTLPBdbI3a9KysuuHMaqqR63cLa6GofB2ePhwg6/hk3daU/MK4MzHshA8Qy1T3+hOey2LwBrGqHaHubQPgFUrtVBViZgbDV/tOBv6K5ZSTD9AdjTzh/nf/Bu7B2Pa9W31LZmmqzCJLpV3zLmZm3SsOW1dtVeLaHfgAVuBe3CT9l3Dh01+0JFq3uu/+J1bRm+iZXdHsexMGvhqRH1yqUSd62Y0v4yRRUAPm0lhGP/T5XVqksp76bPt7VqzG3Q41F8kjuiLUMscZ8RRzjPNlkROZ2abiW/pSlrWHOmznv7wmRtfEtAl88PgreyRaD3FOBjx/Rs9scf/FwQbNK7IFBSkHzjCuW1WL9Af9Ta0TglhGaig5S0LynuTl3/Yfkcp9ka5c+3t3XZdb9ZD4YFfecCfuJ4zOwBsd6CfXas1FsCJpccmCS+IiONRjZDomnLwnIIDAUnOxix4qzm1zR3vQrteZ7xTXLTnugzbEf5P94S+XO2GawEDMKTvmFvrLdTWAc9XbtX00S/epCvjcXzGsRWuFVHbm8Z1AqZhcDjO4OJb0Cl0bmnkdiRjFkdHHMvoCvHWbV53/uIWE1cAV0oIjLzRaIzzMHq445nOq7pm/eupDkTxxPkeXiOIeGDCtmmKo8uvaWo7vPoAA1RHf6dirx2BzFV/OnW6YWUz+pUwkS2iOGLGcEAztDNWmWIVHnPy3RfPge4hM0QKqT5hkVHoBD0Ohf3O8LmEyCUV+nc22sPki57H+wZV2ClF3SBQZw4Za9TgzQhNE84jz6DId0kbXskVbk0eXcnD3ityuW0SxX0NbqKGA6ncHbgIJY46b2chh+ceOdoxIz8Jxuy6JvBrrdbGqI/1hpo1YrQvDMD6gNDgY9hL0W/vn8GFy1RsbZA3POM0UM3fJfgHhcsM+hc1af/ebch/m8Z9OGdG5vztUwFX+toTThJhov0tUph7bsdlRqNNoCXE0RhNUjI6l6d20STwfjpv3SS96tHCmQOxY6/4B3UkobE14XAhxfmO8p6huhCasJmOlg5V4uF32RAccVMzX8YD03b73/SVJbom+GAM=",
+      "page_age": "1 days ago",
+      "title": "BERNAMA - Haze Watch: 34 Areas Record Unhealthy Air Quality At 9 Am, Johan Setia Api At 192",
+      "type": "web_search_result",
+      "url": "https://www.bernama.com/en/general/news.php?id=2620586"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Ipoh Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/perak/ipoh/ipoh"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Ipoh Air Quality Index (AQI) : Real-Time Air Pollution, Graph, Historical Data| AQI USA",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/us/dashboard/malaysia/perak/ipoh"
+     },
+     {
+      "encrypted_content": "EvAHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOGRc4e6ZojL7PxLeRoMMM227BT7l6mmfcR2IjCBhWLR39qmW1Nf+OwOkBedcpM6t4ybS8XfMjdlok9HRgrKuieug0PLHBQ2MiYuv44q8wbN2Xo34STJ0EgUY+x4z3UvWMgtdg6lv4/yTkjMfH1x3kEkM/5CQjbx0PgkGUCS96YlohM4guA6S5eBq9dQ/LwfitdHLrKlbzKicKbQC/JnvPlz9TTFZ1fyNumdmzmLoQaEI7LcFP2JwhKe742PTdZLTg6UeLLl0OTrQ58tpHdVyVdIYF2iBJSRJOdjzW9D8Z1+3/gYC2lZIfDh+0SgV28AAxEdYTXr+Rj5f1nstvhWx+q0QWhX9C6G2aQPKe0d0JIjHcg/09G+ktfAkvcRM5yFSnZsic+2yGQ+PSiFJ9anFr3tVOK3oyCZGRJ2eMhwa6MHhvTiq+0nHHN0eWGeU9v3XiDQSGGr+XEXsd/kGH+9m1dzDa+02VzKI+0NqyTbkDvVFgHZkMOKSsMIZ/CTqtFeuA3zHlgt2/DqYvEFipfhgKxDYrmCKOowlfNoCFsvD3PdafuuBpXgD6Af8+Ja0ozMFaSzuRit2UIjkeSDZJPtPbYwgDKxv8scQ9SP+uFSfv8RBEHgdJ57aMLcbViLgN28/flYqQtC8Q0jovMfYgPC30vn4M1iwS2lYkZTzwuC+ofWS4qVsNJVHRC5GRtm23TFoBPIdZ/etPkn8uqaBNMOxqHgKroWkpkVqQFl1hIMlEa0/0pvSioWEpXW4V699CH2IoUXxEQ2llMD+4ePhmnRE5iu5dRSkjyBiyydriXjqlUq+8otuuYkN6GvGRwO9fGQDvTxj0Gp1Rxoz38V2hgcJmufGS36TRYrFNU29FXuoPQHbeeyxItbSaO7oMTG7L7E9RJIwAk9eyHbXlL56wHahtqyIqd3Y11P/omaZv7Oixaw7hV2s4IzeUb+dzOyg2X8EW6CpRdHZwY7E832dFvosJd3+8ICT6cUpdOndqHWkiRqneEizadK7D5N5+qUO/PDh1Mpc+8Sf7ytkFjh2oYSEwPCF1cQVkz0r5ix5r3/7JxW5UkYWdfmNj44Csa5KQh9zoHdra6KjEMfA8b2U4ZvHHTXFBCCPZkQZHU9hWCk5V+l1eX0cUFFBK9giPtt8bBOwKEyK9aqz7pl0PsYMsKaXPrtYPJEHVl8a+U8PaoK4sQVj4/nG6d9yC6T8USbH+p7AHvEXHvdg1LeN3rrLnfk+OHFYzSLBcIOqhWMrpSX1Pa1j+ry7DmqAmIHNn5VlHHlZPVcGAM=",
+      "page_age": null,
+      "title": "Malaysia API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en"
+     },
+     {
+      "encrypted_content": "EoUJCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDqF6lnTAWEQlI61GxoMFI6PrA3Yannfh173IjDsSXdnaL+oCPes1DZqUapCK5KMSPbJbtwYD74DJ4TCx11jE3XlaMxI3ki5SrD/83UqiAiXGye3Vf0CIr2TPA0i5ORA+YB4XhB/kwwhCqhFigN39hGbCkWRA/fxgTSDigorjZf5qFaj/VT6oSNZYoAUhmT5+jsXSgP70ffyNMf8TXKg+KIF1WcJZZnTu7+hpX21mpJUO+xKOkKZnmzGiYlVi8W+1mf6Lr/dqBgYQ2j7GJWVBzFMF7ENW853I7UZurwtL+rL8LjB3nwMynP5xBV247O5WXiDpAt9eKDLjo2ZUks2uJywBqD+OZGo6sPUkTu4jWtWrxfGnHsuOFP8Q5K5ck5tScJDPA8Bh+kJMRwNcUGW1rB8wDNpvCWCYspyYDeWUAHmNWZR9sa2R2o5Y9UpoOMybB8QFgsRsAbqUZ4JcWemn9vw6QPjF6+4bGCUkO3JEwkZVwZ1W0DX1UmiJEr5gawaZ8XAVeeW0kbfuqCtaIJg/ZMMPLl/u4ubTjBN3E8xaeb/gZSf7vsgiTzvxExHFAUjJ0r/hP02wY1xG3E4RzkOcTOIJjWLhK7Z9FOivNmuyqd3rtCdZdQVw8JSv8DhaFFDrxrDa5UzHWwRAytpRN2to+3AazRdlDklr69WknocRg65ViHBMRSmQBDl0PU7FwY3sP9Nha62f+QYU1PXAeXFQbIHXVUmtwLWkMj+E1cWrxxlZHApuOiVy+JIVWNWPMZVWWMWTnoa0qjX+0K8V/IPOF5p3k6aMwxaD4feaAHEW7VWiL/PT6dDkaX3kI12KNV3Rknz+nxnnfW1o9faJbFnR9NY4nEnUbdPZSX7/JopacaNLUwG6bSzsgCPTQjauYaOe+OK4/N1W1RwpUNy+3wAn+Y1APa4v0XhRBWJY92+YbK9E1hqoY/160l8LuBKU8Y3ZL6Xo34khhvozjGGvBI2pRJtn5K5kqRm1LAVKECGhCoLupLaJg5QO6SgowKWk0b8gxrzwtQP5JO9kpC/0ExMiBZLSY4pAVcuPg6gtcqx8yMXR+Ym77KiTwYa5M3TxltQqiYmYGT5D3jk8Tu2bTJ6HG01dbtbYlXDG9Z/wKYHn1oQX2klACASaWYU76jy/DY8D6ZOz0KferHt6ftNL1bUjl2C4Jerd1P5JMhqHcuD0UQP9+kZzoExeA8F7rL10bU3nZN30QtHCXRA6UOYSfeplKRayCruECUbx0viqoG5pX5T3R90I5qBDpsoVCO2hpirCwFvwBHmysP7Ct3VC26Th1oBvGjSXL5NJ9cvMYbOJoCXO9eRP8Drt4mDg0ISMyXx4UP/O+HkA7fV9KyevC8nhIdWMF1mRsFChZCXjOhS01Ec/X66U3zsU2RYNYg20mgxAIHgyRpu/SpAWCOrW6IVjeAR7cuEK1avBp4C/zhcS1Mj38LQ1w5RlOQK9fv8vPANF+xph9qTSQMYAw==",
+      "page_age": "0 days ago",
+      "title": "BERNAMA - Haze: Pasir Gudang Records Very Unhealthy Air Quality as Of 9 Am",
+      "type": "web_search_result",
+      "url": "https://www.bernama.com/en/general/news.php?id=2621121"
+     },
+     {
+      "encrypted_content": "EtQGCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDJx8OXMB041pPM/bYRoMyQ88UgvswqMU4wayIjByIu1F68yKCxY/jKUCjtI15rlM4yQXHAAo7Z5Cn2tPi2Kmoie2dBdSw9OxyEM2cnQq1wVOt2J1l2C/TtOs1FEWafdA07PpGX8ux3NvxDwv7wo3LbzNibK3htuQ0uBQWYlighZe96SQMe5L+pjvMSmsCHzDJ4BIZlsVvYNSNbLtXXAu8/khrGnk+kdeWRb1dsMiU3+sk2SciN82sg6rwMczsymYQ9fitQ+d8b1uhgaX7wqh0pAGqyLGncuZI6kAwmA8yKYlLw5B9rHLtRrm/U1vytqlQnBsOBkk4vEcrcdwPmTZU5vf6D3WgozG7moRuhujXc4Q3bc/7l7KZROp81YNN71S+UpDLB5gn0EiLjJQQTcqm2PVDYcXdbWPWqX1/pnNXWLBYNVkCelm1hs8YDNlLBcjh+eujUyaiBfZOJACIbIcxFb61cgD2g4feiD4Cl4z/4aXYqO5sFr3gNFopfQc85CI8ftL6uNEWBdPR+1upF7vb2zGpzAkruTYRENBu3gK4LGbCIj5vmkQR00tw8O7fDWnYKTbaazea7es3o2IO68qClRVYriW/aqulsL8Z85BokSL9HJBNkeBOn3QMRplDBcJKIEEDOrhMvbaEbEEYTI6b/BRxUeVo8V4pNLG5Ejs+juceDjrOygBA/rI7AlM8hl8K48dlzp9vbc6voUDrBfGcDG7BidxEF4rVct8AhFgiuBGmSUY4o/AxpXWPgVVRVvNYDlOVEOf/TGy78cf3FPd1vbG29XN8+iejBbzv4LRt98G/nhRChPci3k/QQr2tHelN42v/tDLQrkywaNSZkP9Gu9BcJ2FtJRbBPEw2LCPRZc2Ojx5UvxgmJqAwBGpob2IF5W2XF3mKI8oZXiQVnZV8cNLgkovyAXuiM2Da1DYnSBBpxTMA2iDN1TNBwysXBCGbbBnIKMzjaL75s6qxcj2B0bG3DhU27JzkolcNYxIST6cuOBRaRwZ5h/KyfIADLV0osT1nJZg7HLbHqIK2/iSn8fID5JYi15+rIHbH0y1SmDV4QOVMzktGAM=",
+      "page_age": "1 days ago",
+      "title": "Air quality very unhealthy in Pasir Gudang, unhealthy in 32 other areas",
+      "type": "web_search_result",
+      "url": "https://www.freemalaysiatoday.com/category/nation/2026/10/16/air-quality-very-unhealthy-in-pasir-gudang-unhealthy-in-32-other-areas"
+     },
+     {
+      "encrypted_content": "EosMCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDMlrjAqZIOPIDzG+DhoMP3PZw8QMglh8+fQOIjDmObV6Xi2GySLQKy1+//LWHqMxkwKft9W+Vc4tGDDsG+8OpURj+LdxjXXd2uH+MmEqjgu7NGxNev9LS7MCQmXS/xPLmB/603Ea83KVxROClTvEhAiSpxdx4sfuZhlEVallFQmQWkP9UYyw2bKfE7rRR+eG8t+oqNFLKEUYlbE0giFIfgzTIRtXedvDuCqyLQ2x8Dfrhg9VicpkA+hKqTWG3hTDartV57lWDz0sBVk15PNxPajOsisAo3KyAn2DYs4vMRU7XFOGU0SlPmAmyVb7Ng2aElAB3WlI5XTLuwqxH8uDcknrwLW3WKqX3j62mU6kz3ROSt/O+Npg+M8qFpTXGEYzieEA8dvJn+eRUZEIQ3tJ1wwr7QNAT4dxx3OkICKVIN32opj4x4Pf5pGRPnj/56Abq/CFF4eh4//QVzvL6HJkM8Bzgc6n9QzRnONpREJ8jgOZmV4K+kRWLMb07w61of09fr0/PQ8DgZDFktEhJztPhKXubyjanS45YuG2+nMpMdd/ozMgzGMXOKItX/mGIuPz/2T89jbHWj3pP0cvIpPqvXNtTW7zVaH/Y111qik0rsvCicuycGwH8r8NcNlcIaV7ZhwkUDPI3yMHuz+Y9YF1VHsflk+N+c76BuOk1m26SoOay5jVEegDB0OYz4JL94S0hkKVdh6SBTlJ63+juT/G4XCHvmJxO9jWKb/iuwfm6lIy6fkQOLd48JnisvAnZbAy1v+BastTNxsVLjQBJFkEjCGb+QdPlHAlYrAm+TEOPv3RPJUH2eAtTWq7YbZgC3EyJA6nGl5Z978rZWsZuc2zpwns992z8xXqZ+NbRdRCF7xQn+qzgpjSxsYbUtOPG5NYmkefh8vlPZHiYQNEMUFjYDczInYmjAr5o+z8eHpn03KW4+9r+Pr0hl33jTJugkh/BJ+Tq6za52JEkmlxY9o06n/8mSDxlj8cKvzQO1yhN7z6PhiZ4FWgDPH1cCz0corZVJI3g5vB88jY3d0neUAvoYAcwHPXgi0gAQe12CBc6MjqEHxDuVob2bh3bn+XU7MMU1GNF8jrYsYbRcPvDPnJaYyoY+qI7E8ep6cRGrZZvIGPXCq36tWOfHt03O7FhTKA11n74T5B54k3K/5GLStpbDHEbhNXXe2z4Dyg0UxyEKi3gTCePVJleUboY4kT/beNcqMFZL14GEj7zzniPF68wqXDd9cdxwbvOaLafiAwFY0YdMs0zK7sWpJZnKGbQnAOLHu8dBbJcDBVOMhV+5uw6xjbpvb7Nc/8BM4FNlPOVML9vwZARK68oqy/BckRxhTfWVKxvk2NwgcwVRbVDmwOrEjirlQIojgKdi/TwBZjWry3G56/OhfV3M7w5+R6bCw6MJ/VarbY3EkX583Z8t4+lyBZ56SFPIZ9Zgj35mO7ps6SxE6teH0ivS5q2n+YZEodonfGkadidBjUabW4miyWwFrOtpqenoL6hhKRx1IM40nYfO9Un5Sk+W9fHksiPcmSE79ybicf6021uTo7nvbdfuDk0Qfs3hFQQ735yTqzmMGEztkms6cB5vwOb7zYhyG3MRXy/ZopiOMCGzOh+3hgwMESDpSQ+CfYmuTx/v0obCtQxsLxtZQE2TcTqNP4J1OvSaKxlX8GUVtFGpkcP6vIg18WV2DapROrUm3tmUHXvSwEs5AFwf7GPn+kvR2wQVSffl0PyX4Xjvu0BrP0soj3a9JIpiDAvNA/PLQ/b+oJVNA1IAjgyJM0/y28Tnsb8WEbKvKkFj7okzDL3zKVF4ZQhc9xedrxx8x9pbl1YwaimRye2Q+FtUYhG1Rtt/9JJcAfUTwkBxFP5mjf7v6XreGM0GAAZvfPVvq7ahU2uRt0z+ycJz6R/NlOQZ4Y6iYEuF/csVgRNFcpCafAArL0SMCL+veJPsFqcdFGg6xCK5ec0YfGhVrP/7sn894joFjbb91HR4nbZegwTBo0Bbwq0IUYAw==",
+      "page_age": "68 days ago",
+      "title": "Malaysia Air Pollutant Index (API) Readings",
+      "type": "web_search_result",
+      "url": "https://blissair.com/api-my"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/malaysia/2019/09/14/two-areas-in-sarawak-and-johor-record-very-unhealthy-air-quality/1790459"
+     }
+    ],
+    "tool_use_id": "srvtoolu_018XcS9PyvBiSapnPi1Wqk9q",
+    "type": "web_search_tool_result"
+   },
+   {
+    "id": "srvtoolu_016hUUc6NK5N4gZ3sDYpUjcZ",
+    "caller": {
+     "tool_id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Kuala Lumpur API indeks pencemar udara hari ini"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "EuoHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDI1g1F1wJ3UeCojCfBoMR2Qdv8xlcVqUrdJkIjDKhGU13d9r/5Srdad1Jbtu6jWlBZZDvkTJcPuVBmlbxonoiGnmxlX/Pzc1FzePmUMq7QakPh5rlOBBd1d88De29s2vV3OahFmaFj0GKfvPlk4iwwlay0J9OWp4R/+tkoSi0tMll3Z2MfVqYOPoxHYBqbFCsyhIammhRB1fCkBIaLM6klRaOh+4r5Pxz7+5AnpRehkzAIzFZpsDrG9pZnSayUB9brFwyZR6AOgxLlzY9Qgo0i9o/jwgbPHEE9pNr6Ej6cX48QYPQyJr8PJnPP7IzL1RSzmO4z92C5bXcTP4QiV0cTi1wRUI5QhZ0izv8o92ujUOhJeC0E/wmXAxyD6TjVT5g01IAURaZy9YZSyWa01XLWrKwz84hBEQjMaeo2H7itIvQ9dVP1KRckUh2PCVObPCSWCWt/nw9TOz+RUPbC/4/KdZ3L4xBzLtVipslD/peGnwT+ouZ122iRx/dFi/B5odE5cLb60+pw7OteenEBZwIv80xTHQFG3ePYdTE5qx6uyGxQUm6lEMRHJM3+XV2xatyiykIJaUERxjX/FgyJAJ1qYTIDVU/AMmcs37CIXdexYRR315aBSaSdeAj5yZLBd1WsP5rYVT/mCQ2JUJoB97FV65ixkqgFTpqkbgJQdR9Juy6ZcjDumoX3fpjv+OkDYwTlGzXLgffsjvJ1v4LarcgO7/jGN9AftzEt+YsRvQTtI0mM16Vo7/h0lpnyiTkDBNfRM0M+auN4dEbjPkJiU/kreGCGGESyvXSrZ+M6hIA74QauzUsh8RTm2ixmXOGlPu5CoWb1H6rI5nH/NkffgwsrmaI766b7t72TkwzWMXB7fMfeNlU+nYrEwJggtihYio3QiezSE+G8+ovGWMK5t9IPJjg7V4+VlmsKyJN0PDCS1Y8C3TIZrqOJe7LWsZmO+pMmItNReg3QJTxs/gOyYNmHGt7z7GeytjpODhA5HNnfyId4r2Jjob97V75/5/896K8yKKRUipBBrZfaJyk0W7pzSGQFnxRI2XkhUqsps3ER5hZ1XMOWu/pU2wecudxvpXnGgca35MgHgNXxFMe/bW5o8Y7Ebt0h1DKxB6HOgCQlY9Q7/o+t49oUrbLmEuxRC6Su/i9y0rcvYFNOqtewPZg5hB+CpeK4jUR/7IPGX8vBAmDsX8baXT19gjqcD5I5skOY5mvCogFLSwnTr1Tp/rbrkcM7p/Qqk5IoZajJfc899eFxSAiN+Aj+t9IhEVGAM=",
+      "page_age": "0 days ago",
+      "title": "Pasir Gudang kekal catat IPU sangat tidak sihat - Portal Berita RTM",
+      "type": "web_search_result",
+      "url": "https://berita.rtm.gov.my/nasional/senarai-berita-nasional/senarai-artikel/pasir-gudang-kekal-catat-ipu-sangat-tidak-sihat/"
+     },
+     {
+      "encrypted_content": "EuIICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDD6tgU14A2c6he50UxoMw9qxUjSRU9zbXvSoIjAI6orT6FnQlCpVxecd64bwUhWdSylfh9jEIjjMWA4lQWnhDOTIteBEfxQNGm3nMeIq5QeSzvdbE4QbS0j+DgWCEsjom4L0IwmqeEzgZqIWtlCgrhhSiMABpnNq2g+4JU5GT8COE9TKefUHf42nqqJzqUBnp9ab8mitidI67ePouoebobQ5jfxfgN6zG6q9INop3Ebb/f2e+kPAmMaXm3B+Map0seMgm5Xw10wialVvqthXFNCge+RKAAmMTuJoHZSUvbOxfv7sMAv8t4y88okkgMSunzMZjw5QFMiBrAw9vh98i6vvUpl+cX/wXE/U/fosO28iO9UGITLR4mLv9EuOCPRmGHs8TomG/yU52WYNr0NuFjRj3Z/Qtup+daE4mdGdu6OG243qVgt1lTub/jw0FKuMcHUv5u2AA+eON2Owlqbv1/K8f7KuHMyEaXqGbviCA9RNEmHrYhTRDUJ6q5UyoM3EksW3iLCaGVImwUBImQJtDIPtzzNwCmllBR+TmknX4u7oHf9VboMCbfuxMPFOEn8znm5FbYV7NYBmqxguOR0McgvdAdOtuJMi872Iu3J/UXPVMlrJ8Xg0fA5CxwXLelBRhhoVO1oPU4lrfR6Huq7294nR9SHossUMmawdCNiJuvqTFU92uMZEq55VG+YC6m0jEDUHr+vHk06/vyuKLBY8Z5cV8q/Q0xLKx8QtYF1HedgZNGIPCNvufLuZ8tDCOsKHnYyzoA+Yp14r7yScGneSCWicdHJabPhhPGWlk8Zx3zoy+F5PaTtt3lO1l2drPtaTPLyOFilBN/gQPrdX2M9xShc8DYrOVpraG7sSt7Gl0h5m2XFIbzrDANx8Iz6SoEDXuLKOQ6gn7WNt/ot4Ju2rgFf9eZDNrGFJzlq6sCf1gDmpJA9HpF8OHgsIrwRRBUg/n1S2gZTGWBrf2hpz6ctpJE4PnNMW+wgx3by9dZt5LjlOtfepxigMc/t+/llnivOcuoiohfLWA9YMb8arX7eZw0q5borYJFbGjYWeBSZfEiLCRUrI2w0/xf4rxK9d0u34ME2hGNNXAY2r7uxPN4VgW96Y1pw8eLktwaZkbM9rLiKOTH96evIP3ZoSgvHAAu0xLBcylflzlzeZJeMAfRs2b54xS3JvImNXAQdYcuWOXev3+fRhuL6xuD95FMx/6f45UGIvf5oME7JZ8LQSCfRc8FBcJ2W8LLgtk0/4pwDL0oJu3mrPKGHwUKArQpchw+IyF6ddrgIyiVyL0Ur0oxxpagRVrPQNXHXgZdKkXYdWO2Suzc7vEfLX+IEtQadXQZ4Wp9e4zNpfsjx1vMBC4zsJ+8684qbXvWknc1kFklkoTx1nXMhxGyoO/X56m6ahvNKOMp8pooR1uvkZxooLiCXfpfcYfgHYGAM=",
+      "page_age": "0 days ago",
+      "title": "Apa Dampak Karhutla di Indonesia terhadap Negara Tetangga?",
+      "type": "web_search_result",
+      "url": "https://kompas.id/artikel/apa-dampak-karhutla-di-indonesia-terhadap-negara-tetangga"
+     },
+     {
+      "encrypted_content": "EowICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDDrPyVsow5Z3WJM8aBoMIRnibCtg8+QuGmd0IjAFNVYFRjkBw8FuDqrCNe5kOu/GJMxENTYIMLDkXBiy5m51ouVcEtnMMJZrf9jg99QqjweXYQwYowP5HacWCw4TEbFl7sGXDSLF4SNH9b1rHJ3W4RQxPwAp0flMT8U5hljHvgrsgk71WlbH1E2bSsHd6juETOBuBBRRwHx/mADeOrmN0GKT3Lh7zvnJKf0V9gaRCL/6cHWn78dIc1wEQmHsebcNMlH5PBLZa1+AyLgHyB5gFZfh1+/EdxhiYJjwFoVczw76pIepe0cCVrcJ3J3BRYhtdItFaZ1VCUdC0U2qDVNs6zpJr1+VNoIo0q3Id+H4bMKBfeF/p661O6J+dFvNAvMm9s5ERtTZL0rZRKrAUaz95ZeOgZxabI3NhPBRYPAJCu08sLEL555LyvODjaXwKd5znU16zezy6ThuZCJXFNeQ8S6MLQaDqDCKgia3PBS4dNqAUxotHtPRkeAeHnVqlUWHsp8LqjF0HER0TEFLCTxuG5JY9flN97LbOxmYBePqRecb1jRLDSiqp67yz0Pl2kVejBAXBYEUB+Xebljkk1RF8BzSBWyFcCptfj0cUqQe8Kvn43RXZuKIQy6KxabxyEUxKMwr8Wz4+Fxn6yOoPRQKdDW0GT4ymxbu36kt7C5VHfazduDWIoIEDAKgr2HD00nHP126eh6hyeMPtQOb5cL4hlpprDQLheveTWSRdiaBXnyzfJ5wyShKgEaRCUPfp2v393y//H8VJMU+oCDpF3aYj2e50QPAQxZy9WLoEWv2GDemlULmBirAhgluJDaUxj3jIlNpqEcWgWWCJfY44sqjIdMHFhOArdT81+oJWPimjwvN7Mdz2S3Wck3Z3/sJSqrX4vN/mHq1BW02IPJ3wiC08IJkh0eYXfpCbSgO6gtm+SxX4apCjF39mq/1dEFHTNU1aC4zS4YsXOCe+bcRsgTpq8eEjGCK1rOeckBqzipUmwDV+3UO8CHRhbLvwup/ZbII5dOw1/1NCp3vOsMSX4KHglZn0zcJ5U0etAPIygUO0bDZLlgDtqucmnJr1SXzzaYoqhWr6b2nNQL7jd+QjO2X6rq1HoThNAKLgGmIr1KnN92QadvF5ne/PYteLfNTXFxbBn9m6wk+/UYtxnFoD9D8nlrhnaMkcDP6yJmIPdEJFMTjbb0PGjgB/P311cJfQFjiM1Ikt7wF6rqVTRiSnxEJ3EGdm3g8Ekqwz7JA8kc70g1Tmb/oZeJHQWVI8QqYFZ2k4GHYPBcM8NOXHMGnn4sYXUuVcr268d9dWUAlXtQGPBgD",
+      "page_age": null,
+      "title": "Air Pollution Index",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Air_Pollution_Index"
+     },
+     {
+      "encrypted_content": "EqULCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOZHIydxJW70VWKZLhoMKcStG4mRSIydCy+cIjCp0nzbW91oQ+AGUONrvg/bSs2JvFe9tGur9z+AKbHfaXBV9uOn+2rtu8LxS2MiGuoqqAreK31F+XwwsRfDplW8gjnCKf3lmhsV3vRkP9a47OvAdQSxdYav5MmpNRf5nn/gWQKacMo+hKDibxfZK/tBQA1zp2F0/384caztkU09U3Tq1WATOYdYdnV3YXoPFNEx6rV6h3RWepAddXFO9ug/d0aD/h01wjh5KfvJjxbWYbd2nPY+0blMr5MxmwDRN/ocrz44klgYJuH5K+1b/g9V27KMWcSgg+RJapOsXRjn3HTKaTxB0R0DlkpjBKCTVIZI99Jv0Ykfbm6UXzqgOlMiSx77dXQe4dw9ZYt7Xq0WKnXOkbQbKFGuDHMWwzuyOdjd+/00J1wGZVpw66OLkkeOkRY9PW0IaZaWlf7jzlD2FwGnRTeZmEQCDxW1/OWmpKSs7gbAN76RBxN7FczxdGwy57FY/MH63S47zwXVcwwKP3q6EWLBGXddkHxmEOeo9xtm38h6aqySdBSPeNRyeRGwgK+WdvnJpFN90KCwYB7PU+EVm666XX1bPPn1/MYgeKeOhHjBMsZPK3H5C4aakFILi166mx05s61Gqu0SlBG8HVdRtPnWHNVgWhyJkFFeML+whJhIPbt+/pUJQmEXw9q0BNbpPUnYVsgNtiHFYI7qOjjZq3hV89drMnlLUxEFGYEZKFXWOL10FI8NAHpkTg4Ffl6AKuFQtpanEIpXjI2nhEx5kNSVQRgxEeZVLOEXBAf8IIBal85vZpaxrVqHZ3INBwX5UoUx9n8z7G0TgL3x6PSD1XpaGg9JfqwdXAPnB1UKirDdzalLFrwh+TFem0KfkC897w39q7GVsvf5MSU4dXXPPMxrzL/X0WwaPAoYK4t9P8vlv8DvNI/fTM+AlLX+bQkH0fTUtzs4qnHkgqkVpXcpdB77KHfNqMWe2CsYgim4/8xqMdPWbftUJqmncQpeOLFw1BlX7FtExOd9HfBm/ZPMB8Zhr8ULRFKdXaR6e9RQsJWmZFeZtGhoMsra4mBObos3DctqjAFC8j4Et0Xg1BUV0MJXDA0fRs1NEKyIp92nxZVk/UXkF+6/1/ryouCYSjKupznwRmeX+EFNhYN4Fiq0t9jnetuFDNRRcAP5o8jInE/97TEnuYBjb2ISnGh66RqpwbJhqraPsqCVWHwipu7PwYlspEhbPBn146FN7mTm6TVTEhtVXs5qUix5ouPEoX6nuPG1TnWLuERs7v+Nq62U0k43sInHOzKz0SYDNOv7rIUzvzfwizz0QdcQzIWRWjGkcKMpMps7U6IfximmO0Y7U+636nOT6VFBATyMyrHdCIAv/bo0cgSbNykWOhh5AaNrrKithBk4Ek47s/bnLPx0uJhSiNn+Xpqy0mHC9QxDDrFxfiezO/Q/vxQjEDvpPEeBj5EEtaCR5tyXKKDrYX83SgCRs4i+BDKJggk49Tnkxa+moMS6cOxAuMn27BK3f2TW06trPBRKEx+r08yoZCofe77kYzyvUkqj0JvN/a50QkN6HiQJd5zXDVp/NOBH6uTUmiuj1suX4F0i3difMjL/Oj0dM9BZqUSPhSn300eZ8T6v7dHTXvSjsCV2TDT5UIMejAbgJycr9aMSLQ+DHxwNX5PtvxJzZqbcAThgj5kWcmlRn9rkHmTglx2W4E8YZGMviPnGRP+7/c5+ZjMcxqQEz4KhpvY7ax60vX19rra+bT4oa+/LyWL6f+g08djON24pwHxmF5QyHhXmNa/Rh8dcZ4gqdqpmfdKBAqAPMCRwjDWGstgmvR2IIBR2dWevd7wbKNeycjNw+x4YAw==",
+      "page_age": null,
+      "title": "Malaysia API Today 2026",
+      "type": "web_search_result",
+      "url": "https://semakapi.my/en"
+     },
+     {
+      "encrypted_content": "EugICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHMxovDRfbBbYZ9kBhoMtBSpgVMRKvLqfTAlIjDp3DAgpLfOE+ZQCe+wGfG0FlLNJ8sugur81yfZVbFoR9M1TXi92uKm3W1npC7v4gYq6wcrO3AaNo3g4VHR+sIu6S/SMHhtEW/j+5XBg9dpcDwi5N2WzWC6Jptic+OQMTz8zMW3JMPfhL50CuOZR/tm7N50TNdl4FdGLbEzehabkNMcbC5PyZ2j89SCMZTrKnwtg5L66Hz7vXmPAAs/o/bxbHY403/oxQIRxNwsO6TdToDTgJe6siDWlYM0hExBB9pzGZvvz80W/dr8wxO9PPoDiJ671WbdnXTxv7zPoMpSU00MnapsQ7HUdDy6167wxVp6ilcvByNyVmYkL8HpKYqsrOBVSXeQ4UsTGDeuz8kew8yLBUb7vN5CPU2vNvkwCFqKd7zaBGccNX2zmzyOPjAxZ5+gnhR/VYa7WtAhwT1ktIUC5pKIuzdtY/J55cy2KJznZVvNEtMwS8w2gGQVikBJF1IZEb5ePZYe/KUQyTmDzOd4ENhNwgL3R4gTH0rQZevef70g5+66CnrDHmjzbq5uPzAoX4A9WnjxY5AxIzGali8IS9eVnrut4Xd163lkoCTcOHSqiUlwCOV9WO9nd0gHIQDne24X8mUIuaXinsTCU1LlwSjp5PE++xN52gTOQorW/lIdT8CoVyg+sxLIlmhwd1AwRWlNdBTnm6SW6i4jjWQ8QCfMHDetNertYP7UsdIOYxODMLjMF1R+jaw9OKy/s8xEmBAt+7up/u7XRXgsXm2Nvu1kVksDD7+X6gDuuFk2QeaYfbLyyrXJvI2YZLudcBoUujUvQzETRouty7tk0cp9yl0uyfQhFzYnD0+wXoXoQqp2Mm7MBoIkjuyJFIMZ1vukJTswplYQ5Q28iRt3v+N0u9oOTO4ASTChzlG9BvqRywBGJacDIhVIRzf9mFTmE+8AEz/4C3EAfqgpbRd4Tv0VtY54sc3cWg2/LVG0baLnJOl7Nrp/Q/IffGGSvacqvvFpEN9Gt/SnFYhD2ODUH6hd2x7rOmWmjiCRXjprUucUd2+FoEuiIk2zDaLh13BK/rzI4gV2YAGYkIQtuhEN5+mclyJHxiTBAMNSFxi9EmVoMHRQreHiDLmKhrtD1+LuX9E7TZUv7LtfIHgjjl6nNBTaf5As+9uNO3btSIHSen0mCyImJGXslQCwcE0tQGekbPTOV+soKX1eEhkya77jIPMs49O3/ebmOa9dUGSA34gw2Z8CiqD6pZ+fgKIX9y2RBMhY6PNCxJHOoE9qWVzrUN7xjsr5YKiQVk2Qz4nUg75Ega+f1ga8ThjnFDqmhixfOkR0OmfPhT3AYC2LxtJQQWXnCp/PcJUuhh+pUFqBSOUClnPBMy+37K+DIu7RI6bPjB2s7RW76mb9yHcNKfwJmMiMIqaeyX8J0lh4hHpfGAM=",
+      "page_age": "0 days ago",
+      "title": "BERNAMA - Haze: Larkin, Pasir Gudang Hit Very Unhealthy API Levels This Evening",
+      "type": "web_search_result",
+      "url": "https://bernama.com/en/general/news.php?id=2621388"
+     },
+     {
+      "encrypted_content": "EuAQCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLLNkFmg7UcZ6pe2TBoMjxMGm7v7qjn2KNm5IjCaWk3U1D6mD3pD1VFTaXWTGD97mJ1Uz24xEUJm5rLj8TkUBe+auFjrQZtzz/VH5yoq4w8TJ4aY5zcGMxUyJJWhwvUuwH67UukBmF8+YZqdIgPUuxPas5TQKjs0/CFXwINZVbj3pjwf38UxQvhceuacmTyRs0Pz+HGsgYkltg/j26VP8RUDzdP2y0QBCOovSLOWlVFDgKxr8xkGGTitLa25H99yeuyJJcIz4C5vpptBFCjgREioT8b40Gt99VeLoksy3IZDWhve8o5vwxZ9n0mrf06QmGzbBEHUBAb4Cwkvx69OvkSjqF9+7tdMYJq82w6IA+nVEvzeBkHirIVKRUVwRymsFe3M5zF54afcB/0Fpuvf+V/IT3EQuxSUjT5FkPxYSXbki36A3J4ZwXp/ANysdiibLUcBivnzs4K1Auw49KX4sgnpYiRPM2LFPO7ahAUh72UzMY2xfppv7w47iDqV0rAKKWhv5N9G6owFaWiTgnavkTP0/GPR5MkaKE9Be9fAhhvYHzGDcAAR7pSIkN+jY4f7sH0oQSh7egsHQ/dfKvbjW3EXyu/HnMVkQQTivM7p11PZUQ1FCA6q05zSKlTZGBAc7G3DiV/l0QRqEQlSFHaLXGp57LXUNDw7B/MN4m28turhS7JffROE4c/ahpKWYsOe54fuKLSQsu4mHAaKRAdv7rX2NLR06s1StvjJXn0kBTKj+V5ULp3PmkU6X20LVaS8hnjOdAh3OTBx/4fkSI8hSgDMMg9PT6X/2+T+B2BTEIsBcozxC+viuOJV+i3L9Mx16fPCfCJIb3ZRNNfqE1w/QPe5JHwG16BQTiE8Td/gJ0NtbneFcKF3M+SALlRCO2WccfngJjA0vV7GHhvSuVnof3mJqJhAH3+jaiZr+wAvX9Uvj5304m9UmCfWBBwMF6k+PVrn97HrHhRcZOcJjrowa+TwnGlnm/S53k9KyTd7jKExIbZqEn2bgJBYKJ4mj/r8+L5jGvPcNGOFQ25Pwx6JvY9XgL4uz/xuwuR4L/oqU94CWvNv7sGSnKz0AfIxW7neNQh1/L3Y/kHhXJpnBFPLz4ciN4lk6YehRAF6IrYbeB21uUle9s6Ibr/MuU4JoM27X3+s9wavTkqgen2v+7gTauPxoVdiIVQnTMhw7R8AtuHtrTqaxZoLoX+lNg7iVOFdcalX9DDJX0Ka4CIUwQ/aWN/yLw5NNv2ke1/vscXAQ7FpLBrpT0Xfy759cmrkbpYMpZMWE8ySdr6exMjI6HLX+/14ZgPqDkh2uY9TpIGYx6FhsgNyHWSxVVjqdrgG2ZRw+4jA3SDqZh3Vl02puLKzEmcF44MFNesEfiN1J4JtwsIiRdtIMuVGU7DApUY0UgLw2VQH44UhTYcV5DBwRjhZzBqJQA5cGgvBkRoR8HjJxi+yoKmWRcVT/NAxajtZk/iMI1eDdaKV805/yp3XzrrlhavdwhA+Oc9RlbWf7wXWXM0RafVY0z4s6YUVzz4SdSTNMLzMnTrZqBbvcYVUTktGPW5y23qT575VQwh+DVwsqSX1xK5aQEhCYqOr4L5ASucvLJo3ccDUJQekvGNqCeJn5h1aY8UGb41X55m6d2+nekmPuLZZ2QsCHVFXR3DlS6I2Ha5598eP43Tq4h0HorujQTrmj6EbSbmVWn1aEtPWmvQdZ3q05VXPBln3sj0nqxvMucd1Zt+xFxYIMAHzd6kD8k8fnalDx0YFpfpUeVcG45ql4uVhfJUH1j9wdmfTgwmffvLuuGlkvrbUexpF3KFEjmBxgeEx8HAkUcNMPm5yd+U7PF2PTA3XLBuNmgxYdWbfKvH8RBRNUD66TfHqb/khYQz9oYUcloqGaDzrlZ1eX+pWUF1z8q3cSPL/Ee6CEWcMDONyYR4NR7Ku9P02Yxigc6maJEYcOLCbkmKJ6nPCrdgcEkjun1tBmzyCox868qQrzKt+eWh8vAioncNLA8eV052Avc6hs6vumsT+1H37XlAyDkf8zaiViVeYxbOTUNQtEN3B7ukLHaEknDT2yuRUVU7VNUZHWHUf4R3Fdq7UB1H6QPx6R6ouZvSpZ3mvAb1haQI1bcmfmViAgzbXFBFpy0K99iJXZpzJ27BaGmHN/5p5HfN4hp2cYwmXoxN1HW+i4x03EIaShA7xOxOCRmWaK/2JKMWocV3KY5zvpvUvg+WwxLc7le/+18fxEszQxfz6jLLq6FWI4XdY9ise5BqFQ+F49QH4mIpHosRL5LLQkWTpXx+IlwUGYpmCycG2G0HdIPWHnE6OSgJyDmsMaOaxMqjrkcS0FU/yzAd6zsYCFPgq+WdxG3Qj2v1eKuvrCtwneaX8bgVH2W50oTGDtK+6KE7qQaSqb0Q7rc22ht1b19otFugQTJCl03rL91yjDhy7t/5x0/aa/9EpCbAFTjcNJMGwqXfifGibvdCs4+/77TPZwyrpByAGijDhf6D80amvTIHSgZT5kqLxkvrB1wIJvMxEwSK5j1Au1n5yydo+PgJzV6ZY0o26EsumV0dp/uRduaRG2hb9n6y7Orn4GkyMr+yNEYbxxKZW/NvfNG9RmwbmjF66nw4LuaXoMnSLXrDARH2tVV1LJ6yUbhvvkkSUQKxdmR4T/J0YEcuZc5kSdKcRFBqURZpqzBk5S8du+JrJ2COUdW6r9ImcQsZjAdxJgGJfRzTtYyVgNqQXYz8xoNHs6iPtPU91prXZZwjPh0iLInwVXhABiKpOL1AXgDFVHlOBwXmBpfYEv5drT6H+2yKpfiYYAw==",
+      "page_age": "2 days ago",
+      "title": "Kuala Lumpur Air Pollution: Real-time Air Quality Index (AQI)",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/city/kuala-lumpur/"
+     },
+     {
+      "encrypted_content": "EvIDCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOiBr4dWu38/K7yLgBoMmKYPaUU1huqg54ivIjDkqkrxoU9GfnDq8dsw0DY5b1kNJ6IKo1bWq9xDJJDxvplxP+q/V5s4yEsOUUxRLQEq9QIE3FXtQCyLGrWsd2JKRbE6awKDvUjHWQ1GjV3WJERrG8pyhY8OwSnBngDNhvItY+IiDI1Ush64YtLQQaKbACJpjNDlFcy3Cf7MBq43g+uD4+UExmDzQ8Np0qsudV+aKjLnSkSaXIbPC7t62+69luxxsjeEid9Gx1s1OzpSRcCXeElD84VTd6V3616USTbfzshG3K9tTB2dosKxyAzxYwqDNqO30UlwRF3BqqPkHJ/e0tKW4g2LkmLjdTviywoJijcj3iGgHHs0mNm75aVWvf8PQt4aSTsd3d3NXyKN6sAha1UD936MGmu935NdlgChyr44x0QJKgAhocl6av5oV/9EwJtxNOAZ3Ib2gFus+LVg5nfAeAfOvX6fM+QaFyCiS0QNzBtuCpviR66hClApqFzTqnJO+e14DCt6UZ4o0GG3AulXHG/pNzjGB9p8JGjK79w6hsO/adEl6jTEea3cvYGKStzpVi9O0ZpawN+ntM888vgcLLNsGAM=",
+      "page_age": "1 days ago",
+      "title": "Malaysia Air Quality Index (AQI) and Air Pollution information",
+      "type": "web_search_result",
+      "url": "https://www.iqair.com/air-quality/malaysia"
+     },
+     {
+      "encrypted_content": "EtQICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDKhFXgsYE+tU6ZaDChoMGYP2nLltb5JEDKX0IjANHiPB/cxmiw3dayQ12IPxGZ3CDCmEqyCXAEkseRRgbuVdAZ3KrG5II/KX08fWLhUq1werFDFZWjj1UJtkZ9OQyGdoCURCBP6Zy+A5Z5IbaG27sWVXdBIBT8nwo9ZACCPA3V8Jnrpbh2ltaRbUlkCqULB4ULwuV4SyeFquLPlc16RjykNiioie19SiJkVToCj6pTtguM4vNEUAf4e616FSiWooVPaDHwmKbYWzNdTCDyu/UtMAUZ7a1VWyHj6EAANbWfL7oyUBmfIt/tOT/uCPtF3RhFxi8ao0DcvRVo9Z8zppMTn3X53uSOFUjicth5rV4o9ZG7ywd7V3PSF+UXTAu2FTwBRumo5dmF3iYpdMH8vk0gmZskd+ui1RBMwLfGY8u0JC1AW0iEpPAkxCFDo4jhVqz56q3cBNA8gQn6idWr+/f4zMVfF3fXEyPDYFu2oMVH97GqueF6kdEzTsPtyUkiIvIZ7A7/dml2mNDBNoAr7wqB09vOSSDaqd0T9evdwx6HqbuszREn6SR2CmRpH9jl7He+ycOVVkSp/6qw0fc0e8RbYKs3QabAw/QZejafbuizvlIp9mqpwTFzrnaxqebOoJ6IZ48cy/GaFh7jqUOfvI5vuJChXOVyZs4ev+nDhbMjjGROmlyPPHJkM+QxsCFNKNQbVsZwPHrZ0bldhJRIXTnRwECM+Vuf+mXOpY/mk43Fg1HN0RaIDzp4/h1uoP3ILJdzR7W4GV+DhoC2IPC8mpfG3qU1buVjLZYou41wKFuvw8TefYQyRV/t68OX/2aXJRr5BIpFU1GENUR6eO5YBMnCw9Fil1IxJZZ7+R0I+uI6lKgGRdbig4A4DxuiodsgShB0k/VWKrJui+e6QjOCY5hzpME4xbZXpRL6co+bqdmkxuGB7ekUgWg5cYTUPRqtVkutHlqA7Fcv5F1+O0y6Mbu2/6GZVGZRza+BwipR6bC6ke4F1zY2wCMJWPQWTXfuY6VscPtCBIqVOc9kknZ+dgk88+oB0taP+NdoV/a4/tyrFmWeffa0u/PIcnQhRC6x8FBnSjJByi9bJt7qlaT8a0ouEBcBxuIQSX3LVqo6Tx7nSXXibEo90ktNeW9wd0DLnhwwEYzcC16oRG2m2HnZ6mvObMMPHCKrc60PRV3d83eCbu/ciiuKvx6oz45zy+7NMY1ssBjB6pY0lgUxSwTiR/0JOmO4XqlzkyWJ9oavt0yZjBILcX9vv0sSe/lmzjso49TkkW+o2RfzvpCGrRx77CNgzUGGOehk1ovNPdC3s6lsqm6TPTrYIJyzcxbUzruR70u9NXV4wGIApXIv73MI8IiCraEZGNHK6cayl5dE4nxtvbxQ6Zd9YjySzJbL/BqqOHEvqn5ubrCxgD",
+      "page_age": "3 days ago",
+      "title": "Air Pollution in Malaysia: Real-time Air Quality Index Visual Map",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/map/malaysia/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Kuala Lumpur Air Quality Index (AQI) : Real-Time Air Pollution",
+      "type": "web_search_result",
+      "url": "https://www.aqi.in/dashboard/malaysia/kuala-lumpur/kuala-lumpur"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "AQI in Kuala Lumpur: 142 (Unhealthy (Sensitive)) - Time.now",
+      "type": "web_search_result",
+      "url": "https://time.now/kuala-lumpur/aqi/"
+     }
+    ],
+    "tool_use_id": "srvtoolu_016hUUc6NK5N4gZ3sDYpUjcZ",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "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",
+     "return_code": 0,
+     "stderr": "",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01Kp9RzyYRaxZAwyrh3k4Wzv",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS9QcKEAgSGAI4AUIIdGhpbmtpbmcSDKhq9kPw8/xcXF0JrhoMEHTJFYWLEAPvpQGYIjAiyeeWuIyl4QjWNwptZkIDRRG+YeFwFEIpy8ffZwqqNX0X9VDiPECinjavJ6ZdCVoqkgc2K9Yf1UjHFvr8KTtKYqWjMgwKnGPtNSL/5AhECkSkr3pImWY4KEnbIVXXHqQpgaLbObNRXLdFijGwS2kvoGbmO/k5Sb8HEraen5j/TIvZduhnY1fB9GNpsFkJyw81pydkQQqceFeGuR5QFqwdle5hQ8k7lJ+7bgdA5JWcinWZGtgdIbynasUrSEDagRzvAVjFv5U99aTKlrs4av+lxjPGqHlxqTmOxiQEI/qbDHwK39k9mHfcKmaKm5taLwZqGxP+hHO0V+IpSOX5vsMezZ/0cvRIzUjUIvq7VRGK6IaKlcF3jRx5DbbBl6xcsL6FvA5YvDjPGvamyPsQ7LdfPNcKOva8/F3IQ6uNKBPqg17nFzrYI4UlaUPmAO/c4u20eX5qST4tqLwP0eHgUPt/euFWnMu9WR7Er8C7U+zmU0Km3pysO1P3CGOb6+YawxKXDPw+dnAB+pS3/Kg9D7/pvxhVAZfs5aKpgO96XSJvJya+qWSCkBUy68qxG6Ry0BIWYif0gyWMCoInFGDVyUEypxADKPUPcfNe8GpTQouGZjWpaTFduzgsMe9jyTPiE3M1Mh84pQR/1TG0KIRNzWbjy6eMC9T8XtRzDdcj0XSmuAV1xbJtgOokmF2OXEwH50YqQUR5fW5AdTr6nuEF0aGOhfOPjqfDu30ajy8bBpAWie8bYotDGfCy/DkGBlkYlQ83JvxMutlit9QMgy5F3mH6STdmOWdlwv13ihWuxrqpWPZ3WZ3gvh5YjGGl41dyG00Hzf/mSe20V/mUiCshQQ3vcVbSDlN5onjzXZfmqfI454CdS/7/afYq2wo1V/MAjXkPVtikkMhISaDMfZEXjbtPf01Veo99Mi501Q2mlRJJt82ydBrrIPgPqpuSFkLI8c17NYNqPxHrcI973Sc+qlAteCHsfOPR22FDh+7u5U2q7rqX2av2Nti7IO4uCqd8FVaymzuULNrDiuyUFBNwrR4hPwXO8OcLFFpwk+lQhRFrLq4y/8hne8k1J+gJPdalqrDngb4PtpzOGPS0F+XtExhTw6yHRZYuYggHnmIHOo6UjFYO2o9VWUo+SxlNKKdC4xXPTWUsm8OqoqOfzW2Y4v1FEKRNIqzVRtejE5UtzBVTog6Bf6a3/RgoVC5YIpJ70FQ7u0G5GSGW44zjpuUzoHZMtYCPyrQYQJoulXz7///bpMyKF7XhotsgRG7TchxZojTYv76F4xgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "Probably yes, but I couldn't get a clean, same-time comparison. The readings I found were taken at different times.\n\n| City | Reading | Source and timing |\n|---|---|---|\n| Kuala Lumpur | US AQI 207 (Very Unhealthy) | IQAir, 12:00 on Oct 16 |\n| Ipoh | US AQI about 124–133 (Poor / Unhealthy for Sensitive Groups) | aqi.in, about a day old |\n| Ipoh | US AQI 56 (Moderate) | IQAir, but this page was a stale snapshot from Oct 13 |\n\n- **Haze:** Malaysian news reports from Oct 15–16 say about 34 areas nationwide have unhealthy air. Most of them are in Selangor and Johor, such as Klang, Johan Setia and Pasir Gudang. That fits KL being worse than Ipoh.\n- **Ipoh isn't clean either:** Even the more recent Ipoh figures are in the unhealthy-for-sensitive-groups range. Ipoh is likely better than KL, but not good.\n- **Different scales:** US AQI and Malaysia's API (the official DOE index) don't use the same scale. Compare numbers from the same scale.\n\nFor a live check, use the DOE's APIMS site (apims.doe.gov.my), the MyIPU app, or IQAir. Compare the Ipoh stations (Tasek and Tenby) with the KL stations (Batu Muda and Cheras).\n\nIf you're sensitive to air pollution or have asthma, wear an N95 mask outdoors in either city and limit strenuous outdoor activity.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 31345,
+   "output_tokens": 1234,
+   "output_tokens_details": {
+    "thinking_tokens": 227
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 4
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

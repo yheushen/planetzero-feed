@@ -1,0 +1,382 @@
+{
+ "schema_version": "1",
+ "question_id": "q15",
+ "question": "新加坡今天的霾严重吗？",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "zh",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "paid",
+ "plan": "Pro",
+ "model_asked": "claude-opus-5-5",
+ "model": "claude-opus-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T08:45+08:00",
+ "answer": "是的，挺严重的。新加坡现在正处在一轮持续的烟霾中，全岛空气质量都在\"不健康\"范围。\n\n**最新读数（NEA，10月17日早上7点）**\n- 全岛 24 小时 PSI 都属\"不健康\"，中部最高，为 **191**\n- 各区：中部 191、西部 181、东部 175、南部 161、北部 144\n- 1 小时 PM2.5 五个区都在\"偏高\"等级，东部最高，约 119 µg/m³\n\n**近期走势**\n- 10月16日情况最差：中部 PSI 一度升到 **227**，是今年烟霾季的最高值。那天东部和西部也超过 200，属于\"非常不健康\"（201–300）。\n- 今早读数比昨天稍低，回到\"不健康\"（101–200）的偏高位置，但还没有真正好转。\n- 据报道，新加坡从10月5日起已连续约12天空气不健康，是2015年严重烟霾以来持续最久的一次。有诊所表示，因呼吸道和眼睛不适来看病的人增加了两到三成。\n\n**NEA 健康建议（现在的水平）**\n- 健康人士：减少剧烈的户外活动\n- 老人、孕妇、儿童，以及心肺疾病患者：避免剧烈户外活动\n- 如果 PSI 又升过 200，建议尽量待在室内，必要时戴 N95 口罩\n\nPSI 每小时都会更新，雾霾也受风向和降雨影响变化很快。出门前可以到 **haze.gov.sg** 或用 NEA 的 myENV App 查看实时读数和官方预报。",
+ "citations": [],
+ "claim": {
+  "value": 191.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T08:00+08:00",
+  "band_right": true,
+  "close": true,
+  "off_pct": 10,
+  "measured_ref": [
+   174
+  ],
+  "measured_range": [
+   143,
+   189
+  ],
+  "named_source": [
+   "NEA"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T08:45+08:00",
+  "pm25": [
+   75,
+   76,
+   127,
+   109,
+   110
+  ],
+  "index": [
+   [
+    143,
+    "psi"
+   ],
+   [
+    158,
+    "psi"
+   ],
+   [
+    174,
+    "psi"
+   ],
+   [
+    179,
+    "psi"
+   ],
+   [
+    189,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T08:00+08:00"
+ },
+ "took_s": 22.7,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6tL6SG4QQe66xjGzBgh",
+  "container": {
+   "id": "container_01RJ5jJjTYDLZtJtoDXeVYG6",
+   "expires_at": "2026-10-17T01:46:12.223372Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_01MVXfNTY59FVVxgkKLePhvW",
+    "input": {
+     "code": "import json\nr = await web_search({\"query\": \"Singapore haze PSI today\"})\nfor x in r[:6]:\n    print(x.get('title'), x.get('url'), x.get('page_age'))\n    print(x.get('content','')[:600].replace('\\n',' '))\n    print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01U5XRsykbtNCcpgk3THTwEu",
+    "caller": {
+     "tool_id": "srvtoolu_01MVXfNTY59FVVxgkKLePhvW",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "Singapore haze PSI today"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_01MVXfNTY59FVVxgkKLePhvW",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "Eu8KCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDEhK0tU3X9k+M4KxkhoMtVIlVuwo2DG7GEBzIjD/K4hnbAv+ZQOcsBSm2PEbAgPuCTIlvZkVrnFAxm4Kgc1CrEBa5InpzKxrPC7bHN8q8gksS5xm7i7Qiad3qDMHpq23SIh5AVBl97xedUjenjktg7QTFywPb5pTVGjdXfbSucJ10wB+rkSgYelTY/gmui9GLhcE0CAXR2Ll24p/xZPYBN3nm0V7k0n/PX5VHHu52duUXM4O/KGi9NQuSBv4qCSFS+picZ7t2M2xbA3ye3JziHFjM3zpUhHxfsdSTZ/UR2R2oeJ1a0ssA+qU+x98JHTgcx0NvYLlCgDP109oes40YB1QH2d/9BtVkNosdIpTIWKjluoTAK4PJRoH9ALPjmQeMnnjmF1VAGyuRAVNIujsbCr+3LqWpCyu6eai9N3KajT/HB0WRN8aIE3dRYFtrNA8ZSd7Zt5STUm+YHK2BLUPK7PsyLbII8jzhkAEbCphhzeItH7mnJO8CGE5I+JgBehkNkQvMCoA75ZfvEcBQfy13vp+0MFg848hqJjYhY9GQgXQrlWDTOwSYYT0lvyLZArPt8h8dKFM2wfxAZtmdM7zm4/GBYcwWxbB0tKFvGm+6n9yHEXXm8tOwv9T8zSVx041xRasM/1h6L8NWUUe/6yN4cWUPI3QWUG35C2pHfLl4LT1efK1CPD3cjG8mLSDekvbThNDMb7AQg8SpRnHsXdksKj95sT5DlSwtbd2E8jQh4y1bFXi+hiu5LbWCJs96zE9O+driPNt8o+kJFBIpi/RgaWjYgJT7eqa2Ga5f4TrWMZCZVBueAPaZ6JCScgwo5iERtpDQVyrK1lHOc3OZNpsxGUYUzRto2BQm7ZQ6R69gSK9auSo/QwyWLNOSz4Qyk0qItJsMxBI6bh9Qx2hdH8VVtlsTb9EdQi4P5NzGzOO1UacePQ/8iVQRzH5bzNysJcNd3PxuKuKubyzAxZvxnZNCpvvMzuduupQGE4f6XUw3FV87EtLHq2E+E1+3P+6MQFonr3r5s84ulOfzQBlX55oHQ2QQ4wFNCzYFA5Rpmhz9PCdKunrX91WYbpf9TxQGOleBwYXAt2venyWul0M3+71fTkwOVEpCjxh+AlsBp1+OPJOiEzwJiYpX/qFwY2tKOfcUHWCTFfkpt+pdcYEUbjLipTvnmSFc1JTADuK0pt8WYXv8CFLg5WHpDS94DBtwMpusOftCUTrH6yB9GUVlMyWCUiKAJhgRoXaAl8PFiKhftII7PBP41/MoVN+h8m6rPNvCduke6E/EruiNTzZKEY61KDyngbqaEOQpbwkMBrU38WD5ePkx9sc8st2yh0UnGlBl3JFAGQwXalNOp5/SsxJXAZcIzJ8eBMvxYZzMcD6rZSK6kgQRVYaviJpmfzltQpzGrQ4RfG63m0dfSnUPtC6ACtlJxi0M1NJofdRGHSV+awnuURLAhwVz8LmOPSjlg7m4w+MeUBskVoZrHjyATiZ5D08gBBDfY7cyuZAh68mt0PxltoQiDrLaD8kNdO34nWP0KiCOKz0lFIDzzmXY6NhMJs1GmauD/TzFxzbLAy3X/AHWaaguL6al0ixP9nZ41RT4qaJnyJyPnPQJ/q3wZQxcWq7hmjQWU9a1hg0Lw+G686X5EcJWFvFOd4vuQ8Ri0K387Yb/0jPbmNSie0PMEVbB+XV7pIUgVAhdpbjRLQmrdscajKH42MHPHBfGBSrVkMtqcWhsBQ3hp1u1Qbrqh6LMqdywxoR1KrkRKN5kZowQWgroig4+J6SrohiaEORKjDRBYoYAw==",
+      "page_age": "2 days ago",
+      "title": "PSI Singapore Now: Haze & Air Quality by Region",
+      "type": "web_search_result",
+      "url": "https://schlah.com/weather/haze"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "Singapore PSI & Haze Today — Live Air Quality by Region",
+      "type": "web_search_result",
+      "url": "https://www.checkpointsg.com/haze"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "1 days ago",
+      "title": "Haze Today Near Me: Live Air Quality, PSI and AQI",
+      "type": "web_search_result",
+      "url": "https://hazenow.app/"
+     },
+     {
+      "encrypted_content": "EtUICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDAptSEbEJUTPofyhtRoMHs0dtDa8SolMUQ2wIjBjGJ82exYsLADsQVOOrNnN1kr96EOKoXGuO9RxriiWFDifM4pQgDBGojNRgo5qyk0q2Af1ZXhd7GJMvGVRjh3Hy1nllBC7gkiPt1rOTLP1MOWK8bof/P8/p7YURfpNhpagDED/hrm25V82UPcwZ/+tHaCqsHfEytCsXjMv26zD5oYvj8oftnG0MwDEhLNgZAUUmZcKOVy+YoGr5SslpOIbSqaGZDgZXrlyVqI+cTXaxaGMu6tWv9j9WNUvmHkEKNERnqQCY04jmoHCmechXjIVbKFKmEa6kW3iIl/AO5BAdCKL3zVPAtRM77l0U/UOYs2VifFHUxO2b3YD1EjOyyuiASYblF8Ruu89WyQqfw970HTOfU7fCA2pdPuGWNynmWzsjPkuvJs1ngNcXN/FJwtAp1tDYeGLePFr5fIo2M5FP7sKtOvYR0vZh1+9deVtj6BVFynrmUcnJeHau63KREuwbV10Qdhm3KMZiNto9H4HICbi1I8WDcH57vJKRbvE56j2l0jBSA5+bStTuQYS2Z9X7cKIqV3+f7rZZDhLnxoABIzXraxhJHHYXL4yjw4ogkSaTIYex0NDT1NHSpbclpXCyIFXLb9pZgkfUahSzrCGb10NCwiYKlvbyhg1mddmVtlgGhBHTnayc9MNfdpePbkxVlICImzVHB6/es1Z/CTSF4JPhTX7G68l0KoBfufSXIsYYtdZxuEZGPkvj2Oog3kqOP1Ewh/sw/XuZTWSnVb/WVy3/kHPevfdjIo1jgZgDFD4HunVMGMQ4CX2NNGTMpc8iSz9i447aIWeUp5g6n73DZIoOcOSFWquvWp4eCD0kHZO9DeuJRQDPD/95wEb87M7hjfwh/pDUOym6z55Dbt4seYgCiB4AF0q5KulHZVCX7jt021eS0E+/4fZTWE8fZSt27LG5G+XuYJ7EDUsOPGVAPPcaFD8DRnKjvysfxvkHK5EECXYBoCTvQMPyDU8gsD1xQFI8By2wc0KwQQSwW3D/klTzCWVPHWS3esxL1r/TlOfUcDuc8Yw5F4T55LbzjrbqBiROuE0kYPbZBCgzv2sv+xMPTOLaNTxlyspUaHbY7ulFd/upiokKhKVUVeZ6eVqWQWPtdiJQ9oyFt71sWF5TwOeZDW8H4qExOEmgnwZ7vKJyObpJ6NoToRlqNaauFnOlFP8r5A07l4S6UMJI0cxcyb/CUQPA5kPd06y/vjxa158b7EGy+x/hFZczMWew624PKdTy8dIXejmMoHnOrnI742rue2VpZv9d+W1f/G3WUVoXnxuJoPwZao0PnkDgdX/M4weqw1cPTAIghhtFCrw+IsUKfTvYGlQRBv/IqaPU2ezDLXLljrSnbi/Dmvh+QHKKY+1yh6ze/6h1dUYAw==",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/world/2015/10/24/singapore-air-quality-enters-very-unhealthy-range/992887"
+     },
+     {
+      "encrypted_content": "EocHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCM5SJSv/GwpmIZFRBoMzFhnYpfABsWQ49diIjAwddAgxYeAYMCqnINSS67vllkm2wJz+E+n1PsTEYjt9oBEr1XBXtxchAV+1L/FidIqigZyTj2nMvvI3HiiuHS6YzGkDXjsDG5XpoBJhQTi8iLpoGml3RN4oHB8DuFRD2sCZ+1QuS2M9Q7e2s4DROQH7SvYlARhHfLZFJB90KInkQJEKkrVvmUOpal3v2EhpwJyfHaB5HlFhiWWFGGDCFkUFwDxXCe2MOMpEP8bABC2oXb5RJYwJ6S1vdxpRegplidaJFCf5tOt6MGG9Lbgn1ER7DoQBI3/rxM2JH6GBpgdqqzOHACBnwKnRQeQ4fCCZ1TvATAzfQWbNhG44wQ7w1kX8PvBdJUF5l10xgJn8iynsFF4gNpvW/bfUBsK72HlpPvOEUjqCxnWLwhGcJOhCC+2ELbup8/Z/cVlSN3F6OFv+nndz9IgXhX6Qjr45BjUHfoOirYh6sdt10rTDVk5fm4TjYdURKY9EKYx4kGUTaYxs2ggXs1DQSHcXZmEiJmBPWZT0JYbVdez4WMuBOqc9EqKAwmx09g06y7WeFpczhWzOdNLqVYHCMchL59K4qxPcwR1D6GuF5B/ndK/W+ljvGzHpZzX0AQE576kkqy79jsvG5YiunUCnD53/aQIGstxtdQ4COb67hRS3akcz/P9Zj3yqjoIed00n7SPSUMmRNRRqfIRuDUmhPlz2cAyjlemr+ncC8ZcCTnJaV+dNDwLMRm77NtgDYbFo3XFPAuqmuJkC4VA0qIZJSZXF9e/p6uYq+QSGCfJkbt8TVh45l9RYTUHp+pPGnWo89xp8HvXizzTG/y2SlqPrTvScllnmpVzrwpJo9VFbqHChThNwfj2XJsOi/I3ndhBV0q1ENiy5ejbG87l5ZLzxCSJz4Gzo4o604igI5WDKpFNsa7MCmCV5j/43unWuUwRtB8r3+WD2C5QRjDewOEsNCQ3RCUcrvi5wja9zWIAkXNiEae3n4A5OeQvCKqXuzB9d56MTmV4s5fUX1wGirjnfFm/6p3xGr3IMOohrkl9nKbWPgThDZfy+IkWRxbv0wGt1J3Z0SLZSr1nuAsql/v6On6PWeVxkRK6WVNwsGUdc+rN0fbeA3BFGAM=",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/world/2015/09/15/singapore-air-quality-remains-at-unhealthy-level/970085"
+     },
+     {
+      "encrypted_content": "EtoICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDHwwdKz8AOR7rCh08RoMGDdpuLr9awfaFqXaIjDGgMG58+MUBpQKTYnTxmC9QApuu7bljB1ym7wimDeRLCbiZZ/OZHIX6HegQWMf1Yoq3QfX9y/WZM3So9eMOcnUyzoJkXm6ZuEz4xfMsZNA1YxlYEcxX/N/JsGWVo6R86d0uj2F+4/f/xnwcHhsGI4t5kAlknWZA5OaGnjz9uzdY0hO/HMS6Qq0hN6XL4towGiMpNS8CN0vv/7W80aXd2wZ0pJsW8Vn68ojw8MeTsN6pXP7YR4rEPPQh3iaVbp6OlBbow/j0jARyVfz9I4Be6jFMheZPDHCYB7SBUcVeR4UkoAjd7fbz9cX0z6B592FHQ3EWMdDkWa5+zdH/JR7sEbMcKqMxzAs8cHmuUNIx08W3fW0+eRFRKVDZqQGLgKE0QwmaPXnnzn48MP8vGgju6t4bw2a26FgEhdTD6nJ+zXGdbnfSYxsr+3FkSHtUnWkKOEn8LifQPDpps1hbaBIq6NXwxTAkK1sIPtuq28PNMf6MDzEWz2YBV2N6PItJtZEY9XICqrcJKnYu3G68NK3skoYTtGXAm0qd3fwg/9f76FyvtfivU7PGyHC7tb+7zyyHalODzRxAqqfVoQmmVc9a69+MERb/QTsQvcSZr+6AE/+7ckhd95SIlEJq0tcV8jIrGH9RZq3m+Tb/G60f10t4LN9aptMU3qhTALDX1TofwyMxwhmXns4mPkETQbtx8yx3bJzcsSj3gF9F4Xoj2fmc7LW2M0WUMOK2pMtDlswRus85myuFwu+yPnlHHC2XVFE6m7RKtIhxyT8dXz0moCuqCFsE1bQFOaG6d6PY4MHM6yK15hpONiMD4rJ2db5T/uqZqV4KEfaIyoYAWRQjHM4tu1HUauPAdg6BhsBkV1fhKN0KgAETT2Iv6Ca6RoFtxv5Qyk8J5degXMmgrxcS5eAiWC8LTma7tN8Zda9MXzGKg6Hgrux36rVhsTyNEjMo/1RWjp3lqQValeFWRm5j+keu1v7Tp7IxnoX1+ZKMw4mxR/vdJMIyzPT3st1tQ/sMMVaEbNi0uUkdVdoMvhOsHmH8rO9CS02kbBdoaxAz2w8yYnJUgt4Xfzprpz7nbB1F8yFagu5gmJyeOHYLZa/Dy2lpUDOf/89vvVxYdoFyjtF0Z9zMZEwLCcH7iKugCc5DiUMehrRohzvNHS51MHm3mcDA2DoCc1l2rdTiCaEwJ7XoWd62AGobfsx7R18JAXeokF7Pw8olmqjPrJ59duzOpXaqDc0MgJHXcDzyFtNcrX7Pw4K630CqaZ5yMmz61CSIesEsPk8sRLPUQty68qx+jL2JjLSftEv22icFbLlH4XFD/FsTvwKFmHgqrJE4a8mV4KbCnVC1byqhKAW9PbZuvTb3ekuUZw1e8JzgkMq8c5HynK2PRgD",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/world/2016/08/26/singapore-shrouded-in-smog-as-haze-returns-to-se-asia/1192137"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/singapore/2023/10/07/indonesia-fire-haze-pushes-singapore-air-quality-into-unhealthy-range/94920"
+     },
+     {
+      "encrypted_content": "EssICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDN0uq0L3MjOeHqPewRoMrazVKux8Z+/6/P9DIjA9CCZsukrr7q/va0DqxD4ODACOpBPwooIhgz4Wu/rkCMmVEqKu36QMmkY8+DKSJZYqzgchUZoFuN/++2G93cggNm/NsXwBNsf7KDc+CcNmNN5dm74Fu5933yLkBagaPS0Sw/xWhRdftvcN0u1Z2znwm/NJOMAV8k7sxNRIINLeelNAW3R1vaeOqoe5bPLGFRJ1GM9spX1HUV8I0U7Je876b8PuNr3N84iNUWNiCPpRtzgtD9CFGakCUxCvndkvM0rdLll6Lm5kqtIRgMWak7k4H1Dzx/A2dTXhj5IdsiwWrBD5xb3VtVdiEMN3bvkBs8MSNUncv9YK+a2zYB5fGzlRaNDqqnMzBVB4zMGuccJR/6jxPZlfyH8AkNJWgG65+B1qfiDfXjDhxLC5qdDuXStnKs6CYkpqYJGTrvbDq1vFc2phzYfGIWUpPloJOyFCSChY5GgLxtAUvDX3ZBDipT2EjrsvaLGiN64rjD5kTzPBFAEIpHh8RhA1auNR5sAClJA735buZBHDiw92EdBpanmLZp+ofwS5cCOdKgCGSWyECkMqAJBzVV/gw8XT78i+xcjB56Nr4q/2VbhOCFS5Uq5d2EQ0t9gIAykKOHI6FEL++SOqOsv4TRBF9hqSJ2WyUkRMGAtIu4ji3GSyAFxOr0M5k480Te0STBkQTi2WRASZDDMnMHeoFcBO0X93M9vXQ//ODyauHYDPwo8ZwSOzMGeXTrqIddhYLTL1aIbcF+fGcyII1GlKneWIjhRhivgxvnvBwhqF3I8OhnCqvyTvI6vriPH7/Xqd2OWlrOqt3hUmi4nMoWxyGVaYh+PtoJ9ZDmuUdyFBpomPDUx2lanVBLpe7UcgAiFvkGmAbuGgUxZjbQpGr3oqarNhQTY7yzfMdX2d9WNSRCfUmOjBuuLQbZmwMmKMuZUjNExmE4i0Xws/z0HGYY86fIe3i8D9BGNzX044oRRoRaz06YjAczuJdMPaV/zgePwQVPRD6GPLk+zontKWeyg1JdR47/R8rc7GWz0WWptwRVf9jIVqXmZwvb2M0xJIUMRVX/9dwfcy8+Oqxmlx/bLgR8tOrU6GaD5EyP4bBHCvWv3kFptXOEHKSYJd9WXfsiUo7A/AMTZBpq+Yybvz9FNLj1Hl0ZMV+k0xKiHc7r3X6QyIkA1dbLu0HROi1lrOfGazEb7Nji2+S+DqDD4KSAt+vJQ61cnVLgKNM+ypLdIrLCI7xibd1KEhpjmzEvZQReJn5kxFvwmTvyBxlk5S9LZUEydoP9iamadeRz0Qh81kQAAgAZPfWx1ZtLMmf2GXQ599zLgKSTDqMBTHyaiAucLREdVVxIknEA7UHPY0JFCLxP93KcTFmkYnFwxS0xgD",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/amp/news/world/2015/09/27/singapore-air-quality-gradually-worsens-throughout-the-day/977473"
+     },
+     {
+      "encrypted_content": "ErkICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLypzsgpVX+yJsUoGxoM6T9rcV6nmL8vwW/GIjCPrqshVb+8A8rAdDD5ZV3hElhgtWdKIbAMQdoPsdPEb7paZYDhxeXwzMgSby2arYoqvAezMoMvH/u6C49jWPih/rGA0grehE/5QUHVvgcMu0y4koENkYGuCOQNFeGJIfk1krHLzpJDhvO2w5oS3UuybbfK5CeOwiM8+UdiyispTgDO7plPW/cZLz0a8DC1Ij01Et3fl0YZdDW0UGrQrMKZjakOtWAzFZo6DPrM3fLJBh0fXI7M7gCP8Ls+Z3UdqgwfaST94pEw2DFm7BGkKZaFNPmM/qPseHKzw8/76X3gtDd/rj/GbC6mWSZJQE6sv4CHRhbOAMfY9jG281SvI4o2tJq+15YJeFaV2Mz0T3dlA/HhOABjJjlvc1wmdYw/fTdMkcW9JfPB4QZs9i6/iWRsLdMEfDXR/fqKCVRVSNIsB601pku8JKv7de+H2yFoJTF5OV3RVBdTHY2NJioyF7y4nYbwJg/FV8GXiyACFoPvytMFwdF6+nxdOYxN6ABdNIQKsrJbX/Rz0CYbyoEBkT3VYffvaUJ/do/6V/8eKzS9KEU5aZCA5eVJvnfwqLZzO8Pip6KvrnKT++3V+vi580vLN9yXjZlAcOX8DSmvKA0ag5jROdL2FxkeX2wdEkTeS/xvB3GfPjFHbO4x5LBt4jBv5uYm2be3rMxWQBck0WLF6plabTD/LWTunbBQQ8wH4fssG5MEfjVaOk5X9kDSIyh6cqPLISw8VIzO0XJKcqFjVWcKbUThV9PTfeeYZUrCUAdAXFvtU4d51yQN18gY18udE2Tcu4ZEFD4C214RX5z/6ZpZHEcijOupJYs/HufDr628kxv7bpfIftX3HvxS0o1rcsj0ir0yFGFFR/9oFNcxRm9QxXSqWkF1Na8E/G8JXYVQNInWmxXy6BPCvnKstJEdSLSsjIEnU9HkSG2ExbJwBxHLLrFCNHmYwoAjxRjbezX7CmK+0J7d9iMXyUEK8ICHGQGJdOzn44JSlaT0QAdiENsV51EHQvSGx4ngCXR5grfTEqdY0E8VnH5zT+gbiZl2Apyh614idFWoursinWy21KCCB6v8TeffBtpTyoyeWflXoxodbvHK4JdvZjhQqPTx8ewkJ48HFt88UdnThE91aWJx7Dry7sxLw23imQRZTUjYoGvzCP4wyC57W7xaWqEGcDB50DLeqP9MOGw4h3w6SND0TQdJt8yQPwH5Bq/6F/T6DKfElLXF+nFihjqLqJky5C2C+GZXJ6yc7QOCFwvSLlvmE5jb73SbVCg4adTenpuYcF6ZtjZMUUfbMtxfuXfxIAksWBoE4LpER90fbUWwlGoljCtzNU+5Zf4K0jCWZRgD",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/world/2015/10/24/singapore-air-quality-enters-very-unhealthy-range/992887"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "www.malaymail.com",
+      "type": "web_search_result",
+      "url": "https://www.malaymail.com/news/world/2013/06/20/haze-level-hits-all-time-high-in-singapore/486507"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01U5XRsykbtNCcpgk3THTwEu",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDBqySoBZniJe44sLfxoMfjD+F3HQrZh5crA2IjCAbLSKnHqIeyDHbk53Tu9IcfnEcB/gWOWTvZ05L3bYDteBAXtsX2yv6YH62wqKbg0qEqcEqSg4rQapCEMMBf8wN08xAxgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_01MVXfNTY59FVVxgkKLePhvW/cell.py\", line 11, in <module>\n    print(x.get('title'), x.get('url'), x.get('page_age'))\n          ^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_01MVXfNTY59FVVxgkKLePhvW",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01D5zUsgmKM4Y71yvgjtAu3v",
+    "input": {
+     "code": "print(type(r)); print(str(r)[:3000])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'>\n[{\"type\": \"web_search_result\", \"title\": \"PSI Singapore Now: Haze & Air Quality by Region\", \"url\": \"https://schlah.com/weather/haze\", \"content\": \"Haze and PSI in Singapore now. NEA's live readings for every region of Singapore.Updated 9:04 pm. refreshes automatically. \\u2026 It depends on fires in the region, wind direction and rain, which NEA's Meteorological Service tracks daily.\\n\\n24-hr PSI 219 (Very unhealthy, Central) and 1-hr PM2.5 136 at 9:00 pm. Every region, the 24-hour trend, and NEA's advice.\\n\\n# Haze and PSI in Singapore now\\nNEA's live readings for every region of Singapore.Updated 9:04 pm \\u00b7 refreshes automatically\\n\\nRight now\\n\\n1-hr PM2.5, Central\\n\\n136\\n\\nBand 2 Elevated\\n\\nToday\\n\\n24-hr PSI, Central\\n\\n219\\n\\nVery unhealthy\\n\\nBetter than 6 hours ago (-10, Central)\\n\\n## What NEA advises now\\n### Today\\n24-hr PSI Very unhealthy\\n\\n**Healthy persons**: Avoid prolonged or strenuous outdoor physical exertion\\n**Elderly, pregnant women, children**: Minimise outdoor activity\\n**Persons with chronic lung or heart disease**: Avoid outdoor activity\\n\\n## Haze and PSI: common questions\\n### How long will the haze last?\\n\\n\\nIt depends on fires in the region, wind direction and rain, which NEA's Meteorological Service tracks daily. This page shows whether readings are rising or falling over the last six hours; NEA publishes the official 24-hour PSI forecast and the regional outlook on haze.gov.sg.\", \"page_age\": \"2 days ago\"}, {\"type\": \"web_search_result\", \"title\": \"Singapore PSI & Haze Today \\u2014 Live Air Quality by Region\", \"url\": \"https://www.checkpointsg.com/haze\", \"content\": \"Live 24-hour PSI and 1-hour PM2.5 readings for all five regions of Singapore, with NEA's health advisory for each band.\\n\\nLive 24-hour PSI and 1-hour PM2.5 readings for all five regions of Singapore, with NEA's health advisory for each band. Check the haze before you head out or cross the Causeway.\\n\\nLive 24-hour PSI and 1-hour PM2.5 readings for all five regions of Singapore, with NEA's health advisory.\\n\\nSkip to content\\n\\n# Singapore PSI & haze today\\nNEA reading of 17 Oct, 7:00 am \\u00b7 updates hourly\\n\\nRight now the 24-hour PSI is unhealthy across Singapore, highest 191 in Central, as of 17 Oct, 7:00 am.\\n\\nThe 1-hour PM2.5 is elevated in East, Central, West, North and South \\u2014 highest 119 \\u00b5g/m\\u00b3 in East.\\n\\nNEA's guide for the next hour: reduce strenuous outdoor activity; avoid strenuous outdoor activity if you are elderly, pregnant, a child, or have heart or lung disease.\\n\\nNorth Woodlands checkpoint\\n\\nPSI 144\\n\\nPM2.5 83\\n\\nPSI 144, Unhealthy. PM2.5 83 \\u00b5g/m\\u00b3, Elevated.\\n\\nWest Tuas checkpoint\\n\\n\\n\\nPSI 181\\n\\nPM2.5 97\\n\\nPSI 181, Unhealthy. PM2.5 97 \\u00b5g/m\\u00b3, Elevated.\\n\\nCentral\\n\\nPSI 191\\n\\nPM2.5 108\\n\\nPSI 191, Unhealthy. PM2.5 108 \\u00b5g/m\\u00b3, Elevated.\\n\\nEast\\n\\nPSI 175\\n\\nPM2.5 119\\n\\nPSI 175, Unhealthy. PM2.5 119 \\u00b5g/m\\u00b3, Elevated.\\n\\nSouth\\n\\nPSI 161\\n\\nPM2.5 75\\n\\nPSI 161, Unhealthy. P\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01D5zUsgmKM4Y71yvgjtAu3v",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSkQUKEAgSGAI4AUIIdGhpbmtpbmcSDP0uGweueOn+EeBkNRoMsSxEi/ouvXBh+9o3IjB9kb6Z5FaXJXLHXmGLTu8GbQlMpi0+mzsvSzjIE2bok0uH+IVfPRmQV7K8hS3tSPYqrgTTKdPjllXRhXaKoAPB8oSFPpxCZRatcJ/cpBnjERzajz+uwCaIeABTlDTZC0jtDqfUzNrX2D4BT1eciOim6D6lFmmPw4CsjcB0liFd657ZMKfl5gsli4MMzQYdi4uVpvLcopXHcr/Cpzx6ML+OXcyG/va2IeE+tjYfi+5AtpwOg+CXtHo4gUi/oul2GAGX03L5d9/Kh8GFNGpe+ROlWWHV+bd+uXxND7oglw865uuhhHTxvLqPepgz7Af6dbCWY9fNhYOXv5/wOe3EVO4OYYCSGWDBSsypyh9LIC26+DNRO/txtqksffPyNtKPOsK49xzg0fEG3D5inJqN2g077rUSLNpbqlbvrAHE30piAqDWL5eL6xCpYQxLnuX/KRmNNkKJblB/634riVAHV2A/Dbivu78swbVCz41oxWqn539Yvasm/7g5bVsAzR2II1K1wTJvF7NTqZPKUT3RITelsuENZsPXCbUAnNgOTR4IP1YfH5f8+Mn+EXZzobcHFQv6aZfyQqNoPQWenaCg/98ARK7oXO+qk+P+aGn/Id2b6IbxvF21TuqMf3RCNUcxus1qRx48UHsMdgYLWJ1Gbg1DbcQF0bQFK1vT9tmZr3Zxwz1rsSCOPPYeOLtXB+6IzX6b7mrC9dSs+CWZ7+iyR4QeFuBag9gOAX0QM/FPUaa8DVJ9tOOn+3Af6UKEq2M7OYhcOsF4TltPgJBwGp5dMDSITWqflPY21YO7gW0s9+95XmMYAQ==",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_019y84mEGMBBUJcpbthEGcNK",
+    "input": {
+     "code": "d=json.loads(r)\nfor x in d:\n    print(x['title'],x['url'],x.get('page_age'));print(x['content'][:400].replace('\\n',' '));print('--')\nr2=json.loads(await web_search({\"query\": \"新加坡 烟霾 今天 PSI\"}))\nfor x in r2[:6]:\n    print(x['title'],x['url'],x.get('page_age'));print(x['content'][:400].replace('\\n',' '));print('--')"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01KhmEADMcRwKj173RG58GF5",
+    "caller": {
+     "tool_id": "srvtoolu_019y84mEGMBBUJcpbthEGcNK",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "新加坡 烟霾 今天 PSI"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_019y84mEGMBBUJcpbthEGcNK",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "新加坡连续12天空气不健康！创2015年以来最长烟霾纪录 - FoodieSG",
+      "type": "web_search_result",
+      "url": "https://www.foodiesg.com/archives/87163"
+     },
+     {
+      "encrypted_content": "ErsKCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDGVswNLhhLnNwEqNKBoMTbxkGVEKhNB4g427IjDPlrvl+cE8A4R0pKx2x0fFDRoMM8lP+u27POQ0rf800kGDPAzGiUGmaxOfruANuKAqvglBd0iDq/w1YT9BOK/EI9SxhAuO/Ue9Cxy+OUck936tMNtOyXjObVQwYA5NX1Zq4yNrWQpQ2lcYuYSSxZ9ae+u0+7VUvWGN7M6FK2Qs0gYS4Tea4qybgF27GwPbrDgqJuXgyRIqsD8URAbmZR8VMXQVsKgK8VfI6X6jL1w2flRSszcxQnRk3WN8n7ZDBu8occgOBUDpzt3kICOqiu/eKf8L47wwjoYwi6RlMBh1cSdQO/mk7Tf5uiUFT9lmCiAtKnfpop9WB/N+uUfGru9N+f53zTBzLjRFJD2IJK6bbFcHTceM5FmNnMVhLY3AxFlnXhT2dK9JXNX8A6jxWWxcTuJMbpA1zyZQ/StWHRTRQ1LdM2s5GSHSmyJTiFTsElTPWXc9t5D40L2D0hERrYphsc3pPbhxhw1EJn+kyhxl7Pbt7ILriDHg+wPvcHqIeTFD2i0/Yt0K2369TB/8AlbPRg68lqeOu8X8PZpzaAwhFPZggBFOdGy3wkpgjSTT0cqMqmvUWoK/IEwenBdnODwZA3Js5qHZGwQksIWyNXCPgj/alaMlGkxrJaCEXdFwu54QNpveNQwzFawPfsL0BQIBVgFHDuahiNus9inUs7QQex7Z+9F69sBi1KzXuUdzJaXtXyt2xGloRFaAUW3GMXIwg6svTLVNog6YDDjdNvCRkUfa/54Kp5PL/BUSNMymKwIvN+Rcv2nbEPLxml4zTzlRfBKi1lAbOkvYAceasJz9P54pg1XfSbNkdnTIZVyvJ4ehuHeA9tdgEX5Mt3GbNY3Pmyi4YnkveRCqAWptZq3xijZA2Weul7YQqPH3gtwayV5zyWX07bpLEwldElCmO1iHaj003+6SIPCQp/KvIJ+KJn6HA9zvzyrTWSv+LiRHBr1WZDC4IdHFJEglb3sMJgGVfi/XRYIOk0zBMEl16mUTgdLcI6xmX8QY6mn7KUapWj3eGoaFVkoI/ndp5OqQQK2jIg1jkb6JR5sTYI3CnH4uudCQV4+9NgHNvo0wGzbg93noKAhcF+T8LCiesDLEbcuJvcbWFWG2FAGS1J4XCY8RRlq/EPTFKKuu40DFV8ib/syIGcAxOx0EpaOBuye/GSI9bmJ6F+qolacNUSdOHjbFrBYKLrWqU1WxncLE6+yk6oaM7r3y8yuG9RnYt/BucD+r5q55lnDE9RujvsqNfKbb+hQF4SqN+ih6kIQ7lrL8qyu9pXKRYmUxtJeYX8bjRTpDwZ6Mv3zzNTUlSLmM2tdiPEAnrOPMSSClUkVQWrxU4RINWyOJEBpkRt0gNkDvrzAwcYolmyNbGv6+IWjt2BUW73erLzCMk8mL26KYaTj9b686ire6XUAUQE954eKQ6N+/u546ySuBOjaLEhglRTDvf1rw78dbsWkhw9YX4K6k0xLRsdnEzCwy5cl0VBFhxwFZSw80bLnsCZR7UDzRPukrH7dkjUGzf3EIvsVsi11Xjfq4rcGQukhZT8oOZFTYZ2cWSPsAUayoSwrOYbVim9JM1+wVE1GLFWmlVETgpQ/8/8yy7tNfvvV6ZW1IQN6u+KcuWKBTosI/hjMmvS97KHrDwMO/sIHXdkXCqMbNz6CVBQykUfuemgxtqvBC9w/uP8UOcBgD",
+      "page_age": "1 days ago",
+      "title": "新加坡烟霾持续加重 中部PSI升至“非常不健康”水平",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/443126"
+     },
+     {
+      "encrypted_content": "EvUHCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCkif9EYTLvI+bwQbhoMQBmfW1Fsgz/bqBPMIjAezlg4ylrShA09gnvaAAXroFlZ+C0G1VFdH/TrqvF8b5NioKL7fvolyrTsGm53Qu8q+AZjywFGbPsOr2csX6USiRmmdfO8d/B8OfnUuCIIWxpztvrgDLHiXT1zAuTKtccYE+WuTXx8OIBej7oPi+6qlP3Xih3GKRMYziKMQWe8WUgZ5GoIUMbeR6u/gftV+omKUtC+5mVYXTLo1nVS+16MxC1OcezRh98EX1esjji93HgvFgJAVDvcaSPNxVQ791ogFY9WE1TJTWwaqxxkW2+Ow3JhzukB2DBR0IOz0bh6UsYVQzky9tslh/VkW7/ned1Vj6T/YUPEEho7GyFJFRTf05FGV8oVNWHyNEoMdXTUJCLHa44Fr3svy1a+AWPupWCMG71SPfND3zvGKfSL2A67KgU89IvZ9FVPH64l0cxEz9DbSy8GLQc9ypu8KAjUb/OFN1l1a0MFyRRrCyOBhJzgmu4t7RfGSa5O03Va+ERD7Khks9+usz+Xhp1XQvZXk71/kRJZhM4E4dLRYFrnWE6H23UBvdCdFeUe5OeuhftGE0gLkBh4USXgghZETNEngl0+uBJB9tX4u7B2iv/F6C8ZQwhJGJA/x+2qT1LLEEQeowp+nKRRfj0Px/eVyQUmmS2PxepSgI99ZCA+FHMtMsWA3V+NYgnmsZonBHcV1tV/rqH1tNiWwYWoUSWA1ZX6NLyuPCvSqrSMXrBcbQyX30oOsUpoUxtlqD6DilaEMU/F6Nult/GgmIB/iVN29yd8ulzM4WNUGJYiQWyLw3f/JzrDwPbDIESm5PQi7wCZe5vXgd0Xx5S475psqasubaldCKz5vK5k2Rh3ODZUQjgtywEV2HoeC9TcaYYbCB3b72nLt7qvyVDR5p1n5w2OPWOiDRZZqoPRJVHX0tlDBsGmpkHm6jJ17NeO4U7joOlaBqTd2o7IdYSNhnS/6nOCxr7I4kSxcFjOX8rYulpcovCXezU/WnbFTl+Wh7YiFSannR+UzKusQA6EcM0qeRaQrUM7m/j1mvhAfiesj0t2eB9i4llQdmW1qnyI85/yR96zY0Msj21w0I//oNC5+a4hK0BJ07+ARAsIS+xhYsu1Vden/GP9kEB+awrClXpPbr0RJ9qELsxPN0wOqPvgQ2Z+YfaY4xyVz2WoU+1GI65xlPMe1lVDPPzhlrdjfTJUh50MkeY7vd81TaB7f2HI9nMuJBPq4oGKrRmJT6clGTfsCDxC45AJg6ufi6Mfec9r1ZAYAw==",
+      "page_age": "0 days ago",
+      "title": "烟霾加剧 中部PSI今早升至今年新高",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/443209"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "3 days ago",
+      "title": "本地24小时PSI全岛仍属不健康水平 西部最差",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/442662"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "新加坡PSI和PM2.5 AQI:為什麼兩個讀數有差異?",
+      "type": "web_search_result",
+      "url": "https://www.aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/hk/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "新加坡PSI和PM2.5 AQI:为什么两个读数有差异?",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/cn"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "シンガポール PSI と PM2.5 AQI: 2 つの測定値に違いがあるのはなぜですか?",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/jp"
+     },
+     {
+      "encrypted_content": "EpwICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDLkAIC/IGMiXwpaXBBoMHUV6yWTBvlElCX9wIjCws2cZedSluZ8SURYBYI+doiwySsD4C4rOclADqN6YimbqjPn+MPgelVMFZrS+7/IqnwdrpkBks8nLLf6ImWGMk7Yrh1na+SO0TZoZnmO291TGcvJRyZuhRiZjmUZlD21SVx57iRLVaBfnlhnNhHH+/tCoOobNYtZwSNkuyE9XGSl5ryJQC63G+lisb4GMJBA8NRcExYxVHZ5m+fUEMyvO/4k656VoHUDwVv3RRBcqkmYr7WDkiXz/4BcrRGWLDCddgnU3W4s5FSH3St6fCvZkfLIzmGPTcdASdk49FGHSV2MznRFF1iihfMqWfP+UosUYTzGMY4e4PhdxTdE5mkTcDyJuOb0HNLnUPCI7uG2b3Zt/84MskxFl07M/CQmvUuWQmGdbCzuzytngfAiDB5ldbtlqh95JfFRnAe9Mv1zxh4ana6bth0eldxUNZEnabbuyUQe/9fjFrMyeeQ3G1qyvN+gwtMeeDhAxlEU61BmoqPUhthdRGwl6bONfeYKKL46D95Fe4EhTnxuoJdP5L+13IjD3GNDLkCebiLvBEZP3a0/bkrjjkZg5gTrAOGXpyDby75X+O0lhyRWAQjvoWzLwsIYDhop4Lc3Kvf0iKhLO+gPqiLSrVNTAhuZcf1HAnPLnIV5l7j9eFOjFcZA3fAY6g1s8x6ch1XnOyrTK0zdY7MpfHHE6KBLKv6lSx/TNuzIIMcix1ffeiItK+jEmaaXzUK+q7NIqrvZzkNi122MnbxY2cHTs4tgJkMzQ/KSS2UYACY9ALQvE5viHaXWgHGXaS2maZNzVof+zmQ3gwaCWemdr8MnHPyJnJG0sIi6JA80pR7b2fjG02hiHKLnKS3ApzW2gpmkaWosF7El2RNq7Zt9L5GMbaNISg4Ct34E3RCQkUrtqud+GoqfgFbQyn18qVqGdbb1Jhvqe5hpSLcWHsE5H41Vr/UjCzsq5uur+cUFMgj2df8t5KL7MPLejBYWnV7yHxzRVZv1W+/l+Q/WSFik6Hl+n8/lOaJfKII9jYCskKiPWX46BRyvW2PWOFg6QRkvUdw09LxBPoOmX08kGsbmrjHNOmdeaBnUoxx/wNbZM4HhiuPdGWv8etKNvxUsop3iKTS7R++lEkshiNxI/4YQKjJat3yG3WX3V5+t+1XepSibjdVHHE9Dzr44dqFyNQ3RNw0rVcZ05+3PXRvcq40fQJvxuoWORXedyaOpYpT8NWEdfrKs8XYtJ5ujFD/Hue6qEbg2ScNlHa2feBoy7MbClYfkuWVy0ZfDdgYf505UiH6MjTHIdAeDiQhO5GxbWj20YAw==",
+      "page_age": null,
+      "title": "싱가포르 PSI 및 PM2.5 AQI: 두 판독값에 차이가 있는 이유는 무엇입니까?",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/kr"
+     },
+     {
+      "encrypted_content": "EvQICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDE8Puy30jP//AWcyTRoM8allkguB32dZ6fseIjAXOhkzKUKfkdlrdwDh1cGfzmGJjhZwKVh2La4h5WJFq2ZHdTk8KOpzkAusOznuUtIq9webVxPZdycbzVkHi3dIX6r6x2/HvrJs8ga55V6PHsOYE/+wUfCXw4zjG1Tc33pXKUaJ+ONj/3mekdr2eubLKV7AsDz37SDpfH0trECNV5QR+jZZPNzdLRn7q9AJ1tRT/YwP+9WAeCBHpzsG8gOe3Z7/4MQAbXvFniIMmFgKdTUUJkqD/NQlHwbxEjC0oWmI23V0A/NB/2ucqvSdu8QkBzOZuGxonuuVth/lGXMEq5ga8BNlWPEjboCv/Pf7zJIR3TjHIHzyh1sCbHyg6DK+ebSor7TexVt5hGR+n/l0unV0JCwYIqnu/eGXDPVBbmY6xUAQLQX5w//Sgz0dYFHzm81iG6Y1I5ypVIChx4wSWc9DIvKAFwIOVcRREupGAohCLKSReQSdVpoDxDSF3Psi1BY3VCHF1aHiXCbHAjWw7aUv9+6kkEw81x5unryFX2Jn2h+wdAjoQdvuh1FZaj4n6yT8MbEgxP3Sx78DF4v3nCIXuh1nWF2q6nIM9vzhx8ZZfXsbMnuE5FZagbDGQ2y4bOlf+//JbwYxpLHVoV+6eDbrEwo/GbEX3z5yjjjagOd3YqgtOi9YG1TkBNeuVmWhCT30xBb6JVRbvb0rGI1BliQ+R80r7LFbZy15VdLt1mAOSxR+HarRXoRcCbMh9pCKHQ/PYrKRG+Yc9mvf45S8auWMFlAT6ArA9jJI/NDKnJLMkCF88LaeLfKWcPKL98rOIAwVx5tQH9Znb8wpgohCTCnMQ8EIEBSv9lEI0aNhiEQ0ZO65TLHF08t9Khy7NzuxSBmACspi5T3fJzzwcnZ5Og2ac8bBw0rOqKL0OCAZrcOM+QTUZIB7XCjnGEtC2qTY7q4cUI7iW9atQUa1cLLzkLUx2HlsSyVri3SKw6408yhnZ199cnXcLhzpfHrEtr/4twxBXEm8apWpWdkrVF4Z1bbim4dYWlhHbKQVxJ368qehhq/RyUIiMz0dxHI8abpMoRMBh+SpUSFVt2FnFqOtm0e5s1kxBEhVJQU0p7PchQq/6nt/ZpBYAYB6TBQtYyn6HD2j4IbpjPK4EXNWMPrPKyM1cL/Aux+9XP0454f/jMWxBFCZo+3qx2kvpmFOZ2/ej1TtlCLxr62N1uCvscJJxSrb0S/0t8dWK9UvwVoTI9oRxlKOn3s9zyGlRwC1HFmLgX0kuNDKEMFhoegiuVGfNiWfBh2MNpk5bLSm9JtYuNDbW7VJ3kFYZMppiwCsXYkoagH8Po0qOMGB/uMGWj3gZRMkntkuVJ7GYW03qRB9tqwAZWFiJgCSoi2PGlkvQwtFB1VqPbP+JG4o/udXwUdbcAcvURli0Ph2rsnYlQZWxxZuwlTEqpbvB3UIGAM=",
+      "page_age": null,
+      "title": "Pollutant Standards Index",
+      "type": "web_search_result",
+      "url": "https://en.wikipedia.org/wiki/Pollutant_Standards_Index"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01KhmEADMcRwKj173RG58GF5",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "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",
+     "return_code": 0,
+     "stderr": "",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_019y84mEGMBBUJcpbthEGcNK",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQSgwgKEAgSGAI4AUIIdGhpbmtpbmcSDDjs/9eTl1TQfyQUWxoMugra6f19JdE92NnUIjC6svTo7SfAzGayjLd91bzeXbCTYTvQhx5Y1WZ8AcAbtxtGBQykwi5W/0B8TSdpSpMqoAd6eY5AG8/aJxhQw20zVxtiC9BVP4gGP37AotflV65e8KENJxyZtjKu9KYyyDOzmA3FdsSUzdq2KSZHVZsaVPk9gKongOlcdiMm3LJ++QY47JNjbUBQo3qm4CMrlgP3gpDMiwzP7Kd2JrjLuY8RzS8NBSeskULN6nUdU9UNX9bOqZQ97IOwWA95Bgm0re7ccTsjPidrfAT68WHxPWDZt5RNUVAWhnHjjDdRWDXLoBHMpCsxZa9Vr0D5RUGrMBrRd1+vuw0yBc7VRvgj3fWWjOPc0sgj9VvBMsN8ymAIgFrNpswhcwR1fjnTZcsOROe7Q2xrrFqxyKWFJOIiWINWt7UEVSIyCt4zxvHr9gjcHSOehQPgB0vPjKMpFDZybe8Znu5gZf3RDDf+PNpq47Lg/B/gYJcsIFMeer7WwTpHL+ma+kk1ErKQ2DNgB6IbCUI9zynOpz2Q2vu19U+KLo0gjzvPsiYcMT0xi1U5In86u3Umm67YPLlBYtMuaCWD6c+q83PGBoYQIfcz+MPpPKaZspBN01p9qYVQTtwr+0e4dSx8GNhxgtKbHZYYykV2wT8zEyiayYmqWFjYBuej/8yZfiUOwgiX30EDQ79hFz+WpSxFuUilJdTJpzSUGABX1N8bT+Caq0o8ccWWD8eO/AhT1Oua26mNQUKHmS841jpjG7UAozwvtVrSsYY/ytUSfeqoR8qdqkczaSt0gVW74WY60/EFvU4Lf0Xpmp+rXZQB2qQVflVZBB7pRS0kxB3B43kS3QhrmKU5NnR4ugC3msM/5WOxqkWah0TPV/F8hHNNcnmmmRhayDSHLdtkmoxxclGQejSECcgY4SwJYxvF3LYo11dxGtP9W1KcAmdols4Rmn9tvfvapSEspefZJRU/wMbX4dmp3eGKGjKq5AoxMVIrNSmt6B0wtY1zlcShT112OjGXH6DWwKh7GDA7pcu/+0btuD2EdGs8T+30YN4qKNvSJ2ZLi+v+W5CAwWLb6NwUAF31obIbjmdiX0ymo2AiX792qH/xQ11zSbsTLMTm19VuvXerox365S50NYp13XIWl1iseFzE1RKrNIBtnkRAfuhFUu9RrdBed3tVMVIbWRX/naj/KPouSFteHapHlweScI8FyKQVj/V2NsvgrvvDQRm83S3hOWpOF2CTCd5R8x21bAH+9HFBoGtwv+3t74u3pOg1wXS+1WTNjvyDKpMrxd468GmGEkJOs0Yjz0if+bfCCr/OGAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "是的，挺严重的。新加坡现在正处在一轮持续的烟霾中，全岛空气质量都在\"不健康\"范围。\n\n**最新读数（NEA，10月17日早上7点）**\n- 全岛 24 小时 PSI 都属\"不健康\"，中部最高，为 **191**\n- 各区：中部 191、西部 181、东部 175、南部 161、北部 144\n- 1 小时 PM2.5 五个区都在\"偏高\"等级，东部最高，约 119 µg/m³\n\n**近期走势**\n- 10月16日情况最差：中部 PSI 一度升到 **227**，是今年烟霾季的最高值。那天东部和西部也超过 200，属于\"非常不健康\"（201–300）。\n- 今早读数比昨天稍低，回到\"不健康\"（101–200）的偏高位置，但还没有真正好转。\n- 据报道，新加坡从10月5日起已连续约12天空气不健康，是2015年严重烟霾以来持续最久的一次。有诊所表示，因呼吸道和眼睛不适来看病的人增加了两到三成。\n\n**NEA 健康建议（现在的水平）**\n- 健康人士：减少剧烈的户外活动\n- 老人、孕妇、儿童，以及心肺疾病患者：避免剧烈户外活动\n- 如果 PSI 又升过 200，建议尽量待在室内，必要时戴 N95 口罩\n\nPSI 每小时都会更新，雾霾也受风向和降雨影响变化很快。出门前可以到 **haze.gov.sg** 或用 NEA 的 myENV App 查看实时读数和官方预报。",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-opus-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 32876,
+   "output_tokens": 1120,
+   "output_tokens_details": {
+    "thinking_tokens": 149
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 2
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}

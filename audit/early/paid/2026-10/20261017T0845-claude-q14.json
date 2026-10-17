@@ -1,0 +1,147 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "paid",
+ "plan": "Pro",
+ "model_asked": "claude-opus-5-5",
+ "model": "claude-opus-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T08:45+08:00",
+ "answer": "The two numbers usually aren't contradicting each other. They measure the same air in different ways. Assuming you're in Singapore, where PSI is the official index from NEA, there are a few common reasons they disagree:\n\n**1. Different scales**\nMost weather and air-quality apps (Apple Weather, IQAir, AccuWeather and others) use the **US EPA AQI**, which is stricter about fine particles (PM2.5) than Singapore's PSI. For the same PM2.5 level:\n\n| PM2.5 (µg/m³) | Singapore PSI | US AQI |\n|---|---|---|\n| ~40 | ~80, **Moderate** | ~110, **Unhealthy for Sensitive Groups** |\n| ~55 | ~100, Moderate (borderline) | ~150, **Unhealthy for Sensitive Groups** (borderline) |\n\nSo a reading that PSI calls \"Moderate\" can easily show up as orange or red in a US-AQI app. Some apps also shorten \"Unhealthy for Sensitive Groups\" to just \"Unhealthy.\"\n\n**2. Different time periods**\nPSI is a **24-hour average**, so it reacts slowly. Many apps show a **current or 1-hour reading**, which jumps with short spikes like a nearby fire, traffic, or haze moving in. If the air is getting worse, the app will look bad before the PSI catches up.\n\n**3. Different data sources**\nApps may use a sensor closer to you, a cheap consumer sensor, or a computer model instead of NEA's official monitoring stations. That can make their numbers higher or lower.\n\n**Which one to trust:**\n- **PSI** is the official measure for Singapore's health advisories.\n- For what's happening right now, check NEA's **1-hour PM2.5 reading** on haze.gov.sg or the myENV app. A reading in Band II (Elevated) or higher means the air is worse at the moment, even if the 24-hour PSI still says Moderate.\n- If you're sensitive to air quality (asthma, heart or lung conditions, elderly, pregnant, young kids), it's reasonable to go by the more cautious reading and cut back on long or hard outdoor activity.\n\nIf you tell me which app you're using, I can check which scale it uses.",
+ "citations": [],
+ "claim": {
+  "value": 40.0,
+  "high": 55.0,
+  "scale": "µg/m³"
+ },
+ "each": [
+  {
+   "value": 40.0,
+   "label": ""
+  },
+  {
+   "value": 55.0,
+   "label": ""
+  }
+ ],
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T08:00+08:00",
+  "band_right": false,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   75,
+   127
+  ],
+  "measured_range": [
+   75,
+   127
+  ],
+  "named_source": [
+   "NEA",
+   "IQAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T08:45+08:00",
+  "pm25": [
+   75,
+   76,
+   127,
+   109,
+   110
+  ],
+  "index": [
+   [
+    143,
+    "psi"
+   ],
+   [
+    158,
+    "psi"
+   ],
+   [
+    174,
+    "psi"
+   ],
+   [
+    179,
+    "psi"
+   ],
+   [
+    189,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T08:00+08:00"
+ },
+ "took_s": 14.7,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg6tKvAsazdC5rPqvVaur",
+  "container": null,
+  "content": [
+   {
+    "signature": "CAQSmg8KEAgSGAI4AUIIdGhpbmtpbmcSDCDSUQOeOudTbHL/cxoM8kxMC5mBEJoMTr50IjBPpG9GWgukofalgvgkCqYn6vTMGdCwKbgS8SsgnJDX/XW7ga+C8Y46rW77yP976PMqtw4uvg8hB0GUeK/ExaJiwkOmAOxtWi55U6boXwdy9RQ7Xg3xnfZWf+Q+wsfODixGmQurU+nn/Yxm2T7cj1v7Hn3Ny2mtrURcxzRHr2/DUqikAobQdTL4sFWdFoD+8Dm83DwllIfo8BHAFy0DRB9ay1px6x3MgO1EMYdfcJN/Rf9Gxm28vQSDf8CfoY9EU1TLvEkmE/BLJESnc4zV2ImZqs9r0m5bUudPurCnRa5qgFkYcfArPMzB88sVprITcCqYRBGTPjjKBPMbEU9n9KjmVpQvfcByx1RCn1rjcfE6N9MvR3pAZ6Kms8l0yEvljs9O0Y0n48+mzCcb50e6d9pVKWhTnFRo4j/prvkqKF8T66H/S1CDzoxzu5hVGjhzwNOjxfMnQ/OTI9tE2xaQx47eGt4nEh7kB0xvINhuVFrDL3Laqz46sJiwf+COmlTjAGdtz63x+5JdMyz+MKxqqAUYJ7xTPq5+Gm2p8l6aBLlr4A58IolDa+N+Nl79w8lA+sxcouCMcpy+d84ynSUs+JYOn3BNMvrhVLRlvDxHi5x+cMzUAMXbMIZb8ucqG2d9aPES55H0g3ZxcOPGYp95a76ifuiFPlADESh7HiDL+ZNwHqZ6hnX2H7i+YjzWFqAxBsar4K+YHw6XgM3YJiT+p3y4VnUwyw/8IMIpoem0yDhK/YAFYZlRKIiM2BCPeUwwShqH8Jt3VC1MX22P2kT7G19lUcjuPNeQQrhdzgqh7XsZg2On/Bb1t/92hJgkCIuhlVq9qPHjmacgDP53a5+1+gfRaXirbhnrHARrbsGwQFYhJZ8omOao9IcflGznCfefFGz5M3YE2wZdFIzVnpkmzjfrywZtevNHA9y8HCu7844+8eaZh8JO/i3apFQfSfdueNffyj6QeeOgN+dkxQtqjw8oKp/oiiOgW481kH/btLY0Mo1kjvp9BVT2HnmpubhuMAQV1CCep8/MUAakabrNgUAjEbD34rRU+hY03FZhVpFSBu1G59MX7ALZZgxauqsMnJ0pEXQDh2q8KELEbvvgdggVm9v0XtdKc+CM6dN7Zm3RTeWz3z/gL8YsarAMeFGcomdh2RaZLZ7tg6z8FEUM0Id+aYmko7zcL9hViPAOai/bNb1fBrdjRzKC3yoarQ6eO43rYsk9apmrTi5didQiJ+2f7jDsiZjgtiFGraA2zoYjWgKYqedkgivjfC+T5zt5+ZL88EcUCQdmGUc9qsq2LriVHeRic2EbRVwciO7eF+XGpbZIbL/lqBqYmfg84YZX9j3lJOeiZ9/7J34KpvQl76J7PCWX2d11ln11VW7Wwkcd8dHCaR1AP+C8o+ttwTAjk9U89kmF1mGwGsoRwYBL6JNcmorZL2snXmQ9kFMA3PXtOGoNRscyljUSHAUu34YtYk0L9D65KCVrYPjnO92t3Fklbsf7vdDWopWIo8x0IvMdRWIQoaChPJjV9r8AkBWtrdzDTBAndaPlNf/gRddmHSvKyagYWCMa4mBZsVZXHqt93KdYRX/PYWKejmTXuKuB7FZyJwqI+wUFynIXUMi3tNZJY0lXyviHNM/6/OiBvnjomDxPp54tH36O45lu93FEJZV3y7bPIYWGmptM0kqsNu7w0XH26Zg8tfp/pGYkRcVppBfbWaln2mZbaoYdqcnN3J2we4Nw4UIU+op8KftzHyn1lm8LnfpsEkf//IRQ0PnAaFlKQUxUS6bMTQ2aMNsaouM24j7nLxEdf1hzSg26xZNwZ++CK83hz/12FZkm5skfSFp+8Ge1AyiMK4EkJPG+RfMqhZUn3bjxYgS/2igPGQyEccnZ7n07SoDswfqE80mTfl06m4xl7hMIBtkrrYvFOi+7Bxd4sabVta9Xt42jNFpdHlXlRUTLZV6sEoXBcl+yWbgMx3o1Q6HaSzieLq9sf7n3JAJ0Q8r34lgHW+6pYeQ5YLd85uckuRdlyE/5RCYi+ibTJyYRNwIraeuMY0Hzs8jjR0eR4phdybNgZ6YKXSndt5eo26Kfo6yZwbWxmxUY5iWPCSj+Hm/Kn5hYL/Wg/DE/bKgtHgLO7vD3PxBBB0MymPvxCxPcmXTIvB0sPlRM3By+rCwtoKhXJ4wiTP/xrp5rJ9ztVaL3mwxDGUd7JduOXPN4TxPaQLHKE0zIKAH9q+hHK71EcnVUWoC+Zu3yLSRmkwqPGHWrzDRNdbjhSt17Zf7ToziXNyBujpgSIdK8QixiF8j9bHR8mfflZrxBA2y9anWIXNyUuoTaSfKZ2vbqNy/krrNiuZsr97GE9jzEP0B8NDlSujB26Osz9LuNvTEg3hgQz0fOoEKwAveMVuYkD130VdA5WKzI4xL6vMIcv0EX/pca/RCzZcgNHpYf75zZgcsH97zqVhzlP4OC4fv4NZzApx9iqfGyNo/29Z1x9wtY/b2QqasTOP35XFyQy5zCKurUUbng596RLJZ+zXTj5MsjeUrYLtrrpRgB",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "The two numbers usually aren't contradicting each other. They measure the same air in different ways. Assuming you're in Singapore, where PSI is the official index from NEA, there are a few common reasons they disagree:\n\n**1. Different scales**\nMost weather and air-quality apps (Apple Weather, IQAir, AccuWeather and others) use the **US EPA AQI**, which is stricter about fine particles (PM2.5) than Singapore's PSI. For the same PM2.5 level:\n\n| PM2.5 (µg/m³) | Singapore PSI | US AQI |\n|---|---|---|\n| ~40 | ~80, **Moderate** | ~110, **Unhealthy for Sensitive Groups** |\n| ~55 | ~100, Moderate (borderline) | ~150, **Unhealthy for Sensitive Groups** (borderline) |\n\nSo a reading that PSI calls \"Moderate\" can easily show up as orange or red in a US-AQI app. Some apps also shorten \"Unhealthy for Sensitive Groups\" to just \"Unhealthy.\"\n\n**2. Different time periods**\nPSI is a **24-hour average**, so it reacts slowly. Many apps show a **current or 1-hour reading**, which jumps with short spikes like a nearby fire, traffic, or haze moving in. If the air is getting worse, the app will look bad before the PSI catches up.\n\n**3. Different data sources**\nApps may use a sensor closer to you, a cheap consumer sensor, or a computer model instead of NEA's official monitoring stations. That can make their numbers higher or lower.\n\n**Which one to trust:**\n- **PSI** is the official measure for Singapore's health advisories.\n- For what's happening right now, check NEA's **1-hour PM2.5 reading** on haze.gov.sg or the myENV app. A reading in Band II (Elevated) or higher means the air is worse at the moment, even if the 24-hour PSI still says Moderate.\n- If you're sensitive to air quality (asthma, heart or lung conditions, elderly, pregnant, young kids), it's reasonable to go by the more cautious reading and cut back on long or hard outdoor activity.\n\nIf you tell me which app you're using, I can check which scale it uses.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-opus-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5906,
+   "output_tokens": 1428,
+   "output_tokens_details": {
+    "thinking_tokens": 682
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
