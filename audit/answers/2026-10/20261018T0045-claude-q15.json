@@ -1,0 +1,297 @@
+{
+ "schema_version": "1",
+ "question_id": "q15",
+ "question": "新加坡今天的霾严重吗？",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "zh",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-18T00:45+08:00",
+ "answer": "是的，按最新报道（10月17日，周六），新加坡的霾相当严重。\n\n**24小时PSI（上午7点）**\n- 全岛各区都在“不健康”范围，介于144到191之间。\n- 中部191，西部181，东部175，南部161，北部144。\n- 中部前一天（16日）曾升到“非常不健康”水平，下午3到4点达到本季最高的229。到17日凌晨才回落。\n\n**1小时PM2.5（中午前后）**\n- 中午空气再度转差。西部最严重，达每立方米206微克。\n- 中部174，南部165，东部144，北部91，都属偏高水平。\n\n**预报**\n- 国家环境局预计，未来24小时PSI在150到230之间，也就是“不健康”到“非常不健康”。\n- 未来三天仍可能受苏门答腊烟霾影响。\n\n**建议**\n- 儿童、孕妇和老人尽量减少户外活动。\n- 患有慢性肺病或心脏病的人应避免外出。\n- 必须外出时，可以戴N95口罩。新加坡政府已向符合资格的年长者、孕妇、儿童和病患发放N95口罩。\n- 出门前先查国家环境局（NEA）网站或 haze.gov.sg 的实时数据。\n\n以上数据来自东方日报、新加坡新闻网（xinjiapo.news）和联合新闻网等报道。PSI每小时更新，数值会随风向变化，请以官方实时数据为准。",
+ "citations": [],
+ "claim": null,
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "4",
+ "scores": {
+  "gave_number": false,
+  "said_unit": false,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": null,
+  "checked_hour": null,
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "NEA"
+  ]
+ },
+ "not_read": true,
+ "measured": {
+  "at": "2026-10-18T00:45+08:00",
+  "pm25": [
+   83,
+   114,
+   111,
+   199,
+   98
+  ],
+  "index": [
+   [
+    129,
+    "psi"
+   ],
+   [
+    168,
+    "psi"
+   ],
+   [
+    182,
+    "psi"
+   ],
+   [
+    215,
+    "psi"
+   ],
+   [
+    185,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-18T00:00+08:00"
+ },
+ "took_s": 18.0,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg89XZiQ2sRiXr1pLRGPs",
+  "container": {
+   "id": "container_01Jrb175fCNg83tg9Z3asM5x",
+   "expires_at": "2026-10-17T17:46:05.163763Z"
+  },
+  "content": [
+   {
+    "id": "srvtoolu_012b3nCdoTuu2kqYAMSZBYN8",
+    "input": {
+     "code": "r = await web_search({\"query\": \"新加坡 今天 霾害 PSI 空气质量\"})\nfor x in r[:6]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:600].replace(\"\\n\",\" \"))\n    print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "id": "srvtoolu_01UQbr67npS5JAx6SAzANi7Y",
+    "caller": {
+     "tool_id": "srvtoolu_012b3nCdoTuu2kqYAMSZBYN8",
+     "type": "code_execution_20260120"
+    },
+    "input": {
+     "query": "新加坡 今天 霾害 PSI 空气质量"
+    },
+    "name": "web_search",
+    "type": "server_tool_use"
+   },
+   {
+    "caller": {
+     "tool_id": "srvtoolu_012b3nCdoTuu2kqYAMSZBYN8",
+     "type": "code_execution_20260120"
+    },
+    "content": [
+     {
+      "encrypted_content": "Ev8PCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDOaLreJtVSYJeQ28DBoM2Q946ZOuG4T+oCbBIjAuN+nT4fJhpgHxPMDDV7GPaXTGxYaDJ4tuNmt6bzQ2qSBkTsrzI5NEaO2KqOGBLqIqgg9CmPAcJSx7lLWb5hRj7EswTmDrdvLNq+vKWF79d3EjrXPXTN0eNHbplDfUOpNs+VDXR7bKTLPygnekbD39ZMGhgT5LU67rA+B9C+zTN7S/UL7NVqn/NgtX3t5U4xiSVd43TQMdUdWtcCwjbbAhBusqwNukddZTM5AbxBgn15bQszRw7zEcp9JAzD/sO0jVdULcscS7EVrpZRpMiHsJqIglFNMlK29hVkG5vIn3OaI1u6zQeYcVOauEl+Rs40dihMJrwkIxifyE3LcAsyxBB77vFqufOIPMlnSh4fjZNqWjHcyPEQiwoqwokaFYTAU6kCLf7kBmzIffcc9srYB2NfZETtiW4ONj9u9/At5zudvlAusIrrXcAFkI4BbqYs1ESJhgMOJF13M+P0V2ZetFkVUxCX+JZLkF4rtb2tadrmltPV+swMOvosAujPQAxapZJKGdWxrygLwMv5x2BanTyJhRcZSoxQ2awfomjrVK/2/Fc8krSdjypByCJuJtt1QR03nO0ss/sLkKBb03muamlubonV6uuAHGLkH3NwKA7K3LsOVwFhzQ3CrKiN2+sJN14A5bFvU7+fWkJLbX8V48sa/evgrilOtcomlNr4MUtfBrZxAHcsRqJokHAPgSztlOWZye+O+JISOHjSSe0Lsr1vKTdhUyrTKOZm2Es6s415XdPPt+yDDioC18wpOZOAGMNLHgAsOMZsG7lc1oxbuYNSYE9E7Yfcv1wkbPnWrpBG44GitqJb0qvBet6xgZnY1QpnWIPUpDVmbQd4ScOANElK8I58DWhGFL6jQxBt3zicmrOPxW4UCfTEmgKqYcBHaLsmAaFcqieW9e3Wwccp4N86DoqZkguYfedOU1TUyrXKuTmUW5a7f1QbKGeNWAXeATyAFF7Li7Mf6aW/VtbnzSCKpZhX0e4ZFXIegohVAebI5c9M18CIVeCfudlCyRikTsylsllmjCeNYJRys+xRoTM/QMc9xocz3E5b+P+Q+oqGclIJvaBH/WsOx4+5RatFblZg+sTm48ArLYWPkZh2iYoLG27UX/mFmZaoShXWqkjd3ACybwt3jopqG37vecpq64zj15F8OqIw7ddrx/l9cUoD+pccKn/B9HRH0hqn6PL0LEZkYS98s+NQWS4YmVjSWJ8glgcPz62Rk4csAaGvvWhPV5cPg/zegnWIZH1b6jH1+OptYKzNUo/hYZkqZ2qlWBpI50URHTqLgAb25MyIt5Qim0VO3AY96IHPFNUYPRJ3ShU/dsqSPXSI3rj7Q0ajMKrkzeiCnSHWn190Lw7In/jjE2PabZF9US8crb9Wsi9SS57hWut9JDmIijDSr2FJbi02zDo0wrtP786WBzfEDaRI3/dlpOG5k7i+AihCzWICZaVt/2JsQfItMVw+D7VhZB4zHMdFDrH7C0FZ55wRHwcLf61GPr0Q6/ZIUWyZfsLMN4ejAGOQDFIYXdkLrcwYvWxgS8yvdoc28Awq88mAdKIPvCiyuqKILQQc4/78lZGw2cA3220hoAqCx0FoOH9geR9hFVnRv0L4ZqztwbRFfqizrlxvCb+hKpRyrgom3z/OM/I8xXx5Slm8je7hubhgzIQMzoHW6G8vueniUN9Xi+q183Ej5Q8hmTv+WOCgrle7lVCTNIrSdRqddZN5p55VpTxmxWBnfH1OPPGq0A5bA64cM8qqptAKRUeEcNp8yYyY5G3H8ABiqrNMA2Nmhk4tP+HnEJUzVjjfxCqQe9u8zfb0rRYJjU1oFhFERtoCisVCHRnjN9tTDAW8LKGQx25S6mfUrZIP0iuWKPQAs8oNljpjs5oPvKsriVAE3R9vB4cMgyNXTkkuWHsXeENxxQSU0C1BhVY2VzuSf3a50l1XooXfwD69G9iYBYSC+T2gHNz/ItUzLMXCo1kmiF4h3RLXby3uhk/EIAqeQzKaSCcVP1tiZNzoKIO/oaVuVfE7/TH60kpTcWnmKYxTcM5PqTEC8DElwzf82RRs0gIF+89wIf3Re9XvzANgsnCQ27MhDYITK9x+ZMQxrBphdm5VakSHWz8x/BT4o8wp8igA4Zv/FCisYGvMfgpMy60H2hwIS0zB+oaXBuGq1CVJLul4lwgkrV1YZkX7iUEymf99FwyVKRnfwsoik6UVjP52EfEHqNpjlPjYt3QovULaWl1McGmRlP2OsswwE4TTEVBl6JXHaMQAMTeKvGAEdJJRyphUfW7LG5vp8dBP+vZfzpMQnj9oQ63SJ09pwTpzloauXN01HIfpOxZZ00zGqzNAu4aygL4I6O6+hovu0d7avbkpTg0Qr3P6+/48yEb4UrK4poNJh4irBhRiyrHT+/4wr/Dn5vCNF3UrNAeSPwi1oJtah6ntQley62JZcH+2p0RydRgB27Jm6WD4IXC0qSE1FoNWCuJEPqDcnL9Pi7jwBftm+Qsec0/7nvItiBE2KvhxbIqHVRaw+04v8YDpNSeHUGsMZFKtawPryNaUe8ZFcFBIdbgH8la4FFxjFWwLihVr4Zd/WBEPO/ZrfLhElBO6PnTvxotDFr/75zUFfe14IvWFV2oLGAA7E0MhgD",
+      "page_age": "2 days ago",
+      "title": "印尼跨境霾害影響新加坡 民眾重拾口罩政府發放N95",
+      "type": "web_search_result",
+      "url": "https://udn.com/news/story/6812/9817071"
+     },
+     {
+      "encrypted_content": "EpEICioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDFzSWvvNMIjIWb4yhBoMXEttYLxUP2YTuwTsIjAhXTsEo6dcKmBmt0OA8bgXN6GMt0+1zmbQ9bmcT5OY/mBCz6Xo/NL3PZxWEdr3X30qlAcKkp8bSHUe7XPrOV5//9l6JX/oIpJsmNiZ3M15y3G1UFZ72lSIC+QkEmK2e0rnHGkdMyO9nNXegCKjfIAbUJoFWXXxXC+mou6JQYYiVsSkPYNe60GrZmm6xGmQHz36lgy62p4uRkbbsfgHoxWn3ubP67HSvlYd1eE8NJFBXU2/K3HYtHPWBrbFh7nnllzzC+HtGKGBekSBZKHFKzDHL9Sg/I2s4ZFkG5lG0w4BRyrfe3V1PcpSEIGZZozJiV+FP8BIGCpWsuH59ILXOs+nAeUyEcbGAsEPHs31xyyxr+yTgdA/tOJKgnBX91keZEIjZ+90vxhVHEskIlJY7YkxXnhNqU89ZxgH0cfyRL0wnTLRxwn3gjHqSUtQKohzRk0cjSBreQIH0Df5EfBQWm9RnTwEk7afVaAWm6XDjWXw7OlE6MNcOjC1V5C3cfyIo6Lw/lspZagk/saUzzbRLI2CowBHcRvq/Z9u3gHFw8FbJTdUnLpWgP2I+fFUVmkpinfglANf31/BfmEmAkY+57t/02XO2n3z0wnkmMVbtvSy4ifdqW6LHLabLLGoaQdiPUtoAZBnFxdmiYnPYcPQw9ScXoMBLH2bIs5iG+pkFQtxYgqBJbhKAJUcCnSRNh4tEbn+Y0dyO1nkL+bpqusTBJ9tP/VVEECcSNtxqNKdEvjPEAv2Z0jaEMlS9OwYrxXV95/8Zj74CpPgZQ6El0aKypXsKXIEkg7uN1hPKci7YWkQDbrx7K+I85xPletWbXlJWNndlCC7cD5qC3ZGHDijAAWlu+VcblmhHzXB5EEA79jXv4lh3YWxfqOoyZk1dzv0wF4W3NzrR2KPKxmhocM1IRkyi3W59Ne3yDkDAeuqoMpjW6AYPzu5cZu7U3twWZSnjADtNoXPLeRGH+H5DX/2B03w5hAf8e3c10ifxGzOPHhppzKqk6EVu8EKg3FWCyqUmyACH7r9+dTxhEo3dZ0KxsNYzYVnDRdwKKIidr2MyMm0zVLr6hPEjHbVsBeR2BaDa4d/lrX0Mhh8rlWaDNDGZa7Kmd4hK372WjJ3ZzpZ0Vm2kZGnf7QGsj+ZElMR59kRmK3oDkSDXXYSgvdVnyFZcqpY3ZxOUSLf4cP3hqmKjepVxc1Zl5yk+AiCRBmPQfJ3/EEbN/YF105FpAyX+eTaLAv8nyu8k7vlsN2VVbrejMoTctRTvy65pUJcpajIAPpz59edeN8C0mqcGAM=",
+      "page_age": "0 days ago",
+      "title": "狮城空污中午恶化返高水平 西部最严重达206",
+      "type": "web_search_result",
+      "url": "https://orientaldaily.com.my/news/spr/2026/10/17/855847"
+     },
+     {
+      "encrypted_content": "EpsJCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDCk32MK60o7ocjleWxoMYZBcJ2so1HXcjWA8IjBLXy55Bvg1WQktR+aIiACRWUHCmQF8rI7afR12Yj6AU1+LygtXSozExE127z0PR5cqngh8Wt/HPdW+dGu8A9xqjtjrb3J/fjoJO6rkbqeT8JJc2i8JovmJKGCcp3yDP0feQBZTl4qaYsWgqPAllkKvNG80gXoYcVtmwer7ndPwNByfsrCE8sWmNMcpHdriA9xXt2MqN7rhDnZ5kA67trFmT/Ht/K11hjoDuobE9qYBRkpLLBO2OLGTu9gOVlZz3N7YzCte3xo1H+jUgVxvM8R9rj3raVGO6erNbCLM9YdBX+ZUwjA1/j/gWGQtcgZEjy6qmx4RxJQ3gJz24pRuBxzWiGoAMHuYo0Lps7olhRAvpY305kED1tXqzZmQRiy1eTO3/6KpR8GuSB4HyNrAEWjktr3amUqmqZH37JNc4tHiVNvdUC+dYLRg8HlHKKYGQnCgat9j80AeY7z72LHh2veYgWdC3FpwzHdkBVSWTGyhZQ14vSkwt+oDTXnylgPbcOOf96LQN85zS6UFq3IpAU1lG8peCb0gM97k5yi0046YSjdCfSvU4LuBlSl3oD14CMNAhiwm6bEsyM6kMSPxzQXzsnK0Qd4KJDlPwVamD+BS8YFoL9MJ8gijE73s/rUMGpGCKSfgX3mNwcXBYHMKeNGjUzVqU3v596iDL6NX2O9OKqSRh5s4Wol2m1unpdqlMHo3lgmWacsV8/DYdk5/oAXR5HEtzNdsa0FhIRCobUioCgTXXp6D7zdCAkNTFwA/1Cng0zNKLc2f4Ge1Vby17ZFhkaESbX0NhkUbSkNm+b82g/vJM43kb3MIS7eWvgx3tN+xnkgmBAWbeqZ/oKSl9yGShR97uOYmRacchleDCZPRYJ4evetu7/QbY8PU2c4x0Usn4B/IWftD3C3shXkPc9LLwlWgwpe5WQz9wbfwFPdAbkAIpZg+beOpW0Gh6NzsW72iBCDctk9F8vlzw5ybPVq6/vqmoMJEIKbIulOTOLv+lzqDzqM4ksLLDihOhOR7uXVuodUxuoCEA2TLrXqv5eomfXPNKJxYLAU/PEbkK2kBY3vf97TxcF3cbD9+PFxGE1SMhLYyk5wzq/hM4K748oAclJleH2j1EmKXepjXqfo5+2i58vE+DQhlw/qCCGkcqJa0SDmuS9pGGpOtJH7w3YjboZ8grnmhDvkxWW9BuJDBJfCN7GznI7AWnsIgbQ5OLXTHWu01TqzrCsnlfSph+gZSCEqZfydpLmf/IVJunVdbR6BYI6MYQKG9Y9nW4dxCBMNYO4j9Jg5u2Sx/SevngGgCn8/y/+Uu1rFbp3mWyMicDUQMjVTaM5vvVYt5mYCk6k7VNpuKEdCc8l9eeV2AQdfJTTABwbGLe8lWLO9SPP73Z84Q3YHuEk3/g5G7QaL1k/sfajt2wV8wHThNuYqz0oeoVMnzRpkMJUtAtQMxLI2mnanXOnFOfTdZ8rv6fmI/UYs9GAM=",
+      "page_age": "0 days ago",
+      "title": "新加坡周六烟霾 PSI 预报达 150 至 230，儿童应减少户外活动 - 🌐 全球时局与钱包 - 飞出国论坛",
+      "type": "web_search_result",
+      "url": "https://bbs.fcgvisa.com/t/psi-150-230/62557"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "新加坡今早空气质量略有改善 中部PSI降至191点",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/443369"
+     },
+     {
+      "encrypted_content": "EvMJCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDAlixeUXJIPaeDbrzBoMpdimKOyFm0XJEVNEIjBCHY5LGNp7NJVMHDpZY7u8VSZvUAlY/PUB5h2AapEsMv7cns+De2Fh41HTW6IqVEoq9ggGGc/B6JSsLwp27u57WmpEOpDJrWP58cIbym+sfDzJQuCXicIJfHijkOf6ivQN6KGNqUArg+xv84MbCBYDS3/LLN/7vJmeBpmhI+DaanhulJHc3vYI8iv2oMTuixRDLxdOSfr5rU1+zPDlh9eBhNNGhvOxcGy5OvpqWr2cOkXfWWX3CiD12eXhSzQVyDNwm1v4lC+/8cQRt+mha79c2M8r9TwrO4FzmrVZhrW0aowsH1t+95AErO1N3UOOnIO0gfbdr7oKX3IFhyF6Rev6WitRu4Xo6qUDtKybzDh1yIK2EOWgPWEajyfl86prtz4wR7bQ0RNRoLPL0J5T5h6HYupW1JsTiAkt+OygdfTj19wEfRCCr9TnEFGD86McB/KX0sSe1eAhZZSgj+pWndolhfwaHn05wzzBbvZzOWcrLl3af1EV9LrG9v/A7AXnMmeaRo5S3dm/GFIIqdPDKBp0q7drcg8HyxdFozgkuVuGVMGuJ08j29o9QavwrrN4xRlRFCvoia6oojM/9bjjsXgxCZPkTAO/V5nOxe/ldEQBGFAY2RExR57VLaF7UFlCGKQtuSnO/1wEnf7MzllqFleojOCMjux6SM3pRI/CktR4gaL3rdFJltYcmD9hBueI8XOJnUBdUqvNBeBnm6geXLIo9fDZMBLb1IWJUtU3S1Ijpd44M1vPwjLfM2MpEIiuhhtGvkJSV2QvSVY2MtK7DOapV6XFVpyd9Oa0WXxc+X59X+K66E1UKtEoA6RIkKj77L76hbfIQxvxASPGwEBqidDt/HEu8awPKzZ2y9RvmVcx0vDJ/+Z0XviwKazE7Rbmd1b8V3sjklVFV62LVbQ5GTN2UA75FGT2gb0qoKNt8m47LmiOqQsTU6I+u96wSKJEtd8/2zxEYohU5JJf+DRMrg04eP5CRNGPxbK7bGto7LUZu/NEun5JxmBHo6t3aoH1z+Y8KA0i2iCgkHfCNYIglNpjlmQM/UdCiK9ctAx8dbryKJ2a6mUK0L7vWvHP+ZzSzUTRwVearo9O+NKmDqsZckA3yUAr3elYQ9RDZL0DSAcsi3i8PyefuQRbSuQOg9dWD5u1j4cRkU2zEpWBz6oop3n+nmNbdXPE9wRv9pHgdP+Rz5sfvM+vTO84+TEolB27XCGvbJDNyYikmExW6iqf6nNb8g/5dOvNryVd9s2MdkTEAVQph+xnscZWpQ38gCYSJd4ljYfG1ZuaGlvsAQ3igCjWKu85cqrfPeGPmVhTAAcQqzJrCPtklV5HYDxMX23oed1NwXicSkFE9niogp7P1mO4NmTrmwklnxPnkrRi3akyjvkjPL5IZVXBxqairmGtt799innNToMFREb8glx879KhT/BEtuHTdjeMV4+pMRMZ5RTrYsHA+Kb/IvP1XXpGyLOu9NwsppLeb6M2oDFq/BeKf1B55Lglrt38pfUj7f3NXZOmdVbESiuIQcQ59J2kFgHWoOant2l+hiSmMkewtG3VNM86fVL8gjPA+Zr3IwEOOzGQglTv4B2kFRgD",
+      "page_age": "0 days ago",
+      "title": "新加坡雾霾持续：全岛PSI处于“不健康”范围，PM2.5仍偏高",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/443361"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": "0 days ago",
+      "title": "新加坡中部PSI达224，进入非常不健康水平",
+      "type": "web_search_result",
+      "url": "https://www.xinjiapo.news/news/443373"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "新加坡PSI和PM2.5 AQI:為什麼兩個讀數有差異?",
+      "type": "web_search_result",
+      "url": "https://www.aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/hk/"
+     },
+     {
+      "encrypted_content": "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",
+      "page_age": null,
+      "title": "新加坡PSI和PM2.5 AQI:为什么两个读数有差异?",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/cn"
+     },
+     {
+      "encrypted_content": "EpEFCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDC1PQnBlNo0yRjblhRoM6gmKSdvqPrPkCF6HIjCv4fjsuLyEDA83z/KT7PHPXh5zXXjTs6hX36pW6tIkp5CJ8fbwS9F1N7s7SYRauYEqlAQ3mHoRpVPpoHafGAzAdmaGHNoKU2UeZGb6xBuYFDzTbC03dxo0MlZxj4d6bSsriJ2mRU/Wssm1gLl9+Q2JJM4hIReY8ioh/4nWUL1oQdi28UI9a0y4b95b88QoaiEql7kq+dkShxu7RLnEw0EQbX9Dbf2p1n6GhX7H2ivyo6tzeJvvRwJINx3jJm5G1ObnjGW20Z+pxTuLhGnkyMr4w5xwhj4yvAelEpFIXSuFK8bfNXjPf0paYdKCXaqDhFksQh5rZI8Fw5seqV8txtWEB2c0Iems3pnUYf98fS9jsfpAhorpep6qHD2uA1fdr3pgyfFuBeXBTZ6nml0i3rp7L9jdvFN8zjbdpgTye/ri5mK7Lnt8idP3bQpWHE9be4i7MUiTYp9xJq7r2Cfzs1ffOPGXPsptOpLqxy3XTXf6xu6znWuFQ8g/DCD2RxZZZL1we1Y+pL3GMDoUAColdmoyDY8nEKAhkjZVoArmFcIjMsgdnMBPXGjjijka5KFthuBYIXCFC8T6V5Hw8l/Lis7EmnfTctxkaw8IOPfM3LcRgdquf98zbZTpBNUZxYQq4UAN1w9R+YpkCOeHNL+nLRfVwstC8FLR6w7ENNxxAmcedpzW8VmZEgHFqpv0ZIgiKHZNyMFUICfDmqK2IXYJBHrHVehqC+qBs3RtUBEuA2MBmwSpEbrw1zPwptKLdfCt+9STgkOh8o0YGAM=",
+      "page_age": null,
+      "title": "シンガポール PSI と PM2.5 AQI: 2 つの測定値に違いがあるのはなぜですか?",
+      "type": "web_search_result",
+      "url": "https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/jp"
+     }
+    ],
+    "tool_use_id": "srvtoolu_01UQbr67npS5JAx6SAzANi7Y",
+    "type": "web_search_tool_result"
+   },
+   {
+    "content": {
+     "content": [],
+     "encrypted_stdout": "Eo4BCioIFBgCIiRjMTQ0OTYyNS1jNTBkLTRmMjYtYjZlMi01NWQ3MGRlYjgwZmUSDJwkeNOxP3n1bOKISBoMLgMMvVy88fhnGbXyIjD5qPBlZdOMXHL55bJB1Ai/ccfgA5+aF3l3hql5ocITJjVV2pgIYfllrWIO4mN+DJwqEs6p5MtUu/FpQpVajly8rSwMRhgD",
+     "return_code": 1,
+     "stderr": "Traceback (most recent call last):\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 190, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/srvtoolu_012b3nCdoTuu2kqYAMSZBYN8/cell.py\", line 10, in <module>\n    print(x['title'], x['url'], x.get('page_age'))\n          ~^^^^^^^^^\nTypeError: string indices must be integers, not 'str'\n",
+     "type": "encrypted_code_execution_result"
+    },
+    "tool_use_id": "srvtoolu_012b3nCdoTuu2kqYAMSZBYN8",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01NNpgTFPDzPQVghSuhmXVBn",
+    "input": {
+     "code": "print(type(r), str(r)[:1500])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "<class 'str'> [{\"type\": \"web_search_result\", \"title\": \"\\u5370\\u5c3c\\u8de8\\u5883\\u973e\\u5bb3\\u5f71\\u97ff\\u65b0\\u52a0\\u5761 \\u6c11\\u773e\\u91cd\\u62fe\\u53e3\\u7f69\\u653f\\u5e9c\\u767c\\u653eN95\", \"url\": \"https://udn.com/news/story/6812/9817071\", \"content\": \"\\u5370\\u5c3c\\u68ee\\u6797\\u91ce\\u706b\\u7522\\u751f\\u7684\\u973e\\u5bb3\\u56b4\\u91cd\\u5f71\\u97ff\\u65b0\\u52a0\\u5761\\uff0c\\u7a7a\\u6c23\\u54c1\\u8cea\\u9054\\u300c\\u975e\\u5e38\\u4e0d\\u5065\\u5eb7\\u300d\\u7b49\\u7d1a\\u3002\\u7576\\u5730\\u6c11\\u773e\\u6234\\u4e0a\\u53e3\\u7f69\\u9632\\u8b77\\uff0c\\u65b0\\u52a0\\u5761\\u653f\\u5e9c\\u4e5f\\u5ba3\\u5e03\\u5411\\u7b26\\u5408\\u8cc7\\u683c\\u5e74\\u9577...\\n\\n# \\u5370\\u5c3c\\u8de8\\u5883\\u973e\\u5bb3\\u5f71\\u97ff\\u65b0\\u52a0\\u5761 \\u6c11\\u773e\\u91cd\\u62fe\\u53e3\\u7f69\\u653f\\u5e9c\\u767c\\u653eN95\\n10\\u670815\\u65e5\\u65b0\\u52a0\\u5761\\u6b66\\u5409\\u77e5\\u99ac\\uff08Bukit Timah\\uff09\\u6c11\\u773e\\u4ff1\\u6a02\\u90e8\\uff0c\\u4e00\\u7fa4\\u76f8\\u7576\\u65bcN95\\u6a19\\u6e96\\u7684\\u53e3\\u7f69\\u6b63\\u88ab\\u6253\\u5305\\uff0c\\u6e96\\u5099\\u514d\\u8cbb\\u5206\\u9001\\u7d66\\u6613\\u53d7\\u973e\\u5bb3\\u5f71\\u97ff\\u7684\\u4eba\\u3002\\n\\n**\\u5370\\u5c3c**\\u68ee\\u6797\\u91ce\\u706b\\u7522\\u751f\\u7684**\\u973e\\u5bb3**\\u56b4\\u91cd\\u5f71\\u97ff**\\u65b0\\u52a0\\u5761**\\uff0c\\u7a7a\\u6c23\\u54c1\\u8cea\\u9054\\u300c\\u975e\\u5e38\\u4e0d\\u5065\\u5eb7\\u300d\\u7b49\\u7d1a\\u3002\\u7576\\u5730\\u6c11\\u773e\\u6234\\u4e0a**\\u53e3\\u7f69**\\u9632\\u8b77\\uff0c\\u65b0\\u52a0\\u5761\\u653f\\u5e9c\\u4e5f\\u5ba3\\u5e03\\u5411\\u7b26\\u5408\\u8cc7\\u683c\\u5e74\\u9577\\u8005\\u3001\\u5b55\\u5a66\\u3001\\u5152\\u7ae5\\u53ca\\u75be\\u75c5\\u60a3\\u8005\\u767\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01NNpgTFPDzPQVghSuhmXVBn",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "id": "srvtoolu_01PiH2fLjEcgNebGrsYDsekr",
+    "input": {
+     "code": "import json\nd=json.loads(r)\nfor x in d[:8]:\n    print(x['title'], x['url'], x.get('page_age'))\n    print(x['content'][:300].replace(\"\\n\",\" \"))\n    print('--')\n"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "印尼跨境霾害影響新加坡 民眾重拾口罩政府發放N95 https://udn.com/news/story/6812/9817071 2 days ago\n印尼森林野火產生的霾害嚴重影響新加坡，空氣品質達「非常不健康」等級。當地民眾戴上口罩防護，新加坡政府也宣布向符合資格年長...  # 印尼跨境霾害影響新加坡 民眾重拾口罩政府發放N95 10月15日新加坡武吉知馬（Bukit Timah）民眾俱樂部，一群相當於N95標準的口罩正被打包，準備免費分送給易受霾害影響的人。  **印尼**森林野火產生的**霾害**嚴重影響**新加坡**，空氣品質達「非常不健康」等級。當地民眾戴上**口罩**防護，新加坡政府也宣布向符合資格年長者、孕婦、兒童及疾病患者發放**N95**口罩。  根據新加坡國家環境局網站數據，截至今天中午，西部地區24小時空氣污染指數（\n--\n狮城空污中午恶化返高水平 西部最严重达206 https://orientaldaily.com.my/news/spr/2026/10/17/855847 0 days ago\n55分钟前 新加坡. (新加坡17日讯)天降黑雨!受持续烟霾影响,新加坡周四(15日)迎来大雨,但不少民众发现户外收集的雨水竟黑得像咖啡乌,令... 阅读全文.  ###### Advertisement 新加坡西部、中部和南部地区的一小时PM2.5悬浮颗粒浓度，周六中午时分升至高水平。  发布于 2026年10月17日 12时38分 • 最后更新 4分钟前 • 整理：符诗玉  # 狮城空污中午恶化返高水平　西部最严重达206 ###### Advertisement （新加坡17日讯）新加坡西部、中部和南部地区的一小时PM2.5悬浮颗粒浓度，在中午时分升至高水平，其中西部地区情况最为严重，每\n--\n新加坡周六烟霾 PSI 预报达 150 至 230，儿童应减少户外活动 - 🌐 全球时局与钱包 - 飞出国论坛 https://bbs.fcgvisa.com/t/psi-150-230/62557 0 days ago\n10 月 17 日（周六），新加坡 24 小时污染标准指数（PSI）预报为 150 至 230，空气质量处于“不健康”至“非常不健康”范围。新加坡国家环境局建议，儿童、孕妇和老人尽量减少户外活...  10 月 17 日（周六），新加坡 24 小时污染标准指数（PSI）预报为 150 至 230，空气质量处于“不健康”至“非常不健康”范围。新加坡国家环境局建议，儿童、孕妇和老人尽量减少户外活动；慢性肺病或心脏病患者应避免户外活动。计划当天通勤、送孩子上学或安排户外活动的人，应根据活动时间查看相应空气质量数据。    ✅源 出门前先看活动时段对应的数据 国家环境局于 10 月 16 日（周五）发\n--\n新加坡今早空气质量略有改善 中部PSI降至191点 https://www.xinjiapo.news/news/443369 0 days ago\n新加坡今早（17日）空气质量稍有好转。截至早上7点，全岛各地区24小时空气污染指数（PSI）均低于200点，但仍处于不健康水平，介于144至191点。 中部PSI为191点，仍是全岛最高，但已从...  新加坡今早（17日）空气质量稍有好转。截至早上7点，全岛各地区24小时空气污染指数（PSI）均低于200点，但仍处于不健康水平，介于144至191点。 中部PSI为191点，仍是全岛最高，但已从昨天的非常不健康水平回落至不健康水平。西部、东部、南部和北部分别为181点、175点、161点和144点。 全岛一小时PM2.5浓度介于每立方米75至...  # 新加坡今早空气质量略有改善 中部PSI\n--\n新加坡雾霾持续：全岛PSI处于“不健康”范围，PM2.5仍偏高 https://www.xinjiapo.news/news/443361 0 days ago\n新加坡10月17日早晨雾霾持续。上午7时，全岛各区域24小时空气污染指数（PSI）均处于“不健康”范围：中部191、北部144、南部161、东部175、西部181。中部前一天曾持续处于“非常不健...  新加坡10月17日早晨雾霾持续。上午7时，全岛各区域24小时空气污染指数（PSI）均处于“不健康”范围：中部191、北部144、南部161、东部175、西部181。中部前一天曾持续处于“非常不健康”范围，下午3时至4时达到本季最高的229，直到17日凌晨才回落。 PSI是六种主要空气污染物的24小时滚动平均值，101至200为“不健康”，201至300为...  # 新加坡雾霾持续：全岛PSI\n--\n新加坡中部PSI达224，进入非常不健康水平 https://www.xinjiapo.news/news/443373 0 days ago\n10月16日上午7时，新加坡中部24小时污染物标准指数（PSI）升至224，达到非常不健康水平。该区域指数在午夜过后不久突破这一等级，并在清晨持续上升。 东部和西部的24小时PSI为195，...  10月16日上午7时，新加坡中部24小时污染物标准指数（PSI）升至224，达到非常不健康水平。该区域指数在午夜过后不久突破这一等级，并在清晨持续上升。 东部和西部的24小时PSI为195，处于不健康水平。全岛一小时PM2.5浓度均处于偏高区间，中部最高，达每立方米149微克。 新加坡国家环境局预计，全国24小时PSI将处于不健康至低...  # 新加坡中部PSI达224，进入非常不健康水平 10\n--\n新加坡PSI和PM2.5 AQI:為什麼兩個讀數有差異? https://www.aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/hk/ None\n由於某些歷史原因,新加坡使用PSI污染物標準指數)來評估空氣品質。在上圖中,數字 1 對應於用於 PSI 評估的 PM10 值。值67(/59)可讀取為 67 µg/m3,對應於 PSI 59。PSI 被評估為每種污染物的單一 PSI 的最大值:PM 10 、SO 2 、NO 2 、O 3 (臭氧)和CO 2  PSI(Singapore-North) = max( PSIPM10-based, ... PSIO3-based )= max (59, ..., 77) = 77  儘管如此,有趣的是,在同一個表中,最後一列也提供了 PM2.5 資料(參見圖 3)。該數據僅以 μg/m3 為單位\n--\n新加坡PSI和PM2.5 AQI:为什么两个读数有差异? https://aqicn.org/faq/2013-06-25/singapore-psi-and-pm25-aqi-why-is-there-a-difference-between-the-two-readings/cn None\n由于某些历史原因,新加坡使用PSI污染物标准指数)来评估空气质量。在上图中,数字 1 对应于用于 PSI 评估的 PM10 值。值67(/59)可读取为 67 µg/m3,对应于 PSI 59。PSI 被评估为每种污染物的单个 PSI 的最大值:PM 10 、SO 2 、NO 2 、O 3 (臭氧)和CO 2  PSI(Singapore-North) = max( PSIPM10-based, ... PSIO3-based )= max (59, ..., 77) = 77  尽管如此,有趣的是,在同一个表中,最后一列还提供了 PM2.5 数据(参见图 3)。该数据仅以 μg/m3 为单位\n--\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01PiH2fLjEcgNebGrsYDsekr",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "signature": "CAQS8wYKEAgSGAI4AUIIdGhpbmtpbmcSDH0xP4tUGs+ht3LeSxoM+PKpyR4acI7WX0XOIjAd/h2vaKNZCcX34m+jAeMgCfSUDb/F01ykGIi9rl8utJz6uwYD3wCzQHWg48GQcfwqkAaRzCIzCsu8AxwpCAboKgBZVoCVk1Y85nl68ZPVLgsFXmY0ejPP4vVfrcB+D/Ld+z1Be/vLmJnLpKIHGcAikD56669eL7nOC7JO8veSZf1svLfXxNe53aFfyoQf3E2YPOZmzSZWppx3bDplDAuWH0AOiyKenCTFU0I1XgJeYwXfkh36a38aG6H2TdkteEl/izEw6fSO+3SC0TYkx8EMeD9YeCLWAMV10UPgJfkRJVL7DYNyun7K1RZonh6v8xNwtm0gcOATMmWmAsaamNpWXrNe+AKeE4qUoTaaCDV1Dd5U6Y4Opavd3D0iIDIdmeWPyE6KX0X9oRUHOOdHwJaYw5Ut3MELci1Qxat75zBVuHxd0VeQmOVMk3XmzZgNQh1KoRZdeh4qj3BlxPyrqlcv/Y5v/pC36v5iYwpVCHHA7y5zYm+jsyQJiXEq/YHQu8L6dFM83OkLkq4wfOGCAMI6v655mpqzn75QqgLGhUFK7qT+tV66WbZfVh7N7Ddf+nb+NnCymoz7QQcGp904txYztLCtEKdV9BlAh6YQj1KewimGhLx2JCIjixvA/yldudPeM3xxSCTMNEKu9hNkApVg10JU6cI73/vXThyDHnmophJ8FrrPY2XiL42eOg4dvJHwZkeA/vkqZ75smDk4kwrHIkOLxdk8qGa/H8TEzST35Hp9g3e13rauqzXAXHnzyVU5VEkfFZUfhVgb3b+dpzeCTReQIj/dfeM3xBcwRy1Y/vntWMYF+1VbT5vdUVRuOXfpZPd6c8S28YVVXW/rhgMPgiofcY3pxGgPTKjIC0rXgxXOvFJurJ8Q9fo9XxhjkABW+cMrQx/A0ajLdAC/Anr5tHWIr+PiCRrigHPU/xWPF7Gw9HkmH2k2BCyQnlK575MCN9Rqa4OCfr7iStCntAUzMSOeT1D6vLmYfXyn3sDUoa00BR1EMMH+UGxsBZSOJkimTPtB3T8UIZdaT37OI+jjKtpT5LNCrmVOfKD/o/BTwFo3eLHGpcMlJsP1QEhmyFr4Bq9it/MhUFySpDZOuabrwz8eGAE=",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "id": "srvtoolu_01NMTNM1iBEZWLJRHTv6f53p",
+    "input": {
+     "code": "print(d[1]['content'][:1500]); print(d[3]['content'][:1000])"
+    },
+    "name": "code_execution",
+    "type": "server_tool_use"
+   },
+   {
+    "content": {
+     "content": [],
+     "return_code": 0,
+     "stderr": "",
+     "stdout": "55分钟前 新加坡. (新加坡17日讯)天降黑雨!受持续烟霾影响,新加坡周四(15日)迎来大雨,但不少民众发现户外收集的雨水竟黑得像咖啡乌,令... 阅读全文.\n\n###### Advertisement\n新加坡西部、中部和南部地区的一小时PM2.5悬浮颗粒浓度，周六中午时分升至高水平。\n\n发布于 2026年10月17日 12时38分 • 最后更新 4分钟前 • 整理：符诗玉\n\n# 狮城空污中午恶化返高水平　西部最严重达206\n###### Advertisement\n（新加坡17日讯）新加坡西部、中部和南部地区的一小时PM2.5悬浮颗粒浓度，在中午时分升至高水平，其中西部地区情况最为严重，每立方米206微克。\n\n根据新加坡国家环境局网站数据，中部地区的一小时PM2.5为每立方公尺174微克，南部则为165微克，东部为144微克、北部91微克，均属于偏高水准。\n新加坡今早（17日）空气质量稍有好转。截至早上7点，全岛各地区24小时空气污染指数（PSI）均低于200点，但仍处于不健康水平，介于144至191点。 中部PSI为191点，仍是全岛最高，但已从...\n\n新加坡今早（17日）空气质量稍有好转。截至早上7点，全岛各地区24小时空气污染指数（PSI）均低于200点，但仍处于不健康水平，介于144至191点。 中部PSI为191点，仍是全岛最高，但已从昨天的非常不健康水平回落至不健康水平。西部、东部、南部和北部分别为181点、175点、161点和144点。 全岛一小时PM2.5浓度介于每立方米75至...\n\n# 新加坡今早空气质量略有改善 中部PSI降至191点\n新加坡今早（17日）空气质量稍有好转。截至早上7点，全岛各地区24小时空气污染指数（PSI）均低于200点，但仍处于不健康水平，介于144至191点。\n\n\n\n全岛一小时PM2.5浓度介于每立方米75至119微克，处于偏高水平。东部最高，为119微克；中部、西部、北部和南部分别为108、97、83和75微克。\n\n环境局昨天预测，未来三天新加坡仍可能受到苏门答腊烟霾影响。未来24小时PSI预计介于150至230点，即从不健康水平中段至非常不健康水平较低区间。\n\n## 相关新闻\n### 探访布罗莫火山，也走进游客较少的周边小镇\n\n2026年10月16日\n\n中东局势紧张加剧供应担忧 国际油价上涨逾3%\n\n热点\n\n### 中东局势紧张加剧供应担忧 国际油价上涨逾3%\n\n2026年10月16日\n\n新加坡雾霾夜间减轻，空气质量仍处不健康水平\n\n热点\n\n### 新加坡雾霾夜间减轻，空气质量仍处不健康水平\n2026年10月16日\n\n新加坡雾霾持续：全岛PSI处于“不健康”范围，PM2.5仍偏高\n\n### 西甲第九轮拉科鲁尼亚1比1战平莱万特\n\n\n\n### 人工智能相关类股再受压，华尔街股市显著下挫\n\n新加坡今早空气质量略有改善 中部PSI降至1\n",
+     "type": "code_execution_result",
+     "abort_reason": null
+    },
+    "tool_use_id": "srvtoolu_01NMTNM1iBEZWLJRHTv6f53p",
+    "type": "code_execution_tool_result"
+   },
+   {
+    "text": "是的，按最新报道（10月17日，周六），新加坡的霾相当严重。\n\n**24小时PSI（上午7点）**\n- 全岛各区都在“不健康”范围，介于144到191之间。\n- 中部191，西部181，东部175，南部161，北部144。\n- 中部前一天（16日）曾升到“非常不健康”水平，下午3到4点达到本季最高的229。到17日凌晨才回落。\n\n**1小时PM2.5（中午前后）**\n- 中午空气再度转差。西部最严重，达每立方米206微克。\n- 中部174，南部165，东部144，北部91，都属偏高水平。\n\n**预报**\n- 国家环境局预计，未来24小时PSI在150到230之间，也就是“不健康”到“非常不健康”。\n- 未来三天仍可能受苏门答腊烟霾影响。\n\n**建议**\n- 儿童、孕妇和老人尽量减少户外活动。\n- 患有慢性肺病或心脏病的人应避免外出。\n- 必须外出时，可以戴N95口罩。新加坡政府已向符合资格的年长者、孕妇、儿童和病患发放N95口罩。\n- 出门前先查国家环境局（NEA）网站或 haze.gov.sg 的实时数据。\n\n以上数据来自东方日报、新加坡新闻网（xinjiapo.news）和联合新闻网等报道。PSI每小时更新，数值会随风向变化，请以官方实时数据为准。",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 42879,
+   "output_tokens": 997,
+   "output_tokens_details": {
+    "thinking_tokens": 91
+   },
+   "server_tool_use": {
+    "web_fetch_requests": 0,
+    "web_search_requests": 1
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
