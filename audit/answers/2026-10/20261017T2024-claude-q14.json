@@ -1,0 +1,127 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T20:24+08:00",
+ "answer": "The two numbers probably come from different measuring systems, so they can disagree even when the air hasn't changed. These are the most likely causes, roughly from most to least common.\n\n**1. Different scales**\n- PSI is Singapore's index. \"Moderate\" is 51–100, and \"Unhealthy\" doesn't start until 101.\n- Many apps use the US AQI instead. It has similar numbers but different pollutant breakpoints, and it is generally stricter for fine particles (PM2.5). The same PM2.5 concentration can score higher on the US AQI than on the PSI.\n- Some apps also use the label \"Unhealthy for Sensitive Groups\" at 101–150 and shorten it to \"Unhealthy.\"\n\n**2. Different time averaging**\n- The official PSI is a **24-hour** rolling index, so it reacts slowly. If the haze or smoke just arrived, the PSI lags behind.\n- Apps often show a **real-time or hourly** reading (such as NowCast), which jumps sooner.\n- Singapore's NEA also publishes a 1-hour PM2.5 reading. That one is closer to what apps show.\n\n**3. Different data sources and locations**\n- Your app may use a nearby low-cost sensor network (such as PurpleAir), satellite estimates, or a model. The PSI uses official government monitoring stations.\n- Local conditions like traffic, cooking smoke, or construction can make one spot worse than the regional average.\n- The headline PSI is often a national or regional figure. Your neighborhood reading can be higher or lower.\n\n**4. Different pollutants**\n- Indices pick the worst pollutant (PM2.5, PM10, ozone, and so on). The two systems may weight or include different ones.\n\n**What to do**\n- Open the app's details and look for the **index name** (US AQI, PSI, or something else), the **pollutant** driving the score, and whether the figure is **hourly or 24-hour**.\n- Compare the app with the official source for your area, such as NEA or your local environmental agency.\n- If you have asthma, heart or lung conditions, or are elderly or pregnant, it's reasonable to follow the more cautious reading. Consider limiting strenuous outdoor activity, especially if the hourly PM2.5 is high.\n\nIf you tell me which app you're using and your location, I can help work out which reading applies to you.",
+ "citations": [],
+ "claim": null,
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": false,
+  "said_unit": false,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": null,
+  "checked_hour": null,
+  "band_right": null,
+  "close": null,
+  "off_pct": null,
+  "measured_ref": null,
+  "measured_range": null,
+  "named_source": [
+   "NEA",
+   "PurpleAir"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T20:24+08:00",
+  "pm25": [
+   79,
+   117,
+   116,
+   187,
+   135
+  ],
+  "index": [
+   [
+    131,
+    "psi"
+   ],
+   [
+    161,
+    "psi"
+   ],
+   [
+    178,
+    "psi"
+   ],
+   [
+    202,
+    "psi"
+   ],
+   [
+    185,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T20:00+08:00"
+ },
+ "took_s": 10.6,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7odR1MXfJmzzbGXnPYG",
+  "container": null,
+  "content": [
+   {
+    "signature": "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",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "The two numbers probably come from different measuring systems, so they can disagree even when the air hasn't changed. These are the most likely causes, roughly from most to least common.\n\n**1. Different scales**\n- PSI is Singapore's index. \"Moderate\" is 51–100, and \"Unhealthy\" doesn't start until 101.\n- Many apps use the US AQI instead. It has similar numbers but different pollutant breakpoints, and it is generally stricter for fine particles (PM2.5). The same PM2.5 concentration can score higher on the US AQI than on the PSI.\n- Some apps also use the label \"Unhealthy for Sensitive Groups\" at 101–150 and shorten it to \"Unhealthy.\"\n\n**2. Different time averaging**\n- The official PSI is a **24-hour** rolling index, so it reacts slowly. If the haze or smoke just arrived, the PSI lags behind.\n- Apps often show a **real-time or hourly** reading (such as NowCast), which jumps sooner.\n- Singapore's NEA also publishes a 1-hour PM2.5 reading. That one is closer to what apps show.\n\n**3. Different data sources and locations**\n- Your app may use a nearby low-cost sensor network (such as PurpleAir), satellite estimates, or a model. The PSI uses official government monitoring stations.\n- Local conditions like traffic, cooking smoke, or construction can make one spot worse than the regional average.\n- The headline PSI is often a national or regional figure. Your neighborhood reading can be higher or lower.\n\n**4. Different pollutants**\n- Indices pick the worst pollutant (PM2.5, PM10, ozone, and so on). The two systems may weight or include different ones.\n\n**What to do**\n- Open the app's details and look for the **index name** (US AQI, PSI, or something else), the **pollutant** driving the score, and whether the figure is **hourly or 24-hour**.\n- Compare the app with the official source for your area, such as NEA or your local environmental agency.\n- If you have asthma, heart or lung conditions, or are elderly or pregnant, it's reasonable to follow the more cautious reading. Consider limiting strenuous outdoor activity, especially if the hourly PM2.5 is high.\n\nIf you tell me which app you're using and your location, I can help work out which reading applies to you.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1171,
+   "output_tokens_details": {
+    "thinking_tokens": 402
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
