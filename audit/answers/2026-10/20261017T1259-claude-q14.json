@@ -1,0 +1,138 @@
+{
+ "schema_version": "1",
+ "question_id": "q14",
+ "question": "Why does my app say the air is unhealthy but the PSI says moderate?",
+ "city": "Singapore",
+ "where": "sg",
+ "lang": "en",
+ "assistant": "claude",
+ "name": "Claude",
+ "provider": "Anthropic",
+ "tier": "free",
+ "model_asked": "claude-sonnet-5-5",
+ "model": "claude-sonnet-5-5",
+ "web_search": true,
+ "asked_at": "2026-10-17T12:59+08:00",
+ "answer": "The two numbers probably aren't measuring the same thing. These are the usual causes, most likely first.\n\n**1. Different scales**\n- Singapore's PSI labels 51–100 \"Moderate\" and 101–200 \"Unhealthy\".\n- The US AQI labels 101–150 \"Unhealthy for Sensitive Groups\" and 151–200 \"Unhealthy\". The US also tightened its PM2.5 breakpoints in 2024.\n- Apps like IQAir, AirVisual and Google often use the US AQI or their own scale. The same pollution can get a worse label from them than from the PSI.\n\n**2. Different averaging times**\n- The headline 24-hour PSI averages PM2.5 and PM10 over the past day, so it reacts slowly.\n- Many apps show a real-time or hourly reading, such as the NowCast AQI or the 1-hour PM2.5. If haze or traffic smoke just arrived, the app will spike first and the PSI will catch up hours later.\n- The NEA also publishes a 1-hour PM2.5 reading. It can look worse than the 24-hour PSI.\n\n**3. Different data sources and locations**\n- Official PSI comes from regulatory monitors and is reported by region (north, south, east, west, central).\n- Apps may use the nearest station, a satellite model, or crowd-sourced low-cost sensors. These sensors can read high, especially in humid air, and they can be right next to a local source like a road or a barbecue.\n\n**4. Different pollutants**\n- The PSI reports the worst of several sub-indices (PM2.5, PM10, ozone, NO₂, SO₂, CO).\n- Some apps weight one pollutant, usually PM2.5, more heavily or show only that one.\n\n**5. Different labels for the same number**\n- Some apps say \"unhealthy\" in a general sense when they really mean \"unhealthy for sensitive groups\".\n\n**How to check**\n- In the app, tap the reading and look at the source, the pollutant and the time window.\n- Compare it with the official source for your region, such as the NEA or the myENV app in Singapore.\n- Match like with like: 24-hour PSI against 24-hour data, and 1-hour PM2.5 against 1-hour PM2.5.\n\n**What to do in the meantime**\n- If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults) or you can smell smoke, follow the more cautious reading. Limit strenuous outdoor activity and consider a mask.\n- Otherwise, the official PSI is a reasonable guide, and a short spike in the app isn't usually cause for alarm.\n\nWhich app are you using, and where are you? With that I can tell you which scale it uses and why it differs.",
+ "citations": [],
+ "claim": {
+  "value": 51.0,
+  "high": 100.0,
+  "scale": "PSI"
+ },
+ "each": null,
+ "quoting": [],
+ "window": null,
+ "stated_time": null,
+ "rules": "3",
+ "scores": {
+  "gave_number": true,
+  "said_unit": true,
+  "said_window": "not said",
+  "age_hours": null,
+  "stale": null,
+  "freshness": "no time",
+  "time_for": null,
+  "oldest_hours": null,
+  "number_hour": null,
+  "check": "checked",
+  "checked_hour": "2026-10-17T12:00+08:00",
+  "band_right": false,
+  "close": false,
+  "off_pct": null,
+  "measured_ref": [
+   136,
+   184
+  ],
+  "measured_range": [
+   136,
+   184
+  ],
+  "named_source": [
+   "NEA",
+   "IQAir",
+   "Google"
+  ]
+ },
+ "not_read": false,
+ "measured": {
+  "at": "2026-10-17T12:59+08:00",
+  "pm25": [
+   91,
+   165,
+   144,
+   206,
+   174
+  ],
+  "index": [
+   [
+    136,
+    "psi"
+   ],
+   [
+    153,
+    "psi"
+   ],
+   [
+    173,
+    "psi"
+   ],
+   [
+    178,
+    "psi"
+   ],
+   [
+    184,
+    "psi"
+   ]
+  ],
+  "where": [
+   "NEA North",
+   "NEA South",
+   "NEA East",
+   "NEA West",
+   "NEA Central"
+  ],
+  "hour": "2026-10-17T12:00+08:00"
+ },
+ "took_s": 11.3,
+ "asked_how": "scheduled",
+ "raw": {
+  "id": "msg_011Cg7DfH7wdUDTeqrD39vPC",
+  "container": null,
+  "content": [
+   {
+    "signature": "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",
+    "thinking": "",
+    "type": "thinking"
+   },
+   {
+    "text": "The two numbers probably aren't measuring the same thing. These are the usual causes, most likely first.\n\n**1. Different scales**\n- Singapore's PSI labels 51–100 \"Moderate\" and 101–200 \"Unhealthy\".\n- The US AQI labels 101–150 \"Unhealthy for Sensitive Groups\" and 151–200 \"Unhealthy\". The US also tightened its PM2.5 breakpoints in 2024.\n- Apps like IQAir, AirVisual and Google often use the US AQI or their own scale. The same pollution can get a worse label from them than from the PSI.\n\n**2. Different averaging times**\n- The headline 24-hour PSI averages PM2.5 and PM10 over the past day, so it reacts slowly.\n- Many apps show a real-time or hourly reading, such as the NowCast AQI or the 1-hour PM2.5. If haze or traffic smoke just arrived, the app will spike first and the PSI will catch up hours later.\n- The NEA also publishes a 1-hour PM2.5 reading. It can look worse than the 24-hour PSI.\n\n**3. Different data sources and locations**\n- Official PSI comes from regulatory monitors and is reported by region (north, south, east, west, central).\n- Apps may use the nearest station, a satellite model, or crowd-sourced low-cost sensors. These sensors can read high, especially in humid air, and they can be right next to a local source like a road or a barbecue.\n\n**4. Different pollutants**\n- The PSI reports the worst of several sub-indices (PM2.5, PM10, ozone, NO₂, SO₂, CO).\n- Some apps weight one pollutant, usually PM2.5, more heavily or show only that one.\n\n**5. Different labels for the same number**\n- Some apps say \"unhealthy\" in a general sense when they really mean \"unhealthy for sensitive groups\".\n\n**How to check**\n- In the app, tap the reading and look at the source, the pollutant and the time window.\n- Compare it with the official source for your region, such as the NEA or the myENV app in Singapore.\n- Match like with like: 24-hour PSI against 24-hour data, and 1-hour PM2.5 against 1-hour PM2.5.\n\n**What to do in the meantime**\n- If you're sensitive to air pollution (asthma, heart or lung conditions, children, older adults) or you can smell smoke, follow the more cautious reading. Limit strenuous outdoor activity and consider a mask.\n- Otherwise, the official PSI is a reasonable guide, and a short spike in the app isn't usually cause for alarm.\n\nWhich app are you using, and where are you? With that I can tell you which scale it uses and why it differs.",
+    "type": "text"
+   }
+  ],
+  "diagnostics": null,
+  "model": "claude-sonnet-5-5",
+  "role": "assistant",
+  "stop_details": null,
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "type": "message",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 0,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "inference_geo": "global",
+   "input_tokens": 5989,
+   "output_tokens": 1389,
+   "output_tokens_details": {
+    "thinking_tokens": 495
+   },
+   "service_tier": "standard",
+   "speed": "standard"
+  }
+ }
+}
