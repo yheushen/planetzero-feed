@@ -1,9 +1,10 @@
 """The record's pictures (session 8e, part 143i): what the site drew at a kept hour, drawn by the site itself, so the kept picture is the
 site's own (its colours per band, its marks, its key and freshness line). Playwright opens the site's build (`record-site/`, copied to
-the feed repository by `make feed-repo`) on Earth, Round 5, reading the kept hour's data (record/hours/<hour>/data/*.json.gz, served
-unzipped), with the browser's clock set to the hour the feed was built, so "this hour" and "Late" read as they did then. The standard
-layers: the smoke (adjusted to the monitors), the wind, the fires, the monitors. 1280 by 800, WebP; a 640 by 400 thumbnail of each.
-Only "Tap anywhere", the first visit's prompt to tap, is hidden: a picture is not tapped.
+the feed repository by `make feed-repo`) on Earth, Round 5, as a replay of the kept hour (part 143j: /earth?at=<hour>, the record
+served at /record), with the browser's clock set to the hour the feed was built, so "this hour" and "Late" read as they did then and the
+picture says "Kept: 17 Oct, 7:00 pm", never "Now" or "live". The standard layers: the smoke (adjusted to the monitors), the wind, the
+fires, the monitors. 1280 by 800, WebP; a 640 by 400 thumbnail of each. Hidden: "Tap anywhere", the first visit's prompt to tap (a picture
+is not tapped), and the replay's banner (the picture's place in the record dates it; the record's pages say it is kept).
 """
 import datetime as dt
 import gzip
@@ -23,7 +24,8 @@ SEA_CENTRE, SEA_ZOOM = (6.0, 117.0), 3.5   # the Flat view's box at 1280 px: abo
 
 
 class Handler(SimpleHTTPRequestHandler):
-    """The site's build at /, the kept hour's data at /feed/ (each .json.gz served unzipped), the record's history/ and real/."""
+    """The site's build at /, the record as it is at /record/ (a replay reads it there), the kept hour's data at /feed/ (each .json.gz
+    served unzipped: the site as live, for the check that a kept picture matches it), the record's history/ and real/."""
     site = record = hour = None
 
     def log_message(self, *a):
@@ -31,6 +33,13 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = self.path.split("?")[0]
+        if path.startswith("/record/"):
+            src = Path(self.record) / path[len("/record/"):]
+            if not src.is_file():
+                self.send_error(404)
+                return
+            kinds = {".gz": "application/gzip", ".webp": "image/webp", ".json": "application/json"}
+            return self.send_file(src, kinds.get(src.suffix, "application/octet-stream"))
         if path.startswith("/feed/"):
             rel = path[len("/feed/"):]
             base = Path(self.record)
@@ -78,12 +87,17 @@ def webp(png, size, quality):
     return out.getvalue()
 
 
-def shoot(page, base, view, built):
-    """1 view of the kept hour: Globe or Flat, Real Earth or Plain, the standard layers on."""
+def shoot(page, base, view, built, hour=None):
+    """1 view of the kept hour: Globe or Flat, Real Earth or Plain, the standard layers on; as a replay of the hour when given (else the
+    site as live, reading /feed/)."""
     page.clock.install(time=built)
-    page.goto(base + "/earth", wait_until="domcontentloaded")
+    if hour:   # the banner hidden before the page lays Earth out, so the picture has the live page's size
+        page.add_init_script("window.__pzRecordBase = '/record'; document.addEventListener('DOMContentLoaded', () => { const s = document.createElement('style'); "
+                             "s.textContent = '[data-kept-banner] { display: none !important }'; document.head.appendChild(s) })")
+    page.goto(base + ("/earth?at=" + hour if hour else "/earth"), wait_until="domcontentloaded")
     page.wait_for_selector("[data-earth-stage][data-shown='yes']", timeout=90000)
-    page.add_style_tag(content="[data-earth-hint] { display: none !important }")   # "Tap anywhere" asks for a tap; a picture has none
+    # "Tap anywhere" asks for a tap; a picture has none
+    page.add_style_tag(content="[data-earth-hint] { display: none !important }")
     kind, base_ = view.split("-")
     if kind == "flat":   # Flat over Southeast Asia, about 92 to 142 E and 12 S to 24 N (the page's own map, moved by its hook)
         page.click("[data-view='flat']")
@@ -119,7 +133,7 @@ def draw(record, due, site, browser=None):
                 ctx.add_init_script("try { localStorage.setItem('pz-earth-tour', 'done'); localStorage.setItem('pz-compare', JSON.stringify({ layout: 'after', site: 'after' })) } catch (e) {}")
                 t0 = time.monotonic()
                 try:
-                    png = shoot(ctx.new_page(), f"http://127.0.0.1:{srv.server_address[1]}", view, built)
+                    png = shoot(ctx.new_page(), f"http://127.0.0.1:{srv.server_address[1]}", view, built, hour)
                 finally:
                     ctx.close()
                 out = record / "hours" / hour

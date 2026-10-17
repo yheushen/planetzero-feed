@@ -170,7 +170,7 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-1.63.0-chromium
 
-      - name: Keep this hour in the record (its data, manifest and pictures; 4 minutes at most)
+      - name: Keep this hour in the record (its data, manifest and pictures; once a day the time-lapse; 4 minutes at most)
         if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
         continue-on-error: true
         timeout-minutes: 8
@@ -185,7 +185,16 @@ jobs:
           if git diff --cached --quiet; then echo "nothing new this hour"; exit 0; fi
           git commit -q -m "record $(TZ=Asia/Singapore date +%Y-%m-%dT%H:%M) Malaysia time"
           for try_ in 1 2 3; do
-            if git pull --rebase -q origin main && git push -q origin HEAD:main; then echo "kept, pushed on try $try_"; exit 0; fi
+            if git pull --rebase -q origin main && git push -q origin HEAD:main; then echo "kept, pushed on try $try_"; break; fi
+            if [ "$try_" = 3 ]; then echo "gave up after 3 tries"; exit 1; fi
             sleep 5
           done
-          echo "gave up after 3 tries"; exit 1
+          # the time-lapse (part 143j), when made this run: its 4 files, rewritten whole each day, on the branch timelapse as 1 commit that
+          # replaces the day before's, so the old copies never pile up in the record's history
+          if [ -f timelapse/.made ]; then
+            export GIT_INDEX_FILE="$RUNNER_TEMP/timelapse-index"
+            git add -f timelapse/real.mp4 timelapse/real.gif timelapse/plain.mp4 timelapse/plain.gif timelapse/timelapse.json
+            tl=$(git commit-tree -m "time-lapse $(TZ=Asia/Singapore date +%Y-%m-%d)" "$(git write-tree)")
+            unset GIT_INDEX_FILE
+            git push -q -f origin "$tl:refs/heads/timelapse" && echo "time-lapse pushed"
+          fi

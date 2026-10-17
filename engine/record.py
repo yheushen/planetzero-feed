@@ -14,6 +14,8 @@ back and check. Not an audit: there is no independent truth to compare a picture
                                    every 3 hours; each day's worst hour over Southeast Asia in 4 views, made the morning after.
   history/                         the feed's history/ once (it only grows: a replay reads the hours before the kept one from it).
   days/<date>.json, index.json     each day's hours, its worst hour and pictures; every hour kept, with its files.
+  timelapse/                       1 frame a day at its worst hour, Real Earth and Plain, MP4 and GIF (part 143j, record_timelapse.py),
+                                   made when a day has ended.
 
 Size (session 8e, Amendment 1): about 1 MB of data an hour, compressed. Past 14 days, an hour's data is kept only every 3 hours and at the
 day's worst hour (thin()); the pictures stay. GitHub Pages publishes at most 1 GB.
@@ -317,6 +319,7 @@ def index(record, today=None):
     days = {}
     for h in hours:
         days.setdefault(h["name"][:10], []).append(h)
+    ignore_timelapse(record)
     shutil.rmtree(record / "days", ignore_errors=True)
     for d, hs in days.items():
         w = worst_hour(record, d)
@@ -326,8 +329,31 @@ def index(record, today=None):
                                   "and pictures of what it drew. A record, not a measurement: the smoke is an estimate from a computer model, adjusted "
                                   "to the monitors.", "first": hours[0]["hour"] if hours else None, "last": hours[-1]["hour"] if hours else None,
                                   "days": [{"date": d, "worst": worst_hour(record, d), "hours": len(hs)} for d, hs in sorted(days.items())],
-                                  "hours": hours, "credit": CREDIT})
+                                  "hours": hours, "timelapse": timelapse_of(record), "credit": CREDIT})
     return hours
+
+
+def timelapse_of(record):
+    """The time-lapse's days and files, for the record's pages (part 143j); None until the first day has ended."""
+    f = Path(record) / "timelapse" / "timelapse.json"
+    if not f.exists():
+        return None
+    t = read(f)
+    import record_timelapse
+    return {"days": [x["date"] for x in t.get("frames", [])], "made_at": t.get("made_at"), "base": record_timelapse.TIMELAPSE_BASE,
+            "files": {look: {kind: v["path"] for kind, v in kinds.items()} for look, kinds in t.get("files", {}).items()}}
+
+
+IGNORE = ("timelapse/*.mp4", "timelapse/*.gif", "timelapse/.made")
+
+
+def ignore_timelapse(record):
+    """The time-lapse's files live on their own branch (record_timelapse.py): the main branch ignores them."""
+    f = Path(record) / ".gitignore"
+    have = f.read_text(encoding="utf-8").splitlines() if f.exists() else []
+    want = [x for x in IGNORE if x not in have]
+    if want:
+        f.write_text("\n".join(have + ["# the time-lapse's files: on the branch `timelapse` (part 143j)"] + want) + "\n", encoding="utf-8")
 
 
 def backfill(repo, record, site=None, since=None):
@@ -390,6 +416,10 @@ def main():
         record_shots.draw(a.record, pictures_due(a.record, t), a.shots)
     thin(a.record, t.date().isoformat())
     index(a.record, today=t.date().isoformat())
+    if a.shots:   # the time-lapse, when a day has ended and its 4 views are drawn (nothing otherwise)
+        import record_timelapse
+        if record_timelapse.make(a.record, a.shots):
+            index(a.record, today=t.date().isoformat())
     print(f"kept {man['hour']}: {len(man['files'])} files, {len(man['left_out'])} left out, High or worse over Southeast Asia {man['high_area_km2']} km²")
 
 

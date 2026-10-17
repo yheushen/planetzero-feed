@@ -17,6 +17,8 @@
       ;(function () {
         var p = location.pathname.replace(/\/+$/, '') || '/'
         if (p !== '/' && p !== '/earth') return
+        // part 143j: a kept hour (?at=) reads the record's files through the page's own code, never the live feed
+        if (/[?&]at=/.test(location.search)) return
         var base = '%VITE_FEED_BASE%'
         if (base.charAt(0) === '%') base = '/feed'
         var get = function (path) {
@@ -51,9 +53,8 @@
         }, function () {})
       })()
     </script>
-    <script type="module" crossorigin src="/assets/index-DDYQq_ej.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/feature-DkHCJYUS.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-BK1EwziQ.css">
+    <script type="module" crossorigin src="/assets/index-C7KIU1Ub.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BrbNiSvx.css">
   </head>
   <body>
     <div id="root"></div>
