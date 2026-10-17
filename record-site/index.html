@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="The air you breathe this hour in Malaysia and Singapore, and where every number comes from." />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+    <title>Planet Zero: the air this hour</title>
+    <script>
+      // Session 7e, part 114: on the Now page and on Earth, Earth's file, the smoke grid and the names are asked for now, before the page's
+      // code has loaded (the page then uses these same requests, window.__pzEarly); the wind's frame and the day's picture as soon as
+      // Earth's file names them, the picture by a link rel="preload" (4,096 px on a laptop, 2,048 on a phone: min-width 900 px, as the
+      // page decides).
+      ;(function () {
+        var p = location.pathname.replace(/\/+$/, '') || '/'
+        if (p !== '/' && p !== '/earth') return
+        var base = '%VITE_FEED_BASE%'
+        if (base.charAt(0) === '%') base = '/feed'
+        var get = function (path) {
+          return fetch(base + '/' + path, { cache: 'no-store' }).then(function (r) {
+            return r.ok ? r.json() : Promise.reject(new Error(path + ': ' + r.status))
+          })
+        }
+        var early = (window.__pzEarly = { 'earth.json': get('earth.json'), 'earth/smoke/now.json': get('earth/smoke/now.json') })
+        // the names on the globe, from the site itself
+        early.places = fetch('/earth/places.json').then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('places: ' + r.status)) })
+        for (var k in early) early[k].catch(function () {})
+        early['earth.json'].then(function (e) {
+          // the wind's frame for now, as soon as Earth's file names it
+          var w = (e.layers || []).filter(function (x) { return x.id === 'wind' })[0]
+          if (w && w.now && !early[w.now]) {
+            early[w.now] = get(w.now)
+            early[w.now].catch(function () {})
+          }
+          var l = (e.layers || []).filter(function (x) { return x.id === 'real_earth' })[0]
+          var d = l && l.day_picture
+          if (!d || !d.sizes || !d.sizes.length) return
+          var want = window.matchMedia('(min-width: 900px)').matches ? 4096 : 2048
+          var s = d.sizes.filter(function (x) { return x.width === want })[0] || d.sizes[0]
+          var link = document.createElement('link')
+          link.rel = 'preload'
+          link.as = 'image'
+          link.type = 'image/webp'
+          link.crossOrigin = 'anonymous'
+          link.href = base + '/' + s.webp
+          link.setAttribute('data-day-picture', d.date)
+          document.head.appendChild(link)
+        }, function () {})
+      })()
+    </script>
+    <script type="module" crossorigin src="/assets/index-LjIV2cAP.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/feature-DkHCJYUS.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CIel769k.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

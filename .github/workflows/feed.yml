@@ -23,12 +23,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     # the feed (up to about 10 minutes when the day's globe grid is fetched), Earth (12 at most) and publishing: the job must outlast
-    # them all, or the hour's feed is lost (16 Oct, 3:30 pm: a 20-minute limit cancelled a run while Earth waited for the Data Store)
-    timeout-minutes: 28
+    # them all, or the hour's feed is lost (16 Oct, 3:30 pm: a 20-minute limit cancelled a run while Earth waited for the Data Store);
+    # and the record's capture after it (8 at most, part 143i)
+    timeout-minutes: 36
     env:
       OPENAQ_KEY: ${{ secrets.OPENAQ_KEY }}
       FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
       WAQI_TOKEN: ${{ secrets.WAQI_TOKEN }}
+      RECORD_ON: ${{ secrets.RECORD_DEPLOY_KEY != '' }}   # the record (session 8e, part 143i), once its deploy key is set
     steps:
       - uses: actions/checkout@v7
 
@@ -146,3 +148,44 @@ jobs:
             (cd .. && python engine/earth.py --out _feed --cache .cache > /dev/null) || true
           done
           echo "gave up after 3 attempts"; exit 1
+
+      # The record (session 8e, part 143i; docs/TERMS-CHECK-RECORD-2026-10-18.md in the private repo): what the site showed this hour,
+      # kept in yheushen/planetzero-record: the hour's data (what each view is drawn from), its manifest, and the pictures due, drawn
+      # by the site itself (record-site/) in a browser. After the feed is published, so a slow capture never holds the feed back.
+      - name: Check out the record, with the key that may write to it
+        if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
+        continue-on-error: true
+        uses: actions/checkout@v7
+        with:
+          repository: yheushen/planetzero-record
+          ref: main
+          path: _record
+          ssh-key: ${{ secrets.RECORD_DEPLOY_KEY }}
+
+      - name: The browser that draws the record's pictures (kept between runs)
+        if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
+        continue-on-error: true
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.63.0-chromium
+
+      - name: Keep this hour in the record (its data, manifest and pictures; 4 minutes at most)
+        if: steps.due.outputs.due == 'yes' && env.RECORD_ON == 'true'
+        continue-on-error: true
+        timeout-minutes: 8
+        run: |
+          pip install -q -r engine/requirements-record.txt
+          python -m playwright install --with-deps chromium > /dev/null
+          python engine/record.py --feed _feed --record _record --shots record-site
+          cd _record
+          git config user.name "planetzero-record"
+          git config user.email "planetzero-record@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing new this hour"; exit 0; fi
+          git commit -q -m "record $(TZ=Asia/Singapore date +%Y-%m-%dT%H:%M) Malaysia time"
+          for try_ in 1 2 3; do
+            if git pull --rebase -q origin main && git push -q origin HEAD:main; then echo "kept, pushed on try $try_"; exit 0; fi
+            sleep 5
+          done
+          echo "gave up after 3 tries"; exit 1
